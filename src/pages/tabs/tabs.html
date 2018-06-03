@@ -1,0 +1,25 @@
+<ion-tabs *ngIf="role == '1'" [color]="'tail'">
+  <ion-tab [root]="homePage" tabTitle="Home" tabIcon="home"></ion-tab>
+  <ion-tab [root]="leadPage" tabIcon="book" tabTitle="Lead" [ngStyle]="{'color':'blue'}"></ion-tab>
+  <ion-tab [root]="estimatePage" tabIcon="list-box" tabTitle="Estimate" [ngStyle]="{'color':'blue'}"></ion-tab>
+  <ion-tab [root]="ordersPage" tabIcon="list-box" tabTitle="Orders" [ngStyle]="{'color':'blue'}"></ion-tab>
+  <!-- <ion-tab [root]="trialBalPage" tabIcon="list-box" tabTitle="Trial Balance" [ngStyle]="{'color':'blue'}"></ion-tab> -->
+  <!-- <ion-tab [root]="dayBookPage" tabIcon="book" tabTitle="Day book" [ngStyle]="{'color':'blue'}"></ion-tab> -->
+  <!-- <ion-tab [root]="statisticsPage" tabIcon="stats" tabTitle="Statistics" [ngStyle]="{'color':'blue'}"></ion-tab> -->
+</ion-tabs>
+<!-- <ion-tabs *ngIf="role == '2'" [color]="'tail'">
+  <ion-tab [root]="homePage" tabTitle="Home" tabIcon="home"></ion-tab>
+  <ion-tab [root]="trialBalPage" tabIcon="list-box" tabTitle="Trial Balance" [ngStyle]="{'color':'blue'}"></ion-tab>
+  <ion-tab [root]="statisticsPage" tabIcon="stats" tabTitle="Statistics" [ngStyle]="{'color':'blue'}"></ion-tab>
+</ion-tabs>
+<ion-tabs *ngIf="role == '3'" [color]="'tail'">
+  <ion-tab [root]="homePage" tabTitle="Home" tabIcon="home"></ion-tab>
+  <ion-tab [root]="statisticsPage" tabIcon="stats" tabTitle="Statistics" [ngStyle]="{'color':'blue'}"></ion-tab>
+</ion-tabs> -->
+
+<!-- <ion-tabs [color]="'tail'">
+  <ion-tab [root]="homePage" tabTitle="Home" tabIcon="home"></ion-tab>
+  <ion-tab *ngIf="role == '1' || role == '2'" [root]="trialBalPage" tabIcon="list-box" tabTitle="Trial Balance" [ngStyle]="{'color':'blue'}"></ion-tab>
+  <ion-tab *ngIf="role == '1'" [root]="dayBookPage" tabIcon="book" tabTitle="Day book" [ngStyle]="{'color':'blue'}"></ion-tab>
+  <ion-tab [root]="statisticsPage" tabIcon="stats" tabTitle="Statistics" [ngStyle]="{'color':'blue'}"></ion-tab>
+</ion-tabs> -->
