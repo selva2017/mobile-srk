@@ -15,4 +15,6 @@ export interface Estimate {
             unit4: string;
             unit6: string;
         }];
+    fullLoads: string;
+    partialLoad: string;
 }

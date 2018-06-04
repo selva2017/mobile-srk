@@ -39,6 +39,7 @@ export class EstimatePage {
   unit4: string;
   unit6: string;
   estimate: Estimate[] = [];
+  partialLoadOption: boolean = false;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private authService: AuthService,
@@ -92,37 +93,50 @@ export class EstimatePage {
 
 
   onChange(customer) {
-    console.log("customer");
-    console.log(customer);
+    // console.log("customer");
+    // console.log(customer);
+  }
+
+  onChangeTotalUnits() {
+    if (this.itemGroup == "HOLLOW BLOCK") {
+      this.estimate['fullLoads'] = Math.floor(this.estimate['unitsTotal'] / 700);
+      this.estimate['partialLoad'] = this.estimate['unitsTotal'] % 700;
+      // this.estimate['partialLoad'] > 0;
+      if (this.estimate['partialLoad'] > 0) {
+        this.partialLoadOption = true;
+      }
+    }
   }
 
   onItemGroupChange(item: Item[], division) {
     this.itemGroup = "";
     // this.itemGroup = "Aggregate";
-    console.log("inside item group");
+    // console.log("inside item group");
     if (division == "Quarry") {
-      console.log("inside Quarry Division");
-      console.log(item);
+      // console.log("inside Quarry Division");
+      // console.log(item);
       this.itemGroup = "Quarry";
       // this.items1 = item;
     }
     if (division == "HOLLOW BLOCK") {
-      console.log("inside HOLLOW BLOCK Division");
-      console.log(item);
+      this.itemGroup = "HOLLOW BLOCK";
+      // console.log("inside HOLLOW BLOCK Division");
+      // console.log(item);
+      // console.log(this.estimate['unitsTotal']);
       // this.items1 = item;
     }
 
     if (division == "PAVER") {
-      console.log("inside PAVER Division");
-      console.log(item);
+      // console.log("inside PAVER Division");
+      // console.log(item);
       // this.items1 = item;
     }
     // console.log(this.items1);
   }
   // estimateOrder(orders: Orders) {
   estimateOrder() {
-    console.log("orders");
-    console.log(this.customer);
+    // console.log("orders");
+    // console.log(this.customer);
     // this.estimate['customerName'] = this.customer['cust_Name'];
     // this.estimate['itemGroup'] = this.itemGroup;
     // this.estimate['itemGroupName'] = this.customer1['cust_Name']
@@ -137,7 +151,7 @@ export class EstimatePage {
     // console.log(this.unit2);
     // console.log(this.unit4);
     // console.log(this.unit6);
-    console.log(this.estimate);
+    // console.log(this.estimate);
     // this.orderData.slice();
     // this.orderData.push(orders);
     // console.log(this.orderData);
@@ -173,7 +187,7 @@ export class EstimatePage {
       .subscribe(
         (list: Item[]) => {
           this.items = list;
-          console.log(this.items);
+          // console.log(this.items);
           this.loading.dismiss();
         },
         error => {

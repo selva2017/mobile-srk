@@ -90,22 +90,9 @@
       <ion-col col-8>
         <ion-item>
           <ion-select name="itemName">
-          <!-- <ion-select [(ngModel)]="estimate.itemName" name="itemName"> -->
+            <!-- <ion-select [(ngModel)]="estimate.itemName" name="itemName"> -->
             <ion-option *ngFor="let item1 of items1" [value]="item1" (change)="onItemNameChange(item1)" required>{{item1.division_NAME}}</ion-option>
           </ion-select>
-        </ion-item>
-      </ion-col>
-    </ion-row>
-
-    <ion-row>
-      <ion-col col-6>
-        <ion-item>
-          <ion-label>Total Units</ion-label>
-        </ion-item>
-      </ion-col>
-      <ion-col col-6>
-        <ion-item>
-          <ion-input [(ngModel)]="estimate.unitsTotal" name="unitsTotal" type="text" required></ion-input>
         </ion-item>
       </ion-col>
     </ion-row>
@@ -122,8 +109,22 @@
         </ion-item>
       </ion-col>
     </ion-row>
+
+    <ion-row>
+      <ion-col col-6>
+        <ion-item>
+          <ion-label>Total Units</ion-label>
+        </ion-item>
+      </ion-col>
+      <ion-col col-6>
+        <ion-item>
+          <ion-input [(ngModel)]="estimate.unitsTotal" name="unitsTotal" type="text" (change)="onChangeTotalUnits()" required></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
     <div *ngIf="itemGroup=='Quarry'">
-    <!-- <div *ngIf="itemGroup=='Aggregate'"> -->
+      <!-- <div *ngIf="itemGroup=='Aggregate'"> -->
       <ion-row>
         <ion-col col-6>
           <div style="font-size:1.6rem;font-weight:bold;text-align: center;">Capacity</div>
@@ -181,6 +182,46 @@
           </ion-item>
         </ion-col>
       </ion-row>
+    </div>
+    <div *ngIf="itemGroup=='HOLLOW BLOCK'">
+      <!-- <div *ngIf="itemGroup=='Aggregate'"> -->
+      <ion-row>
+        <ion-col col-6>
+          <div style="font-size:1.6rem;font-weight:bold;text-align: center;">Quantity</div>
+        </ion-col>
+        <ion-col col-6>
+          <div style="font-size:1.6rem;font-weight:bold;text-align:center;">Loads</div>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col col-6>
+          <ion-item>
+            <ion-label>700 Units</ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col col-6>
+          <ion-item>
+            <ion-label>{{estimate.fullLoads}}</ion-label>
+            <!-- <ion-input [(ngModel)]="estimate.fullLoads" name="fullLoads" type="text"></ion-input> -->
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <div *ngIf="partialLoadOption==true">
+        <ion-row>
+          <ion-col col-6>
+            <ion-item>
+              <ion-label>{{estimate.partialLoad}} Units</ion-label>
+            </ion-item>
+          </ion-col>
+          <ion-col col-6>
+            <ion-item>
+              <ion-label>1</ion-label>
+              <!-- <ion-input [(ngModel)]="estimate.partialLoad" name="partialLoad" type="text"></ion-input> -->
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </div>
     </div>
     <button ion-button block type="submit" [color]="'head'" [disabled]="!estimateForm.valid">
       Submit
