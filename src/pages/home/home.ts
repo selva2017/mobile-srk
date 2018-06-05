@@ -101,25 +101,26 @@ export class HomePage {
         // this.barChart = this.getBarChart();
       },
       error => {
+        console.log("cust")
         // this.loading.dismiss();
         this.handleError(error.json().error);
       }
       );
 
-    this.authService.getMessages()
-      .subscribe(
-      (list) => {
-        this.showLoader();
-        this.messages = list;
-        // console.log(this.messages);
-        // console.log(list);
-        this.loading.dismiss();
-      },
-      error => {
-        // this.loading.dismiss();
-        // this.handleError(error.json().error);
-      }
-      );
+    // this.authService.getMessages()
+    //   .subscribe(
+    //   (list) => {
+    //     this.showLoader();
+    //     this.messages = list;
+    //     // console.log(this.messages);
+    //     // console.log(list);
+    //     this.loading.dismiss();
+    //   },
+    //   error => {
+    //     // this.loading.dismiss();
+    //     // this.handleError(error.json().error);
+    //   }
+    //   );
   }
   // );
   // this.data1 = [this.prodStatistics[0].stockWeek, this.prodStatistics[0].stockMonth, this.prodStatistics[0].stockQuarter, this.prodStatistics[0].stockYear];
