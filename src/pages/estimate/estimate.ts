@@ -48,6 +48,7 @@ export class EstimatePage {
   sites: Site[] = [];
   references: Reference[] = [];
   partialLoad: number;
+  uom: string = '';
   estimate = {
     customerID: '',
     // itemGroup: '',
@@ -214,6 +215,8 @@ export class EstimatePage {
     // console.log(product);
     this.selectedProduct = product;
     // console.log(this.selectedProduct);
+    // console.log(this.estimate);
+    // this.uom = this.estimate['product']['uom'];
   }
 
   onSelectCustomer(customer_id) {
@@ -294,6 +297,14 @@ export class EstimatePage {
         this.transportPerKMCostTiles = 50;
         console.log(this.transportCostPerSqFt = (this.distanceKM * this.transportPerKMCostTiles) / this.unitsTotal);
         console.log(this.productCostPerSqFt = (this.productPricePerUnit + this.loadingCostPerUnit + this.transportCostPerSqFt));
+
+        this.estimate['fullLoads'] = Math.floor(this.estimate['unitsTotal'] / 850);
+        this.estimate['partialLoad'] = this.estimate['unitsTotal'] % 850;
+        // this.estimate['partialLoad'] > 0;
+        if (this.estimate['partialLoad'] > 0) {
+          this.partialLoadOption = true;
+        }
+  
         break;
       }
       case "PAVER": {
