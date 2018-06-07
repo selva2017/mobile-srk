@@ -101,8 +101,8 @@ export class HomePage {
         // this.barChart = this.getBarChart();
       },
       error => {
-        console.log("cust")
-        // this.loading.dismiss();
+        // console.log("cust")
+        this.loading.dismiss();
         this.handleError(error.json().error);
       }
       );
