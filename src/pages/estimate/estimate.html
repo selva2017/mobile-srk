@@ -77,7 +77,7 @@
         <!-- <ion-input [(ngModel)]="customer.reference_ID" name="reference_ID" type="text" [disabled]="true" ></ion-input> -->
         <ion-select [(ngModel)]="estimate.reference1" name="reference1">
           <ion-option *ngFor="let reference1 of references" [value]="reference1.reference_ID" (ionSelect)="onSelectReference(reference1.refrer_NAME)">
-          {{reference1.refrer_NAME}} ({{reference1.referer_MOBILE1}}) - {{reference1.referer_TYPE}}
+            {{reference1.refrer_NAME}} ({{reference1.referer_MOBILE1}}) - {{reference1.referer_TYPE}}
           </ion-option>
         </ion-select>
       </ion-item>
@@ -97,7 +97,7 @@
         <!-- <ion-input [(ngModel)]="customer.reference_ID" name="reference_ID" type="text" [disabled]="true" ></ion-input> -->
         <ion-select [(ngModel)]="estimate.reference2" name="reference2">
           <ion-option *ngFor="let reference2 of references" [value]="reference2.reference_ID" (ionSelect)="onSelectReference(reference2.refrer_NAME)">
-          {{reference2.refrer_NAME}} ({{reference2.referer_MOBILE1}}) - {{reference2.referer_TYPE}}
+            {{reference2.refrer_NAME}} ({{reference2.referer_MOBILE1}}) - {{reference2.referer_TYPE}}
           </ion-option>
         </ion-select>
       </ion-item>
@@ -201,7 +201,7 @@
           </ion-col>
           <ion-col col-6>
             <ion-item>
-              <ion-input [(ngModel)]="estimate.unit1" name="unit1" type="text"></ion-input>
+              <ion-input [(ngModel)]="estimate.unit1" name="unit1" (ionChange)="onChangeUnit1(estimate.unit1)" type="text"></ion-input>
             </ion-item>
           </ion-col>
         </ion-row>
@@ -213,7 +213,7 @@
           </ion-col>
           <ion-col col-6>
             <ion-item>
-              <ion-input [(ngModel)]="estimate.unit2" name="unit2" type="text"></ion-input>
+              <ion-input [(ngModel)]="estimate.unit2" name="unit2" (ionChange)="onChangeUnit2(estimate.unit2)" type="text"></ion-input>
             </ion-item>
           </ion-col>
         </ion-row>
@@ -225,7 +225,7 @@
           </ion-col>
           <ion-col col-6>
             <ion-item>
-              <ion-input [(ngModel)]="estimate.unit4" name="unit4" type="text"></ion-input>
+              <ion-input [(ngModel)]="estimate.unit4" name="unit4" (ionChange)="onChangeUnit4(estimate.unit4)" type="text"></ion-input>
             </ion-item>
           </ion-col>
         </ion-row>
@@ -237,7 +237,7 @@
           </ion-col>
           <ion-col col-6>
             <ion-item>
-              <ion-input [(ngModel)]="estimate.unit6" name="unit6" type="text"></ion-input>
+              <ion-input [(ngModel)]="estimate.unit6" name="unit6" (ionChange)="onChangeUnit6(estimate.unit6)" type="text"></ion-input>
             </ion-item>
           </ion-col>
         </ion-row>
@@ -377,23 +377,23 @@
         <ion-col>
           <ion-item>
             <ion-label>Product Cost: </ion-label>
-            <ion-label>{{estimate.totalProductCost}}</ion-label>
+            <ion-label>{{displayINR(estimate.totalProductCost)}}</ion-label>
           </ion-item>
           <ion-item *ngIf="isToggledTax">
             <ion-label>Tax: </ion-label>
-            <ion-label>{{estimate.totalTax}}</ion-label>
+            <ion-label>{{displayINR(estimate.totalTax)}}</ion-label>
           </ion-item>
           <ion-item>
             <ion-label>Transport Cost: </ion-label>
-            <ion-label>{{estimate.totalTransportCost}}</ion-label>
+            <ion-label>{{displayINR(estimate.totalTransportCost)}}</ion-label>
           </ion-item>
           <ion-item>
             <ion-label>Loading Cost: </ion-label>
-            <ion-label>{{estimate.totalLoadingCost}}</ion-label>
+            <ion-label>{{displayINR(estimate.totalLoadingCost)}}</ion-label>
           </ion-item>
           <ion-item>
             <ion-label>Total Cost : </ion-label>
-            <ion-label>{{estimate.totalCost}}</ion-label>
+            <ion-label>{{displayINR(estimate.totalCost)}}</ion-label>
           </ion-item>
         </ion-col>
       </ion-row>
