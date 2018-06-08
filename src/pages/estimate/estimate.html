@@ -29,7 +29,7 @@
           <ion-item>
             <ion-select [(ngModel)]="estimate.customerID" name="customerID">
               <ion-option *ngFor="let customer of customers" [value]="customer.cust_ID" (ionSelect)="onSelectCustomer(customer.cust_ID)"
-                required>{{customer.cust_NAME}} ({{customer.cust_PHONE1}})</ion-option>
+                >{{customer.cust_NAME}} ({{customer.cust_PHONE1}})</ion-option>
             </ion-select>
           </ion-item>
         </ion-col>
@@ -37,14 +37,13 @@
       <ion-item>
         <ion-label stacked>Item Name</ion-label>
         <ion-select [(ngModel)]="estimate.customerID" name="customerID" [compareWith]="">
-          <ion-option *ngFor="let customer of customers" [value]="customer.cust_ID" (ionSelect)="onSelectCustomer(customer.cust_ID)"
-            required>{{customer.cust_NAME}} ({{customer.cust_PHONE1}})</ion-option>
+          <ion-option *ngFor="let customer of customers" [value]="customer.cust_ID" (ionSelect)="onSelectCustomer(customer.cust_ID)">{{customer.cust_NAME}} ({{customer.cust_PHONE1}})</ion-option>
         </ion-select>
       </ion-item>
       <!-- <ion-item>
             <ion-label>Customer</ion-label>
             <ion-select [(ngModel)]="customer" name="customer" >
-              <ion-option *ngFor="let customer of customers" [value]="customer" (change)="onChange(customer)"  text-left required>{{customer.cust_NAME}}</ion-option>
+              <ion-option *ngFor="let customer of customers" [value]="customer" (change)="onChange(customer)"  text-left >{{customer.cust_NAME}}</ion-option>
             </ion-select>
           </ion-item> -->
 
@@ -57,10 +56,10 @@
         <ion-col col-8>
           <ion-item> -->
         <ion-select [(ngModel)]="estimate.siteID" name="siteID">
-          <ion-option *ngFor="let site of sites" [value]="site.site_ID" (ionSelect)="onSelectSite(site.site_NAME)" required>{{site.site_NAME}}</ion-option>
+          <ion-option *ngFor="let site of sites" [value]="site.site_ID" (ionSelect)="onSelectSite(site.site_NAME)">{{site.site_NAME}}</ion-option>
         </ion-select>
         <!-- <ion-label>{{customer.site_NAME}}</ion-label> -->
-        <!-- <ion-input [(ngModel)]="customer.site_NAME" name="site_NAME" type="text" [disabled]="true" required></ion-input> -->
+        <!-- <ion-input [(ngModel)]="customer.site_NAME" name="site_NAME" type="text" [disabled]="true" ></ion-input> -->
       </ion-item>
       <!-- </ion-col>
       </ion-row> -->
@@ -75,10 +74,10 @@
         <ion-col col-8>
           <ion-item> -->
         <!-- <ion-label>{{customer.reference_ID}}</ion-label> -->
-        <!-- <ion-input [(ngModel)]="customer.reference_ID" name="reference_ID" type="text" [disabled]="true" required></ion-input> -->
+        <!-- <ion-input [(ngModel)]="customer.reference_ID" name="reference_ID" type="text" [disabled]="true" ></ion-input> -->
         <ion-select [(ngModel)]="estimate.reference1" name="reference1">
-          <ion-option *ngFor="let reference1 of references" [value]="reference1.reference_ID" (ionSelect)="onSelectReference(reference1.refrer_NAME)"
-            required> {{reference1.refrer_NAME}} ({{reference1.referer_MOBILE1}}) - {{reference1.referer_TYPE}}
+          <ion-option *ngFor="let reference1 of references" [value]="reference1.reference_ID" (ionSelect)="onSelectReference(reference1.refrer_NAME)">
+          {{reference1.refrer_NAME}} ({{reference1.referer_MOBILE1}}) - {{reference1.referer_TYPE}}
           </ion-option>
         </ion-select>
       </ion-item>
@@ -95,10 +94,10 @@
         <ion-col col-8>
           <ion-item> -->
         <!-- <ion-label>{{customer.reference_ID}}</ion-label> -->
-        <!-- <ion-input [(ngModel)]="customer.reference_ID" name="reference_ID" type="text" [disabled]="true" required></ion-input> -->
+        <!-- <ion-input [(ngModel)]="customer.reference_ID" name="reference_ID" type="text" [disabled]="true" ></ion-input> -->
         <ion-select [(ngModel)]="estimate.reference2" name="reference2">
-          <ion-option *ngFor="let reference2 of references" [value]="reference2.reference_ID" (ionSelect)="onSelectReference(reference2.refrer_NAME)"
-            required> {{reference2.refrer_NAME}} ({{reference2.referer_MOBILE1}}) - {{reference2.referer_TYPE}}
+          <ion-option *ngFor="let reference2 of references" [value]="reference2.reference_ID" (ionSelect)="onSelectReference(reference2.refrer_NAME)">
+          {{reference2.refrer_NAME}} ({{reference2.referer_MOBILE1}}) - {{reference2.referer_TYPE}}
           </ion-option>
         </ion-select>
       </ion-item>
@@ -112,7 +111,7 @@
         <!-- </ion-col>
           <ion-col col-6> -->
         <!-- <ion-item> -->
-        <ion-input [(ngModel)]="estimate.distanceKM" name="distanceKM" type="text" placeholder="Enter the distance in KM" required></ion-input>
+        <ion-input [(ngModel)]="estimate.distanceKM" name="distanceKM" type="text" placeholder="Enter the distance in KM"></ion-input>
       </ion-item>
       <!-- </ion-col> -->
       <!-- </ion-row> -->
@@ -143,8 +142,7 @@
         <!-- <ion-col col-8> -->
         <!-- <ion-item> -->
         <ion-select [(ngModel)]="estimate.productGroupName" name="item_Group_NAME">
-          <ion-option *ngFor="let row of productGroupModel" (ionSelect)="onItemGroupChange(row,row.product_GROUP_ID,row.division_ID)"
-            required>{{row.product_GROUP_NAME}}</ion-option>
+          <ion-option *ngFor="let row of productGroupModel" (ionSelect)="onItemGroupChange(row,row.product_GROUP_ID,row.division_ID)">{{row.product_GROUP_NAME}}</ion-option>
 
         </ion-select>
       </ion-item>
@@ -161,7 +159,7 @@
             <ion-item> -->
         <!-- <ion-select name="product"> -->
         <ion-select [(ngModel)]="estimate.product" name="product">
-          <ion-option *ngFor="let item of products" [value]="item" (ionSelect)="onItemNameChange(item.productDetails)" required>{{item.product_NAME}}</ion-option>
+          <ion-option *ngFor="let item of products" [value]="item" (ionSelect)="onItemNameChange(item.productDetails)">{{item.product_NAME}}</ion-option>
         </ion-select>
       </ion-item>
       <!-- </ion-col> -->
@@ -176,7 +174,7 @@
         <ion-col col-6>
           <ion-item> -->
         <ion-input [(ngModel)]="estimate.unitsTotal" name="unitsTotal" type="text" (change)="onChangeTotalUnits(estimate.unitsTotal)"
-          placeholder="Enter the Total Units/Qty" required></ion-input>
+          placeholder="Enter the Total Units/Qty"></ion-input>
       </ion-item>
       <!-- </ion-col> -->
       <!-- </ion-row> -->
@@ -378,25 +376,27 @@
       <ion-row>
         <ion-col>
           <ion-item>
-            <ion-label>Transport Cost: </ion-label>
-            <ion-label>7000</ion-label>
-          </ion-item>
-          <ion-item>
-            <ion-label>Loading Cost: </ion-label>
-            <ion-label>700</ion-label>
+            <ion-label>Product Cost: </ion-label>
+            <ion-label>{{estimate.totalProductCost}}</ion-label>
           </ion-item>
           <ion-item *ngIf="isToggledTax">
             <ion-label>Tax: </ion-label>
-            <ion-label>1700</ion-label>
+            <ion-label>{{estimate.totalTax}}</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label>Transport Cost: </ion-label>
+            <ion-label>{{estimate.totalTransportCost}}</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label>Loading Cost: </ion-label>
+            <ion-label>{{estimate.totalLoadingCost}}</ion-label>
           </ion-item>
           <ion-item>
             <ion-label>Total Cost : </ion-label>
-            <ion-label>17000</ion-label>
+            <ion-label>{{estimate.totalCost}}</ion-label>
           </ion-item>
         </ion-col>
       </ion-row>
-
-
     </ion-card>
     <button ion-button block type="submit" [color]="'head'" [disabled]="!estimateForm.valid">
       Submit
