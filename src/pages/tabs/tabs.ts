@@ -28,6 +28,6 @@ export class TabsPage {
   }
   ionViewDidEnter() {
     this.role = localStorage.getItem('role');
-    // console.log(this.role);
+    // //console.log(this.role);
   }
 }

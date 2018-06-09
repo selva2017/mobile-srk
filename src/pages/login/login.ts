@@ -28,7 +28,7 @@ export class LoginPage {
     this.authService.login(this.loginData)
         .subscribe(
         success => {
-            // console.log(success);
+            // //console.log(success);
             
             if (success.statusMessage == "AUTH_SUCCESS") {
               this.token = true;
@@ -38,8 +38,8 @@ export class LoginPage {
               // localStorage.setItem('companyName', success.companyName);
               localStorage.setItem('companyId', success.companyId);
               localStorage.setItem('isAuthenticated', 'true');
-              // console.log('Company Id -' + success.companyId);
-              // console.log('Role -' + success.role);
+              // //console.log('Company Id -' + success.companyId);
+              // //console.log('Role -' + success.role);
               // this.isAuthenticated = true;
               this.navCtrl.setRoot(TabsPage);
               this.loading.dismiss();
@@ -91,7 +91,7 @@ export class LoginPage {
     });
 
     toast.onDidDismiss(() => {
-      // console.log('Dismissed toast');
+      // //console.log('Dismissed toast');
     });
 
     toast.present();

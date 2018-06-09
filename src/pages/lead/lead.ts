@@ -19,7 +19,7 @@ export class LeadPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad LeadPage');
+    //console.log('ionViewDidLoad LeadPage');
   }
 
 }

@@ -19,7 +19,7 @@ export class OrdersPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad OrdersPage');
+    //console.log('ionViewDidLoad OrdersPage');
   }
 
 }

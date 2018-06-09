@@ -20,7 +20,7 @@ export class HomePage {
     if (localStorage.getItem("token")) {
       this.isLoggedIn = true;
     }
-    // console.log("Constructor...");
+    // //console.log("Constructor...");
     // this.authService.fetchDashboardData()
     //   .subscribe(
     //   (list) => {
@@ -39,8 +39,8 @@ export class HomePage {
     //   .subscribe(
     //   (list) => {
     //     this.messages = list;
-    //     console.log("Message count");
-    //     console.log(list);
+    //     //console.log("Message count");
+    //     //console.log(list);
     //     this.loading.dismiss();
     //   },
     //   error => {
@@ -68,29 +68,29 @@ export class HomePage {
   // ionViewDidEnter() {
     ngOnInit() {
     this.category = "production";
-    // console.log("Did enter...");
+    // //console.log("Did enter...");
     // const loading = this.loadingCtrl.create({
     //   content: 'Please wait...'
     // });
     // this.authService.getActiveUser().getToken()
     // .then(
     // (token: string) => {
-    // console.log(token);
+    // //console.log(token);
     this.authService.fetchCustomerData()
       .subscribe(
       (list) => {
         this.showLoader();
         this.prod_data = [];
         this.prod_month = [];
-        // console.log(this.prodStatistics.productionSummaries.length);
+        // //console.log(this.prodStatistics.productionSummaries.length);
         // for(var i=0; i < this.prodStatistics.productionSummaries.length; i++)
         //   if (Number(this.prodStatistics.productionSummaries[i].amount) > 0) {
         //     this.prod_data[i] = Number(this.prodStatistics.productionSummaries[i].amount/1000);
         //     this.prod_month[i] = this.prodStatistics.productionSummaries[i].month;
         // }
-        // console.log(this.prod_data.length);
-        // console.log(this.prod_data);
-        // console.log(this.prod_month);
+        // //console.log(this.prod_data.length);
+        // //console.log(this.prod_data);
+        // //console.log(this.prod_month);
         // this.numbers.push(Number(this.prodStatistics.stockWeek/1000));
         // this.numbers.push(Number(this.prodStatistics.stockMonth/1000));
         // this.numbers.push(Number(this.prodStatistics.stockQuarter/1000));
@@ -101,7 +101,7 @@ export class HomePage {
         // this.barChart = this.getBarChart();
       },
       error => {
-        // console.log("cust")
+        // //console.log("cust")
         this.loading.dismiss();
         this.handleError(error.json().error);
       }
@@ -112,8 +112,8 @@ export class HomePage {
     //   (list) => {
     //     this.showLoader();
     //     this.messages = list;
-    //     // console.log(this.messages);
-    //     // console.log(list);
+    //     // //console.log(this.messages);
+    //     // //console.log(list);
     //     this.loading.dismiss();
     //   },
     //   error => {
@@ -137,7 +137,7 @@ export class HomePage {
   ionViewDidLoad() {
     this.companyId = localStorage.getItem('companyId');
     // this wont get prod_data so need to call getLineChat() from Constructor
-    // console.log('ionViewDidLoad ChartJsPage');
+    // //console.log('ionViewDidLoad ChartJsPage');
 
   }
 
@@ -176,7 +176,7 @@ export class HomePage {
     });
 
     toast.onDidDismiss(() => {
-      // console.log('Dismissed toast');
+      // //console.log('Dismissed toast');
     });
 
     toast.present();
