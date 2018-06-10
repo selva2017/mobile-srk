@@ -36,7 +36,7 @@
         </ion-col>
       </ion-row> -->
       <ion-item>
-        <ion-label stacked>Item Name</ion-label>
+        <ion-label stacked>Customer Name</ion-label>
         <ion-select [(ngModel)]="estimate.customerID" name="customerID" [compareWith]="">
           <ion-option *ngFor="let customer of customers" [value]="customer.cust_ID" (ionSelect)="onSelectCustomer(customer.cust_ID)">{{customer.cust_NAME}} ({{customer.cust_PHONE1}})</ion-option>
         </ion-select>
@@ -163,6 +163,16 @@
           <ion-option *ngFor="let item of products" [value]="item" (ionSelect)="onItemNameChange(item.productDetails)">{{item.product_NAME}}</ion-option>
         </ion-select>
       </ion-item>
+      <ion-item stacked>
+        <!-- <ion-col> -->
+        <ion-label>Product Unit Cost :</ion-label>
+        <ion-label>{{estimate['product'].product_COST}}</ion-label>
+        <!-- <ion-item> -->
+        <ion-label>Loading Unit Cost :</ion-label>
+        <ion-label>{{estimate['product'].loading_COST}}</ion-label>
+        <!-- </ion-item> -->
+        <!-- </ion-col> -->
+      </ion-item>
       <!-- </ion-col> -->
       <!-- </ion-row> -->
       <!-- <ion-row> -->
@@ -246,7 +256,7 @@
     </ion-card>
     <ion-card>
       <div *ngIf="itemGroup=='DESIGNER TILES'">
-        <ion-card>
+        <!-- <ion-card>
           <ion-row>
             <ion-col col-6>
               <div style="font-size:1.6rem;font-weight:bold;text-align: center;">Quantity</div>
@@ -265,7 +275,6 @@
             <ion-col col-6>
               <ion-item>
                 <ion-label>{{estimate.fullLoads}}</ion-label>
-                <!-- <ion-input [(ngModel)]="estimate.fullLoads" name="fullLoads" type="text"></ion-input> -->
               </ion-item>
             </ion-col>
           </ion-row>
@@ -280,12 +289,11 @@
               <ion-col col-6>
                 <ion-item>
                   <ion-label>1</ion-label>
-                  <!-- <ion-input [(ngModel)]="estimate.partialLoad" name="partialLoad" type="text"></ion-input> -->
                 </ion-item>
               </ion-col>
             </ion-row>
           </div>
-        </ion-card>
+        </ion-card> -->
 
         <ion-card>
           <div *ngFor="let item of selectedProduct">
@@ -298,7 +306,6 @@
               <ion-col col-6>
                 <ion-item>
                   <ion-input [(ngModel)]="item.qty" name={{item}} type="text" text-right></ion-input>
-                  <!-- <ion-input name="item.product_DETAIL_NAME" [(ngModel)]="estimate.tiles" type="text"></ion-input> -->
                 </ion-item>
               </ion-col>
             </ion-row>
@@ -306,32 +313,24 @@
         </ion-card>
       </div>
       <div *ngIf="itemGroup=='PAVER'">
-        <ion-row>
-          <ion-col col-6>
-            <div style="font-size:1.6rem;font-weight:bold;text-align: center;">Item</div>
-          </ion-col>
-          <ion-col col-6>
-            <div style="font-size:1.6rem;font-weight:bold;text-align:center;">Qty</div>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-
-          <ion-col col-6>
-            <ion-item>
-              <ion-label> {{item.product_DETAIL_NAME}}</ion-label>
-            </ion-item>
-          </ion-col>
-          <ion-col col-6>
-            <ion-item>
-              <ion-input [(ngModel)]="estimate.pavers" name={{item.product_DETAIL_NAME}} type="text" text-right></ion-input>
-              <!-- <ion-input name="item.product_DETAIL_NAME" [(ngModel)]="estimate.tiles" type="text"></ion-input> -->
-            </ion-item>
-          </ion-col>
-        </ion-row>
+        <div *ngFor="let item of selectedProduct">
+          <ion-row>
+            <ion-col col-6>
+              <ion-item>
+                <ion-label> {{item.product_DETAIL_NAME}}</ion-label>
+              </ion-item>
+            </ion-col>
+            <ion-col col-6>
+              <ion-item>
+                <ion-input [(ngModel)]="item.qty" name={{item}} type="text" text-right></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+        </div>
       </div>
-      <div *ngIf="itemGroup=='CRUSHER / BUNKAR'">
+      <!-- <div *ngIf="itemGroup=='CRUSHER / BUNKAR'">
         inside crusher
-      </div>
+      </div> -->
       <div *ngIf="itemGroup=='HOLLOW BLOCK'">
         <!-- <div *ngIf="itemGroup=='Aggregate'"> -->
         <ion-row>
@@ -384,11 +383,11 @@
             <ion-label>Tax: </ion-label>
             <ion-label>{{displayINR(estimate.totalTax)}}</ion-label>
           </ion-item>
-          <ion-item>
+          <ion-item *ngIf="showTransportCost">
             <ion-label>Transport Cost: </ion-label>
             <ion-label>{{displayINR(estimate.totalTransportCost)}}</ion-label>
           </ion-item>
-          <ion-item>
+          <ion-item *ngIf="showLoadingCost">
             <ion-label>Loading Cost: </ion-label>
             <ion-label>{{displayINR(estimate.totalLoadingCost)}}</ion-label>
           </ion-item>
