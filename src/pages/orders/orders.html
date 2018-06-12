@@ -1,18 +1,83 @@
-<!--
-  Generated template for the OrdersPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
-
-  <ion-navbar>
-    <ion-title>Orders</ion-title>
+  <ion-navbar [color]="'head'">
+    <ion-buttons left>
+      <button ion-button icon-only menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title center>Order</ion-title>
+    <ion-buttons right>
+      <img alt="logo" height="40" src="assets/imgs/srk-0.png">
+      <!-- <img alt="logo" height="40" src="assets/imgs/{{companyId}}.png"> -->
+    </ion-buttons>
   </ion-navbar>
-
 </ion-header>
 
+<ion-content>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-list padding>
+    <ion-item *ngFor="let item of orders; let i = index" class="border-shade">
+      <ion-row>
+        <ion-col col-5>Customer</ion-col>
+        <h2>{{ item.cust_ID}}</h2>
+      </ion-row>
+      <ion-row>
+        <ion-col col-5>Order#</ion-col>
+        <h2>{{ item.order_GROUP_NO}}</h2>
+        <!-- <button ion-button small item-end [navPush]="subOrderPage" [navParams]="item">{{ item.order_GROUP_NO}}</button> -->
+      </ion-row>
+      <ion-row>
+        <ion-col col-5>Order Date</ion-col>
+        <h2>{{ item.order_DT}}</h2>
+      </ion-row>
+      <ion-row>
+        <ion-col col-5>Product</ion-col>
+        <h2>{{ item.product_ID}}</h2>
+      </ion-row>
+      <ion-row>
+        <ion-col col-5>Site</ion-col>
+        <h2>{{ item.site_ID}}</h2>
+      </ion-row>
+      <ion-row>
+        <ion-col col-5>Group</ion-col>
+        <h2>{{ item.product_GROUP}}</h2>
+      </ion-row>
+      <ion-row>
+        <ion-col col-5>Distance</ion-col>
+        <h2>{{ item.delivery_DISTANCE}}</h2>
+      </ion-row>
+      <ion-row>
+        <ion-col col-5>Total Units</ion-col>
+        <h2>{{ item.total_ORDER_UNIT}}</h2>
+      </ion-row>
+      <ion-row>
+        <ion-col col-5>Unit Cost</ion-col>
+        <h2>{{ item.product_UNIT_COST}}</h2>
+      </ion-row>
+      <ion-row>
+        <ion-col col-5>Loading Cost</ion-col>
+        <h2>{{ item.loading_UNIT_COST}}</h2>
+      </ion-row>
+      <ion-row>
+        <ion-col col-5>Product</ion-col>
+        <h2>{{ item.total_PRODUCT_COST}}</h2>
+      </ion-row>
+      <ion-row>
+        <ion-col col-5>Loading</ion-col>
+        <h2>{{ item.total_LOADING_COST}}</h2>
+      </ion-row>
+      <ion-row>
+        <ion-col col-5>Transport</ion-col>
+        <h2>{{ item.total_TRANSPORT_COST}}</h2>
+      </ion-row>
+      <ion-row>
+        <ion-col col-5>Transport</ion-col>
+        <h2>{{ item.total_COST}}</h2>
+      </ion-row>
 
-<ion-content padding>
-
+      <!-- <button ion-button clear item-end color="danger" *ngIf="role == '1'" (click)="onRemoveFromList(item.voucherKey)">Hide</button> -->
+    </ion-item>
+  </ion-list>
 </ion-content>

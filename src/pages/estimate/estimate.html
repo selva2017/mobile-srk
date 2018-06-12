@@ -38,7 +38,8 @@
       <ion-item>
         <ion-label stacked>Customer Name</ion-label>
         <ion-select [(ngModel)]="estimate.customerID" name="customerID" [compareWith]="">
-          <ion-option *ngFor="let customer of customers" [value]="customer.cust_ID" (ionSelect)="onSelectCustomer(customer.cust_ID)">{{customer.cust_NAME}} ({{customer.cust_PHONE1}})</ion-option>
+          <ion-option *ngFor="let customer of customers" [value]="customer.cust_ID" (ionSelect)="onSelectCustomer(customer.cust_ID)"
+            required>{{customer.cust_NAME}} ({{customer.cust_PHONE1}})</ion-option>
         </ion-select>
       </ion-item>
       <!-- <ion-item>
@@ -57,7 +58,7 @@
         <ion-col col-8>
           <ion-item> -->
         <ion-select [(ngModel)]="estimate.siteID" name="siteID">
-          <ion-option *ngFor="let site of sites" [value]="site.site_ID" (ionSelect)="onSelectSite(site.site_NAME)">{{site.site_NAME}}</ion-option>
+          <ion-option *ngFor="let site of sites" [value]="site.site_ID" (ionSelect)="onSelectSite(site.site_NAME)" required>{{site.site_NAME}}</ion-option>
         </ion-select>
         <!-- <ion-label>{{customer.site_NAME}}</ion-label> -->
         <!-- <ion-input [(ngModel)]="customer.site_NAME" name="site_NAME" type="text" [disabled]="true" ></ion-input> -->
@@ -112,7 +113,7 @@
         <!-- </ion-col>
           <ion-col col-6> -->
         <!-- <ion-item> -->
-        <ion-input [(ngModel)]="estimate.distanceKM" name="distanceKM" type="text" placeholder="Enter the distance in KM"></ion-input>
+        <ion-input [(ngModel)]="estimate.distanceKM" name="distanceKM" type="text" placeholder="Enter the distance in KM" required></ion-input>
       </ion-item>
       <!-- </ion-col> -->
       <!-- </ion-row> -->
@@ -126,7 +127,7 @@
           <ion-item>
             <ion-label *ngIf="isToggledTax">Yes</ion-label>
             <ion-label *ngIf="!isToggledTax">No</ion-label>
-            <ion-toggle (ionChange)="notifyTaxOption(estimate.taxable)" [checked]="isToggledTax"></ion-toggle>
+            <ion-toggle (ionChange)="notifyTaxOption(estimate.taxable)" [checked]="isToggledTax" required></ion-toggle>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -143,7 +144,8 @@
         <!-- <ion-col col-8> -->
         <!-- <ion-item> -->
         <ion-select [(ngModel)]="estimate.productGroupName" name="item_Group_NAME">
-          <ion-option *ngFor="let row of productGroupModel" (ionSelect)="onItemGroupChange(row,row.product_GROUP_ID,row.division_ID)">{{row.product_GROUP_NAME}}</ion-option>
+          <ion-option *ngFor="let row of productGroupModel" (ionSelect)="onItemGroupChange(row,row.product_GROUP_ID,row.division_ID)"
+            required>{{row.product_GROUP_NAME}}</ion-option>
 
         </ion-select>
       </ion-item>
@@ -160,15 +162,15 @@
             <ion-item> -->
         <!-- <ion-select name="product"> -->
         <ion-select [(ngModel)]="estimate.product" name="product">
-          <ion-option *ngFor="let item of products" [value]="item" (ionSelect)="onItemNameChange(item.productDetails)">{{item.product_NAME}}</ion-option>
+          <ion-option *ngFor="let item of products" [value]="item" (ionSelect)="onItemNameChange(item.productDetails)" required>{{item.product_NAME}}</ion-option>
         </ion-select>
       </ion-item>
       <ion-item stacked>
         <!-- <ion-col> -->
-        <ion-label>Product Unit Cost :</ion-label>
+        <ion-label>Cost/Unit:</ion-label>
         <ion-label>{{estimate['product'].product_COST}}</ion-label>
         <!-- <ion-item> -->
-        <ion-label>Loading Unit Cost :</ion-label>
+        <ion-label>Loading:</ion-label>
         <ion-label>{{estimate['product'].loading_COST}}</ion-label>
         <!-- </ion-item> -->
         <!-- </ion-col> -->
@@ -185,7 +187,7 @@
         <ion-col col-6>
           <ion-item> -->
         <ion-input [(ngModel)]="estimate.unitsTotal" name="unitsTotal" type="text" (change)="onChangeTotalUnits(estimate.unitsTotal)"
-          placeholder="Enter the Total Units/Qty"></ion-input>
+          placeholder="Enter the Total Units/Qty" required></ion-input>
       </ion-item>
       <!-- </ion-col> -->
       <!-- </ion-row> -->
@@ -255,7 +257,7 @@
       </div>
     </ion-card>
     <ion-card>
-      <div *ngIf="itemGroup=='DESIGNER TILES'">
+      <div *ngIf="itemGroup=='DESIGNER_TILES'">
         <!-- <ion-card>
           <ion-row>
             <ion-col col-6>
@@ -331,7 +333,7 @@
       <!-- <div *ngIf="itemGroup=='CRUSHER / BUNKAR'">
         inside crusher
       </div> -->
-      <div *ngIf="itemGroup=='HOLLOW BLOCK'">
+      <div *ngIf="itemGroup=='HOLLOW_BLOCK'">
         <!-- <div *ngIf="itemGroup=='Aggregate'"> -->
         <ion-row>
           <ion-col col-6>
@@ -401,8 +403,8 @@
     <button ion-button block type="submit" [color]="'head'" [disabled]="!estimateForm.valid">
       Submit
     </button>
-    <button ion-button block [color]="'red'">
-      Cancel
-    </button>
   </form>
+  <button ion-button block color="danger" (click)="clearAllData()">
+    Clear All
+  </button>
 </ion-content>
