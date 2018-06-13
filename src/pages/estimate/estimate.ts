@@ -50,7 +50,7 @@ export class EstimatePage {
   references: Reference[] = [];
   partialLoad: number;
   uom: string = '';
-  totalUnitsCountValidation: boolean;
+  totalUnitsCountValidation: boolean = false;
   estimate = {
     customerID: '',
     // itemGroup: '',
@@ -60,7 +60,7 @@ export class EstimatePage {
     productGroup: '', //itemGroup
     productGroupName: '',
     product: '',
-    distanceKM: '',
+    distanceKM: 0,
     unitsTotal: 0,
     fullLoads: 0,
     fullLoadsCost: 0,
@@ -138,7 +138,25 @@ export class EstimatePage {
     // unitlTransportCostSum: 0,
   }
   totalUnitsCountCheck() {
+    // console.log(Number(this.estimate['unit1'] * 1) + Number(this.estimate['unit2'] * 2) + Number(this.estimate['unit4'] * 4) + Number(this.estimate['unit6'] * 6));
     if (Number(this.estimate['unit1'] * 1) + Number(this.estimate['unit2'] * 2) + Number(this.estimate['unit4'] * 4) + Number(this.estimate['unit6'] * 6) > this.unitsTotal) {
+      // if (Number(this.estimate['unit1'] + this.estimate['unit2'] + this.estimate['unit4'] + this.estimate['unit6']) > this.unitsTotal) {
+      let alert = this.alertCtrl.create({
+        title: 'Warning',
+        subTitle: 'Your Total Units and Total Breakup Units are not matching.',
+        buttons: ['OK']
+      });
+
+      alert.present();
+      this.totalUnitsCountValidation = false;
+    }
+    else
+      this.totalUnitsCountValidation = true;
+
+  }
+  checkTotalUnitsMatch() {
+    // console.log(Number(this.estimate['unit1'] * 1) + Number(this.estimate['unit2'] * 2) + Number(this.estimate['unit4'] * 4) + Number(this.estimate['unit6'] * 6));
+    if (Number(this.estimate['unit1'] * 1) + Number(this.estimate['unit2'] * 2) + Number(this.estimate['unit4'] * 4) + Number(this.estimate['unit6'] * 6) != this.unitsTotal) {
       // if (Number(this.estimate['unit1'] + this.estimate['unit2'] + this.estimate['unit4'] + this.estimate['unit6']) > this.unitsTotal) {
       let alert = this.alertCtrl.create({
         title: 'Warning',
@@ -251,6 +269,8 @@ export class EstimatePage {
   }
   clearAllData() {
     // this.clearHBCosts();
+    // estimateForm.distanceKM.value = 0;
+    this.estimate['distanceKM'] = 0;
     this.estimate['unitsTotal'] = 0;
     this.estimate['transportPerKMCost'] = 0;
     this.estimate['totalProductCost'] = 0;
@@ -258,7 +278,18 @@ export class EstimatePage {
     this.estimate['totalLoadingCost'] = 0;
     this.estimate['totalTransportCost'] = 0;
     this.estimate['totalCost'] = 0;
+    this.estimate['product_COST'] = 0;
+    this.estimate['loading_COST'] = 0;
     this.clearProductCosts();
+    this.clearDropdown();
+  }
+
+  clearDropdown() {
+    this.estimate['siteID'] = '0';
+    this.estimate['reference1'] = '0';
+    this.estimate['reference2'] = '0';
+    this.estimate['productGroupName'] = '0';
+    this.estimate['product'] = '0';
   }
   clearProductCosts() {
     // this.estimate['unitsTotal'] = 0;
@@ -295,7 +326,7 @@ export class EstimatePage {
     this.clearProductCosts();
     this.selectedProduct = product;
     //console.log(this.selectedProduct);
-    console.log(this.estimate);
+    // console.log(this.estimate);
     // this.uom = this.estimate['product']['uom'];
   }
 
@@ -624,9 +655,9 @@ export class EstimatePage {
         // this.unitsTotal = Number(this.estimate['unitsTotal']);
         // console.log(this.unitsTotal);
         // console.log(this.distanceKM);
-        
-        // this.calculatedTransportCost = ((this.distanceKM * this.transportPerKMCostTiles) / this.unitsTotal);
-        this.calculatedTransportCost = this.roundTransportCost((this.distanceKM * this.transportPerKMCostTiles) / this.unitsTotal);
+
+        this.calculatedTransportCost = ((this.distanceKM * this.transportPerKMCostTiles) / this.unitsTotal);
+        // this.calculatedTransportCost = this.roundTransportCost((this.distanceKM * this.transportPerKMCostTiles) / this.unitsTotal);
         // console.log(this.calculatedTransportCost);
         this.calculatedSqFtUnitCost = this.loadingCostPerUnit + this.productPricePerUnit + this.calculatedTransportCost;
         // console.log(this.calculatedSqFtUnitCost);
@@ -867,7 +898,8 @@ export class EstimatePage {
     }
     else if (float_part > 0.75 && float_part < 0.99) {
       return int_part + 1;
-    }
+    } else
+      return int_part;
   }
   onItemGroupChange(product: Product[], product_group_id, product_group_name) {
     this.clearProductCosts();
@@ -943,19 +975,44 @@ export class EstimatePage {
   }
   // estimateOrder(orders: Orders) {
   estimateOrder(estimateForm) {
-    // //console.log(estimateForm);
+    // console.log(estimateForm.distanceKM);
     // console.log(this.estimate);
     this.estimate['salesRep'] = '100';
-    if (this.itemGroup == "AGGREGATES") {
-      if (this.totalUnitsCountValidation) {
-        this.doEstimation();
-        // estimateForm.reset();
+    switch (this.itemGroup) {
+      case "QUARRY": {
+        this.checkTotalUnitsMatch();
+        if (this.totalUnitsCountValidation) {
+          this.doEstimation();
+          break;
+        }
+        else
+          this.totalUnitsCountCheck();
+        break;
       }
-      else
-        this.totalUnitsCountCheck();
+      case "PAVER": {
+        this.doEstimation();
+        break;
+      }
+      case "DESIGNER_TILES": {
+        this.doEstimation();
+        break;
+      }
+      case "HOLLOW_BLOCK": {
+        this.doEstimation();
+        break;
+      }
     }
-    else
-      this.doEstimation();
+    // if (this.itemGroup == "QUARRY") {
+    //   if (this.totalUnitsCountValidation) {
+    //     this.doEstimation();
+    //   }
+    //   else if (!this.totalUnitsCountValidation)
+    //     this.totalUnitsCountCheck();
+    // }
+    // else if (this.itemGroup == "PAVER" || this.itemGroup == "DESIGNER_TILES" || this.itemGroup == "HOLLOW_BLOCK") {
+    //   this.doEstimation();
+    // }
+    // estimateForm.reset();
     // this.estimate['customerName'] = this.customer['cust_Name'];
     // this.estimate['itemGroup'] = this.itemGroup;
     // this.estimate['itemGroupName'] = this.customer1['cust_Name']
@@ -1018,7 +1075,7 @@ export class EstimatePage {
       .subscribe(
         (list: ProductGroup[]) => {
           this.productGroupModel = list;
-          console.log(this.productGroupModel);
+          // console.log(this.productGroupModel);
           this.loading.dismiss();
         },
         error => {
@@ -1028,11 +1085,21 @@ export class EstimatePage {
       );
   }
 
+  private handleMessage(message: string) {
+    const alert = this.alertCtrl.create({
+      // title: 'Network Connection error!',
+      subTitle: "Successfully submitted the Estimation...",
+      message: message,
+      buttons: ['Ok']
+    });
+    alert.present();
+  }
+
   private handleError(errorMessage: string) {
     const alert = this.alertCtrl.create({
       // title: 'Network Connection error!',
-      subTitle: "Estimation submitted successfully...",
-      // message: errorMessage,
+      subTitle: "Failed to submit the Estimation...",
+      message: errorMessage,
       buttons: ['Ok']
     });
     alert.present();
@@ -1046,40 +1113,50 @@ export class EstimatePage {
   }
   doEstimation() {
     // this.showLoader();
-    this.handleError("estimation");
+    // this.handleError("estimation");
     this.authService.sendEstimation(this.estimate)
       .subscribe(
         success => {
-          console.log(success);
-          this.handleError("Success");
+          // console.log("success");
+          // this.handleMessage("Success");
           // this.ngOnInit();
           // this.clearHBCosts();
           // this.clearProductCosts();
-          // if (success.statusMessage == "AUTH_SUCCESS") {
-          //   // this.token = true;
-          //   // this.token_name = success.token;
-          //   // localStorage.setItem('token', this.token_name);
-          //   // localStorage.setItem('role', success.role);
-          //   // // localStorage.setItem('companyName', success.companyName);
-          //   // localStorage.setItem('companyId', success.companyId);
-          //   // localStorage.setItem('isAuthenticated', 'true');
-          //   // //console.log('Company Id -' + success.companyId);
-          //   // //console.log('Role -' + success.role);
-          //   // this.isAuthenticated = true;
-          //   // this.navCtrl.setRoot(TabsPage);
-          //   // this.loading.dismiss();
-          // }
-          // else {
-          //   // this.token = false;
-          //   // // this.isAuthenticated = false;
-          //   // localStorage.setItem('isAuthenticated', 'false');
-          //   // this.loading.dismiss();
-          //   // this.invalidLogin.emit(true);
-          // }
+          if (success == 200) {
+            this.handleMessage("Success");
+            // this.ngOnInit();
+            this.clearAllData();
+            //   // this.token = true;
+            //   // this.token_name = success.token;
+            //   // localStorage.setItem('token', this.token_name);
+            //   // localStorage.setItem('role', success.role);
+            //   // // localStorage.setItem('companyName', success.companyName);
+            //   // localStorage.setItem('companyId', success.companyId);
+            //   // localStorage.setItem('isAuthenticated', 'true');
+            //   // //console.log('Company Id -' + success.companyId);
+            //   // //console.log('Role -' + success.role);
+            //   // this.isAuthenticated = true;
+            //   // this.navCtrl.setRoot(TabsPage);
+            //   // this.loading.dismiss();
+          }
+          else {
+            // this.presentToast("error");
+            // this.ngOnInit();
+            this.handleError("error");
+            //   // this.token = false;
+            //   // // this.isAuthenticated = false;
+            //   // localStorage.setItem('isAuthenticated', 'false');
+            //   // this.loading.dismiss();
+            //   // this.invalidLogin.emit(true);
+          }
         },
         (error) => {
-          this.loading.dismiss();
-          this.presentToast(error);
+          // (error) => {
+          // console.log(error.status);
+          // this.handleError(error);
+          this.handleError("error");
+          // this.presentToast(error);
+          // this.loading.dismiss();
         });
   }
 
