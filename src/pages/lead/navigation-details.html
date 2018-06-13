@@ -1,13 +1,15 @@
-
-<ion-header >
-    <ion-navbar >
-    <ion-title >
-    {{ item.title }}
-</ion-title>
-    < /ion-navbar>
-    < /ion-header>
-
-    < ion - content padding >
-        <ion-icon[name]="'logo-' + item.icon"[ngStyle] = "{'color': item.color}" > </ion-icon>
-{ { item.description } }
-</ion-content>
+<ion-header>
+    <ion-navbar>
+      <ion-title>
+        <!-- {{ item.order_GROUP_NO }} -->
+      </ion-title>
+    </ion-navbar>
+  </ion-header>
+  
+  <ion-content padding>
+    <!-- <ion-icon [name]="'logo-' + item.icon" [ngStyle]="{'color': item.color}"></ion-icon> -->
+    <div *ngFor="let item of orders; let i = index">
+        {{ item.product_NAME }}
+        {{ item.total_COST }}
+    </div>    
+  </ion-content>

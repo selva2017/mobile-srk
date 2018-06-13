@@ -38,8 +38,10 @@
       <ion-item>
         <ion-label stacked>Customer Name</ion-label>
         <ion-select [(ngModel)]="estimate.customerID" name="customerID" [compareWith]="">
-          <ion-option *ngFor="let customer of customers" [value]="customer.cust_ID" (ionSelect)="onSelectCustomer(customer.cust_ID)"
+          <ion-option *ngFor="let customer of customers" [value]="customer.cust_ID" (ionSelect)="onSelectCustomer(customer.cust_ID,cust_NAME)"
             required>{{customer.cust_NAME}} ({{customer.cust_PHONE1}})</ion-option>
+            <!-- <ion-option *ngFor="let customer of customers" [value]="customer.cust_ID" (ionSelect)="onSelectCustomer(customer.cust_ID)"
+            required>{{customer.cust_NAME}} ({{customer.cust_PHONE1}})</ion-option> -->
         </ion-select>
       </ion-item>
       <!-- <ion-item>

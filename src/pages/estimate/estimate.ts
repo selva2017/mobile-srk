@@ -131,7 +131,12 @@ export class EstimatePage {
     totalTax: 0,
     totalLoadingCost: 0,
     totalTransportCost: 0,
-    totalCost: 0
+    totalCost: 0,
+    customerName: 0,
+    siteName: 0,
+    salesRepName: '',
+    referral1Name: 0,
+    referral2Name: 0
     // unit1TaxSum: 0,
     // unit1TotalCostSum: 0,
     // unit1LoadingCostSum: 0,
@@ -278,8 +283,8 @@ export class EstimatePage {
     this.estimate['totalLoadingCost'] = 0;
     this.estimate['totalTransportCost'] = 0;
     this.estimate['totalCost'] = 0;
-    this.estimate['product_COST'] = 0;
-    this.estimate['loading_COST'] = 0;
+    this.estimate['product']['product_COST'] = 0;
+    this.estimate['product']['loading_COST'] = 0;
     this.clearProductCosts();
     this.clearDropdown();
   }
@@ -289,7 +294,7 @@ export class EstimatePage {
     this.estimate['reference1'] = '0';
     this.estimate['reference2'] = '0';
     this.estimate['productGroupName'] = '0';
-    this.estimate['product'] = '0';
+    // this.estimate['product'] = '0';
   }
   clearProductCosts() {
     // this.estimate['unitsTotal'] = 0;
@@ -330,8 +335,9 @@ export class EstimatePage {
     // this.uom = this.estimate['product']['uom'];
   }
 
-  onSelectCustomer(customer_id) {
+  onSelectCustomer(customer_id, customer_name) {
     // //console.log(customer_id);
+    this.estimate['customerName'] = customer_name;
     this.authService.fetchSiteDetails(customer_id)
       .subscribe(
         (list: Site[]) => {
@@ -358,8 +364,11 @@ export class EstimatePage {
       );
   }
   onSelectSite(site_name) {
+    this.estimate['siteName'] = site_name;
   }
   onSelectReference(reference_name) {
+    this.estimate['referral1Name'] = reference_name;
+    this.estimate['referral2Name'] = reference_name;
   }
   productPricePerUnit: number = 0;
   loadingCostPerUnit: number = 0;
@@ -978,6 +987,7 @@ export class EstimatePage {
     // console.log(estimateForm.distanceKM);
     // console.log(this.estimate);
     this.estimate['salesRep'] = '100';
+    this.estimate['salesRepName'] = 'Selva';
     switch (this.itemGroup) {
       case "QUARRY": {
         this.checkTotalUnitsMatch();

@@ -25,5 +25,10 @@ export interface Estimate {
     loadingCost: string;
     taxAmount: string;
     totalCost: string;
+    CUSTOMER_NAME: string;
+    SITE_NAME: string;
+    SALES_REP_NAME: string;
+    REFREREL1_NAME: string;
+    REFREREL2_NAME: string;
 }
 

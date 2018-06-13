@@ -13,7 +13,7 @@ import { AuthService } from '../providers/auth-service/auth-service';
 import { LoginPage } from './../pages/login/login';
 import { RegisterPage } from '../pages/register/register';
 import { OrdersPage } from './../pages/orders/orders';
-import { LeadPage } from './../pages/lead/lead';
+import { LeadPage, NavigationDetailsPage } from './../pages/lead/lead';
 import { EstimatePage } from './../pages/estimate/estimate';
 
 @NgModule({
@@ -25,7 +25,8 @@ import { EstimatePage } from './../pages/estimate/estimate';
     RegisterPage,
     OrdersPage,
     EstimatePage,
-    LeadPage
+    LeadPage,
+    NavigationDetailsPage
   ],
   imports: [
     IonicModule.forRoot(MyApp),BrowserModule,HttpModule
@@ -39,13 +40,14 @@ import { EstimatePage } from './../pages/estimate/estimate';
     RegisterPage,
     OrdersPage,
     EstimatePage,
-    LeadPage
+    LeadPage,
+    NavigationDetailsPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    AuthService, LoginPage
+    AuthService, LoginPage,NavigationDetailsPage
   ]
 })
 export class AppModule {}
