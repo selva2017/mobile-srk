@@ -12,8 +12,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { AuthService } from '../providers/auth-service/auth-service';
 import { LoginPage } from './../pages/login/login';
 import { RegisterPage } from '../pages/register/register';
-import { OrdersPage } from './../pages/orders/orders';
-import { LeadPage, NavigationDetailsPage } from './../pages/lead/lead';
+import { OrdersPage, NavigationDetailsPage } from './../pages/orders/orders';
+import { LeadPage } from './../pages/lead/lead';
 import { EstimatePage } from './../pages/estimate/estimate';
 
 @NgModule({

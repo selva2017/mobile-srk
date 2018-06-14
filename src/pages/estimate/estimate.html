@@ -38,9 +38,9 @@
       <ion-item>
         <ion-label stacked>Customer Name</ion-label>
         <ion-select [(ngModel)]="estimate.customerID" name="customerID" [compareWith]="">
-          <ion-option *ngFor="let customer of customers" [value]="customer.cust_ID" (ionSelect)="onSelectCustomer(customer.cust_ID,cust_NAME)"
+          <ion-option *ngFor="let customer of customers" [value]="customer.cust_ID" (ionSelect)="onSelectCustomer(customer.cust_ID,customer.cust_NAME)"
             required>{{customer.cust_NAME}} ({{customer.cust_PHONE1}})</ion-option>
-            <!-- <ion-option *ngFor="let customer of customers" [value]="customer.cust_ID" (ionSelect)="onSelectCustomer(customer.cust_ID)"
+          <!-- <ion-option *ngFor="let customer of customers" [value]="customer.cust_ID" (ionSelect)="onSelectCustomer(customer.cust_ID)"
             required>{{customer.cust_NAME}} ({{customer.cust_PHONE1}})</ion-option> -->
         </ion-select>
       </ion-item>
@@ -115,7 +115,8 @@
         <!-- </ion-col>
           <ion-col col-6> -->
         <!-- <ion-item> -->
-        <ion-input [(ngModel)]="estimate.distanceKM" name="distanceKM" type="number" maxlength="3" placeholder="Enter the distance in KM" required></ion-input>
+        <ion-input [(ngModel)]="estimate.distanceKM" name="distanceKM" type="number" maxlength="3" placeholder="Enter the distance in KM"
+          required></ion-input>
       </ion-item>
       <!-- </ion-col> -->
       <!-- </ion-row> -->
@@ -169,12 +170,12 @@
       </ion-item>
       <ion-item stacked>
         <!-- <ion-col> -->
-        <ion-label>Cost/Unit:</ion-label>
+        <ion-label>Cost per Unit:</ion-label>
         <ion-label>{{estimate['product'].product_COST}}</ion-label>
-        <!-- <ion-item> -->
-        <ion-label>Loading:</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Loading Cost:</ion-label>
         <ion-label>{{estimate['product'].loading_COST}}</ion-label>
-        <!-- </ion-item> -->
         <!-- </ion-col> -->
       </ion-item>
       <!-- </ion-col> -->
@@ -309,7 +310,7 @@
               </ion-col>
               <ion-col col-6>
                 <ion-item>
-                  <ion-input [(ngModel)]="item.qty" name={{item}} type="text" text-right></ion-input>
+                  <ion-input [(ngModel)]="item.qty" name={{item}} type="number" text-right></ion-input>
                 </ion-item>
               </ion-col>
             </ion-row>
@@ -326,7 +327,7 @@
             </ion-col>
             <ion-col col-6>
               <ion-item>
-                <ion-input [(ngModel)]="item.qty" name={{item}} type="text" text-right></ion-input>
+                <ion-input [(ngModel)]="item.qty" name={{item}} type="number" text-right></ion-input>
               </ion-item>
             </ion-col>
           </ion-row>

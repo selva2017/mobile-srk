@@ -1,0 +1,83 @@
+<ion-header>
+    <ion-navbar [color]="'head'">
+        <ion-buttons left>
+            <button ion-button icon-only menuToggle>
+                <ion-icon name="menu"></ion-icon>
+            </button>
+        </ion-buttons>
+        <ion-title center>Order Details</ion-title>
+        <ion-buttons right>
+            <img alt="logo" height="40" src="assets/imgs/srk-0.png">
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-card>
+        <ion-card-header>
+            Order # {{ order.order_GROUP_NO }}
+        </ion-card-header>
+        <ion-row>
+            <ion-col col-5>
+                <ion-item>
+                    <ion-label stacked>Customer Name</ion-label>
+                    <ion-label stacked>Site</ion-label>
+                    <ion-label stacked>Referer 1</ion-label>
+                    <ion-label stacked>Referer 2</ion-label>
+                    <ion-label stacked>Distance</ion-label>
+                    <ion-label stacked>Taxable</ion-label>
+                </ion-item>
+            </ion-col>
+            <ion-col col-7>
+                <ion-label>{{order.customer_NAME}}</ion-label>
+                <ion-label>{{order.site_NAME}}</ion-label>
+                <ion-label>{{order.refrerel1_NAME}}</ion-label>
+                <ion-label>{{order.refrerel2_NAME}}</ion-label>
+                <ion-label>{{order.delivery_DISTANCE}}</ion-label>
+                <ion-label>{{order.taxable_STATUS}}</ion-label>
+            </ion-col>
+        </ion-row>
+    </ion-card>
+    <ion-card>
+        <ion-card-header>
+            Product Details
+        </ion-card-header>
+        <ion-row>
+            <ion-col col-5>
+                <ion-item>
+                    <ion-label stacked>Product Group</ion-label>
+                    <ion-label stacked>Product</ion-label>
+                    <ion-label stacked>Total Units</ion-label>
+                </ion-item>
+            </ion-col>
+            <ion-col col-7>
+                <ion-label>{{order.product_GROUP}}</ion-label>
+                <ion-label>{{order.product_NAME}}</ion-label>
+                <ion-label>{{displayIndianNumber(order.total_ORDER_UNIT)}}</ion-label>
+            </ion-col>
+        </ion-row>
+    </ion-card>
+    <ion-card>
+        <ion-card-header>
+            Cost Details
+        </ion-card-header>
+        <ion-row>
+            <ion-col col-5>
+                <ion-item>
+                    <ion-label stacked>Product Cost</ion-label>
+                    <ion-label stacked>Tax 1</ion-label>
+                    <ion-label stacked>Tax 2</ion-label>
+                    <ion-label stacked>Loading Cost</ion-label>
+                    <ion-label stacked>Transport Cost</ion-label>
+                </ion-item>
+            </ion-col>
+            <ion-col col-7>
+                <ion-label>{{displayINR(order.total_PRODUCT_COST)}}</ion-label>
+                <ion-label>{{displayINR(order.total_TAX1)}}</ion-label>
+                <ion-label>{{displayINR(order.total_TAX1)}}</ion-label>
+                <ion-label>{{displayINR(order.total_LOADING_COST)}}</ion-label>
+                <ion-label>{{displayINR(order.total_TRANSPORT_COST)}}</ion-label>
+            </ion-col>
+        </ion-row>
+    </ion-card>
+</ion-content>

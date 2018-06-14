@@ -1,86 +1,48 @@
-import { SplashScreen } from '@ionic-native/splash-screen';
-import { StatusBar } from '@ionic-native/status-bar';
 import { AuthService } from './../../providers/auth-service/auth-service';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, PopoverController, LoadingController, AlertController, Platform } from 'ionic-angular';
+
+import { NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
 import { Orders } from '../../models/orders';
 
-/**
- * Generated class for the OrdersPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
-@IonicPage()
+@Component({
+  templateUrl: 'navigation-details.html',
+})
+export class NavigationDetailsPage {
+  order;
+
+  constructor(params: NavParams) {
+    this.order = params.data.item;
+  }
+  displayINR(amount: number) {
+    return new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(amount);
+  }
+  displayIndianNumber(amount: number) {
+    return Number(Math.round(amount)).toLocaleString('en-IN');
+  }
+}
+
 @Component({
   selector: 'page-orders',
   templateUrl: 'orders.html',
 })
 export class OrdersPage {
+  // items = [];
+  loading: any;
   orders: Orders[] = [];
   loading_complete: boolean;
-  // dayBookList: Daybook[];
-  // dayBookDetailsPage = DayBookDetailsPage;
-  companyId: string;
-  loading: any;
-  role: string;
 
-  constructor(private popoverCtrl: PopoverController,
-    private authService: AuthService,
-    private loadingCtrl: LoadingController,
-    private alertCtrl: AlertController,
-    platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
-
-    platform.ready().then(() => {
-      statusBar.styleDefault();
-      splashScreen.hide();
-    });
+  constructor(public nav: NavController, private loadingCtrl: LoadingController,
+    private authService: AuthService, private alertCtrl: AlertController) {
   }
-
-  ionViewDidLoad() {
-    // console.log('ionViewDidLoad DayBookPage');
-    // this.companyId = localStorage.getItem('companyId');
-    // this.role = localStorage.getItem('role');
-  }
-
-  showLoader() {
-    this.loading = this.loadingCtrl.create({
-      content: 'Collecting Orders...'
-    });
-
-    this.loading.present();
-  }
-
-  // onRemoveFromList(key: String) {
-  //   console.log("item" + key);
-  //   this.authService.hideDayBookRow(key)
-  //     .subscribe(
-  //       // (res: Daybook) => console.log(res),
-  //       (success) => {
-  //         console.log("success");
-  //         this.ngOnInit();
-  //       },
-  //       (error) => console.log(error)
-  //     );
-  // }
-
   ngOnInit() {
-    // const loading = this.loadingCtrl.create({
-    //   content: 'Please wait...'
-    // });
-    // this.authService.getActiveUser().getToken()
-    // .then(
-    // (token: string) => {
     this.showLoader();
     this.retrieveEstimatedOrder();
-    // }
-    // );
   }
-
   retrieveEstimatedOrder() {
     this.authService.fetchOrder()
       .subscribe(
+        // (list) => {
         (list: Orders[]) => {
           this.orders = list;
           // console.log(this.orders);
@@ -93,7 +55,17 @@ export class OrdersPage {
         }
       );
   }
+  showLoader() {
+    this.loading = this.loadingCtrl.create({
+      content: 'Collecting Orders...'
+    });
 
+    this.loading.present();
+  }
+
+  openNavDetailsPage(item) {
+    this.nav.push(NavigationDetailsPage, { item: item });
+  }
   private handleError(errorMessage: string) {
     const alert = this.alertCtrl.create({
       title: 'Network Connection error!',
@@ -125,4 +97,11 @@ export class OrdersPage {
     //   refresher.complete();
     // }, 2000);
   }
+  displayINR(amount: number) {
+    return new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(amount);
+  }
+  displayIndianNumber(amount: number) {
+    return Number(Math.round(amount)).toLocaleString('en-IN');
+  }
+
 }
