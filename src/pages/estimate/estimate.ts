@@ -283,61 +283,61 @@ export class EstimatePage {
     this.estimate['referral1Name'] = reference_name;
     this.estimate['referral2Name'] = reference_name;
   }
-      productPricePerUnit: number = 0;
-      loadingCostPerUnit: number = 0;
-      transportPerKMCost: number = 0;
-      tax1: number = 0;
-      tax2: number = 0;
-      taxCost1: number;
-      taxCost2: number;
-      totalProductCost: number;
-      totalCost: number;
-      totalTax: number;
-      totalLoadingCost: number;
-      transportPerKMCostUnit1: number = 0;
-      transportPerKMCostUnit2: number = 0;
-      transportPerKMCostUnit4: number = 0;
-      transportPerKMCostUnit6: number = 0;
-      transportPerKMCostHB: number = 0;
-      transportPerKMCostPavers: number = 0;
-      transportPerKMCostTiles: number = 0;
-      paversLayingCost: number = 0;
-      transportCostPerSqFt: number = 0;
-      productCostPerSqFt: number = 0;
+  productPricePerUnit: number = 0;
+  loadingCostPerUnit: number = 0;
+  transportPerKMCost: number = 0;
+  tax1: number = 0;
+  tax2: number = 0;
+  taxCost1: number;
+  taxCost2: number;
+  totalProductCost: number;
+  totalCost: number;
+  totalTax: number;
+  totalLoadingCost: number;
+  transportPerKMCostUnit1: number = 0;
+  transportPerKMCostUnit2: number = 0;
+  transportPerKMCostUnit4: number = 0;
+  transportPerKMCostUnit6: number = 0;
+  transportPerKMCostHB: number = 0;
+  transportPerKMCostPavers: number = 0;
+  transportPerKMCostTiles: number = 0;
+  paversLayingCost: number = 0;
+  transportCostPerSqFt: number = 0;
+  productCostPerSqFt: number = 0;
 
-      fullLoadsCostSum: number;
-      fullLoadsTaxSum: number;
-      fullLoadsTransportCostSum: number;
-      fullLoadsTotalCostSum: number;
+  fullLoadsCostSum: number;
+  fullLoadsTaxSum: number;
+  fullLoadsTransportCostSum: number;
+  fullLoadsTotalCostSum: number;
 
-      unit1CostSum: number = 0;
-      unit1TaxSum: number = 0;
-      unit1LoadingCostSum: number = 0;
-      unitlTransportCostSum: number = 0;
-      unit1TotalCostSum: number = 0;
-      unit2CostSum: number = 0;
-      unit2TaxSum: number = 0;
-      unit2LoadingCostSum: number = 0;
-      unit2TransportCostSum: number = 0;
-      unit2TotalCostSum: number = 0;
+  unit1CostSum: number = 0;
+  unit1TaxSum: number = 0;
+  unit1LoadingCostSum: number = 0;
+  unitlTransportCostSum: number = 0;
+  unit1TotalCostSum: number = 0;
+  unit2CostSum: number = 0;
+  unit2TaxSum: number = 0;
+  unit2LoadingCostSum: number = 0;
+  unit2TransportCostSum: number = 0;
+  unit2TotalCostSum: number = 0;
 
-      unit4CostSum: number = 0;
-      unit4TaxSum: number = 0;
-      unit4LoadingCostSum: number = 0;
-      unit4TransportCostSum: number = 0;
-      unit4TotalCostSum: number = 0;
+  unit4CostSum: number = 0;
+  unit4TaxSum: number = 0;
+  unit4LoadingCostSum: number = 0;
+  unit4TransportCostSum: number = 0;
+  unit4TotalCostSum: number = 0;
 
-      unit6CostSum: number = 0;
-      unit6TaxSum: number = 0;
-      unit6LoadingCostSum: number = 0;
-      unit6TransportCostSum: number = 0;
-      unit6TotalCostSum: number = 0;
+  unit6CostSum: number = 0;
+  unit6TaxSum: number = 0;
+  unit6LoadingCostSum: number = 0;
+  unit6TransportCostSum: number = 0;
+  unit6TotalCostSum: number = 0;
 
-      showTransportCost: boolean = true;
-      showLoadingCost: boolean = true;
+  showTransportCost: boolean = true;
+  showLoadingCost: boolean = true;
 
-      calculatedTransportCost: number = 0;
-      calculatedSqFtUnitCost: number = 0;
+  calculatedTransportCost: number = 0;
+  calculatedSqFtUnitCost: number = 0;
 
   onChangeUnit1(units) {
     this.getCommonCosts();
@@ -578,7 +578,7 @@ export class EstimatePage {
         // console.log(this.unitsTotal);
         // console.log(this.distanceKM);
 
-        this.calculatedTransportCost = ((Number(this.distanceKM) * this.transportPerKMCostTiles) / Number(this.unitsTotal));
+        this.calculatedTransportCost = this.roundTransportCost((Number(this.distanceKM) * this.transportPerKMCostTiles) / Number(this.unitsTotal));
         // this.calculatedTransportCost = this.roundTransportCost((this.distanceKM * this.transportPerKMCostTiles) / this.unitsTotal);
         // console.log(this.calculatedTransportCost);
         this.calculatedSqFtUnitCost = this.loadingCostPerUnit + this.productPricePerUnit + this.calculatedTransportCost;
@@ -891,7 +891,7 @@ export class EstimatePage {
         (list: Customer[]) => {
           // //console.log(list);
           this.customers = list;
-          this.loading.dismiss();
+          // this.loading.dismiss();
         },
         error => {
           this.loading.dismiss();
@@ -921,6 +921,7 @@ export class EstimatePage {
       buttons: ['Ok']
     });
     alert.present();
+    // return false;
   }
 
   private handleError(errorMessage: string) {
@@ -931,6 +932,7 @@ export class EstimatePage {
       buttons: ['Ok']
     });
     alert.present();
+    // return false;
   }
   isToggledTax: boolean = true;
 

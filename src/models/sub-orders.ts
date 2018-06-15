@@ -18,4 +18,12 @@ export interface SubOrders {
     order_GROUP_NO: string;
     order_NO: string;
     weight: string;
+    orderDetails: [
+        {
+            order_NO: string;
+            order_DETAIL_ID: string;
+            name: string;
+            quantity: string;
+        }
+    ]
 }

@@ -168,7 +168,8 @@
           <ion-option *ngFor="let item of products" [value]="item" (ionSelect)="onItemNameChange(item.productDetails)" required>{{item.product_NAME}}</ion-option>
         </ion-select>
       </ion-item>
-      <ion-item stacked>
+
+      <ion-item>
         <!-- <ion-col> -->
         <ion-label>Cost per Unit:</ion-label>
         <ion-label>{{estimate['product'].product_COST}}</ion-label>
