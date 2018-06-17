@@ -34,14 +34,18 @@ $app-direction: ltr;
 // The "primary" color is the only required color in the map.
 
 $colors: (
-  primary:    #488aff,
+  primary:    #F9AA33,
   secondary:  #32db64,
   danger:     #f53d3d,
   light:      #f4f4f4,
   dark:       #222,
-  selva:      #eb5d53,
-  head:       #1976d2,
-  tail:       #3483d3,
+  head:      #eb362a,
+  // head:      rgb(241, 152, 19),
+  // selva:      #eb5d53,
+  // selva:       #F9AA33,
+  selva:       #eb5d53,
+  tail:       #eb362a,
+  // tail:       rgb(248, 182, 82),
   one:        #e9b44c,
   two:        #7bcfff,
   three:      #9ed5ff,
@@ -56,7 +60,6 @@ $colors: (
     contrast: #ffffff
   )
 );
-
 
 // App iOS Variables
 // --------------------------------------------------
@@ -102,3 +105,4 @@ $colors: (
 
 @import "roboto";
 @import "noto-sans";
+// $text-input-highlight-color-valid: #3ebfe2;

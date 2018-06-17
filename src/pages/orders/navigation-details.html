@@ -50,7 +50,7 @@
             <ion-label>Product Group</ion-label>
             <ion-label>{{order.product_GROUP}}</ion-label>
         </ion-item>
-        <ion-item stacked>
+        <ion-item stacked text-wrap>
             <ion-label>Product</ion-label>
             <ion-label>{{order.product_NAME}}</ion-label>
         </ion-item>
@@ -60,6 +60,10 @@
         </ion-item>
     </ion-card>
     <ion-card>
+        <ion-item stacked>
+            <ion-label>Total Cost</ion-label>
+            <ion-label>{{displayINR(order.total_COST)}}</ion-label>
+        </ion-item>
         <ion-item stacked>
             <ion-label>Product Cost</ion-label>
             <ion-label>{{displayINR(order.total_PRODUCT_COST)}}</ion-label>

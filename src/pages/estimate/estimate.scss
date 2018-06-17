@@ -1,8 +1,18 @@
 page-estimate {
-
+  background-color: map-get($colors, light);
 }
 
 .app-font-25 ion-label{
     white-space: inherit;
     font-size: 25px;
   }
+
+//   ion-label, .select-text {
+//     margin-left: 10px;
+// }
+// ion-content{
+// background: gray !important;
+// }
+// ion-item{
+//   background: lightgray !important;
+// }

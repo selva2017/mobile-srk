@@ -51,6 +51,8 @@ export class EstimatePage {
   partialLoad: number;
   uom: string = '';
   totalUnitsCountValidation: boolean = false;
+  distanceReadOnly: boolean = false;
+  showCostSummary: boolean = false;
   estimate = {
     customerID: '',
     // itemGroup: '',
@@ -132,23 +134,23 @@ export class EstimatePage {
     totalLoadingCost: 0,
     totalTransportCost: 0,
     totalCost: 0,
-    customerName: 0,
-    siteName: 0,
+    customerName: '',
+    siteName: '',
     salesRepName: '',
-    referral1Name: 0,
-    referral2Name: 0
+    referral1Name: '',
+    referral2Name: ''
     // unit1TaxSum: 0,
     // unit1TotalCostSum: 0,
     // unit1LoadingCostSum: 0,
     // unitlTransportCostSum: 0,
   }
-  totalUnitsCountCheck() {
+  aggregateUnitsTotalNotExceedTotalQty() {
     // console.log(Number(this.estimate['unit1'] * 1) + Number(this.estimate['unit2'] * 2) + Number(this.estimate['unit4'] * 4) + Number(this.estimate['unit6'] * 6));
     if (Number(this.estimate['unit1'] * 1) + Number(this.estimate['unit2'] * 2) + Number(this.estimate['unit4'] * 4) + Number(this.estimate['unit6'] * 6) > Number(this.unitsTotal)) {
       // if (Number(this.estimate['unit1'] + this.estimate['unit2'] + this.estimate['unit4'] + this.estimate['unit6']) > this.unitsTotal) {
       let alert = this.alertCtrl.create({
         title: 'Warning',
-        subTitle: 'Your Total Units and Total Breakup Units are not matching.',
+        subTitle: 'Your Total Units and Total Breakup Units count should match.',
         buttons: ['OK']
       });
 
@@ -159,7 +161,7 @@ export class EstimatePage {
       this.totalUnitsCountValidation = true;
 
   }
-  checkTotalUnitsMatch() {
+  aggregateTotalUnitsCountMatch() {
     // console.log(Number(this.estimate['unit1'] * 1) + Number(this.estimate['unit2'] * 2) + Number(this.estimate['unit4'] * 4) + Number(this.estimate['unit6'] * 6));
     if (Number(this.estimate['unit1'] * 1) + Number(this.estimate['unit2'] * 2) + Number(this.estimate['unit4'] * 4) + Number(this.estimate['unit6'] * 6) != Number(this.unitsTotal)) {
       // if (Number(this.estimate['unit1'] + this.estimate['unit2'] + this.estimate['unit4'] + this.estimate['unit6']) > this.unitsTotal) {
@@ -188,9 +190,11 @@ export class EstimatePage {
     //console.log('ionViewDidLoad EstimatePage');
   }
   clearAllData() {
+    this.estimate['product'] = '';
     // this.clearHBCosts();
     // estimateForm.distanceKM.value = 0;
     this.estimate['distanceKM'] = '';
+    this.distanceReadOnly = false;
     this.estimate['unitsTotal'] = '';
     this.estimate['transportPerKMCost'] = 0;
     this.estimate['totalProductCost'] = 0;
@@ -198,13 +202,21 @@ export class EstimatePage {
     this.estimate['totalLoadingCost'] = 0;
     this.estimate['totalTransportCost'] = 0;
     this.estimate['totalCost'] = 0;
-    this.estimate['product']['product_COST'] = 0;
-    this.estimate['product']['loading_COST'] = 0;
+    this.productPricePerUnit=0;
+    this.loadingCostPerUnit=0;
+    // this.estimate['product']['product_COST'] = 0;
+    // this.estimate['product']['loading_COST'] = 0;
     this.clearProductCosts();
     this.clearDropdown();
+    this.selectedProduct = [];
+    this.itemGroup = '';
+    this.estimate['partialLoad'] = 0;
+    this.estimate['fullLoads'] = 0;
+    this.showCostSummary=false
   }
 
   clearDropdown() {
+    this.estimate['customerID'] = '';
     this.estimate['siteID'] = '';
     this.estimate['reference1'] = '';
     this.estimate['reference2'] = '';
@@ -239,11 +251,13 @@ export class EstimatePage {
     this.estimate['partialLoadTransportCost'] = 0;
     this.estimate['partialLoadTotalCost'] = 0;
   }
-  onItemNameChange(product: Product[]) {
+  onItemNameChange(product: Product[],uom) {
     // //console.log("customer");
     // //console.log(product);
     this.clearProductCosts();
     this.selectedProduct = product;
+    this.uom = uom;
+    this.showCostSummary = true;
     //console.log(this.selectedProduct);
     // console.log(this.estimate);
     // this.uom = this.estimate['product']['uom'];
@@ -279,8 +293,10 @@ export class EstimatePage {
   onSelectSite(site_name) {
     this.estimate['siteName'] = site_name;
   }
-  onSelectReference(reference_name) {
+  onSelectReference1(reference_name) {
     this.estimate['referral1Name'] = reference_name;
+  }
+  onSelectReference2(reference_name) {
     this.estimate['referral2Name'] = reference_name;
   }
   productPricePerUnit: number = 0;
@@ -341,8 +357,11 @@ export class EstimatePage {
 
   onChangeUnit1(units) {
     this.getCommonCosts();
-    this.totalUnitsCountCheck();
-    // if ((this.estimate['unit1'] + this.estimate['unit2'] + this.estimate['unit4'] + this.estimate['unit6']) > this.unitsTotal) {
+    this.aggregateUnitsTotalNotExceedTotalQty();
+    if (!this.totalUnitsCountValidation) {
+      // this.productPricePerUnit = 0;
+      this.estimate['unit1'] = 0;
+    }// if ((this.estimate['unit1'] + this.estimate['unit2'] + this.estimate['unit4'] + this.estimate['unit6']) > this.unitsTotal) {
     // }
 
     // console.log(this.totalUnitsCount);
@@ -395,8 +414,11 @@ export class EstimatePage {
   }
   onChangeUnit2(units) {
     this.getCommonCosts();
-    this.totalUnitsCountCheck();
-    //console.log(this.productPricePerUnit);
+    this.aggregateUnitsTotalNotExceedTotalQty();
+    if (!this.totalUnitsCountValidation) {
+      // this.productPricePerUnit = 0;
+      this.estimate['unit2'] = 0;
+    }//console.log(this.productPricePerUnit);
     //console.log(this.loadingCostPerUnit);
     //console.log(this.transportPerKMCostUnit2);
 
@@ -427,8 +449,11 @@ export class EstimatePage {
   }
   onChangeUnit4(units) {
     this.getCommonCosts();
-    this.totalUnitsCountCheck();
-    //console.log(this.productPricePerUnit);
+    this.aggregateUnitsTotalNotExceedTotalQty();
+    if (!this.totalUnitsCountValidation) {
+      // this.productPricePerUnit = 0;
+      this.estimate['unit4'] = 0;
+    }    //console.log(this.productPricePerUnit);
     //console.log(this.loadingCostPerUnit);
     //console.log(this.transportPerKMCostUnit4);
 
@@ -463,7 +488,11 @@ export class EstimatePage {
     //console.log(this.loadingCostPerUnit);
     //console.log(this.transportPerKMCostUnit6);
     this.getCommonCosts();
-    this.totalUnitsCountCheck();
+    this.aggregateUnitsTotalNotExceedTotalQty();
+    if (!this.totalUnitsCountValidation) {
+      // this.productPricePerUnit = 0;
+      this.estimate['unit6'] = 0;
+    }
     //console.log(this.productPricePerUnit);
     //console.log(this.loadingCostPerUnit);
     //console.log(this.transportPerKMCostUnit6);
@@ -516,6 +545,7 @@ export class EstimatePage {
     this.transportPerKMCostUnit6 = 50;
   }
   onChangeTotalUnits(units) {
+    this.distanceReadOnly = true;
     // this.clearProductCosts();
     //console.log(this.estimate);
     // Identify the Partial Load display and value
@@ -810,40 +840,44 @@ export class EstimatePage {
   }
   // estimateOrder(orders: Orders) {
   estimateOrder(estimateForm) {
-    // console.log(estimateForm.distanceKM);
-    // console.log(this.estimate);
-    this.estimate['salesRep'] = '100';
-    this.estimate['salesRepName'] = 'Selva';
-    switch (this.itemGroup) {
-      case "QUARRY": {
-        this.checkTotalUnitsMatch();
-        if (this.totalUnitsCountValidation) {
+    if (Number(this.unitsTotal) > 0 && Number(this.estimate['distanceKM']) > 0) {
+      // console.log(estimateForm.distanceKM);
+      console.log(this.estimate);
+      this.estimate['salesRep'] = '100';
+      this.estimate['salesRepName'] = 'Ashok';
+      switch (this.itemGroup) {
+        case "QUARRY": {
+          this.aggregateTotalUnitsCountMatch();
+          if (this.totalUnitsCountValidation) {
+            this.doEstimation();
+            break;
+          }
+          else
+            this.aggregateUnitsTotalNotExceedTotalQty();
+          break;
+        }
+        case "PAVER": {
           this.doEstimation();
           break;
         }
-        else
-          this.totalUnitsCountCheck();
-        break;
+        case "DESIGNER_TILES": {
+          this.doEstimation();
+          break;
+        }
+        case "HOLLOW_BLOCK": {
+          this.doEstimation();
+          break;
+        }
       }
-      case "PAVER": {
-        this.doEstimation();
-        break;
-      }
-      case "DESIGNER_TILES": {
-        this.doEstimation();
-        break;
-      }
-      case "HOLLOW_BLOCK": {
-        this.doEstimation();
-        break;
-      }
+    } else {
+      this.handleError("Total units and Distance Kms should not be zero...");
     }
     // if (this.itemGroup == "QUARRY") {
     //   if (this.totalUnitsCountValidation) {
     //     this.doEstimation();
     //   }
     //   else if (!this.totalUnitsCountValidation)
-    //     this.totalUnitsCountCheck();
+    //     this.aggregateUnitsTotalNotExceedTotalQty();
     // }
     // else if (this.itemGroup == "PAVER" || this.itemGroup == "DESIGNER_TILES" || this.itemGroup == "HOLLOW_BLOCK") {
     //   this.doEstimation();
