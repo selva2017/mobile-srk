@@ -75,24 +75,28 @@ export class EstimatePage {
     partialLoadTransportCost: 0,
     partialLoadTotalCost: 0,
     unit1: 0,
+    // unit1Total: 0,
     unit1ProductCost: 0,
     unit1Tax: 0,
     unit1LoadingCost: 0,
     unitlTransportCost: 0,
     unit1TotalCost: 0,
     unit2: 0,
+    // unit2Total: 0,
     unit2ProductCost: 0,
     unit2Tax: 0,
     unit2LoadingCost: 0,
     unit2TransportCost: 0,
     unit2TotalCost: 0,
     unit4: 0,
+    // unit4Total: 0,
     unit4ProductCost: 0,
     unit4Tax: 0,
     unit4LoadingCost: 0,
     unit4TransportCost: 0,
     unit4TotalCost: 0,
     unit6: 0,
+    // unit6Total: 0,
     unit6ProductCost: 0,
     unit6Tax: 0,
     unit6LoadingCost: 0,
@@ -202,8 +206,8 @@ export class EstimatePage {
     this.estimate['totalLoadingCost'] = 0;
     this.estimate['totalTransportCost'] = 0;
     this.estimate['totalCost'] = 0;
-    this.productPricePerUnit=0;
-    this.loadingCostPerUnit=0;
+    this.productPricePerUnit = 0;
+    this.loadingCostPerUnit = 0;
     // this.estimate['product']['product_COST'] = 0;
     // this.estimate['product']['loading_COST'] = 0;
     this.clearProductCosts();
@@ -212,7 +216,7 @@ export class EstimatePage {
     this.itemGroup = '';
     this.estimate['partialLoad'] = 0;
     this.estimate['fullLoads'] = 0;
-    this.showCostSummary=false
+    this.showCostSummary = false
   }
 
   clearDropdown() {
@@ -251,7 +255,7 @@ export class EstimatePage {
     this.estimate['partialLoadTransportCost'] = 0;
     this.estimate['partialLoadTotalCost'] = 0;
   }
-  onItemNameChange(product: Product[],uom) {
+  onItemNameChange(product: Product[], uom) {
     // //console.log("customer");
     // //console.log(product);
     this.clearProductCosts();
@@ -363,6 +367,7 @@ export class EstimatePage {
       this.estimate['unit1'] = 0;
     }// if ((this.estimate['unit1'] + this.estimate['unit2'] + this.estimate['unit4'] + this.estimate['unit6']) > this.unitsTotal) {
     // }
+    // this.estimate['unit1Total'] = this.estimate['unit1'] * 1;
 
     // console.log(this.totalUnitsCount);
     //console.log(this.loadingCostPerUnit);
@@ -418,7 +423,9 @@ export class EstimatePage {
     if (!this.totalUnitsCountValidation) {
       // this.productPricePerUnit = 0;
       this.estimate['unit2'] = 0;
-    }//console.log(this.productPricePerUnit);
+    }
+    // this.estimate['unit2Total'] = this.estimate['unit2'] * 2;
+    //console.log(this.productPricePerUnit);
     //console.log(this.loadingCostPerUnit);
     //console.log(this.transportPerKMCostUnit2);
 
@@ -453,7 +460,9 @@ export class EstimatePage {
     if (!this.totalUnitsCountValidation) {
       // this.productPricePerUnit = 0;
       this.estimate['unit4'] = 0;
-    }    //console.log(this.productPricePerUnit);
+    }
+    // this.estimate['unit4Total'] = this.estimate['unit4'] * 4;
+    //console.log(this.productPricePerUnit);
     //console.log(this.loadingCostPerUnit);
     //console.log(this.transportPerKMCostUnit4);
 
@@ -493,6 +502,7 @@ export class EstimatePage {
       // this.productPricePerUnit = 0;
       this.estimate['unit6'] = 0;
     }
+    // this.estimate['unit6Total'] = this.estimate['unit6'] * 6;
     //console.log(this.productPricePerUnit);
     //console.log(this.loadingCostPerUnit);
     //console.log(this.transportPerKMCostUnit6);
@@ -842,7 +852,7 @@ export class EstimatePage {
   estimateOrder(estimateForm) {
     if (Number(this.unitsTotal) > 0 && Number(this.estimate['distanceKM']) > 0) {
       // console.log(estimateForm.distanceKM);
-      console.log(this.estimate);
+      // console.log(this.estimate);
       this.estimate['salesRep'] = '100';
       this.estimate['salesRepName'] = 'Ashok';
       switch (this.itemGroup) {

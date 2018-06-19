@@ -54,11 +54,36 @@
             <ion-label>Product</ion-label>
             <ion-label>{{order.product_NAME}}</ion-label>
         </ion-item>
+        <ion-item stacked text-wrap>
+            <ion-label>Cost per Unit</ion-label>
+            <ion-label>{{order.product_UNIT_COST}}</ion-label>
+        </ion-item>
         <ion-item stacked>
             <ion-label>Total Units</ion-label>
             <ion-label>{{displayIndianNumber(order.total_ORDER_UNIT)}}</ion-label>
         </ion-item>
     </ion-card>
+    <div *ngFor="let item of subOrders">
+        <div *ngIf="item.orderDetails?.length > 0">
+            <ion-card>
+                <ion-card-header>Product Details </ion-card-header>
+                <div *ngFor="let row of item.orderDetails">
+                    <ion-row>
+                        <ion-col col-8>
+                            <ion-item text-wrap>
+                                <ion-label> {{row.name}}</ion-label>
+                            </ion-item>
+                        </ion-col>
+                        <ion-col col-4>
+                            <ion-item>
+                                <ion-label> {{row.quantity}}</ion-label>
+                            </ion-item>
+                        </ion-col>
+                    </ion-row>
+                </div>
+            </ion-card>
+        </div>
+    </div>
     <ion-card>
         <ion-item stacked>
             <ion-label>Total Cost</ion-label>
@@ -85,4 +110,6 @@
             <ion-label>{{displayINR(order.total_TRANSPORT_COST)}}</ion-label>
         </ion-item>
     </ion-card>
+
+
 </ion-content>

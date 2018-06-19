@@ -1,4 +1,4 @@
-<ion-header>
+<!-- <ion-header>
   <ion-navbar [color]="'head'">
     <ion-buttons left>
       <button ion-button icon-only menuToggle>
@@ -14,4 +14,47 @@
 
 <ion-content padding>
 
+</ion-content> -->
+<!-- <ion-header>
+  <ion-navbar>
+    <ion-title>
+      Contact
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-header>
+  <ion-navbar>
+    <ion-title>Ionic Demo</ion-title>
+  </ion-navbar>
+</ion-header> -->
+
+<ion-content padding>
+  <ion-grid>
+    <ion-row *ngFor="let order of orders">
+      <ion-col>
+        <ion-select [(ngModel)]="order.order_ID" name="order_ID">
+          <ion-option *ngFor="let row of products" [value]="row.product_NAME" (ionSelect)="onSelectCustomer(row.product_NAME)">{{row.product_NAME}}</ion-option>
+        </ion-select>
+      </ion-col>
+      <ion-col>
+        <input type="text" [ngModel]="order.order_QTY | number: '1.0-0'" pattern="[0-9]" maxlength="3" (ngModelChange)="order.order_QTY=$event"
+          (ionChange)="validateEmptyValue" />
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <button ion-button [disabled]="rows?.length === maxQuantity" (click)="addrow()">Add Products</button>
+  <button ion-button (click)="submitOrder()">Submit</button>
+  <button ion-button (click)="clearOrders()" color="danger">Cancel</button>
+  <ion-fab bottom right>
+    <button ion-fab (click)="addrow()">Add</button>
+    <!-- <ion-fab-list side="top">
+       <button ion-fab>Product</button>
+       <button ion-fab>Note</button>
+       <button ion-fab>Copier</button>
+     </ion-fab-list>
+     <ion-fab-list side="left">
+       <button ion-fab>Vimeo</button>
+     </ion-fab-list> -->
+  </ion-fab>
 </ion-content>

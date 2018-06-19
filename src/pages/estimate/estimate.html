@@ -191,59 +191,98 @@
       <div *ngIf="itemGroup=='QUARRY'">
         <!-- <div *ngIf="itemGroup=='Aggregate'"> -->
         <ion-row>
-          <ion-col col-6>
+          <ion-col col-4>
             <div style="font-size:1.6rem;font-weight:bold;text-align: center;">Capacity</div>
           </ion-col>
-          <ion-col col-6>
+          <ion-col col-4>
             <div style="font-size:1.6rem;font-weight:bold;text-align:center;">Loads</div>
+          </ion-col>
+          <ion-col col-4>
+            <div style="font-size:1.6rem;font-weight:bold;text-align:center;">Total Units</div>
           </ion-col>
         </ion-row>
 
         <ion-row>
-          <ion-col col-6>
+          <ion-col col-4>
             <ion-item>
               <ion-label color="selva">1 Unit</ion-label>
             </ion-item>
           </ion-col>
-          <ion-col col-6>
+          <ion-col col-4>
             <ion-item>
               <ion-input [(ngModel)]="estimate.unit1" name="unit1" (ionChange)="onChangeUnit1(estimate.unit1)" type="number" maxlength="4"></ion-input>
             </ion-item>
           </ion-col>
+          <ion-col col-4>
+            <ion-item>
+              <ion-label text-center>{{estimate.unit1Total}}</ion-label>
+              <!-- <ion-input [(ngModel)]="estimate.unit1Total" name="unit1Total" type="text" read-only></ion-input> -->
+            </ion-item>
+          </ion-col>
         </ion-row>
         <ion-row>
-          <ion-col col-6>
+          <ion-col col-4>
             <ion-item>
               <ion-label color="selva">2 Units</ion-label>
             </ion-item>
           </ion-col>
-          <ion-col col-6>
+          <ion-col col-4>
             <ion-item>
               <ion-input [(ngModel)]="estimate.unit2" name="unit2" (ionChange)="onChangeUnit2(estimate.unit2)" type="number" maxlength="4"></ion-input>
             </ion-item>
           </ion-col>
+          <ion-col col-4>
+            <ion-item>
+              <ion-label text-center>{{estimate.unit2Total}}</ion-label>
+              <!-- <ion-input [(ngModel)]="estimate.unit2Total" name="unit2Total" type="text"></ion-input> -->
+            </ion-item>
+          </ion-col>
         </ion-row>
         <ion-row>
-          <ion-col col-6>
+          <ion-col col-4>
             <ion-item>
               <ion-label color="selva">4 Units</ion-label>
             </ion-item>
           </ion-col>
-          <ion-col col-6>
+          <ion-col col-4>
             <ion-item>
               <ion-input [(ngModel)]="estimate.unit4" name="unit4" (ionChange)="onChangeUnit4(estimate.unit4)" type="number" maxlength="4"></ion-input>
             </ion-item>
           </ion-col>
+          <ion-col col-4>
+            <ion-item>
+              <ion-label text-center>{{estimate.unit4Total}}</ion-label>
+              <!-- <ion-input [(ngModel)]="estimate.unit4Total" name="unit4Total" type="text"></ion-input> -->
+            </ion-item>
+          </ion-col>
         </ion-row>
         <ion-row>
-          <ion-col col-6>
+          <ion-col col-4>
             <ion-item>
               <ion-label color="selva">6 Units</ion-label>
             </ion-item>
           </ion-col>
-          <ion-col col-6>
+          <ion-col col-4>
             <ion-item>
               <ion-input [(ngModel)]="estimate.unit6" name="unit6" (ionChange)="onChangeUnit6(estimate.unit6)" type="number" maxlength="4"></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col col-4>
+            <ion-item>
+              <ion-label text-center>{{estimate.unit6Total}}</ion-label>
+              <!-- <ion-input [(ngModel)]="estimate.unit6Total" name="unit6Total" type="text"></ion-input> -->
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-8>
+            <ion-item>
+              <ion-label color="selva">Total Units</ion-label>
+            </ion-item>
+          </ion-col>
+          <ion-col col-4>
+            <ion-item>
+              <ion-label text-center>{{estimate.unit6Total}}</ion-label>
             </ion-item>
           </ion-col>
         </ion-row>

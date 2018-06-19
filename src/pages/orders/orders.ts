@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 
 import { NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
 import { Orders } from '../../models/orders';
+import { SubOrders } from '../../models/sub-orders';
 
 
 @Component({
@@ -10,9 +11,24 @@ import { Orders } from '../../models/orders';
 })
 export class NavigationDetailsPage {
   order;
+  subOrders: SubOrders[];
 
-  constructor(params: NavParams) {
+  constructor(public nav: NavController, params: NavParams, private authService: AuthService) {
     this.order = params.data.item;
+    this.authService.fetchSubOrder(this.order['order_GROUP_NO'])
+      .subscribe(
+        // (list) => {
+        (list: SubOrders[]) => {
+          this.subOrders = list;
+          // this.loading_complete = true;
+          // this.loading.dismiss();
+        },
+        error => {
+          // this.loading.dismiss();
+          // this.handleError(error.json().error);
+        }
+      );
+    // this.nav.push(OrdersPage, { item: this.subOrder });
   }
   displayINR(amount: number) {
     return new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(amount);
@@ -33,7 +49,11 @@ export class OrdersPage {
   loading_complete: boolean;
 
   constructor(public nav: NavController, private loadingCtrl: LoadingController,
-    private authService: AuthService, private alertCtrl: AlertController) {
+    private authService: AuthService, private alertCtrl: AlertController,
+    params: NavParams) {
+      // this.subOrders = params.data.item;
+      // console.log("Su Order")
+      // console.log(this.subOrders);
   }
   ngOnInit() {
     this.showLoader();
@@ -45,7 +65,7 @@ export class OrdersPage {
         // (list) => {
         (list: Orders[]) => {
           this.orders = list;
-          console.log(this.orders);
+          // console.log(this.orders);
           this.loading_complete = true;
           this.loading.dismiss();
         },
