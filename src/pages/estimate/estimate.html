@@ -62,7 +62,7 @@
         </ion-col>
         <ion-col col-8>
           <ion-item> -->
-      <ion-select [(ngModel)]="estimate.siteID" name="siteID">
+      <ion-select [(ngModel)]="estimate.siteID" name="siteID" [disabled]="disableSiteName">
         <ion-option *ngFor="let site of sites" [value]="site.site_ID" (ionSelect)="onSelectSite(site.site_NAME)" required>{{site.site_NAME}}</ion-option>
       </ion-select>
       <!-- <ion-label>{{customer.site_NAME}}</ion-label> -->
@@ -82,7 +82,7 @@
           <ion-item> -->
       <!-- <ion-label>{{customer.reference_ID}}</ion-label> -->
       <!-- <ion-input [(ngModel)]="customer.reference_ID" name="reference_ID" type="text" [disabled]="true" ></ion-input> -->
-      <ion-select [(ngModel)]="estimate.reference1" name="reference1">
+      <ion-select [(ngModel)]="estimate.reference1" name="reference1" [disabled]="disableSiteName">
         <ion-option *ngFor="let reference1 of references" [value]="reference1.reference_ID" (ionSelect)="onSelectReference1(reference1.refrer_NAME)">
           {{reference1.refrer_NAME}} ({{reference1.referer_MOBILE1}}) - {{reference1.referer_TYPE}}
         </ion-option>
@@ -102,7 +102,7 @@
           <ion-item> -->
       <!-- <ion-label>{{customer.reference_ID}}</ion-label> -->
       <!-- <ion-input [(ngModel)]="customer.reference_ID" name="reference_ID" type="text" [disabled]="true" ></ion-input> -->
-      <ion-select [(ngModel)]="estimate.reference2" name="reference2">
+      <ion-select [(ngModel)]="estimate.reference2" name="reference2" [disabled]="disableSiteName">
         <ion-option *ngFor="let reference2 of references" [value]="reference2.reference_ID" (ionSelect)="onSelectReference2(reference2.refrer_NAME)">
           {{reference2.refrer_NAME}} ({{reference2.referer_MOBILE1}}) - {{reference2.referer_TYPE}}
         </ion-option>
@@ -215,7 +215,7 @@
           </ion-col>
           <ion-col col-4>
             <ion-item>
-              <ion-label text-center>{{estimate.unit1Total}}</ion-label>
+              <ion-label text-center>{{unit1Total}}</ion-label>
               <!-- <ion-input [(ngModel)]="estimate.unit1Total" name="unit1Total" type="text" read-only></ion-input> -->
             </ion-item>
           </ion-col>
@@ -233,7 +233,7 @@
           </ion-col>
           <ion-col col-4>
             <ion-item>
-              <ion-label text-center>{{estimate.unit2Total}}</ion-label>
+              <ion-label text-center>{{unit2Total}}</ion-label>
               <!-- <ion-input [(ngModel)]="estimate.unit2Total" name="unit2Total" type="text"></ion-input> -->
             </ion-item>
           </ion-col>
@@ -251,7 +251,7 @@
           </ion-col>
           <ion-col col-4>
             <ion-item>
-              <ion-label text-center>{{estimate.unit4Total}}</ion-label>
+              <ion-label text-center>{{unit4Total}}</ion-label>
               <!-- <ion-input [(ngModel)]="estimate.unit4Total" name="unit4Total" type="text"></ion-input> -->
             </ion-item>
           </ion-col>
@@ -269,7 +269,7 @@
           </ion-col>
           <ion-col col-4>
             <ion-item>
-              <ion-label text-center>{{estimate.unit6Total}}</ion-label>
+              <ion-label text-center>{{unit6Total}}</ion-label>
               <!-- <ion-input [(ngModel)]="estimate.unit6Total" name="unit6Total" type="text"></ion-input> -->
             </ion-item>
           </ion-col>
@@ -277,12 +277,12 @@
         <ion-row>
           <ion-col col-8>
             <ion-item>
-              <ion-label color="selva">Total Units</ion-label>
+              <ion-label style="font-size:1.6rem;font-weight:bold;">Total Units</ion-label>
             </ion-item>
           </ion-col>
           <ion-col col-4>
             <ion-item>
-              <ion-label text-center>{{estimate.unit6Total}}</ion-label>
+              <ion-label text-center style="font-weight:bold;">{{unitSumTotal}}</ion-label>
             </ion-item>
           </ion-col>
         </ion-row>

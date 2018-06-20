@@ -20,6 +20,7 @@ export class NavigationDetailsPage {
         // (list) => {
         (list: SubOrders[]) => {
           this.subOrders = list;
+          console.log(this.subOrders);
           // this.loading_complete = true;
           // this.loading.dismiss();
         },
@@ -65,7 +66,7 @@ export class OrdersPage {
         // (list) => {
         (list: Orders[]) => {
           this.orders = list;
-          // console.log(this.orders);
+          console.log(this.orders);
           this.loading_complete = true;
           this.loading.dismiss();
         },

@@ -40,6 +40,11 @@ export class EstimatePage {
   unit2: number;
   unit4: number;
   unit6: number;
+  unit1Total: number = 0;
+  unit2Total: number = 0;
+  unit4Total: number = 0;
+  unit6Total: number = 0;
+  unitSumTotal: number = 0
   // estimate: Estimate[] = [];
   partialLoadOption: boolean = false;
   fullLoadOption: boolean = false;
@@ -53,6 +58,8 @@ export class EstimatePage {
   totalUnitsCountValidation: boolean = false;
   distanceReadOnly: boolean = false;
   showCostSummary: boolean = false;
+  disableSiteName: boolean = true;
+
   estimate = {
     customerID: '',
     // itemGroup: '',
@@ -293,6 +300,7 @@ export class EstimatePage {
           this.handleError(error.json().error);
         }
       );
+    this.disableSiteName = false;
   }
   onSelectSite(site_name) {
     this.estimate['siteName'] = site_name;
@@ -368,8 +376,9 @@ export class EstimatePage {
     }// if ((this.estimate['unit1'] + this.estimate['unit2'] + this.estimate['unit4'] + this.estimate['unit6']) > this.unitsTotal) {
     // }
     // this.estimate['unit1Total'] = this.estimate['unit1'] * 1;
-
-    // console.log(this.totalUnitsCount);
+    this.unit1Total = this.estimate['unit1'] * 1;
+    this.unitSumTotal = this.unit1Total + this.unit2Total + this.unit4Total + this.unit6Total;
+    console.log(this.unitSumTotal);
     //console.log(this.loadingCostPerUnit);
     //console.log(this.transportPerKMCostUnit1);
 
@@ -424,6 +433,10 @@ export class EstimatePage {
       // this.productPricePerUnit = 0;
       this.estimate['unit2'] = 0;
     }
+    this.unit2Total = this.estimate['unit2'] * 2;
+    this.unitSumTotal = this.unit1Total + this.unit2Total + this.unit4Total + this.unit6Total;
+    console.log(this.unitSumTotal);
+
     // this.estimate['unit2Total'] = this.estimate['unit2'] * 2;
     //console.log(this.productPricePerUnit);
     //console.log(this.loadingCostPerUnit);
@@ -461,6 +474,10 @@ export class EstimatePage {
       // this.productPricePerUnit = 0;
       this.estimate['unit4'] = 0;
     }
+
+    this.unit4Total = this.estimate['unit4'] * 4;
+    this.unitSumTotal = this.unit1Total + this.unit2Total + this.unit4Total + this.unit6Total;
+    
     // this.estimate['unit4Total'] = this.estimate['unit4'] * 4;
     //console.log(this.productPricePerUnit);
     //console.log(this.loadingCostPerUnit);
@@ -502,6 +519,9 @@ export class EstimatePage {
       // this.productPricePerUnit = 0;
       this.estimate['unit6'] = 0;
     }
+    this.unit6Total = this.estimate['unit6'] * 6;
+    this.unitSumTotal = this.unit1Total + this.unit2Total + this.unit4Total + this.unit6Total;
+    console.log(this.unitSumTotal);
     // this.estimate['unit6Total'] = this.estimate['unit6'] * 6;
     //console.log(this.productPricePerUnit);
     //console.log(this.loadingCostPerUnit);
@@ -852,7 +872,7 @@ export class EstimatePage {
   estimateOrder(estimateForm) {
     if (Number(this.unitsTotal) > 0 && Number(this.estimate['distanceKM']) > 0) {
       // console.log(estimateForm.distanceKM);
-      // console.log(this.estimate);
+      console.log(this.estimate);
       this.estimate['salesRep'] = '100';
       this.estimate['salesRepName'] = 'Ashok';
       switch (this.itemGroup) {
