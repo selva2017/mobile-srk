@@ -32,8 +32,11 @@ export class NavigationDetailsPage {
     // this.nav.push(OrdersPage, { item: this.subOrder });
   }
   displayINR(amount: number) {
-    return new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(amount);
+    return new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0 }).format(amount);
   }
+  // displayINR(amount: number) {
+  //   return new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(amount);
+  // }
   displayIndianNumber(amount: number) {
     return Number(Math.round(amount)).toLocaleString('en-IN');
   }

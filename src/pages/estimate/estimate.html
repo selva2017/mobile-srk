@@ -158,9 +158,11 @@
       <!-- </ion-col>
             <ion-col col-6> -->
       <!-- <ion-item> -->
+      <!-- <ion-input [(ngModel)]="estimate.distanceKM" name="distanceKM" type="number" maxlength="3" placeholder="Enter the distance in KM"
+        required></ion-input> -->
       <ion-input [(ngModel)]="estimate.distanceKM" name="distanceKM" type="number" maxlength="3" placeholder="Enter the distance in KM"
-        required></ion-input>
-      <!-- [readonly]="distanceReadOnly" required></ion-input> -->
+        (ionBlur)="reCalcualteTotals()" required> </ion-input>
+        <!-- [readonly]="distanceReadOnly" required></ion-input> -->
     </ion-item>
     <!-- </ion-col> -->
     <!-- </ion-row> -->
@@ -277,7 +279,7 @@
         <ion-row>
           <ion-col col-8>
             <ion-item>
-              <ion-label style="font-size:1.6rem;font-weight:bold;">Total Units</ion-label>
+              <ion-label text-center> style="font-size:1.6rem;font-weight:bold;">Total Units</ion-label>
             </ion-item>
           </ion-col>
           <ion-col col-4>
@@ -339,6 +341,7 @@
             </ion-col>
             <ion-col col-3>
               <ion-item>
+                <!-- <ion-input [(ngModel)]="item.qty" name={{item}} type="number" (ionBlur)="calculateTotals(item.qty)" text-right></ion-input> -->
                 <ion-input [(ngModel)]="item.qty" name={{item}} type="number" text-right></ion-input>
               </ion-item>
             </ion-col>
@@ -356,6 +359,7 @@
             </ion-col>
             <ion-col col-3>
               <ion-item>
+                <!-- <ion-input [(ngModel)]="item.qty" name={{item}} type="number" (ionBlur)="calculateTotals(item.qty)" text-right></ion-input> -->
                 <ion-input [(ngModel)]="item.qty" name={{item}} type="number" text-right></ion-input>
               </ion-item>
             </ion-col>
@@ -459,7 +463,7 @@
           </ion-item>
           <ion-item>
             <ion-label color="selva">Loading per Unit:</ion-label>
-            <ion-label>{{displayINR(loadingCostPerUnit)}}</ion-label>
+            <ion-label>{{displayDecimalINR(loadingCostPerUnit)}}</ion-label>
             <!-- <ion-label>{{displayINR(estimate['product'].loading_COST)}}</ion-label> -->
           </ion-item>
         </ion-col>
