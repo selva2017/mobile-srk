@@ -147,7 +147,7 @@
       <!-- <ion-col col-8>
             <ion-item> -->
       <!-- <ion-select name="product"> -->
-      <ion-select [(ngModel)]="estimate.product" name="product">
+      <ion-select [(ngModel)]="estimate.product" name="product" [disabled]="disableItemName">
         <ion-option *ngFor="let item of products" [value]="item" (ionSelect)="onItemNameChange(item.productDetails,item.uom)" required>{{item.product_NAME}}</ion-option>
       </ion-select>
     </ion-item>
@@ -160,9 +160,8 @@
       <!-- <ion-item> -->
       <!-- <ion-input [(ngModel)]="estimate.distanceKM" name="distanceKM" type="number" maxlength="3" placeholder="Enter the distance in KM"
         required></ion-input> -->
-      <ion-input [(ngModel)]="estimate.distanceKM" name="distanceKM" type="number" maxlength="3" placeholder="Enter the distance in KM"
-        (ionBlur)="reCalcualteTotals()" required> </ion-input>
-        <!-- [readonly]="distanceReadOnly" required></ion-input> -->
+      <ion-input [(ngModel)]="estimate.distanceKM" name="distanceKM" type="number" maxlength="3" placeholder="Enter the distance in KM" (ionBlur)="reCalculateTotals()" required> </ion-input>
+      <!-- [readonly]="distanceReadOnly" required></ion-input> -->
     </ion-item>
     <!-- </ion-col> -->
     <!-- </ion-row> -->
@@ -279,7 +278,7 @@
         <ion-row>
           <ion-col col-8>
             <ion-item>
-              <ion-label text-center> style="font-size:1.6rem;font-weight:bold;">Total Units</ion-label>
+              <ion-label text-center style="font-size:1.6rem;font-weight:bold;">Total Units</ion-label>
             </ion-item>
           </ion-col>
           <ion-col col-4>
@@ -427,8 +426,8 @@
         </ion-col>
         <ion-col col-8>
           <ion-item>
-            <ion-label *ngIf="isToggledTax">Yes</ion-label>
-            <ion-label *ngIf="!isToggledTax">No</ion-label>
+            <ion-label *ngIf="isToggledTax" text-right>Yes</ion-label>
+            <ion-label *ngIf="!isToggledTax" text-right>No</ion-label>
             <ion-toggle (ionChange)="notifyTaxOption(estimate.taxable)" [checked]="isToggledTax" required></ion-toggle>
             <!-- <ion-checkbox (ionChange)="notifyTaxOption(estimate.taxable)" [checked]="isToggledTax" required></ion-checkbox> -->
           </ion-item>
@@ -437,32 +436,32 @@
       <ion-row>
         <ion-col>
           <ion-item>
-            <ion-label color="selva">Total Cost : </ion-label>
+            <ion-label color="selva">Total Cost  </ion-label>
             <ion-label>{{displayINR(estimate.totalCost)}}</ion-label>
           </ion-item>
           <ion-item>
-            <ion-label color="selva">Product Cost: </ion-label>
+            <ion-label color="selva">Product Cost </ion-label>
             <ion-label>{{displayINR(estimate.totalProductCost)}}</ion-label>
           </ion-item>
           <ion-item *ngIf="isToggledTax">
-            <ion-label color="selva">Tax: </ion-label>
+            <ion-label color="selva">Tax </ion-label>
             <ion-label>{{displayINR(estimate.totalTax)}}</ion-label>
           </ion-item>
           <ion-item *ngIf="showTransportCost">
-            <ion-label color="selva">Transport Cost: </ion-label>
+            <ion-label color="selva">Transport Cost </ion-label>
             <ion-label>{{displayINR(estimate.totalTransportCost)}}</ion-label>
           </ion-item>
           <ion-item *ngIf="showLoadingCost">
-            <ion-label color="selva">Loading Cost: </ion-label>
+            <ion-label color="selva">Loading Cost </ion-label>
             <ion-label>{{displayINR(estimate.totalLoadingCost)}}</ion-label>
           </ion-item>
           <ion-item>
-            <ion-label color="selva">Cost per Unit:</ion-label>
+            <ion-label color="selva">Cost per Unit</ion-label>
             <ion-label>{{displayINR(productPricePerUnit)}}</ion-label>
             <!-- <ion-label>{{displayINR(estimate['product'].product_COST)}}</ion-label> -->
           </ion-item>
           <ion-item>
-            <ion-label color="selva">Loading per Unit:</ion-label>
+            <ion-label color="selva">Loading per Unit</ion-label>
             <ion-label>{{displayDecimalINR(loadingCostPerUnit)}}</ion-label>
             <!-- <ion-label>{{displayINR(estimate['product'].loading_COST)}}</ion-label> -->
           </ion-item>
@@ -470,11 +469,12 @@
       </ion-row>
     </ion-list>
     <!-- </ion-card> -->
-    <button ion-button block type="submit" [color]="'head'" [disabled]="!estimateForm.valid">
+    <!-- <button ion-button block type="submit" [color]="'head'" [disabled]="!estimateForm.valid"> -->
+    <button ion-button block color="one" type="submit" [disabled]="!estimateForm.valid">
       Submit
     </button>
   </form>
-  <button ion-button block color="yellow" (click)="clearAllData(estimateForm)">
+  <button ion-button block color="danger" (click)="clearAllData(estimateForm)">
     Clear All
   </button>
 </ion-content>

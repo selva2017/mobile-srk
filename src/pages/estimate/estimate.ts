@@ -59,6 +59,7 @@ export class EstimatePage {
   distanceReadOnly: boolean = false;
   showCostSummary: boolean = false;
   disableSiteName: boolean = true;
+  disableItemName: boolean = true;
 
   estimate = {
     customerID: '',
@@ -202,6 +203,8 @@ export class EstimatePage {
   }
   clearAllData() {
     this.disableSiteName = true;
+    this.disableItemName = true;
+
     this.estimate['product'] = '';
     // this.clearHBCosts();
     // estimateForm.distanceKM.value = 0;
@@ -235,17 +238,23 @@ export class EstimatePage {
     this.estimate['productGroupName'] = '';
     this.estimate['product'] = '';
   }
+
   clearProductCosts() {
     // this.estimate['unitsTotal'] = 0;
     this.estimate['unit1'] = 0;
+    this.unit1Total = 0;
     this.estimate['unit2'] = 0;
+    this.unit2Total = 0;
     this.estimate['unit4'] = 0;
+    this.unit4Total = 0;
     this.estimate['unit6'] = 0;
+    this.unit6Total = 0;
     this.estimate['totalProductCost'] = 0;
     this.estimate['totalTax'] = 0;
     this.estimate['totalLoadingCost'] = 0;
     this.estimate['totalTransportCost'] = 0;
     this.estimate['totalCost'] = 0;
+    this.unitSumTotal = 0;
     // this.estimate['product']['product_COST'] = '';
     // this.estimate['product']['loading_COST'] = '';
   }
@@ -295,13 +304,13 @@ export class EstimatePage {
           // //console.log(list);
           this.references = list;
           this.loading.dismiss();
+          this.disableSiteName = false;
         },
         error => {
           this.loading.dismiss();
           this.handleError(error.json().error);
         }
       );
-    this.disableSiteName = false;
   }
   onSelectSite(site_name) {
     this.estimate['siteName'] = site_name;
@@ -393,7 +402,7 @@ export class EstimatePage {
     // this.estimate['unit1Total'] = this.estimate['unit1'] * 1;
     this.unit1Total = this.estimate['unit1'] * 1;
     this.unitSumTotal = this.unit1Total + this.unit2Total + this.unit4Total + this.unit6Total;
-    console.log(this.unitSumTotal);
+    // console.log(this.unitSumTotal);
     //console.log(this.loadingCostPerUnit);
     //console.log(this.transportPerKMCostUnit1);
 
@@ -460,7 +469,7 @@ export class EstimatePage {
     }
     this.unit2Total = this.estimate['unit2'] * 2;
     this.unitSumTotal = this.unit1Total + this.unit2Total + this.unit4Total + this.unit6Total;
-    console.log(this.unitSumTotal);
+    // console.log(this.unitSumTotal);
 
     // this.estimate['unit2Total'] = this.estimate['unit2'] * 2;
     //console.log(this.productPricePerUnit);
@@ -680,30 +689,7 @@ export class EstimatePage {
       case "DESIGNER_TILES": {
         this.getCommonCosts();
         // this.clearProductCosts();
-        this.showTransportCost = false;
-        this.showLoadingCost = false;
-        this.transportPerKMCostTiles = 50;
-        // this.loadingCostPerUnit = 2;
-        // this.loadingCostPerUnit = Number(this.estimate['product']['loading_COST']);
-        // this.tax1 = Number(this.estimate['product']['product_TAX1']);
-        // this.tax2 = Number(this.estimate['product']['product_TAX2']);
-        // this.distanceKM = Number(this.estimate['distanceKM']);
-        // this.unitsTotal = Number(this.estimate['unitsTotal']);
-        // console.log(this.unitsTotal);
-        // console.log(this.distanceKM);
-
-        this.calculatedTransportCost = this.roundTransportCost((Number(this.distanceKM) * this.transportPerKMCostTiles) / Number(this.unitsTotal));
-        // this.calculatedTransportCost = this.roundTransportCost((this.distanceKM * this.transportPerKMCostTiles) / this.unitsTotal);
-        // console.log(this.calculatedTransportCost);
-        this.calculatedSqFtUnitCost = this.loadingCostPerUnit + this.productPricePerUnit + this.calculatedTransportCost;
-        // console.log(this.calculatedSqFtUnitCost);
-        this.estimate['sqftLoadingCost'] = this.loadingCostPerUnit;
-        // console.log(this.estimate['sqftLoadingCost']);
-        this.estimate['sqftTransportCost'] = this.calculatedTransportCost;
-        // console.log(this.estimate['sqftTransportCost']);
-        this.estimate['sqftUnitCost'] = this.calculatedSqFtUnitCost;
-        // console.log(this.estimate['sqftUnitCost']);
-
+        this.calculateTilesCost();
         // NEW for tax
         this.calculateTotalTilesCost();
         // this.estimate['totalProductCost'] = this.estimate['sqftUnitCost'] * Number(this.unitsTotal);
@@ -724,30 +710,7 @@ export class EstimatePage {
       case "PAVER": {
         this.getCommonCosts();
         // this.clearProductCosts();
-        this.transportPerKMCostPavers = 50;
-        this.paversLayingCost = 5.5; // Only for Pavers
-
-        this.showTransportCost = false;
-        this.showLoadingCost = false;
-        // this.loadingCostPerUnit = 2;
-        // this.loadingCostPerUnit = Number(this.estimate['product']['loading_COST']);
-        // this.tax1 = Number(this.estimate['product']['product_TAX1']);
-        // this.tax2 = Number(this.estimate['product']['product_TAX2']);
-        // this.distanceKM = Number(this.estimate['distanceKM']);
-        // this.unitsTotal = Number(this.estimate['unitsTotal']);
-        this.calculatedTransportCost = this.roundTransportCost((Number(this.distanceKM) * this.transportPerKMCostPavers) / Number(this.unitsTotal));
-        // console.log(this.calculatedTransportCost);
-        this.calculatedSqFtUnitCost = this.loadingCostPerUnit + this.productPricePerUnit + this.calculatedTransportCost + this.paversLayingCost;
-        // console.log(calculatedSqFtUnitCost);
-        this.estimate['sqftLoadingCost'] = this.loadingCostPerUnit;
-        // console.log(this.estimate['sqftLoadingCost']);
-        this.estimate['sqftTransportCost'] = this.calculatedTransportCost;
-        // console.log(this.estimate['sqftTransportCost']);
-        this.estimate['sqftUnitCost'] = this.calculatedSqFtUnitCost;
-        // console.log(this.estimate['sqftUnitCost']);
-        this.estimate['sqftLayingCost'] = this.paversLayingCost;
-        // console.log(this.estimate['sqftLayingCost']);
-
+        this.calculatePaverCost();
         // NEW for tax
         this.calculateTotalPaverCost();
         // this.estimate['totalProductCost'] = this.estimate['sqftUnitCost'] * Number(this.unitsTotal);
@@ -773,54 +736,7 @@ export class EstimatePage {
         this.getCommonCosts();
         this.clearProductCosts();
         this.clearHBCosts();
-
-        this.fullLoadOption = true;
-        this.partialLoadOption = false;
-        this.showTransportCost = false;
-        this.transportPerKMCostHB = 60;
-
-        this.estimate['fullLoads'] = Math.floor(Number(this.estimate['unitsTotal']) / 700);
-        this.estimate['partialLoad'] = Number(this.estimate['unitsTotal']) % 700;
-        if (this.estimate['partialLoad'] > 0) {
-          this.partialLoadOption = true;
-        }
-        if (this.estimate['fullLoads'] == 0) {
-          this.fullLoadOption = false;
-        }
-        // this.tax1 = Number(this.estimate['product']['product_TAX1']);
-        // this.tax2 = Number(this.estimate['product']['product_TAX2']);
-        // console.log(this.estimate['fullLoads']); //700*loads
-        // console.log(this.estimate['partialLoad']); //partial load count
-        // console.log(this.tax1);
-        // console.log(this.tax2);
-        // this.estimate['fullLoadsTax'] = (this.estimate['fullLoadsCost'] * (this.tax1 + this.tax2) / 100);
-        // console.log(this.estimate['fullLoadsTax']);
-        if (this.fullLoadOption) {
-          this.estimate['fullLoadsCost'] = this.productPricePerUnit * 700;
-          // console.log(this.estimate['fullLoadsCost']);
-          // this.estimate['fullLoadsTax'] = (this.estimate['fullLoadsCost'] * (this.tax1) / 100)
-          this.estimate['fullLoadsTax'] = (this.estimate['fullLoadsCost'] * (this.tax1 + this.tax2) / 100)
-          // console.log(this.estimate['fullLoadsTax']);
-          this.estimate['fullLoadsTransportCost'] = this.transportPerKMCostHB * Number(this.distanceKM);
-          // console.log(this.estimate['fullLoadsTransportCost']);
-          this.estimate['fullLoadsTotalCost'] = (this.estimate['fullLoadsCost'] + this.estimate['fullLoadsTax'] + this.estimate['fullLoadsTransportCost']);
-          // console.log(this.estimate['fullLoadsTotalCost']);
-
-          this.fullLoadsCostSum = this.estimate['fullLoadsCost'] * this.estimate['fullLoads'];
-          this.fullLoadsTaxSum = this.estimate['fullLoadsTax'] * this.estimate['fullLoads'];
-          this.fullLoadsTransportCostSum = this.estimate['fullLoadsTransportCost'] * this.estimate['fullLoads'];
-          this.fullLoadsTotalCostSum = this.estimate['fullLoadsTotalCost'] * this.estimate['fullLoads'];
-        }
-        if (this.partialLoadOption) {
-
-
-          this.estimate['partialLoadCost'] = this.productPricePerUnit * this.estimate['partialLoad'];
-          // this.estimate['partialLoadTax'] = this.estimate['partialLoadCost'] * ((this.tax1) / 100);
-          this.estimate['partialLoadTax'] = this.estimate['partialLoadCost'] * ((this.tax1 + this.tax2) / 100);
-          this.estimate['partialLoadTransportCost'] = this.transportPerKMCostHB * Number(this.distanceKM);
-          this.estimate['partialLoadTotalCost'] = this.estimate['partialLoadCost'] + this.estimate['partialLoadTax'] + this.estimate['partialLoadTransportCost'];
-        }
-
+        this.calculateHBCost();
         // NEW for tax
         this.calculateTotalHBCost();
         // this.estimate['totalProductCost'] = this.fullLoadsCostSum + this.estimate['partialLoadCost'];
@@ -832,7 +748,105 @@ export class EstimatePage {
       }
     }
   }
+  calculateTilesCost() {
+    this.showTransportCost = false;
+    this.showLoadingCost = false;
+    this.transportPerKMCostTiles = 50;
+    // this.loadingCostPerUnit = 2;
+    // this.loadingCostPerUnit = Number(this.estimate['product']['loading_COST']);
+    // this.tax1 = Number(this.estimate['product']['product_TAX1']);
+    // this.tax2 = Number(this.estimate['product']['product_TAX2']);
+    // this.distanceKM = Number(this.estimate['distanceKM']);
+    // this.unitsTotal = Number(this.estimate['unitsTotal']);
+    // console.log(this.unitsTotal);
+    // console.log(this.distanceKM);
 
+    this.calculatedTransportCost = this.roundTransportCost((Number(this.distanceKM) * this.transportPerKMCostTiles) / Number(this.unitsTotal));
+    // this.calculatedTransportCost = this.roundTransportCost((this.distanceKM * this.transportPerKMCostTiles) / this.unitsTotal);
+    // console.log(this.calculatedTransportCost);
+    this.calculatedSqFtUnitCost = this.loadingCostPerUnit + this.productPricePerUnit + this.calculatedTransportCost;
+    // console.log(this.calculatedSqFtUnitCost);
+    this.estimate['sqftLoadingCost'] = this.loadingCostPerUnit;
+    // console.log(this.estimate['sqftLoadingCost']);
+    this.estimate['sqftTransportCost'] = this.calculatedTransportCost;
+    // console.log(this.estimate['sqftTransportCost']);
+    this.estimate['sqftUnitCost'] = this.calculatedSqFtUnitCost;
+    // console.log(this.estimate['sqftUnitCost']);
+
+  }
+  calculateHBCost() {
+    this.fullLoadOption = true;
+    this.partialLoadOption = false;
+    this.showTransportCost = false;
+    this.transportPerKMCostHB = 60;
+
+    this.estimate['fullLoads'] = Math.floor(Number(this.estimate['unitsTotal']) / 700);
+    this.estimate['partialLoad'] = Number(this.estimate['unitsTotal']) % 700;
+    if (this.estimate['partialLoad'] > 0) {
+      this.partialLoadOption = true;
+    }
+    if (this.estimate['fullLoads'] == 0) {
+      this.fullLoadOption = false;
+    }
+    // this.tax1 = Number(this.estimate['product']['product_TAX1']);
+    // this.tax2 = Number(this.estimate['product']['product_TAX2']);
+    // console.log(this.estimate['fullLoads']); //700*loads
+    // console.log(this.estimate['partialLoad']); //partial load count
+    // console.log(this.tax1);
+    // console.log(this.tax2);
+    // this.estimate['fullLoadsTax'] = (this.estimate['fullLoadsCost'] * (this.tax1 + this.tax2) / 100);
+    // console.log(this.estimate['fullLoadsTax']);
+    if (this.fullLoadOption) {
+      this.estimate['fullLoadsCost'] = this.productPricePerUnit * 700;
+      // console.log(this.estimate['fullLoadsCost']);
+      // this.estimate['fullLoadsTax'] = (this.estimate['fullLoadsCost'] * (this.tax1) / 100)
+      this.estimate['fullLoadsTax'] = (this.estimate['fullLoadsCost'] * (this.tax1 + this.tax2) / 100)
+      // console.log(this.estimate['fullLoadsTax']);
+      this.estimate['fullLoadsTransportCost'] = this.transportPerKMCostHB * Number(this.distanceKM);
+      // console.log(this.estimate['fullLoadsTransportCost']);
+      this.estimate['fullLoadsTotalCost'] = (this.estimate['fullLoadsCost'] + this.estimate['fullLoadsTax'] + this.estimate['fullLoadsTransportCost']);
+      // console.log(this.estimate['fullLoadsTotalCost']);
+
+      this.fullLoadsCostSum = this.estimate['fullLoadsCost'] * this.estimate['fullLoads'];
+      this.fullLoadsTaxSum = this.estimate['fullLoadsTax'] * this.estimate['fullLoads'];
+      this.fullLoadsTransportCostSum = this.estimate['fullLoadsTransportCost'] * this.estimate['fullLoads'];
+      this.fullLoadsTotalCostSum = this.estimate['fullLoadsTotalCost'] * this.estimate['fullLoads'];
+    }
+    if (this.partialLoadOption) {
+
+
+      this.estimate['partialLoadCost'] = this.productPricePerUnit * this.estimate['partialLoad'];
+      // this.estimate['partialLoadTax'] = this.estimate['partialLoadCost'] * ((this.tax1) / 100);
+      this.estimate['partialLoadTax'] = this.estimate['partialLoadCost'] * ((this.tax1 + this.tax2) / 100);
+      this.estimate['partialLoadTransportCost'] = this.transportPerKMCostHB * Number(this.distanceKM);
+      this.estimate['partialLoadTotalCost'] = this.estimate['partialLoadCost'] + this.estimate['partialLoadTax'] + this.estimate['partialLoadTransportCost'];
+    }
+  }
+  calculatePaverCost() {
+    this.transportPerKMCostPavers = 50;
+    this.paversLayingCost = 5.5; // Only for Pavers
+
+    this.showTransportCost = false;
+    this.showLoadingCost = false;
+    // this.loadingCostPerUnit = 2;
+    // this.loadingCostPerUnit = Number(this.estimate['product']['loading_COST']);
+    // this.tax1 = Number(this.estimate['product']['product_TAX1']);
+    // this.tax2 = Number(this.estimate['product']['product_TAX2']);
+    // this.distanceKM = Number(this.estimate['distanceKM']);
+    // this.unitsTotal = Number(this.estimate['unitsTotal']);
+    this.calculatedTransportCost = this.roundTransportCost((Number(this.distanceKM) * this.transportPerKMCostPavers) / Number(this.unitsTotal));
+    // console.log(this.calculatedTransportCost);
+    this.calculatedSqFtUnitCost = this.loadingCostPerUnit + this.productPricePerUnit + this.calculatedTransportCost + this.paversLayingCost;
+    // console.log(calculatedSqFtUnitCost);
+    this.estimate['sqftLoadingCost'] = this.loadingCostPerUnit;
+    // console.log(this.estimate['sqftLoadingCost']);
+    this.estimate['sqftTransportCost'] = this.calculatedTransportCost;
+    // console.log(this.estimate['sqftTransportCost']);
+    this.estimate['sqftUnitCost'] = this.calculatedSqFtUnitCost;
+    // console.log(this.estimate['sqftUnitCost']);
+    this.estimate['sqftLayingCost'] = this.paversLayingCost;
+    // console.log(this.estimate['sqftLayingCost']);
+  }
   roundTransportCost(cost: number) {
     let int_part = Math.trunc(cost); // returns 3
     let float_part = Number((cost - int_part).toFixed(2)); // return 0.2
@@ -858,12 +872,18 @@ export class EstimatePage {
   }
   onItemGroupChange(product: Product[], product_group_id, product_group_name) {
     this.clearProductCosts();
+    this.estimate['distanceKM'] = '';
+    // this.distanceReadOnly = false;
+    this.estimate['unitsTotal'] = '';
+    this.productPricePerUnit = 0;
+    this.loadingCostPerUnit = 0;
     this.authService.fetchProductDetailForGroup(product_group_id)
       .subscribe(
         (list: Product[]) => {
           // //console.log(list);
           this.products = list;
           this.loading.dismiss();
+          this.disableItemName = false;
         },
         error => {
           this.loading.dismiss();
@@ -932,7 +952,7 @@ export class EstimatePage {
   estimateOrder(estimateForm) {
     if (Number(this.unitsTotal) > 0 && Number(this.estimate['distanceKM']) > 0) {
       // console.log(estimateForm.distanceKM);
-      console.log(this.estimate);
+      // console.log(this.estimate);
       this.estimate['salesRep'] = '100';
       this.estimate['salesRepName'] = 'Ashok';
       switch (this.itemGroup) {
@@ -1062,12 +1082,12 @@ export class EstimatePage {
 
   notifyTaxOption(event) {
     this.isToggledTax = !this.isToggledTax;
-    this.estimate['taxable'] = (this.isToggledTax == true) ? "yes" : "no";
-    this.reCalcualteTotals();
+    this.estimate['taxable'] = (this.isToggledTax == true) ? "Yes" : "No";
+    this.reCalculateTotals();
     // //console.log("Event: "+ event.checked); 
     //console.log("Toggled Tax: " + this.isToggledTax);
   }
-  reCalcualteTotals() {
+  reCalculateTotals() {
     switch (this.itemGroup) {
       case "QUARRY": {
         // this.calculateAggregateTotal();
@@ -1079,15 +1099,21 @@ export class EstimatePage {
         break;
       }
       case "DESIGNER_TILES": {
+        this.getCommonCosts();
+        this.calculateTilesCost();
         this.calculateTotalTilesCost();
         break;
       }
       case "PAVER": {
+        this.getCommonCosts();
+        this.calculatePaverCost();
         this.calculateTotalPaverCost();
         break;
       }
 
       case "HOLLOW_BLOCK": {
+        this.getCommonCosts();
+        this.calculateHBCost();
         this.calculateTotalHBCost();
         break;
       }

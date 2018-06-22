@@ -93,14 +93,16 @@
             <ion-label>Product Cost</ion-label>
             <ion-label>{{displayINR(order.total_PRODUCT_COST)}}</ion-label>
         </ion-item>
-        <ion-item stacked>
-            <ion-label>Tax 1</ion-label>
-            <ion-label>{{displayINR(order.total_TAX1)}}</ion-label>
-        </ion-item>
-        <ion-item stacked>
-            <ion-label>Tax 2</ion-label>
-            <ion-label>{{displayINR(order.total_TAX1)}}</ion-label>
-        </ion-item>
+        <div *ngIf="order.taxable_STATUS == 'Yes'">
+            <ion-item stacked>
+                <ion-label>Tax 1</ion-label>
+                <ion-label>{{displayINR(order.total_TAX1)}}</ion-label>
+            </ion-item>
+            <ion-item stacked>
+                <ion-label>Tax 2</ion-label>
+                <ion-label>{{displayINR(order.total_TAX1)}}</ion-label>
+            </ion-item>
+        </div>
         <ion-item stacked>
             <ion-label>Loading Cost</ion-label>
             <ion-label>{{displayINR(order.total_LOADING_COST)}}</ion-label>
@@ -110,6 +112,4 @@
             <ion-label>{{displayINR(order.total_TRANSPORT_COST)}}</ion-label>
         </ion-item>
     </ion-card>
-
-
 </ion-content>
