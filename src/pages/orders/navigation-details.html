@@ -112,4 +112,12 @@
             <ion-label>{{displayINR(order.total_TRANSPORT_COST)}}</ion-label>
         </ion-item>
     </ion-card>
+
+    <button ion-button block color="secondary" (click)="approveOrder(order.order_GROUP_NO)">
+        Approve
+    </button>
+
+    <button ion-button block color="danger" (click)="rejectOrder(order.order_GROUP_NO)">
+        Reject
+    </button>
 </ion-content>

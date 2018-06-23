@@ -150,7 +150,8 @@ export class EstimatePage {
     siteName: '',
     salesRepName: '',
     referral1Name: '',
-    referral2Name: ''
+    referral2Name: '',
+    // highPriority: ''
     // unit1TaxSum: 0,
     // unit1TotalCostSum: 0,
     // unit1LoadingCostSum: 0,
@@ -195,6 +196,8 @@ export class EstimatePage {
     private loadingCtrl: LoadingController,
     private alertCtrl: AlertController, private toastCtrl: ToastController,
     platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
+    // this.getGroupOrdersByStatus("APPROVED");
+    this.getGroupOrdersByStatus("ESTIMATION");
   }
 
 
@@ -283,7 +286,20 @@ export class EstimatePage {
     // console.log(this.estimate);
     // this.uom = this.estimate['product']['uom'];
   }
-
+  getGroupOrdersByStatus(status) {
+    this.authService.fetchOrderByStatus(status)
+      .subscribe(
+        (list: Site[]) => {
+          console.log(list);
+          this.sites = list;
+          this.loading.dismiss();
+        },
+        error => {
+          this.loading.dismiss();
+          this.handleError(error.json().error);
+        }
+      );
+  }
   onSelectCustomer(customer_id, customer_name) {
     this.estimate['customerName'] = customer_name;
     this.authService.fetchSiteDetails(customer_id)
@@ -1079,6 +1095,7 @@ export class EstimatePage {
     // return false;
   }
   isToggledTax: boolean = true;
+  isToggledPriority: boolean = false;
 
   notifyTaxOption(event) {
     this.isToggledTax = !this.isToggledTax;
@@ -1086,6 +1103,10 @@ export class EstimatePage {
     this.reCalculateTotals();
     // //console.log("Event: "+ event.checked); 
     //console.log("Toggled Tax: " + this.isToggledTax);
+  }
+  notifyPriorityOption(event) {
+    this.isToggledPriority = !this.isToggledPriority;
+    // this.estimate['highPriority'] = (this.isToggledPriority == true) ? "Yes" : "No";
   }
   reCalculateTotals() {
     switch (this.itemGroup) {

@@ -28,7 +28,7 @@ export class LoginPage {
     this.authService.login(this.loginData)
         .subscribe(
         success => {
-            // //console.log(success);
+            console.log(success);
             
             if (success.statusMessage == "AUTH_SUCCESS") {
               this.token = true;

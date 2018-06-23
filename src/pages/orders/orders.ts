@@ -1,11 +1,10 @@
+import { EstimatePage } from './../estimate/estimate';
 import { AuthService } from './../../providers/auth-service/auth-service';
 import { Component } from '@angular/core';
 
 import { NavController, NavParams, LoadingController, AlertController } from 'ionic-angular';
 import { Orders } from '../../models/orders';
 import { SubOrders } from '../../models/sub-orders';
-
-
 @Component({
   templateUrl: 'navigation-details.html',
 })
@@ -40,7 +39,32 @@ export class NavigationDetailsPage {
   displayIndianNumber(amount: number) {
     return Number(Math.round(amount)).toLocaleString('en-IN');
   }
+  rejectOrder(order_GROUP_NO) {
+    console.log(order_GROUP_NO);
+    this.authService.updateStatusOfGroupOrder(order_GROUP_NO, "REJECTED")
+      .subscribe(
+        (success) => {
+          console.log("Success");
+          this.nav.push(EstimatePage);
+          // this.refreshList();
+        },
+        (error) => console.log(error)
+      );
+    }
+    approveOrder(order_GROUP_NO) {
+      console.log(order_GROUP_NO);
+      this.authService.updateStatusOfGroupOrder(order_GROUP_NO, "APPROVED")
+      .subscribe(
+        (success) => {
+          // this.refreshList();
+          this.nav.pop();
+          this.nav.push(OrdersPage);
+        },
+        (error) => console.log(error)
+      );
+  }
 }
+
 
 @Component({
   selector: 'page-orders',
@@ -55,15 +79,17 @@ export class OrdersPage {
   constructor(public nav: NavController, private loadingCtrl: LoadingController,
     private authService: AuthService, private alertCtrl: AlertController,
     params: NavParams) {
-      // this.subOrders = params.data.item;
-      // console.log("Su Order")
-      // console.log(this.subOrders);
+    // this.subOrders = params.data.item;
+    // console.log("Su Order")
+    // console.log(this.subOrders);
   }
   ngOnInit() {
+    console.log("oninit")
     this.showLoader();
     this.retrieveEstimatedOrder();
   }
   retrieveEstimatedOrder() {
+    console.log("retrieve")
     this.authService.fetchOrder()
       .subscribe(
         // (list) => {
@@ -79,6 +105,10 @@ export class OrdersPage {
         }
       );
   }
+  // ionViewDidLoad() {
+  //   console.log("will enter")
+  //   this.nav.setRoot(this.nav.getActive().component);
+  // }
   showLoader() {
     this.loading = this.loadingCtrl.create({
       content: 'Collecting Orders...'

@@ -108,19 +108,14 @@
         </ion-option>
       </ion-select>
     </ion-item>
-    <!-- </ion-col>
-      </ion-row> -->
-    <!-- <ion-row> -->
-    <!-- <ion-col col-6> -->
+    <ion-item>
+      <ion-label color="selva">Priority</ion-label>
+      <ion-label *ngIf="isToggledPriority" text-right>High</ion-label>
+      <ion-label *ngIf="!isToggledPriority" text-right>Normal</ion-label>
+      <ion-toggle color="secondary" (ionChange)="notifyPriorityOption(estimate.highPriority)" [checked]="isToggledPriority"></ion-toggle>
+      <!-- <ion-toggle color="secondary" (ionChange)="notifyPriorityOption(estimate.highPriority)" [checked]="isToggledPriority"></ion-toggle> -->
+    </ion-item>
 
-    <!-- </ion-col> -->
-    <!-- </ion-row> -->
-
-    <!-- </ion-card>
-
-    <ion-card> -->
-    <!-- <ion-row> -->
-    <!-- <ion-col col-4> -->
     <ion-item-divider color="selva">
       Order Details
     </ion-item-divider>
@@ -160,7 +155,8 @@
       <!-- <ion-item> -->
       <!-- <ion-input [(ngModel)]="estimate.distanceKM" name="distanceKM" type="number" maxlength="3" placeholder="Enter the distance in KM"
         required></ion-input> -->
-      <ion-input [(ngModel)]="estimate.distanceKM" name="distanceKM" type="number" maxlength="3" placeholder="Enter the distance in KM" (ionBlur)="reCalculateTotals()" required> </ion-input>
+      <ion-input [(ngModel)]="estimate.distanceKM" name="distanceKM" type="number" maxlength="3" placeholder="Enter the distance in KM"
+        (ionBlur)="reCalculateTotals()" required> </ion-input>
       <!-- [readonly]="distanceReadOnly" required></ion-input> -->
     </ion-item>
     <!-- </ion-col> -->
@@ -428,7 +424,7 @@
           <ion-item>
             <ion-label *ngIf="isToggledTax" text-right>Yes</ion-label>
             <ion-label *ngIf="!isToggledTax" text-right>No</ion-label>
-            <ion-toggle (ionChange)="notifyTaxOption(estimate.taxable)" [checked]="isToggledTax" required></ion-toggle>
+            <ion-toggle (ionChange)="notifyTaxOption(estimate.taxable)" color="danger" [checked]="isToggledTax" required></ion-toggle>
             <!-- <ion-checkbox (ionChange)="notifyTaxOption(estimate.taxable)" [checked]="isToggledTax" required></ion-checkbox> -->
           </ion-item>
         </ion-col>
@@ -436,7 +432,7 @@
       <ion-row>
         <ion-col>
           <ion-item>
-            <ion-label color="selva">Total Cost  </ion-label>
+            <ion-label color="selva">Total Cost </ion-label>
             <ion-label>{{displayINR(estimate.totalCost)}}</ion-label>
           </ion-item>
           <ion-item>
