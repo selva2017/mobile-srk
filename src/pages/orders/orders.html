@@ -10,9 +10,61 @@
       <img alt="logo" height="40" src="assets/imgs/srk-0.png">
     </ion-buttons>
   </ion-navbar>
+  <ion-toolbar no-border-top [color]="isAndroid ? 'royal' : 'masters'">
+    <ion-segment [(ngModel)]="category" [color]="'head'">
+      <ion-segment-button value="estimate">
+        Estimated
+      </ion-segment-button>
+      <ion-segment-button value="approved">
+        Approved
+      </ion-segment-button>
+      <ion-segment-button value="Rejected">
+        Rejected
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content>Collecting Latest Data...</ion-refresher-content>
+  </ion-refresher>
+  <div [ngSwitch]="category">
+    <ion-list *ngSwitchCase="'estimate'">
+      <button ion-item *ngFor="let item of estimatedOrders" (click)="openNavDetailsPage(item,'estimate')" icon-start>
+        <h2>{{ item.customer_NAME }}</h2>
+        <h3>{{ item.product_NAME }}</h3>
+        <h3>Qty # {{displayIndianNumber(item.total_ORDER_UNIT)}}</h3>
+        <p>Total Cost # {{ displayINR(item.total_COST) }}</p>
+        <p>Order # {{ item.order_GROUP_NO }} </p>
+        <p>Date {{item.order_DT}}</p>
+      </button>
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'approved'">
+      <button ion-item *ngFor="let approved_item of approvedOrders" (click)="openNavDetailsPage(approved_item,'approve')" icon-start>
+        <h2>{{ approved_item.customer_NAME }}</h2>
+        <h3>{{ approved_item.product_NAME }}</h3>
+        <h3>Qty # {{displayIndianNumber(approved_item.total_ORDER_UNIT)}}</h3>
+        <p>Total Cost # {{ displayINR(approved_item.total_COST) }}</p>
+        <p>Order # {{ approved_item.order_GROUP_NO }} </p>
+        <p>Date {{approved_item.order_DT}}</p>
+      </button>
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'Rejected'">
+      <button ion-item *ngFor="let rejected_item of rejectedOrders" (click)="openNavDetailsPage(rejected_item,'reject')" icon-start>
+        <h2>{{ rejected_item.customer_NAME }}</h2>
+        <h3>{{ rejected_item.product_NAME }}</h3>
+        <h3>Qty # {{displayIndianNumber(rejected_item.total_ORDER_UNIT)}}</h3>
+        <p>Total Cost # {{ displayINR(rejected_item.total_COST) }}</p>
+        <p>Order # {{ rejected_item.order_GROUP_NO }} </p>
+        <p>Date {{rejected_item.order_DT}}</p>
+      </button>
+    </ion-list>
+  </div>
+</ion-content>
+<!-- <ion-content padding>
   <ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content>Collecting Latest Data...</ion-refresher-content>
   </ion-refresher>
@@ -26,4 +78,4 @@
       <p>Date {{item.order_DT}}</p>
     </button>
   </ion-list>
-</ion-content>
+</ion-content> -->

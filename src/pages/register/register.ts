@@ -9,9 +9,9 @@ import { AuthService } from './../../providers/auth-service/auth-service';
 export class RegisterPage {
 
   loading: any;
-  regData = { email: '', password: '', firstName: '', lastName:'',confirmPassword: '', companyId: '' };
+  regData = { email: '', password: '', firstName: '', lastName: '', confirmPassword: '', companyId: '', employeeId: '' };
   error_message: string = '';
-  constructor(public navCtrl: NavController, public navParams: NavParams, public authService: AuthService, 
+  constructor(public navCtrl: NavController, public navParams: NavParams, public authService: AuthService,
     private alertCtrl: AlertController,
     public loadingCtrl: LoadingController, private toastCtrl: ToastController) { }
 
@@ -20,23 +20,24 @@ export class RegisterPage {
     this.showLoader();
     ((this.regData.password === this.regData.confirmPassword) && (this.regData.companyId !== null)) ? valid_password = true : this.error_message = "Password does not match";
     if (valid_password) {
-      this.authService.register(this.regData)
+      this.authService.register(this.regData, this.regData.companyId)
         .subscribe(
-        success => {
-          // console.log(success);
-          this.regData.email = "";
-          this.regData.password= "";
-          this.regData.firstName = "";
-          this.regData.lastName= "";
-          this.regData.confirmPassword= "";
-          this.regData.companyId= "";
-          this.loading.dismiss();
-          this.handleError("success");         
-        },
-        (error) => {
-          this.loading.dismiss();
-          this.presentToast(error);
-        });
+          success => {
+            // console.log(success);
+            this.regData.email = "";
+            this.regData.password = "";
+            this.regData.firstName = "";
+            this.regData.lastName = "";
+            this.regData.confirmPassword = "";
+            this.regData.companyId = "";
+            this.regData.employeeId = "";
+            this.loading.dismiss();
+            this.handleError("success");
+          },
+          (error) => {
+            this.loading.dismiss();
+            this.presentToast(error);
+          });
       this.error_message = "";
     }
     else {

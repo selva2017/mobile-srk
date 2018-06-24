@@ -1,4 +1,3 @@
-import { EstimatePage } from './../estimate/estimate';
 import { AuthService } from './../../providers/auth-service/auth-service';
 import { Component } from '@angular/core';
 
@@ -10,16 +9,19 @@ import { SubOrders } from '../../models/sub-orders';
 })
 export class NavigationDetailsPage {
   order;
+  order_type;
   subOrders: SubOrders[];
 
   constructor(public nav: NavController, params: NavParams, private authService: AuthService) {
     this.order = params.data.item;
+    this.order_type = params.data.test;
+    console.log(this.order_type);
     this.authService.fetchSubOrder(this.order['order_GROUP_NO'])
       .subscribe(
         // (list) => {
         (list: SubOrders[]) => {
           this.subOrders = list;
-          // console.log(this.subOrders);
+          console.log(this.subOrders);
           // this.loading_complete = true;
           // this.loading.dismiss();
         },
@@ -44,16 +46,16 @@ export class NavigationDetailsPage {
     this.authService.updateStatusOfGroupOrder(order_GROUP_NO, "REJECTED")
       .subscribe(
         (success) => {
-          console.log("Success");
-          this.nav.push(EstimatePage);
+          this.nav.pop();
+          this.nav.push(OrdersPage);
           // this.refreshList();
         },
         (error) => console.log(error)
       );
-    }
-    approveOrder(order_GROUP_NO) {
-      console.log(order_GROUP_NO);
-      this.authService.updateStatusOfGroupOrder(order_GROUP_NO, "APPROVED")
+  }
+  approveOrder(order_GROUP_NO) {
+    console.log(order_GROUP_NO);
+    this.authService.updateStatusOfGroupOrder(order_GROUP_NO, "APPROVED")
       .subscribe(
         (success) => {
           // this.refreshList();
@@ -61,6 +63,22 @@ export class NavigationDetailsPage {
           this.nav.push(OrdersPage);
         },
         (error) => console.log(error)
+      );
+  }
+  getOrderByStatus() {
+    this.authService.fetchSubOrder(this.order['order_GROUP_NO'])
+      .subscribe(
+        // (list) => {
+        (list: SubOrders[]) => {
+          this.subOrders = list;
+          // console.log(this.subOrders);
+          // this.loading_complete = true;
+          // this.loading.dismiss();
+        },
+        error => {
+          // this.loading.dismiss();
+          // this.handleError(error.json().error);
+        }
       );
   }
 }
@@ -74,7 +92,11 @@ export class OrdersPage {
   // items = [];
   loading: any;
   orders: Orders[] = [];
+  estimatedOrders: Orders[] = [];
+  approvedOrders: Orders[] = [];
+  rejectedOrders: Orders[] = [];
   loading_complete: boolean;
+  category: string;
 
   constructor(public nav: NavController, private loadingCtrl: LoadingController,
     private authService: AuthService, private alertCtrl: AlertController,
@@ -84,30 +106,71 @@ export class OrdersPage {
     // console.log(this.subOrders);
   }
   ngOnInit() {
-    console.log("oninit")
     this.showLoader();
-    this.retrieveEstimatedOrder();
+    this.retrieveEstimatedOrders();
+    // this.loading.dismiss();
+    // this.showLoader();
+    // this.estimatedOrders = this.retrieveOrdersByStatus("ESTIMATION");
+    // console.log(this.estimatedOrders);
+    this.retrieveApprovedOrders();
+    // this.loading.dismiss();
+    // this.showLoader();
+    // this.approvedOrders = this.retrieveOrdersByStatus("APPROVED");
+    // console.log(this.approvedOrders);
+    this.retrieveRejectedOrders();
+    this.loading.dismiss();
+    this.category = "estimate";
+    // this.estimatedOrders = this.retrieveOrdersByStatus("ESTIMATION");
+    // console.log(this.estimatedOrders);
+    // this.approvedOrders = this.retrieveOrdersByStatus("APPROVED");
+    // console.log(this.approvedOrders);
+    // this.rejectedOrders = this.retrieveOrdersByStatus("REJECTED");
+    // console.log(this.rejectedOrders);
   }
-  retrieveEstimatedOrder() {
-    console.log("retrieve")
-    this.authService.fetchOrder()
-      .subscribe(
-        // (list) => {
-        (list: Orders[]) => {
-          this.orders = list;
-          // console.log(this.orders);
-          this.loading_complete = true;
-          this.loading.dismiss();
-        },
-        error => {
-          this.loading.dismiss();
-          this.handleError(error.json().error);
-        }
-      );
-  }
-  // ionViewDidLoad() {
-  //   console.log("will enter")
-  //   this.nav.setRoot(this.nav.getActive().component);
+  // retrieveOrdersByStatus(status) {
+  //   this.authService.fetchOrderByStatus(status)
+  //     .subscribe(
+  //       (list: Orders[]) => {
+  //         this.orders = list;
+  //         this.loading_complete = true;
+  //         this.loading.dismiss();
+  //       },
+  //       error => {
+  //         this.loading.dismiss();
+  //         this.handleError(error.json().error);
+  //       }
+  //     );
+  //     return this.orders;
+  // }
+  // retrieveOrdersByStatus(status) {
+  //   this.authService.fetchOrderByStatus(status)
+  //     .subscribe(
+  //       (list: Orders[]) => {
+  //         this.orders = list;
+  //         this.loading_complete = true;
+  //         this.loading.dismiss();
+  //       },
+  //       error => {
+  //         this.loading.dismiss();
+  //         this.handleError(error.json().error);
+  //       }
+  //     );
+  //     return this.orders;
+  // }
+  // retrieveOrdersByStatus(status) {
+  //   this.authService.fetchOrderByStatus(status)
+  //     .subscribe(
+  //       (list: Orders[]) => {
+  //         this.orders = list;
+  //         this.loading_complete = true;
+  //         this.loading.dismiss();
+  //       },
+  //       error => {
+  //         this.loading.dismiss();
+  //         this.handleError(error.json().error);
+  //       }
+  //     );
+  //     return this.orders;
   // }
   showLoader() {
     this.loading = this.loadingCtrl.create({
@@ -117,8 +180,8 @@ export class OrdersPage {
     this.loading.present();
   }
 
-  openNavDetailsPage(item) {
-    this.nav.push(NavigationDetailsPage, { item: item });
+  openNavDetailsPage(item, test) {
+    this.nav.push(NavigationDetailsPage, { item: item, test });
   }
   private handleError(errorMessage: string) {
     const alert = this.alertCtrl.create({
@@ -128,24 +191,80 @@ export class OrdersPage {
     });
     alert.present();
   }
-
-  doRefresh(refresher) {
-    this.authService.fetchOrder()
+  retrieveEstimatedOrders() {
+    this.estimatedOrders = [];
+    this.authService.fetchOrderByStatus("ESTIMATION")
       .subscribe(
         (list: Orders[]) => {
-          this.orders = list;
-          refresher.complete();
-          // console.log(this.orders);
-          this.loading_complete = true;
+          this.estimatedOrders = list;
+          console.log(this.estimatedOrders);
+          // this.loading_complete = true;
           // this.loading.dismiss();
         },
         error => {
-          this.loading.dismiss();
+          // this.loading.dismiss();
           this.handleError(error.json().error);
         }
       );
+  }
+  retrieveApprovedOrders() {
+    this.approvedOrders = [];
+    this.authService.fetchOrderByStatus("APPROVED")
+      .subscribe(
+        (list: Orders[]) => {
+          this.approvedOrders = list;
+          console.log(this.approvedOrders);
+          // this.loading_complete = true;
+          // this.loading.dismiss();
+        },
+        error => {
+          // this.loading.dismiss();
+          this.handleError(error.json().error);
+        }
+      );
+  }
+  retrieveRejectedOrders() {
+    this.rejectedOrders = [];
+    this.authService.fetchOrderByStatus("REJECTED")
+      .subscribe(
+        (list: Orders[]) => {
+          this.rejectedOrders = list;
+          console.log(this.rejectedOrders);
+          // this.loading_complete = true;
+          // this.loading.dismiss();
+        },
+        error => {
+          // this.loading.dismiss();
+          this.handleError(error.json().error);
+        }
+      );
+  }
+  doRefresh(refresher) {
+    this.showLoader
+    this.retrieveEstimatedOrders();
+    // this.estimatedOrders = this.retrieveOrdersByStatus("ESTIMATION");
+    this.retrieveApprovedOrders();
+    // this.approvedOrders = this.retrieveOrdersByStatus("APPROVED");
+    this.retrieveRejectedOrders();
+    // this.rejectedOrders = this.retrieveOrdersByStatus("REJECTED");
+    refresher.complete();
+    // this.retrieveOrdersByStatus("APPROVED")
+    // this.authService.fetchOrder()
+    //   .subscribe(
+    //     (list: Orders[]) => {
+    //       this.orders = list;
+    //       refresher.complete();
+    //       // console.log(this.orders);
+    //       this.loading_complete = true;
+    //       // this.loading.dismiss();
+    //     },
+    //     error => {
+    //       this.loading.dismiss();
+    //       this.handleError(error.json().error);
+    //     }
+    //   );
     // console.log('Begin async operation', refresher);
-    // this.retrieveEstimatedOrder();
+    // this.retrieveOrdersByStatus();
     // setTimeout(() => {
     //   console.log('Async operation has ended');
     //   refresher.complete();
@@ -157,5 +276,8 @@ export class OrdersPage {
   displayIndianNumber(amount: number) {
     return Number(Math.round(amount)).toLocaleString('en-IN');
   }
-
+  // getEstimatedOrders(refresher) {
+  //   this.retrieveOrdersByStatus();
+  //   refresher.complete();
+  // }
 }

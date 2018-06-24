@@ -336,12 +336,24 @@
             </ion-col>
             <ion-col col-3>
               <ion-item>
-                <!-- <ion-input [(ngModel)]="item.qty" name={{item}} type="number" (ionBlur)="calculateTotals(item.qty)" text-right></ion-input> -->
-                <ion-input [(ngModel)]="item.qty" name={{item}} type="number" text-right></ion-input>
+                <ion-input [(ngModel)]="item.qty" name={{item}} type="number" (ionBlur)="calculateTotals(item.qty)" text-right></ion-input>
+                <!-- <ion-input [(ngModel)]="item.qty" name={{item}} type="number" text-right></ion-input> -->
               </ion-item>
             </ion-col>
           </ion-row>
         </div>
+        <ion-row>
+          <ion-col col-8>
+            <ion-item>
+              <ion-label text-center style="font-size:1.6rem;font-weight:bold;">Total Sq Ft</ion-label>
+            </ion-item>
+          </ion-col>
+          <ion-col col-4>
+            <ion-item>
+              <ion-label text-center style="font-weight:bold;">{{totalSqFtCount}}</ion-label>
+            </ion-item>
+          </ion-col>
+        </ion-row>
         <!-- </ion-card> -->
       </div>
       <div *ngIf="itemGroup=='PAVER'">
@@ -360,6 +372,18 @@
             </ion-col>
           </ion-row>
         </div>
+        <ion-row>
+            <ion-col col-8>
+              <ion-item>
+                <ion-label text-center style="font-size:1.6rem;font-weight:bold;">Total Sq Ft</ion-label>
+              </ion-item>
+            </ion-col>
+            <ion-col col-4>
+              <ion-item>
+                <ion-label text-center style="font-weight:bold;">{{totalSqFtCount}}</ion-label>
+              </ion-item>
+            </ion-col>
+          </ion-row>
       </div>
       <!-- <div *ngIf="itemGroup=='CRUSHER / BUNKAR'">
         inside crusher

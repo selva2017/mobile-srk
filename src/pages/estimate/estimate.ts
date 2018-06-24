@@ -151,7 +151,7 @@ export class EstimatePage {
     salesRepName: '',
     referral1Name: '',
     referral2Name: '',
-    // highPriority: ''
+    highPriority: ''
     // unit1TaxSum: 0,
     // unit1TotalCostSum: 0,
     // unit1LoadingCostSum: 0,
@@ -393,17 +393,19 @@ export class EstimatePage {
   calculatedTransportCost: number = 0;
   calculatedSqFtUnitCost: number = 0;
   totalCounter: number = 0;
+  totalSqFtCount: number = 0;
 
   calculateTotals(item: number) {
-    this.totalCounter = Number(this.totalCounter) + Number(item);
-    if (Number(this.totalCounter) > Number(this.unitsTotal)) {
-      // if (Number(this.estimate['unit1'] + this.estimate['unit2'] + this.estimate['unit4'] + this.estimate['unit6']) > this.unitsTotal) {
+    this.totalSqFtCount = 0;
+    for (var i = 0; i < this.selectedProduct.length; i++) {
+      this.totalSqFtCount = Number(this.totalSqFtCount) + Number(this.selectedProduct[i]['qty']);
+    }
+    if (Number(this.totalSqFtCount) > Number(this.estimate['unitsTotal'])) {
       let alert = this.alertCtrl.create({
         title: 'Warning',
         subTitle: 'Your Total Units and Individual Color counts are not matching.',
         buttons: ['OK']
       });
-      this.totalCounter = Number(this.totalCounter) - Number(item);
       alert.present();
     }
   }
@@ -1106,7 +1108,7 @@ export class EstimatePage {
   }
   notifyPriorityOption(event) {
     this.isToggledPriority = !this.isToggledPriority;
-    // this.estimate['highPriority'] = (this.isToggledPriority == true) ? "Yes" : "No";
+    this.estimate['highPriority'] = (this.isToggledPriority == true) ? "Yes" : "No";
   }
   reCalculateTotals() {
     switch (this.itemGroup) {

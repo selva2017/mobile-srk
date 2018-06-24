@@ -36,6 +36,10 @@
       <!-- <ion-label stacked>Company ID</ion-label> -->
       <ion-input [(ngModel)]="regData.companyId" name="companyId" type="text" placeholder="Company ID" required></ion-input>
     </ion-item>
+    <ion-item>
+      <!-- <ion-label stacked>Company ID</ion-label> -->
+      <ion-input [(ngModel)]="regData.employeeId" name="employeeId" type="text" placeholder="Employee ID" required></ion-input>
+    </ion-item>
     <p style="color:red">{{error_message}}</p>
     <button ion-button block type="submit" [color]="'head'" [disabled]="!registerForm.valid">
       SignUp
