@@ -11,19 +11,28 @@ export class NavigationDetailsPage {
   order;
   order_type;
   subOrders: SubOrders[];
+  loading: any;
+  showLoader() {
+    this.loading = this.loadingCtrl.create({
+      content: 'Collecting Orders...'
+    });
 
-  constructor(public nav: NavController, params: NavParams, private authService: AuthService) {
+    this.loading.present();
+  }
+  constructor(public nav: NavController, params: NavParams, private authService: AuthService,
+    private loadingCtrl: LoadingController) {
     this.order = params.data.item;
     this.order_type = params.data.test;
     console.log(this.order_type);
+    this.showLoader();
     this.authService.fetchSubOrder(this.order['order_GROUP_NO'])
       .subscribe(
         // (list) => {
         (list: SubOrders[]) => {
           this.subOrders = list;
-          console.log(this.subOrders);
+          // console.log(this.subOrders);
           // this.loading_complete = true;
-          // this.loading.dismiss();
+          this.loading.dismiss();
         },
         error => {
           // this.loading.dismiss();
@@ -43,29 +52,34 @@ export class NavigationDetailsPage {
   }
   rejectOrder(order_GROUP_NO) {
     console.log(order_GROUP_NO);
+    this.showLoader();
     this.authService.updateStatusOfGroupOrder(order_GROUP_NO, "REJECTED")
       .subscribe(
         (success) => {
           this.nav.pop();
           this.nav.push(OrdersPage);
           // this.refreshList();
+          this.loading.dismiss();
         },
         (error) => console.log(error)
       );
   }
   approveOrder(order_GROUP_NO) {
     console.log(order_GROUP_NO);
+    this.showLoader();
     this.authService.updateStatusOfGroupOrder(order_GROUP_NO, "APPROVED")
       .subscribe(
         (success) => {
           // this.refreshList();
           this.nav.pop();
           this.nav.push(OrdersPage);
+          this.loading.dismiss();
         },
         (error) => console.log(error)
       );
   }
   getOrderByStatus() {
+    this.showLoader();
     this.authService.fetchSubOrder(this.order['order_GROUP_NO'])
       .subscribe(
         // (list) => {
@@ -73,7 +87,7 @@ export class NavigationDetailsPage {
           this.subOrders = list;
           // console.log(this.subOrders);
           // this.loading_complete = true;
-          // this.loading.dismiss();
+          this.loading.dismiss();
         },
         error => {
           // this.loading.dismiss();
@@ -197,7 +211,7 @@ export class OrdersPage {
       .subscribe(
         (list: Orders[]) => {
           this.estimatedOrders = list;
-          console.log(this.estimatedOrders);
+          // console.log(this.estimatedOrders);
           // this.loading_complete = true;
           // this.loading.dismiss();
         },
@@ -213,7 +227,7 @@ export class OrdersPage {
       .subscribe(
         (list: Orders[]) => {
           this.approvedOrders = list;
-          console.log(this.approvedOrders);
+          // console.log(this.approvedOrders);
           // this.loading_complete = true;
           // this.loading.dismiss();
         },
@@ -229,7 +243,7 @@ export class OrdersPage {
       .subscribe(
         (list: Orders[]) => {
           this.rejectedOrders = list;
-          console.log(this.rejectedOrders);
+          // console.log(this.rejectedOrders);
           // this.loading_complete = true;
           // this.loading.dismiss();
         },
@@ -240,13 +254,14 @@ export class OrdersPage {
       );
   }
   doRefresh(refresher) {
-    this.showLoader
+    this.showLoader();
     this.retrieveEstimatedOrders();
     // this.estimatedOrders = this.retrieveOrdersByStatus("ESTIMATION");
     this.retrieveApprovedOrders();
     // this.approvedOrders = this.retrieveOrdersByStatus("APPROVED");
     this.retrieveRejectedOrders();
     // this.rejectedOrders = this.retrieveOrdersByStatus("REJECTED");
+    this.loading.dismiss();
     refresher.complete();
     // this.retrieveOrdersByStatus("APPROVED")
     // this.authService.fetchOrder()

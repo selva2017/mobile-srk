@@ -290,7 +290,7 @@ export class EstimatePage {
     this.authService.fetchOrderByStatus(status)
       .subscribe(
         (list: Site[]) => {
-          console.log(list);
+          // console.log(list);
           this.sites = list;
           this.loading.dismiss();
         },
@@ -1053,7 +1053,7 @@ export class EstimatePage {
         (list: Customer[]) => {
           // //console.log(list);
           this.customers = list;
-          // this.loading.dismiss();
+          this.loading.dismiss();
         },
         error => {
           this.loading.dismiss();

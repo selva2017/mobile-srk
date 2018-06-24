@@ -72,7 +72,7 @@
             <ion-label>{{displayIndianNumber(order.total_ORDER_UNIT)}}</ion-label>
         </ion-item> -->
     </ion-card>
-    <div *ngIf="subOrders?.length > 1">
+    <div *ngIf="subOrders?.length > 0 && subOrders?.length != 1">
         <ion-card>
             <ion-card-header>Order Details</ion-card-header>
             <ion-list padding *ngFor="let row of subOrders">
