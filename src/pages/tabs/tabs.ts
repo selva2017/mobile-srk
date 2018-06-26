@@ -1,3 +1,6 @@
+import { GatePage } from './../gate/gate';
+import { LoadingPage } from './../loading/loading';
+import { FrontOfficePage } from './../front-office/front-office';
 import { LeadPage } from './../lead/lead';
 import { EstimatePage } from './../estimate/estimate';
 import { Component } from '@angular/core';
@@ -18,7 +21,10 @@ export class TabsPage {
   ordersPage = OrdersPage;
   leadPage = LeadPage;
   estimatePage = EstimatePage;
-  
+  frontOfficePage = FrontOfficePage;
+  loadingPage = LoadingPage;
+  gatePage = GatePage;
+
   role: string;
 
   constructor(public navCtrl: NavController) {

@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-navbar [color]="'head'">
+    <ion-buttons left>
+      <button ion-button icon-only menuToggle>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title center>Loading</ion-title>
+    <ion-buttons right>
+      <img alt="logo" height="40" src="assets/imgs/srk-0.png">
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <button ion-button block light (click)="doRadio()">Allocate Vehicle</button>
+
+  <button ion-button block color="danger" (click)="doCheckbox()">Select Employees</button>
+</ion-content>

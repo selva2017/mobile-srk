@@ -1,3 +1,4 @@
+import { GatePage } from './../pages/gate/gate';
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
@@ -6,7 +7,8 @@ import { HttpModule } from '@angular/http';
 
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
-
+import { LoadingPage } from './../pages/loading/loading';
+import { FrontOfficePage } from './../pages/front-office/front-office'
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { AuthService } from '../providers/auth-service/auth-service';
@@ -26,10 +28,13 @@ import { EstimatePage } from './../pages/estimate/estimate';
     OrdersPage,
     EstimatePage,
     LeadPage,
-    NavigationDetailsPage
+    NavigationDetailsPage,
+    LoadingPage,
+    FrontOfficePage,
+    GatePage
   ],
   imports: [
-    IonicModule.forRoot(MyApp),BrowserModule,HttpModule
+    IonicModule.forRoot(MyApp), BrowserModule, HttpModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -41,13 +46,16 @@ import { EstimatePage } from './../pages/estimate/estimate';
     OrdersPage,
     EstimatePage,
     LeadPage,
-    NavigationDetailsPage
+    NavigationDetailsPage,
+    LoadingPage,
+    FrontOfficePage,
+    GatePage
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
-    AuthService, LoginPage,NavigationDetailsPage
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
+    AuthService, LoginPage, NavigationDetailsPage
   ]
 })
-export class AppModule {}
+export class AppModule { }

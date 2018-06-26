@@ -151,7 +151,7 @@ export class EstimatePage {
     salesRepName: '',
     referral1Name: '',
     referral2Name: '',
-    highPriority: ''
+    // highPriority: ''//to be added when priority is added as a field in db
     // unit1TaxSum: 0,
     // unit1TotalCostSum: 0,
     // unit1LoadingCostSum: 0,
@@ -1108,7 +1108,7 @@ export class EstimatePage {
   }
   notifyPriorityOption(event) {
     this.isToggledPriority = !this.isToggledPriority;
-    this.estimate['highPriority'] = (this.isToggledPriority == true) ? "Yes" : "No";
+    // this.estimate['highPriority'] = (this.isToggledPriority == true) ? "Yes" : "No";
   }
   reCalculateTotals() {
     switch (this.itemGroup) {
