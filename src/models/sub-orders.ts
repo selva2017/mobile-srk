@@ -45,7 +45,7 @@ export interface SubOrders {
     order_MODIFIED_DT: string;
 }
 
-export interface vehicleList {
+export interface VehicleList {
     vehicle_ID: string,
     vehicle_TYPE: string,
     vehicle_NAME: string,
@@ -62,3 +62,15 @@ export interface Employee {
     phoneNumber: string,
     emailAddress: string
 }
+export interface MachineList {
+    machine_ID;
+    machine_TYPE;
+    machine_NAME;
+    machine_CAPACITY;
+  }
+  export interface YardList {
+    yard_ID;
+    yard_TYPE;
+    yard_NAME;
+    yard_CAPACITY;
+  }

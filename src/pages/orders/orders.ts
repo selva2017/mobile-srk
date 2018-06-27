@@ -51,7 +51,7 @@ export class NavigationDetailsPage {
     return Number(Math.round(amount)).toLocaleString('en-IN');
   }
   rejectOrder(order_GROUP_NO) {
-    console.log(order_GROUP_NO);
+    // console.log(order_GROUP_NO);
     this.showLoader();
     this.authService.updateStatusOfGroupOrder(order_GROUP_NO, "REJECTED")
       .subscribe(
@@ -65,7 +65,7 @@ export class NavigationDetailsPage {
       );
   }
   approveOrder(order_GROUP_NO) {
-    console.log(order_GROUP_NO);
+    // console.log(order_GROUP_NO);
     this.showLoader();
     this.authService.updateStatusOfGroupOrder(order_GROUP_NO, "APPROVED")
       .subscribe(
@@ -120,19 +120,19 @@ export class OrdersPage {
     // console.log(this.subOrders);
   }
   ngOnInit() {
-    this.showLoader();
+    // this.showLoader();
     this.retrieveEstimatedOrders();
     // this.loading.dismiss();
     // this.showLoader();
     // this.estimatedOrders = this.retrieveOrdersByStatus("ESTIMATION");
     // console.log(this.estimatedOrders);
-    this.retrieveApprovedOrders();
+    // this.retrieveApprovedOrders();
     // this.loading.dismiss();
     // this.showLoader();
     // this.approvedOrders = this.retrieveOrdersByStatus("APPROVED");
     // console.log(this.approvedOrders);
-    this.retrieveRejectedOrders();
-    this.loading.dismiss();
+    // this.retrieveRejectedOrders();
+    // this.loading.dismiss();
     this.category = "estimate";
     // this.estimatedOrders = this.retrieveOrdersByStatus("ESTIMATION");
     // console.log(this.estimatedOrders);
@@ -207,7 +207,7 @@ export class OrdersPage {
   }
   retrieveEstimatedOrders() {
     this.estimatedOrders = [];
-    this.authService.fetchOrderByStatus("ESTIMATION")
+    this.authService.fetchOrderByStatus("ESTIMATED")
       .subscribe(
         (list: Orders[]) => {
           this.estimatedOrders = list;

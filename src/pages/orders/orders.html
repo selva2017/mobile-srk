@@ -12,13 +12,16 @@
   </ion-navbar>
   <ion-toolbar no-border-top [color]="isAndroid ? 'royal' : 'masters'">
     <ion-segment [(ngModel)]="category" [color]="'head'">
-      <ion-segment-button value="estimate">
+      <ion-segment-button value="estimate" (click)="retrieveEstimatedOrders()">
+      <!-- <ion-segment-button value="estimate"> -->
         Estimated
       </ion-segment-button>
-      <ion-segment-button value="approved">
+      <ion-segment-button value="approved" (click)="retrieveApprovedOrders()">
+      <!-- <ion-segment-button value="approved"> -->
         Approved
       </ion-segment-button>
-      <ion-segment-button value="Rejected">
+      <ion-segment-button value="Rejected" (click)="retrieveRejectedOrders()">
+      <!-- <ion-segment-button value="Rejected"> -->
         Rejected
       </ion-segment-button>
     </ion-segment>

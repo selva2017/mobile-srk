@@ -35,11 +35,11 @@ export class LoginPage {
               this.token_name = success.token;
               localStorage.setItem('token', this.token_name);
               localStorage.setItem('role', success.role);
-              // localStorage.setItem('companyName', success.companyName);
+              localStorage.setItem('employeeId', success.employeeId);
               localStorage.setItem('companyId', success.companyId);
               localStorage.setItem('isAuthenticated', 'true');
-              // //console.log('Company Id -' + success.companyId);
-              // //console.log('Role -' + success.role);
+              //console.log('Company Id -' + success.companyId);
+              console.log('Employee Id -' + localStorage.getItem('employeeId'));
               // this.isAuthenticated = true;
               this.navCtrl.setRoot(TabsPage);
               this.loading.dismiss();

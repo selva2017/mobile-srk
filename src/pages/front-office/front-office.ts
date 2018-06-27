@@ -1,4 +1,4 @@
-import { SubOrders, vehicleList } from './../../models/sub-orders';
+import { SubOrders, VehicleList } from './../../models/sub-orders';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 
@@ -15,7 +15,7 @@ export class FrontOfficePage {
   }
   approvedOrders: SubOrders[] = [];
   a: string;
-  vehicles: vehicleList[];
+  vehicles: VehicleList[];
   gaming: string;
   displayINR(amount: number) {
     return new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0 }).format(amount);
@@ -864,7 +864,7 @@ export class FrontOfficePage {
     for (var i = 0; i < this.vehicles.length; i++) {
       alert.addInput({
         type: 'radio',
-        label: this.vehicles[i].vehicle_NAME,
+        label: this.vehicles[i].vehicle_NAME + '(' + this.vehicles[i].vehicle_CAPACITY + ')',
         value: this.vehicles[i].vehicle_NAME,
       });
     }

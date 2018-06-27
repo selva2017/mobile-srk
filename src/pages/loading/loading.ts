@@ -1,6 +1,7 @@
-import { vehicleList, Employee } from './../../models/sub-orders';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+
+import { SubOrders, VehicleList, Employee, MachineList, YardList } from './../../models/sub-orders';
 
 @IonicPage()
 @Component({
@@ -8,27 +9,57 @@ import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angu
   templateUrl: 'loading.html',
 })
 export class LoadingPage {
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad LoadingPage');
-  }
-
   testRadioOpen: boolean;
   testRadioResult;
   testCheckboxOpen: boolean;
   testCheckboxResult;
   test: string;
-  vehicles: vehicleList[];
+  vehicles: VehicleList[];
   employees: Employee[];
+  machines: MachineList[];
+  yards: YardList[];
+  startHrMtr: string;
+  endHrMtr: string;
   data: any[] = [
     { name: "label1", visible: false, object2: "1" },
     { name: "label2", visible: true, object2: "2" },
 
   ];
 
+  machineLoading: boolean = true; notifyLoadingOption(event) {
+    this.machineLoading = !this.machineLoading; // console.log("Event:"+ event.checked); 
+    console.log("Toggled Load: " + this.machineLoading);
+  }
+
+  doRadioYard() {
+    let alert = this.alerCtrl.create();
+    alert.setTitle('Select Yard');
+    for (var i = 0; i < this.yards.length; i++) {
+      alert.addInput({
+        type: 'radio',
+        label: this.yards[i].yard_NAME,
+        value: this.yards[i].yard_NAME,
+      });
+
+    }
+    alert.addButton('Cancel');
+    alert.addButton({
+      text: 'Ok',
+      handler: data => {
+        console.log('Radio data:', data);
+        this.testRadioOpen = false;
+        this.testRadioResult = data;
+      }
+    });
+
+    alert.present().then(() => {
+      this.testRadioOpen = true;
+    });
+  }
+
   doCheckbox() {
     let alert = this.alerCtrl.create();
-    alert.setTitle('Select the Employees');
+    alert.setTitle('Select Employees');
 
     for (var i = 0; i < this.employees.length; i++) {
       alert.addInput({
@@ -113,10 +144,9 @@ export class LoadingPage {
         this.testCheckboxResult = data;
       }
     });
-    alert.present();
-    // alert.present().then(() => {
-    //   this.testCheckboxOpen = true;
-    // });
+    alert.present().then(() => {
+      this.testCheckboxOpen = true;
+    });
   }
   constructor(public alerCtrl: AlertController) {
     this.employees = [
@@ -216,6 +246,46 @@ export class LoadingPage {
         "vehicle_CAPACITY": "1009"
       },
     ];
+    this.machines = [
+      {
+        "machine_ID": "001",
+        "machine_TYPE": "100",
+        "machine_NAME": "Machine 1 ",
+        "machine_CAPACITY": "1000"
+      },
+      {
+        "machine_ID": "002",
+        "machine_TYPE": "100",
+        "machine_NAME": "Machine 2",
+        "machine_CAPACITY": "1001"
+      },
+      {
+        "machine_ID": "003",
+        "machine_TYPE": "101",
+        "machine_NAME": "Machine 3",
+        "machine_CAPACITY": "1002"
+      },
+    ];
+    this.yards = [
+      {
+        "yard_ID": "1001",
+        "yard_TYPE": "100",
+        "yard_NAME": "Yard 1 ",
+        "yard_CAPACITY": "1000"
+      },
+      {
+        "yard_ID": "1002",
+        "yard_TYPE": "100",
+        "yard_NAME": "Yard 2",
+        "yard_CAPACITY": "1001"
+      },
+      {
+        "yard_ID": "1003",
+        "yard_TYPE": "101",
+        "yard_NAME": "Yard 3",
+        "yard_CAPACITY": "1002"
+      },
+    ];
   }
 
   doRadio() {
@@ -286,6 +356,9 @@ export class LoadingPage {
     });
   }
 
+
+
   ngOnInit() {
   }
+
 }

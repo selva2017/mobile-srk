@@ -10,9 +10,73 @@
       <img alt="logo" height="40" src="assets/imgs/srk-0.png">
     </ion-buttons>
   </ion-navbar>
+
+  <ion-toolbar no-border-top [color]="isAndroid ? 'royal' : 'masters'">
+    <ion-segment [(ngModel)]="category" [color]="'head'">
+      <ion-segment-button value="weighed-orders">
+        Weighed
+      </ion-segment-button>
+      <ion-segment-button value="transit">
+        Transit
+      </ion-segment-button>
+      <ion-segment-button value="delivered">
+        Delivered
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
 </ion-header>
 
+<ion-content>
+  <!-- <ion-refresher (ionRefresh)="doRefresh($event)">
+  <ion-refresher-content>Collecting Latest Data...</ion-refresher-content>
+</ion-refresher> -->
+  <div [ngSwitch]="category">
+    <ion-list padding *ngSwitchCase="'weighed-orders'">
+      <div *ngFor="let  item of weighedOrders">
+        <ion-item>
+          <h2>{{ item.order_GROUP_NO }}</h2>
+          <h3>{{ item.customer_NAME }}</h3>
+          <h3>{{ item.product_NAME }}</h3>
+          <h3>Qty # {{displayIndianNumber(item.total_ORDER_UNIT)}}</h3>
+          <p>Total Cost # {{ displayINR(item.total_COST) }}</p>
+          <p>Uom # {{ item.uom_ID }} </p>
+          <p>Date {{item.order_DT}}</p>
+          <!-- <button ion-button block color="secondary" (click)="allocateVehicle(item,'weighed-orders')"> -->
+          <!-- <button ion-button block color="secondary" (click)="doRadio()">
+          Approve
+      </button> -->
+          <!-- </ion-item>
+      <ion-item> -->
+          <button ion-button block color="secondary" (click)="doRadio()">Allocate Vehicle</button>
+          <!-- <ion-label floating>Vehicle Name</ion-label>
+        <ion-select [(ngModel)]="item.vehicle">
+          <ion-option *ngFor="let vehicle of vehicles">{{vehicle.vehicle_NAME}}</ion-option>
+        </ion-select> -->
+        </ion-item>
+      </div>
+    </ion-list>
 
-<ion-content padding>
 
+    <ion-list *ngSwitchCase="'transit'">
+      <button ion-item *ngFor="let transit_item of transitOrders" (click)="openNavDetailsPage(transit_item,'approve')" icon-start>
+        <h2>{{ transit_item.customer_NAME }}</h2>
+        <h3>{{ transit_item.product_NAME }}</h3>
+        <h3>Qty # {{displayIndianNumber(transit_item.total_ORDER_UNIT)}}</h3>
+        <p>Total Cost # {{ displayINR(transit_item.total_COST) }}</p>
+        <p>Order # {{ transit_item.order_GROUP_NO }} </p>
+        <p>Date {{transit_item.order_DT}}</p>
+      </button>
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'Delivered'">
+      <button ion-item *ngFor="let delivered_item of deliveredOrders" (click)="openNavDetailsPage(delivered_item,'reject')" icon-start>
+        <h2>{{ delivered_item.customer_NAME }}</h2>
+        <h3>{{ delivered_item.product_NAME }}</h3>
+        <h3>Qty # {{displayIndianNumber(delivered_item.total_ORDER_UNIT)}}</h3>
+        <p>Total Cost # {{ displayINR(delivered_item.total_COST) }}</p>
+        <p>Order # {{ delivered_item.order_GROUP_NO }} </p>
+        <p>Date {{delivered_item.order_DT}}</p>
+      </button>
+    </ion-list>
+  </div>
 </ion-content>

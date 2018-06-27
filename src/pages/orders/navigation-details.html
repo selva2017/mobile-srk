@@ -134,7 +134,7 @@
             <ion-label>{{displayINR(order.total_TRANSPORT_COST)}}</ion-label>
         </ion-item>
     </ion-card>
-    <div *ngIf="order_type=='estimate'">
+    <div *ngIf="order_type=='estimate'" padding>
         <button ion-button block color="secondary" (click)="approveOrder(order.order_GROUP_NO)">
             Approve
         </button>

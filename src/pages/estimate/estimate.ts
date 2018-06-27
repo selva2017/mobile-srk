@@ -971,8 +971,8 @@ export class EstimatePage {
     if (Number(this.unitsTotal) > 0 && Number(this.estimate['distanceKM']) > 0) {
       // console.log(estimateForm.distanceKM);
       // console.log(this.estimate);
-      this.estimate['salesRep'] = '100';
-      this.estimate['salesRepName'] = 'Ashok';
+      this.estimate['salesRep'] = localStorage.getItem('employeeId');
+      this.estimate['salesRepName'] = localStorage.getItem('employeeId');
       switch (this.itemGroup) {
         case "QUARRY": {
           this.aggregateTotalUnitsCountMatch();
