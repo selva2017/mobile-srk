@@ -86,7 +86,7 @@
     <div *ngIf="subOrders?.length == 1">
         <div *ngFor="let item of subOrders">
             <div *ngIf="item.orderDetails?.length > 0">
-                <ion-card>
+                <ion-card *ngIf="item.orderDetails?.length != 1">
                     <ion-card-header>Product Details </ion-card-header>
                     <div *ngFor="let row of item.orderDetails">
                         <ion-row>
@@ -102,6 +102,14 @@
                             </ion-col>
                         </ion-row>
                     </div>
+                </ion-card>
+            </div>
+            <div *ngIf="item.orderDetails?.length == 1">
+                <ion-card padding>
+                    <h2>Unit(s): {{displayIndianNumber(item.unit_TYPE)}} Load: {{displayIndianNumber(item.unit)}}</h2>
+                    <h3>Total Cost: {{displayINR(item.order_TOTAL_COST)}}</h3>
+                    <p>Transport: {{displayINR(item.order_TRANSPORT_COST)}}</p>
+                    <p>Tax 1: {{displayINR(item.order_TAX1)}} Tax 2: {{displayINR(item.order_TAX2)}}</p>
                 </ion-card>
             </div>
         </div>

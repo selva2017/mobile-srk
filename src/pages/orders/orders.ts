@@ -23,14 +23,14 @@ export class NavigationDetailsPage {
     private loadingCtrl: LoadingController) {
     this.order = params.data.item;
     this.order_type = params.data.test;
-    console.log(this.order_type);
+    console.log(this.order);
     this.showLoader();
     this.authService.fetchSubOrder(this.order['order_GROUP_NO'])
       .subscribe(
         // (list) => {
         (list: SubOrders[]) => {
           this.subOrders = list;
-          // console.log(this.subOrders);
+          console.log(this.subOrders);
           // this.loading_complete = true;
           this.loading.dismiss();
         },
