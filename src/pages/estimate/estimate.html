@@ -112,7 +112,7 @@
       <ion-label color="selva">Priority</ion-label>
       <ion-label *ngIf="isToggledPriority" text-right>High</ion-label>
       <ion-label *ngIf="!isToggledPriority" text-right>Normal</ion-label>
-      <ion-toggle color="secondary" (ionChange)="notifyPriorityOption(estimate.highPriority)" [checked]="isToggledPriority"></ion-toggle>
+      <ion-toggle [disabled]="disableSiteName" color="secondary" (ionChange)="notifyPriorityOption(estimate.highPriority)" [checked]="isToggledPriority"></ion-toggle>
       <!-- <ion-toggle color="secondary" (ionChange)="notifyPriorityOption(estimate.highPriority)" [checked]="isToggledPriority"></ion-toggle> -->
     </ion-item>
 
@@ -156,7 +156,7 @@
       <!-- <ion-input [(ngModel)]="estimate.distanceKM" name="distanceKM" type="number" maxlength="3" placeholder="Enter the distance in KM"
         required></ion-input> -->
       <ion-input [(ngModel)]="estimate.distanceKM" name="distanceKM" type="number" maxlength="3" placeholder="Enter the distance in KM"
-        (ionBlur)="reCalculateTotals()" required> </ion-input>
+        (ionBlur)="reCalculateTotals()" [disabled]="disableItemName" required> </ion-input>
       <!-- [readonly]="distanceReadOnly" required></ion-input> -->
     </ion-item>
     <!-- </ion-col> -->
@@ -171,7 +171,7 @@
         <ion-col col-6>
           <ion-item> -->
       <ion-input [(ngModel)]="estimate.unitsTotal" name="unitsTotal" type="number" maxlength="4" (change)="onChangeTotalUnits(estimate.unitsTotal)"
-        placeholder="Enter the Total Units/Qty" required></ion-input>
+        placeholder="Enter the Total Units/Qty" [disabled]="disableItemName" required></ion-input>
     </ion-item>
     <!-- </ion-col> -->
     <!-- </ion-row> -->
@@ -490,7 +490,7 @@
     </ion-list>
     <!-- </ion-card> -->
     <!-- <button ion-button block type="submit" [color]="'head'" [disabled]="!estimateForm.valid"> -->
-    <button ion-button block color="one" type="submit" [disabled]="!estimateForm.valid">
+    <button ion-button block color="one" type="submit" [disabled]="!estimateForm.valid || disableItemName || disableSiteName">
       Submit
     </button>
   </form>

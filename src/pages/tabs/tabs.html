@@ -1,24 +1,27 @@
+<ion-tabs *ngIf="role == '3'" [color]="'tail'">
+  <ion-tab [root]="homePage" tabTitle="Home" tabIcon="home"></ion-tab>
+  <ion-tab [root]="leadPage" tabIcon="happy" tabTitle="Lead" [ngStyle]="{'color':'blue'}"></ion-tab>
+  <ion-tab [root]="estimatePage" tabIcon="cart" tabTitle="Estimate" [ngStyle]="{'color':'blue'}"></ion-tab>
+  <ion-tab [root]="ordersPage" tabIcon="book" tabTitle="Orders" [ngStyle]="{'color':'blue'}"></ion-tab>
+</ion-tabs>
 <ion-tabs *ngIf="role == '1'" [color]="'tail'">
   <ion-tab [root]="homePage" tabTitle="Home" tabIcon="home"></ion-tab>
   <ion-tab [root]="leadPage" tabIcon="happy" tabTitle="Lead" [ngStyle]="{'color':'blue'}"></ion-tab>
   <ion-tab [root]="estimatePage" tabIcon="cart" tabTitle="Estimate" [ngStyle]="{'color':'blue'}"></ion-tab>
   <ion-tab [root]="ordersPage" tabIcon="book" tabTitle="Orders" [ngStyle]="{'color':'blue'}"></ion-tab>
-  <!-- <ion-tab [root]="trialBalPage" tabIcon="list-box" tabTitle="Trial Balance" [ngStyle]="{'color':'blue'}"></ion-tab> -->
-  <!-- <ion-tab [root]="dayBookPage" tabIcon="book" tabTitle="Day book" [ngStyle]="{'color':'blue'}"></ion-tab> -->
-  <!-- <ion-tab [root]="statisticsPage" tabIcon="stats" tabTitle="Statistics" [ngStyle]="{'color':'blue'}"></ion-tab> -->
+  <!-- <ion-tab [root]="frontOfficePage" tabIcon="clipboard" tabTitle="Front Office" [ngStyle]="{'color':'blue'}"></ion-tab> -->
+  <!-- <ion-tab [root]="loadingPage" tabIcon="cube" tabTitle="Loading" [ngStyle]="{'color':'blue'}"></ion-tab> -->
+  <!-- <ion-tab [root]="gatePage" tabIcon="person" tabTitle="In-Out Pass" [ngStyle]="{'color':'blue'}"></ion-tab> -->
 </ion-tabs>
 <ion-tabs *ngIf="role == '2'" [color]="'tail'">
-  <ion-tab [root]="homePage" tabTitle="Home" tabIcon="home"></ion-tab>
-  <ion-tab [root]="leadPage" tabIcon="happy" tabTitle="Lead" [ngStyle]="{'color':'blue'}"></ion-tab>
-  <ion-tab [root]="estimatePage" tabIcon="cart" tabTitle="Estimate" [ngStyle]="{'color':'blue'}"></ion-tab>
-  <ion-tab [root]="ordersPage" tabIcon="book" tabTitle="Orders" [ngStyle]="{'color':'blue'}"></ion-tab>
-  <ion-tab [root]="frontOfficePage" tabIcon="clipboard" tabTitle="Front Office" [ngStyle]="{'color':'blue'}"></ion-tab>
-  <ion-tab [root]="loadingPage" tabIcon="cube" tabTitle="Loading" [ngStyle]="{'color':'blue'}"></ion-tab>
-  <ion-tab [root]="gatePage" tabIcon="person" tabTitle="In-Out Pass" [ngStyle]="{'color':'blue'}"></ion-tab>
-  <!-- <ion-tab [root]="trialBalPage" tabIcon="list-box" tabTitle="Trial Balance" [ngStyle]="{'color':'blue'}"></ion-tab> -->
-  <!-- <ion-tab [root]="dayBookPage" tabIcon="book" tabTitle="Day book" [ngStyle]="{'color':'blue'}"></ion-tab> -->
-  <!-- <ion-tab [root]="statisticsPage" tabIcon="stats" tabTitle="Statistics" [ngStyle]="{'color':'blue'}"></ion-tab> -->
-</ion-tabs>
+    <ion-tab [root]="homePage" tabTitle="Home" tabIcon="home"></ion-tab>
+    <ion-tab [root]="leadPage" tabIcon="happy" tabTitle="Lead" [ngStyle]="{'color':'blue'}"></ion-tab>
+    <ion-tab [root]="estimatePage" tabIcon="cart" tabTitle="Estimate" [ngStyle]="{'color':'blue'}"></ion-tab>
+    <ion-tab [root]="ordersPage" tabIcon="book" tabTitle="Orders" [ngStyle]="{'color':'blue'}"></ion-tab>
+    <!-- <ion-tab [root]="frontOfficePage" tabIcon="clipboard" tabTitle="Front Office" [ngStyle]="{'color':'blue'}"></ion-tab> -->
+    <!-- <ion-tab [root]="loadingPage" tabIcon="cube" tabTitle="Loading" [ngStyle]="{'color':'blue'}"></ion-tab> -->
+    <!-- <ion-tab [root]="gatePage" tabIcon="person" tabTitle="In-Out Pass" [ngStyle]="{'color':'blue'}"></ion-tab> -->
+  </ion-tabs>
 <!-- <ion-tabs *ngIf="role == '2'" [color]="'tail'">
   <ion-tab [root]="homePage" tabTitle="Home" tabIcon="home"></ion-tab>
   <ion-tab [root]="trialBalPage" tabIcon="list-box" tabTitle="Trial Balance" [ngStyle]="{'color':'blue'}"></ion-tab>

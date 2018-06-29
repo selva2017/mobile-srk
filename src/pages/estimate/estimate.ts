@@ -207,7 +207,7 @@ export class EstimatePage {
   clearAllData() {
     this.disableSiteName = true;
     this.disableItemName = true;
-
+    this.totalSqFtCount = 0;
     this.estimate['product'] = '';
     // this.clearHBCosts();
     // estimateForm.distanceKM.value = 0;
@@ -895,6 +895,7 @@ export class EstimatePage {
     this.estimate['unitsTotal'] = '';
     this.productPricePerUnit = 0;
     this.loadingCostPerUnit = 0;
+    this.products = [];
     this.authService.fetchProductDetailForGroup(product_group_id)
       .subscribe(
         (list: Product[]) => {
