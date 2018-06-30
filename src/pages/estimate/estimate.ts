@@ -278,6 +278,10 @@ export class EstimatePage {
   onItemNameChange(product: Product[], uom) {
     // //console.log("customer");
     // //console.log(product);
+    this.estimate['unitsTotal'] = '';
+    this.totalSqFtCount = 0;
+    this.productPricePerUnit=0;
+    this.loadingCostPerUnit=0;
     this.clearProductCosts();
     this.selectedProduct = product;
     this.uom = uom;
@@ -973,7 +977,7 @@ export class EstimatePage {
       // console.log(estimateForm.distanceKM);
       // console.log(this.estimate);
       this.estimate['salesRep'] = localStorage.getItem('employeeId');
-      this.estimate['salesRepName'] = localStorage.getItem('employeeId');
+      this.estimate['salesRepName'] = localStorage.getItem('firstName');
       switch (this.itemGroup) {
         case "QUARRY": {
           this.aggregateTotalUnitsCountMatch();

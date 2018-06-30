@@ -12,6 +12,8 @@ export class NavigationDetailsPage {
   order_type;
   subOrders: SubOrders[];
   loading: any;
+  role: string;
+  showApprove: boolean = false;
   showLoader() {
     this.loading = this.loadingCtrl.create({
       content: 'Collecting Orders...'
@@ -21,9 +23,13 @@ export class NavigationDetailsPage {
   }
   constructor(public nav: NavController, params: NavParams, private authService: AuthService,
     private loadingCtrl: LoadingController) {
+    this.role = localStorage.getItem('role');
+    // if (this.role == '1' || this.role == '2') {
+    //   this.showApprove = true;
+    //   console.log(this.showApprove);
+    // }
     this.order = params.data.item;
     this.order_type = params.data.test;
-    console.log(this.order);
     this.showLoader();
     this.authService.fetchSubOrder(this.order['order_GROUP_NO'])
       .subscribe(
@@ -41,10 +47,13 @@ export class NavigationDetailsPage {
       );
     // this.nav.push(OrdersPage, { item: this.subOrder });
   }
+
+  displayDecimalINR(amount: number) {
+    return new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 2 }).format(amount);
+  }
   displayINR(amount: number) {
     return new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0 }).format(amount);
-  }
-  // displayINR(amount: number) {
+  }  // displayINR(amount: number) {
   //   return new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(amount);
   // }
   displayIndianNumber(amount: number) {
@@ -119,9 +128,20 @@ export class OrdersPage {
     // console.log("Su Order")
     // console.log(this.subOrders);
   }
+  role: string;
+
+  ionViewDidEnter() {
+
+  }
   ngOnInit() {
     // this.showLoader();
-    this.retrieveEstimatedOrders();
+    this.role = localStorage.getItem('role');
+    if (this.role == '1' || this.role == '2') {
+      this.retrieveAllEstimatedOrders();
+    }
+    else if (this.role == '3') {
+      this.retrieveEstimatedOrders();
+    }
     // this.loading.dismiss();
     // this.showLoader();
     // this.estimatedOrders = this.retrieveOrdersByStatus("ESTIMATION");
@@ -206,6 +226,7 @@ export class OrdersPage {
     alert.present();
   }
   retrieveEstimatedOrders() {
+    this.showLoader();
     this.estimatedOrders = [];
     this.authService.fetchOrderByStatus("ESTIMATED")
       .subscribe(
@@ -213,7 +234,23 @@ export class OrdersPage {
           this.estimatedOrders = list;
           // console.log(this.estimatedOrders);
           // this.loading_complete = true;
+          this.loading.dismiss();
+        },
+        error => {
           // this.loading.dismiss();
+          this.handleError(error.json().error);
+        }
+      );
+  }
+  retrieveAllEstimatedOrders() {
+    this.showLoader();
+    this.estimatedOrders = [];
+    this.authService.fetchAllOrderByStatus("ESTIMATED")
+      .subscribe(
+        (list: Orders[]) => {
+          this.estimatedOrders = list;
+          // console.log(this.estimatedOrders);
+          this.loading.dismiss();
         },
         error => {
           // this.loading.dismiss();
@@ -222,6 +259,7 @@ export class OrdersPage {
       );
   }
   retrieveApprovedOrders() {
+    this.showLoader();
     this.approvedOrders = [];
     this.authService.fetchOrderByStatus("APPROVED")
       .subscribe(
@@ -229,7 +267,24 @@ export class OrdersPage {
           this.approvedOrders = list;
           // console.log(this.approvedOrders);
           // this.loading_complete = true;
+          this.loading.dismiss();
+        },
+        error => {
           // this.loading.dismiss();
+          this.handleError(error.json().error);
+        }
+      );
+  }
+  retrieveAllApprovedOrders() {
+    this.showLoader();
+    this.approvedOrders = [];
+    this.authService.fetchAllOrderByStatus("APPROVED")
+      .subscribe(
+        (list: Orders[]) => {
+          this.approvedOrders = list;
+          // console.log(this.approvedOrders);
+          // this.loading_complete = true;
+          this.loading.dismiss();
         },
         error => {
           // this.loading.dismiss();
@@ -238,14 +293,14 @@ export class OrdersPage {
       );
   }
   retrieveRejectedOrders() {
+    this.showLoader();
     this.rejectedOrders = [];
     this.authService.fetchOrderByStatus("REJECTED")
       .subscribe(
         (list: Orders[]) => {
           this.rejectedOrders = list;
           // console.log(this.rejectedOrders);
-          // this.loading_complete = true;
-          // this.loading.dismiss();
+          this.loading.dismiss();
         },
         error => {
           // this.loading.dismiss();
@@ -253,40 +308,81 @@ export class OrdersPage {
         }
       );
   }
-  doRefresh(refresher) {
+  retrieveAllRejectedOrders() {
     this.showLoader();
-    this.retrieveEstimatedOrders();
-    // this.estimatedOrders = this.retrieveOrdersByStatus("ESTIMATION");
-    this.retrieveApprovedOrders();
-    // this.approvedOrders = this.retrieveOrdersByStatus("APPROVED");
-    this.retrieveRejectedOrders();
-    // this.rejectedOrders = this.retrieveOrdersByStatus("REJECTED");
-    this.loading.dismiss();
+    this.rejectedOrders = [];
+    this.authService.fetchAllOrderByStatus("REJECTED")
+      .subscribe(
+        (list: Orders[]) => {
+          this.rejectedOrders = list;
+          // console.log(this.rejectedOrders);
+          this.loading.dismiss();
+        },
+        error => {
+          // this.loading.dismiss();
+          this.handleError(error.json().error);
+        }
+      );
+  }
+  doRefreshEstimated(refresher) {
+    if (this.role == '1' || this.role == '2') {
+      this.retrieveAllEstimatedOrders();
+    }
+    else if (this.role == '3') {
+      this.retrieveEstimatedOrders();
+    }
     refresher.complete();
-    // this.retrieveOrdersByStatus("APPROVED")
-    // this.authService.fetchOrder()
-    //   .subscribe(
-    //     (list: Orders[]) => {
-    //       this.orders = list;
-    //       refresher.complete();
-    //       // console.log(this.orders);
-    //       this.loading_complete = true;
-    //       // this.loading.dismiss();
-    //     },
-    //     error => {
-    //       this.loading.dismiss();
-    //       this.handleError(error.json().error);
-    //     }
-    //   );
-    // console.log('Begin async operation', refresher);
-    // this.retrieveOrdersByStatus();
-    // setTimeout(() => {
-    //   console.log('Async operation has ended');
-    //   refresher.complete();
-    // }, 2000);
+  }
+  doRefreshApproved(refresher) {
+    if (this.role == '1' || this.role == '2') {
+      this.retrieveAllApprovedOrders();
+    }
+    else if (this.role == '3') {
+      this.retrieveApprovedOrders();
+    }
+    refresher.complete();
+  }
+  doRefreshRejected(refresher) {
+    if (this.role == '1' || this.role == '2') {
+      this.retrieveAllRejectedOrders();
+    }
+    else if (this.role == '3') {
+      this.retrieveRejectedOrders();
+    }
+    refresher.complete();
+  }    // this.showLoader();
+  // this.retrieveEstimatedOrders();
+  // this.estimatedOrders = this.retrieveOrdersByStatus("ESTIMATION");
+  // this.approvedOrders = this.retrieveOrdersByStatus("APPROVED");
+  // this.rejectedOrders = this.retrieveOrdersByStatus("REJECTED");
+  // this.loading.dismiss();
+  // this.retrieveOrdersByStatus("APPROVED")
+  // this.authService.fetchOrder()
+  //   .subscribe(
+  //     (list: Orders[]) => {
+  //       this.orders = list;
+  //       refresher.complete();
+  //       // console.log(this.orders);
+  //       this.loading_complete = true;
+  //       // this.loading.dismiss();
+  //     },
+  //     error => {
+  //       this.loading.dismiss();
+  //       this.handleError(error.json().error);
+  //     }
+  //   );
+  // console.log('Begin async operation', refresher);
+  // this.retrieveOrdersByStatus();
+  // setTimeout(() => {
+  //   console.log('Async operation has ended');
+  //   refresher.complete();
+  // }, 2000);
+
+  displayDecimalINR(amount: number) {
+    return new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 2 }).format(amount);
   }
   displayINR(amount: number) {
-    return new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(amount);
+    return new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0 }).format(amount);
   }
   displayIndianNumber(amount: number) {
     return Number(Math.round(amount)).toLocaleString('en-IN');

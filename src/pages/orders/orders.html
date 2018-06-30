@@ -11,58 +11,166 @@
     </ion-buttons>
   </ion-navbar>
   <ion-toolbar no-border-top [color]="isAndroid ? 'royal' : 'masters'">
-    <ion-segment [(ngModel)]="category" [color]="'head'">
-      <ion-segment-button value="estimate" (click)="retrieveEstimatedOrders()">
-      <!-- <ion-segment-button value="estimate"> -->
-        Estimated
-      </ion-segment-button>
-      <ion-segment-button value="approved" (click)="retrieveApprovedOrders()">
-      <!-- <ion-segment-button value="approved"> -->
-        Approved
-      </ion-segment-button>
-      <ion-segment-button value="Rejected" (click)="retrieveRejectedOrders()">
-      <!-- <ion-segment-button value="Rejected"> -->
-        Rejected
-      </ion-segment-button>
-    </ion-segment>
+    <div *ngIf="role=='3'">
+      <ion-segment [(ngModel)]="category" [color]="'head'">
+        <ion-segment-button value="estimate" (click)="retrieveEstimatedOrders()">
+          Estimated
+        </ion-segment-button>
+        <ion-segment-button value="approved" (click)="retrieveApprovedOrders()">
+          Approved
+        </ion-segment-button>
+        <ion-segment-button value="Rejected" (click)="retrieveRejectedOrders()">
+          Rejected
+        </ion-segment-button>
+      </ion-segment>
+    </div>
+    <div *ngIf="role=='1' || role=='2'">
+      <ion-segment [(ngModel)]="category" [color]="'head'">
+        <ion-segment-button value="estimate" (click)="retrieveAllEstimatedOrders()">
+          Estimated
+        </ion-segment-button>
+        <ion-segment-button value="approved" (click)="retrieveAllApprovedOrders()">
+          Approved
+        </ion-segment-button>
+        <ion-segment-button value="Rejected" (click)="retrieveAllRejectedOrders()">
+          Rejected
+        </ion-segment-button>
+      </ion-segment>
+    </div>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-  <ion-refresher (ionRefresh)="doRefresh($event)">
-    <ion-refresher-content>Collecting Latest Data...</ion-refresher-content>
-  </ion-refresher>
   <div [ngSwitch]="category">
     <ion-list *ngSwitchCase="'estimate'">
+      <ion-refresher (ionRefresh)="doRefreshEstimated($event)">
+        <ion-refresher-content>Collecting Estimated Orders...</ion-refresher-content>
+      </ion-refresher>
       <button ion-item *ngFor="let item of estimatedOrders" (click)="openNavDetailsPage(item,'estimate')" icon-start>
         <h2>{{ item.customer_NAME }}</h2>
         <h3>{{ item.product_NAME }}</h3>
-        <h3>Qty # {{displayIndianNumber(item.total_ORDER_UNIT)}}</h3>
-        <p>Total Cost # {{ displayINR(item.total_COST) }}</p>
-        <p>Order # {{ item.order_GROUP_NO }} </p>
-        <p>Date {{item.order_DT}}</p>
+        <!-- <h3>Quantity : {{displayIndianNumber(item.total_ORDER_UNIT)}}</h3> -->
+        <!-- <p>Total Cost     : {{ displayINR(item.total_COST) }}</p>
+        <p>Order          : {{ item.order_GROUP_NO }} </p>
+        <p>Date           : {{item.order_DT}}</p>
+        <p>Sales Rep ID   : {{item.sales_REP_ID}}</p>
+        <p>Sales Rep Name : {{item.sales_REP_NAME}}</p> -->
+        <p>
+          <ion-grid>
+            <ion-row>
+              <ion-col col-5>Quantity</ion-col>
+              <ion-col col-7> {{displayIndianNumber(item.total_ORDER_UNIT)}}</ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-5>Total Cost</ion-col>
+              <ion-col col-7>{{displayINR(item.total_COST)}}</ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-5>Order</ion-col>
+              <ion-col col-7>{{item.order_GROUP_NO}}</ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-5>Date</ion-col>
+              <ion-col col-7>{{item.order_DT | date: 'dd-MM-yyyy'}}</ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-5>Sales Rep ID</ion-col>
+              <ion-col col-7>{{item.sales_REP_ID}} </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-5>Sales Rep Name</ion-col>
+              <ion-col col-7>{{item.sales_REP_NAME}} </ion-col>
+            </ion-row>
+          </ion-grid>
+        </p>
       </button>
     </ion-list>
 
     <ion-list *ngSwitchCase="'approved'">
+      <ion-refresher (ionRefresh)="doRefreshApproved($event)">
+        <ion-refresher-content>Collecting Approved Orders...</ion-refresher-content>
+      </ion-refresher>
       <button ion-item *ngFor="let approved_item of approvedOrders" (click)="openNavDetailsPage(approved_item,'approve')" icon-start>
-        <h2>{{ approved_item.customer_NAME }}</h2>
+        <!-- <h2>{{ approved_item.customer_NAME }}</h2>
         <h3>{{ approved_item.product_NAME }}</h3>
         <h3>Qty # {{displayIndianNumber(approved_item.total_ORDER_UNIT)}}</h3>
         <p>Total Cost # {{ displayINR(approved_item.total_COST) }}</p>
         <p>Order # {{ approved_item.order_GROUP_NO }} </p>
         <p>Date {{approved_item.order_DT}}</p>
+        <p>Sales Rep Id: {{approved_item.sales_REP_ID}}</p>
+        <p>Sales Rep : {{approved_item.sales_REP_NAME}}</p> -->
+        <p>
+          <ion-grid>
+            <ion-row>
+              <ion-col col-5>Quantity</ion-col>
+              <ion-col col-7> {{displayIndianNumber(approved_item.total_ORDER_UNIT)}}</ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-5>Total Cost</ion-col>
+              <ion-col col-7>{{displayINR(approved_item.total_COST)}}</ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-5>Order</ion-col>
+              <ion-col col-7>{{approved_item.order_GROUP_NO}}</ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-5>Date</ion-col>
+              <ion-col col-7>{{approved_item.order_DT | date: 'dd-MM-yyyy'}}</ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-5>Sales Rep ID</ion-col>
+              <ion-col col-7>{{approved_item.sales_REP_ID}} </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-5>Sales Rep Name</ion-col>
+              <ion-col col-7>{{approved_item.sales_REP_NAME}} </ion-col>
+            </ion-row>
+          </ion-grid>
+        </p>
       </button>
     </ion-list>
 
     <ion-list *ngSwitchCase="'Rejected'">
+      <ion-refresher (ionRefresh)="doRefreshRejected($event)">
+        <ion-refresher-content>Collecting Rejected Orders...</ion-refresher-content>
+      </ion-refresher>
       <button ion-item *ngFor="let rejected_item of rejectedOrders" (click)="openNavDetailsPage(rejected_item,'reject')" icon-start>
-        <h2>{{ rejected_item.customer_NAME }}</h2>
+        <!-- <h2>{{ rejected_item.customer_NAME }}</h2>
         <h3>{{ rejected_item.product_NAME }}</h3>
         <h3>Qty # {{displayIndianNumber(rejected_item.total_ORDER_UNIT)}}</h3>
         <p>Total Cost # {{ displayINR(rejected_item.total_COST) }}</p>
         <p>Order # {{ rejected_item.order_GROUP_NO }} </p>
         <p>Date {{rejected_item.order_DT}}</p>
+        <p>Sales Rep ID : {{rejected_item.sales_REP_ID}}</p>
+        <p>Sales Rep : {{rejected_item.sales_REP_NAME}}</p> -->
+        <p>
+          <ion-grid>
+            <ion-row>
+              <ion-col col-5>Quantity</ion-col>
+              <ion-col col-7> {{displayIndianNumber(rejected_item.total_ORDER_UNIT)}}</ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-5>Total Cost</ion-col>
+              <ion-col col-7>{{displayINR(rejected_item.total_COST)}}</ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-5>Order</ion-col>
+              <ion-col col-7>{{rejected_item.order_GROUP_NO}}</ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-5>Date</ion-col>
+              <ion-col col-7>{{rejected_item.order_DT | date: 'dd-MM-yyyy'}}</ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-5>Sales Rep ID</ion-col>
+              <ion-col col-7>{{rejected_item.sales_REP_ID}} </ion-col>
+            </ion-row>
+            <!-- <ion-row>
+              <ion-col col-5>Sales Rep Name</ion-col>
+              <ion-col col-7>{{rejected_item.sales_REP_NAME}} </ion-col>
+            </ion-row> -->
+          </ion-grid>
+        </p>
       </button>
     </ion-list>
   </div>

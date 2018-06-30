@@ -13,19 +13,17 @@
 </ion-header>
 
 <ion-content>
-    <ion-card padding>
+    <!-- <ion-card padding>
         <ion-card-header>
-            <b>
-                {{ order.customer_NAME}}
-            </b>
+            {{ order.customer_NAME}}
         </ion-card-header>
         <h2>Order # {{order.order_GROUP_NO}}</h2>
         <h3>Site {{order.site_NAME}}</h3>
         <p>Distance {{displayIndianNumber(order.delivery_DISTANCE)}} Kms</p>
         <p>Taxable {{order.taxable_STATUS}}</p>
         <p>Reference 1 {{order.refrerel1_NAME}}</p>
-        <p>Reference 2 {{order.refrerel2_NAME}}</p>
-        <!-- <ion-item stacked>
+        <p>Reference 2 {{order.refrerel2_NAME}}</p> -->
+    <!-- <ion-item stacked>
             <ion-label>Order #</ion-label>
             <ion-label>{{order.order_GROUP_NO }}</ion-label>
         </ion-item>
@@ -49,12 +47,60 @@
             <ion-label>Reference 2</ion-label>
             <ion-label>{{order.refrerel2_NAME}}</ion-label>
         </ion-item> -->
+    <!-- </ion-card> -->
+    <ion-card>
+        <ion-item-divider color="selva">
+            Order Summary : {{order.customer_NAME}}
+        </ion-item-divider>
+        <ion-grid>
+            <ion-row>
+                <ion-col col-5>Site</ion-col>
+                <ion-col col-7>{{order.site_NAME}}</ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col col-5>Order #</ion-col>
+                <ion-col col-7>{{order.order_GROUP_NO}}</ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col col-5>Referer 1</ion-col>
+                <ion-col col-7>{{order.refrerel1_NAME}}</ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col col-5>Referer 2</ion-col>
+                <ion-col col-7>{{order.refrerel2_NAME}}</ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col col-5>Distance</ion-col>
+                <ion-col col-7>{{displayIndianNumber(order.delivery_DISTANCE)}} Kms</ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col col-5>Taxable</ion-col>
+                <ion-col col-7>{{order.taxable_STATUS}}</ion-col>
+            </ion-row>
+        </ion-grid>
     </ion-card>
-    <ion-card padding>
-        <h2>Product Group {{order.product_GROUP}}</h2>
-        <h3>Product {{order.product_NAME}}</h3>
-        <p>Cost per Unit {{displayINR(order.product_UNIT_COST)}}</p>
-        <p>Total Units {{displayIndianNumber(order.total_ORDER_UNIT)}}</p>
+    <ion-card>
+        <ion-item-divider color="selva">
+            Product Summary : {{order.product_NAME}}
+        </ion-item-divider>
+        <ion-grid>
+            <ion-row>
+                <ion-col col-5>Product Group</ion-col>
+                <ion-col col-7>{{order.product_GROUP}}</ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col col-5>Cost per Unit</ion-col>
+                <ion-col col-7>{{displayINR(order.product_UNIT_COST)}}</ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col col-5>Total Units</ion-col>
+                <ion-col col-7>{{displayINR(order.total_ORDER_UNIT)}}</ion-col>
+            </ion-row>
+        </ion-grid>
+        <!-- <h2>Product Group {{order.product_GROUP}}</h2> -->
+        <!-- <h3>Product {{order.product_NAME}}</h3> -->
+        <!-- <p>Cost per Unit {{displayINR(order.product_UNIT_COST)}}</p> -->
+        <!-- <p>Total Units {{displayIndianNumber(order.total_ORDER_UNIT)}}</p> -->
         <!-- <ion-item stacked>
             <ion-label>Product Group</ion-label>
             <ion-label>{{order.product_GROUP}}</ion-label>
@@ -71,78 +117,141 @@
             <ion-label>Total Units</ion-label>
             <ion-label>{{displayIndianNumber(order.total_ORDER_UNIT)}}</ion-label>
         </ion-item> -->
-    </ion-card>
-    <div *ngIf="subOrders?.length > 0 && subOrders?.length != 1">
-        <ion-card>
-            <ion-card-header>Order Details</ion-card-header>
-            <ion-list padding *ngFor="let row of subOrders">
+
+        <div *ngIf="subOrders?.length > 0 && subOrders?.length != 1">
+            <!-- <ion-card> -->
+
+            <ion-item-divider color="light">
+                Suborder Details
+            </ion-item-divider>
+            <!-- <ion-card-header>Order Details</ion-card-header> -->
+            <ion-grid *ngFor="let row of subOrders">
+                <ion-row>
+                    <ion-col col-6>Unit {{displayIndianNumber(row.unit_TYPE)}} </ion-col>
+                    <ion-col col-6>{{displayIndianNumber(row.unit)}}</ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col col-5>Total Cost:</ion-col>
+                    <ion-col col-7>{{displayINR(row.order_TOTAL_COST)}}</ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col col-5>Transport:</ion-col>
+                    <ion-col col-7>{{displayINR(row.order_TRANSPORT_COST)}}</ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col col-5>Tax 1:</ion-col>
+                    <ion-col col-7>{{displayINR(row.order_TAX1)}} </ion-col>
+                    <ion-col col-5>Tax 2:</ion-col>
+                    <ion-col col-5> {{displayINR(row.order_TAX2)}}</ion-col>
+                </ion-row>
+            </ion-grid>
+
+            <!-- <ion-list *ngFor="let row of subOrders">
                 <h2>Unit(s): {{displayIndianNumber(row.unit_TYPE)}} Load: {{displayIndianNumber(row.unit)}}</h2>
                 <h3>Total Cost: {{displayINR(row.order_TOTAL_COST)}}</h3>
                 <p>Transport: {{displayINR(row.order_TRANSPORT_COST)}}</p>
                 <p>Tax 1: {{displayINR(row.order_TAX1)}} Tax 2: {{displayINR(row.order_TAX2)}}</p>
-            </ion-list>
-        </ion-card>
-    </div>
-    <div *ngIf="subOrders?.length == 1">
-        <div *ngFor="let item of subOrders">
-            <div *ngIf="item.orderDetails?.length > 0">
-                <ion-card *ngIf="item.orderDetails?.length != 1">
-                    <ion-card-header>Product Details </ion-card-header>
-                    <div *ngFor="let row of item.orderDetails">
-                        <ion-row>
-                            <ion-col col-8>
+            </ion-list> -->
+            <!-- </ion-card> -->
+        </div>
+        <div *ngIf="subOrders?.length == 1">
+            <div *ngFor="let item of subOrders">
+                <div *ngIf="item.orderDetails?.length > 0">
+                    <div *ngIf="item.orderDetails?.length != 1">
+                        <ion-item-divider color="light">
+                            Product Details
+                        </ion-item-divider>
+                        <!-- <ion-card-header>Product Details </ion-card-header> -->
+                        <!-- <div *ngFor="let row of item.orderDetails"> -->
+                        <ion-row *ngFor="let row of item.orderDetails">
+                            <ion-col col-7>
                                 <ion-item text-wrap>
                                     <ion-label> {{row.name}}</ion-label>
                                 </ion-item>
                             </ion-col>
-                            <ion-col col-4>
+                            <ion-col col-5>
                                 <ion-item>
                                     <ion-label> {{row.quantity}}</ion-label>
                                 </ion-item>
                             </ion-col>
                         </ion-row>
+                        <!-- </div> -->
                     </div>
-                </ion-card>
-            </div>
-            <div *ngIf="item.orderDetails?.length == 1">
-                <ion-card padding>
-                    <h2>Unit(s): {{displayIndianNumber(item.unit_TYPE)}} Load: {{displayIndianNumber(item.unit)}}</h2>
-                    <h3>Total Cost: {{displayINR(item.order_TOTAL_COST)}}</h3>
-                    <p>Transport: {{displayINR(item.order_TRANSPORT_COST)}}</p>
-                    <p>Tax 1: {{displayINR(item.order_TAX1)}} Tax 2: {{displayINR(item.order_TAX2)}}</p>
-                </ion-card>
+                </div>
+                <div *ngIf="item.orderDetails?.length == 1">
+                    <ion-grid>
+                        <ion-row>
+                            <ion-col col-5>Unit(s) : {{displayIndianNumber(item.unit_TYPE)}}</ion-col>
+                            <ion-col col-5>Load : {{displayIndianNumber(item.unit)}}</ion-col>
+                        </ion-row>
+                        <ion-row>
+                            <ion-col col-5>Total Cost :</ion-col>
+                            <ion-col col-5> {{displayINR(item.order_TOTAL_COST)}}</ion-col>
+                        </ion-row>
+                        <ion-row>
+                            <ion-col col-5>Transport :</ion-col>
+                            <ion-col col-5> {{displayINR(item.order_TRANSPORT_COST)}}</ion-col>
+                        </ion-row>
+                        <ion-row>
+                            <ion-col col-5>Tax 1: {{displayINR(item.order_TAX1)}} </ion-col>
+                            <ion-col col-5> Tax 2: {{displayINR(item.order_TAX2)}}</ion-col>
+                        </ion-row>
+                    </ion-grid>
+                    <!-- <ion-card>
+                        <h2>Unit(s): {{displayIndianNumber(item.unit_TYPE)}} Load: {{displayIndianNumber(item.unit)}}</h2>
+                        <h3>Total Cost: {{displayINR(item.order_TOTAL_COST)}}</h3>
+                        <p>Transport: {{displayINR(item.order_TRANSPORT_COST)}}</p>
+                        <p>Tax 1: {{displayINR(item.order_TAX1)}} Tax 2: {{displayINR(item.order_TAX2)}}</p>
+                    </ion-card> -->
+                </div>
             </div>
         </div>
-    </div>
-    <ion-card>
-        <ion-item stacked>
-            <ion-label>Total Cost</ion-label>
-            <ion-label>{{displayINR(order.total_COST)}}</ion-label>
-        </ion-item>
-        <ion-item stacked>
-            <ion-label>Product Cost</ion-label>
-            <ion-label>{{displayINR(order.total_PRODUCT_COST)}}</ion-label>
-        </ion-item>
-        <div *ngIf="order.taxable_STATUS == 'Yes'">
-            <ion-item stacked>
-                <ion-label>Tax 1</ion-label>
-                <ion-label>{{displayINR(order.total_TAX1)}}</ion-label>
-            </ion-item>
-            <ion-item stacked>
-                <ion-label>Tax 2</ion-label>
-                <ion-label>{{displayINR(order.total_TAX1)}}</ion-label>
-            </ion-item>
-        </div>
-        <ion-item stacked>
-            <ion-label>Loading Cost</ion-label>
-            <ion-label>{{displayINR(order.total_LOADING_COST)}}</ion-label>
-        </ion-item>
-        <ion-item stacked>
-            <ion-label>Transport Cost</ion-label>
-            <ion-label>{{displayINR(order.total_TRANSPORT_COST)}}</ion-label>
-        </ion-item>
     </ion-card>
-    <div *ngIf="order_type=='estimate'" padding>
+    <ion-card>
+        <ion-item-divider color="selva">
+            Cost Summary
+        </ion-item-divider>
+
+        <ion-grid>
+            <ion-row>
+                <ion-col col-5>Total Cost :</ion-col>
+                <ion-col col-7>{{displayINR(order.total_COST)}}</ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col col-5>Product Cost :</ion-col>
+                <ion-col col-7>{{displayINR(order.total_PRODUCT_COST)}}</ion-col>
+            </ion-row>
+
+            <div *ngIf="order.taxable_STATUS == 'Yes'">
+                <ion-row>
+                    <ion-col col-5>Tax 1 :</ion-col>
+                    <ion-col col-7>{{displayINR(order.total_TAX1)}}</ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col col-5>Tax 2 :</ion-col>
+                    <ion-col col-7>{{displayINR(order.total_TAX2)}}</ion-col>
+                </ion-row>
+            </div>
+
+            <ion-row>
+                <ion-col col-5>Loading Cost :</ion-col>
+                <ion-col col-7>{{displayINR(order.total_LOADING_COST)}}</ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col col-5>Transport Cost :</ion-col>
+                <ion-col col-7>{{displayINR(order.total_TRANSPORT_COST)}}</ion-col>
+            </ion-row>
+        </ion-grid>
+    </ion-card>
+    <div *ngIf="role == '1' && order_type=='estimate'" padding>
+        <button ion-button block color="secondary" (click)="approveOrder(order.order_GROUP_NO)">
+            Approve
+        </button>
+        <button ion-button block color="danger" (click)="rejectOrder(order.order_GROUP_NO)">
+            Reject
+        </button>
+    </div>
+    <div *ngIf="role == '2' && order_type=='estimate'" padding>
         <button ion-button block color="secondary" (click)="approveOrder(order.order_GROUP_NO)">
             Approve
         </button>
