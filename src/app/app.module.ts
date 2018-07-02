@@ -17,6 +17,7 @@ import { RegisterPage } from '../pages/register/register';
 import { OrdersPage, NavigationDetailsPage } from './../pages/orders/orders';
 import { LeadPage } from './../pages/lead/lead';
 import { EstimatePage } from './../pages/estimate/estimate';
+// import { Camera } from '@ionic-native/camera';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { EstimatePage } from './../pages/estimate/estimate';
   providers: [
     StatusBar,
     SplashScreen,
+    // Camera,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     AuthService, LoginPage, NavigationDetailsPage
   ]

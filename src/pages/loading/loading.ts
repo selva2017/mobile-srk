@@ -1,3 +1,4 @@
+import { AuthService } from './../../providers/auth-service/auth-service';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 
@@ -25,7 +26,24 @@ export class LoadingPage {
     { name: "label2", visible: true, object2: "2" },
 
   ];
-
+  allocatedOrders: SubOrders[] = [];
+  retrieveSubOrders(status) {
+    status = "all"
+    this.authService.fetchApprovedSubOrders(status)
+      .subscribe(
+        // (list) => {
+        (list: SubOrders[]) => {
+          this.allocatedOrders = list;
+          console.log(this.allocatedOrders);
+          // this.loading_complete = true;
+          // this.loading.dismiss();
+        },
+        error => {
+          // this.loading.dismiss();
+          // this.handleError(error.json().error);
+        }
+      );
+  }
   machineLoading: boolean = true; notifyLoadingOption(event) {
     this.machineLoading = !this.machineLoading; // console.log("Event:"+ event.checked); 
     console.log("Toggled Load: " + this.machineLoading);
@@ -148,7 +166,8 @@ export class LoadingPage {
       this.testCheckboxOpen = true;
     });
   }
-  constructor(public alerCtrl: AlertController) {
+  constructor(public alerCtrl: AlertController, private authService: AuthService) {
+    this.retrieveSubOrders("LOADED");
     this.employees = [
       {
         "employeeId": "100",
@@ -355,9 +374,12 @@ export class LoadingPage {
       this.testRadioOpen = true;
     });
   }
-
-
-
+  displayINR(amount: number) {
+    return new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0 }).format(amount);
+  }
+  displayIndianNumber(amount: number) {
+    return Number(Math.round(amount)).toLocaleString('en-IN');
+  }
   ngOnInit() {
   }
 

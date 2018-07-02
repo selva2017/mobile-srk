@@ -13,6 +13,31 @@
 </ion-header>
 
 <ion-content padding>
+  <!-- <div [ngSwitch]="category"> -->
+  <ion-list>
+    <!-- <ion-refresher (ionRefresh)="doRefreshEstimated($event)">
+      <ion-refresher-content>Collecting Estimated Orders...</ion-refresher-content>
+    </ion-refresher> -->
+    <!-- <button ion-item *ngFor="let item of allocatedOrders" (click)="openNavDetailsPage(item,'estimate')" icon-start> -->
+    <button ion-item *ngFor="let item of allocatedOrders" icon-start>
+      <h2>{{ item.customer_NAME }}</h2>
+      <h3>{{ item.product_NAME }}</h3>
+      <p>
+        <ion-grid>
+          <h2>{{ item.order_GROUP_NO }}</h2>
+          <h3>{{ item.customer_NAME }}</h3>
+          <h3>{{ item.product_NAME }}</h3>
+          <h3>Qty # {{displayIndianNumber(item.total_ORDER_UNIT)}}</h3>
+          <p>Total Cost # {{ displayINR(item.total_COST) }}</p>
+          <p>Uom # {{ item.uom_ID }} </p>
+          <p>Date {{item.order_DT}}</p>
+        </ion-grid>
+      </p>
+    </button>
+  </ion-list>
+  <!-- </div> -->
+</ion-content>
+<!-- <ion-content padding>
   <ion-row>
     <ion-col col-4>
       <ion-item>
@@ -86,8 +111,4 @@
       </ion-col>
     </ion-row>
   </div>
-  <!-- <button ion-button block light (click)="doRadioYard()">Select Yard</button>
-  <button ion-button block light (click)="doRadio()">Show Radio Alert</button>
-
-  <button ion-button block color="danger" (click)="doCheckbox()">Show Checkbox Alert</button> -->
-</ion-content>
+</ion-content> -->

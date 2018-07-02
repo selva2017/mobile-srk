@@ -13,13 +13,13 @@
 
   <ion-toolbar no-border-top [color]="isAndroid ? 'royal' : 'masters'">
     <ion-segment [(ngModel)]="category" [color]="'head'">
-      <ion-segment-button value="weighed-orders">
+      <ion-segment-button value="weighed-orders" (click)="retrieveSubOrders('WEIGHED')">
         Weighed
       </ion-segment-button>
-      <ion-segment-button value="transit">
+      <ion-segment-button value="transit" (click)="retrieveSubOrders('TRANSIT')">
         Transit
       </ion-segment-button>
-      <ion-segment-button value="delivered">
+      <ion-segment-button value="delivered" (click)="retrieveSubOrders('DELIVERED')">
         Delivered
       </ion-segment-button>
     </ion-segment>
@@ -41,21 +41,10 @@
           <p>Total Cost # {{ displayINR(item.total_COST) }}</p>
           <p>Uom # {{ item.uom_ID }} </p>
           <p>Date {{item.order_DT}}</p>
-          <!-- <button ion-button block color="secondary" (click)="allocateVehicle(item,'weighed-orders')"> -->
-          <!-- <button ion-button block color="secondary" (click)="doRadio()">
-          Approve
-      </button> -->
-          <!-- </ion-item>
-      <ion-item> -->
-          <button ion-button block color="secondary" (click)="doRadio()">Allocate Vehicle</button>
-          <!-- <ion-label floating>Vehicle Name</ion-label>
-        <ion-select [(ngModel)]="item.vehicle">
-          <ion-option *ngFor="let vehicle of vehicles">{{vehicle.vehicle_NAME}}</ion-option>
-        </ion-select> -->
+          <button ion-button block color="secondary" (click)="provideOutPass()">Out-Pass</button>
         </ion-item>
       </div>
     </ion-list>
-
 
     <ion-list *ngSwitchCase="'transit'">
       <button ion-item *ngFor="let transit_item of transitOrders" (click)="openNavDetailsPage(transit_item,'approve')" icon-start>
