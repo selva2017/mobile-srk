@@ -46,8 +46,8 @@
       <ion-refresher (ionRefresh)="doRefreshEstimated($event)">
         <ion-refresher-content>Collecting Estimated Orders...</ion-refresher-content>
       </ion-refresher>
-      <button ion-item *ngFor="let item of estimatedOrders" (click)="openNavDetailsPage(item,'estimate')" icon-start>
-        <h2>{{ item.customer_NAME }}</h2>
+      <button ion-item *ngFor="let item of estimatedOrders; let i = index" (click)="openNavDetailsPage(item,'estimate')" icon-start>
+        <h2>{{i+1}}  - {{ item.customer_NAME }}</h2>
         <h3>{{ item.product_NAME }}</h3>
         <!-- <h3>Quantity : {{displayIndianNumber(item.total_ORDER_UNIT)}}</h3> -->
         <!-- <p>Total Cost     : {{ displayINR(item.total_COST) }}</p>
@@ -90,7 +90,7 @@
       <ion-refresher (ionRefresh)="doRefreshApproved($event)">
         <ion-refresher-content>Collecting Approved Orders...</ion-refresher-content>
       </ion-refresher>
-      <button ion-item *ngFor="let approved_item of approvedOrders" (click)="openNavDetailsPage(approved_item,'approve')" icon-start>
+      <button ion-item *ngFor="let approved_item of approvedOrders; let i = index" (click)="openNavDetailsPage(approved_item,'approve')" icon-start>
         <!-- <h2>{{ approved_item.customer_NAME }}</h2>
         <h3>{{ approved_item.product_NAME }}</h3>
         <h3>Qty # {{displayIndianNumber(approved_item.total_ORDER_UNIT)}}</h3>
@@ -102,7 +102,7 @@
         <p>
           <ion-grid>
             <ion-row>
-              <ion-col col-5>Quantity</ion-col>
+              <ion-col col-5>{{i+1}} - Quantity</ion-col>
               <ion-col col-7> {{displayIndianNumber(approved_item.total_ORDER_UNIT)}}</ion-col>
             </ion-row>
             <ion-row>
@@ -134,7 +134,7 @@
       <ion-refresher (ionRefresh)="doRefreshRejected($event)">
         <ion-refresher-content>Collecting Rejected Orders...</ion-refresher-content>
       </ion-refresher>
-      <button ion-item *ngFor="let rejected_item of rejectedOrders" (click)="openNavDetailsPage(rejected_item,'reject')" icon-start>
+      <button ion-item *ngFor="let rejected_item of rejectedOrders; let i = index" (click)="openNavDetailsPage(rejected_item,'reject')" icon-start>
         <!-- <h2>{{ rejected_item.customer_NAME }}</h2>
         <h3>{{ rejected_item.product_NAME }}</h3>
         <h3>Qty # {{displayIndianNumber(rejected_item.total_ORDER_UNIT)}}</h3>
@@ -146,7 +146,7 @@
         <p>
           <ion-grid>
             <ion-row>
-              <ion-col col-5>Quantity</ion-col>
+              <ion-col col-5>{{i+1}} - Quantity</ion-col>
               <ion-col col-7> {{displayIndianNumber(rejected_item.total_ORDER_UNIT)}}</ion-col>
             </ion-row>
             <ion-row>

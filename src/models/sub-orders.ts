@@ -1,48 +1,28 @@
 export interface SubOrders {
-    subOrders: string;
-    site_ID: string;
-    cust_ID: string;
-    site_NAME: string;
-    sales_REP_ID: string;
-    refrerel1_ID: string;
-    referrel2_ID: string;
-    product_ID: string;
-    product_GROUP: string;
-    delivery_DISTANCE: string;
-    total_ORDER_UNIT: string;
-    taxable_STATUS: string;
-    product_UNIT_COST: string;
-    tax1: string;
-    tax2: string;
-    loading_UNIT_COST: string;
-    transport_KM_COST: string;
-    laying_COST: string;
-    sqft_LOADING_COST: string;
-    sqft_LAYING_COST: string;
-    sqft_TRANSPORT_COST: string;
-    sqft_UNIT_COST: string;
-    total_PRODUCT_COST: string;
-    total_TAX1: string;
-    total_TAX2: string;
-    total_LOADING_COST: string;
-    total_TRANSPORT_COST: string;
-    total_LAYING_COST: string;
-    total_COST: string;
-    order_STATUS: string;
-    uom_ID: string;
-    status_FLAG: string;
-    note: string;
-    order_CREATED_BY: string;
-    product_NAME: string;
-    customer_NAME: string;
-    sales_REP_NAME: string;
-    refrerel1_NAME: string;
-    refrerel2_NAME: string;
-    uom: string; 
-    order_GROUP_NO: string;
-    order_DT: string;
-    order_CREATED_DT: string;
-    order_MODIFIED_DT: string;
+    customer_NAME: string, 
+    loading_TYPE: string, 
+    orderDetails: string, 
+    order_GROUP_NO: string, 
+    order_LAYING_COST: string, 
+    order_LOADING_COST: string,
+    order_NO: string, 
+    order_PRODUCT_COST: string, 
+    order_TAX1: string, 
+    order_TAX2: string, 
+    order_TOTAL_COST: string,
+    order_TRANSPORT_COST: string, 
+    ordered_CREATED_BY: string, 
+    productDetails: string, 
+    product_NAME: string, 
+    sale_DATE: string, 
+    site_NAME: string, 
+    sub_ORDER_MODIFIED_BY: string, 
+    sub_ORDER_MODIFIED_DT: string, 
+    sub_ORDER_STATUS: string, 
+    unit: string, 
+    unit_TYPE: string, 
+    uom_ID: string, 
+    weight: string
 }
 
 export interface VehicleList {
@@ -63,14 +43,14 @@ export interface Employee {
     emailAddress: string
 }
 export interface MachineList {
-    machine_ID;
-    machine_TYPE;
-    machine_NAME;
-    machine_CAPACITY;
+    machine_ID,
+    machine_TYPE,
+    machine_NAME,
+    machine_CAPACITY,
   }
   export interface YardList {
-    yard_ID;
-    yard_TYPE;
-    yard_NAME;
-    yard_CAPACITY;
+    yard_ID,
+    yard_TYPE,
+    yard_NAME,
+    yard_CAPACITY,
   }

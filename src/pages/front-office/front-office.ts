@@ -15,6 +15,8 @@ export class FrontOfficePage {
     console.log('ionViewDidLoad FrontOfficePage');
   }
   approvedOrders: SubOrders[] = [];
+  allocatedOrders: SubOrders[] = [];
+  loadedOrders: SubOrders[] = [];
   subOrders: SubOrders[];
   a: string;
   vehicles: VehicleList[];
@@ -105,22 +107,78 @@ export class FrontOfficePage {
   //   });
   // }
   retrieveSubOrders(status) {
-    status = "all"
-    this.authService.fetchApprovedSubOrders(status)
+    switch (status) {
+      case "APPROVED": {
+        this.approvedOrders = [];
+        // status = "APPROVED"
+        this.authService.fetchApprovedSubOrders(status)
+          .subscribe(
+            (list: SubOrders[]) => {
+              this.approvedOrders = list;
+              // console.log(this.approvedOrders);
+              // this.loading.dismiss();
+            },
+            error => {
+              // this.loading.dismiss();
+              // this.handleError(error.json().error);
+            }
+          );
+        break;
+      }
+      case "ALLOCATED": {
+        // status = "APPROVED"
+        this.allocatedOrders =[];
+        this.authService.fetchApprovedSubOrders(status)
+          .subscribe(
+            (list: SubOrders[]) => {
+              this.allocatedOrders = list;
+              // console.log(this.subOrders);
+              // this.loading.dismiss();
+            },
+            error => {
+              // this.loading.dismiss();
+              // this.handleError(error.json().error);
+            }
+          );
+        break;
+      }
+
+      case "LOADED": {
+        // status = "APPROVED"
+        this.loadedOrders = [];
+        this.authService.fetchApprovedSubOrders(status)
+          .subscribe(
+            (list: SubOrders[]) => {
+              this.loadedOrders = list;
+              // console.log(this.subOrders);
+              // this.loading.dismiss();
+            },
+            error => {
+              // this.loading.dismiss();
+              // this.handleError(error.json().error);
+            }
+          );
+        break;
+      }
+    }
+  }
+
+  updateSubOrder(sub_order_number, status,refresh_list) {
+    console.log(sub_order_number, status,refresh_list);
+    // this.showLoader();
+    this.authService.updateStatusOfSubOrder(sub_order_number, status)
       .subscribe(
-        // (list) => {
-        (list: SubOrders[]) => {
-          this.approvedOrders = list;
-          // console.log(this.subOrders);
-          // this.loading_complete = true;
+        (success) => {
+          this.retrieveSubOrders(refresh_list);
+          // this.refreshList();
+          // this.nav.pop();
+          // this.nav.push(OrdersPage);
           // this.loading.dismiss();
         },
-        error => {
-          // this.loading.dismiss();
-          // this.handleError(error.json().error);
-        }
+        (error) => console.log(error)
       );
   }
+
   constructor(public navCtrl: NavController, private alertCtrl: AlertController,
     private authService: AuthService) {
 
@@ -188,7 +246,7 @@ export class FrontOfficePage {
     ];
 
   }
-  doRadio() {
+  doRadio(sub_order_number, status,refresh_list) {
     let alert = this.alertCtrl.create();
     alert.setTitle('Select Vehicle');
     for (var i = 0; i < this.vehicles.length; i++) {
@@ -205,6 +263,7 @@ export class FrontOfficePage {
         console.log('Radio data:', data);
         this.testRadioOpen = false;
         this.testRadioResult = data;
+        this.updateSubOrder(sub_order_number, status,refresh_list);
       }
     });
 

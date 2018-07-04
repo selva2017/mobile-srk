@@ -26,15 +26,33 @@ export class LoadingPage {
     { name: "label2", visible: true, object2: "2" },
 
   ];
-  allocatedOrders: SubOrders[] = [];
+  transportAllocatedOrders: SubOrders[] = [];
+
+  updateSubOrder(sub_order_number, status, refresh_list) {
+    console.log(sub_order_number, status);
+    // this.showLoader();
+    this.authService.updateStatusOfSubOrder(sub_order_number, status)
+      .subscribe(
+        (success) => {
+          this.retrieveSubOrders(refresh_list);
+          // this.refreshList();
+          // this.nav.pop();
+          // this.nav.push(OrdersPage);
+          // this.loading.dismiss();
+        },
+        (error) => console.log(error)
+      );
+  }
+
   retrieveSubOrders(status) {
-    status = "all"
+    this.transportAllocatedOrders = [];
+    // status = "APPROVED"
     this.authService.fetchApprovedSubOrders(status)
       .subscribe(
         // (list) => {
         (list: SubOrders[]) => {
-          this.allocatedOrders = list;
-          console.log(this.allocatedOrders);
+          this.transportAllocatedOrders = list;
+          // console.log(this.transportAllocatedOrders);
           // this.loading_complete = true;
           // this.loading.dismiss();
         },
@@ -167,7 +185,7 @@ export class LoadingPage {
     });
   }
   constructor(public alerCtrl: AlertController, private authService: AuthService) {
-    this.retrieveSubOrders("LOADED");
+    this.retrieveSubOrders("ALLOCATED");
     this.employees = [
       {
         "employeeId": "100",

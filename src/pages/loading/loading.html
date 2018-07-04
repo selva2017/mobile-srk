@@ -18,22 +18,23 @@
     <!-- <ion-refresher (ionRefresh)="doRefreshEstimated($event)">
       <ion-refresher-content>Collecting Estimated Orders...</ion-refresher-content>
     </ion-refresher> -->
-    <!-- <button ion-item *ngFor="let item of allocatedOrders" (click)="openNavDetailsPage(item,'estimate')" icon-start> -->
-    <button ion-item *ngFor="let item of allocatedOrders" icon-start>
-      <h2>{{ item.customer_NAME }}</h2>
-      <h3>{{ item.product_NAME }}</h3>
-      <p>
-        <ion-grid>
-          <h2>{{ item.order_GROUP_NO }}</h2>
+    <!-- <button ion-item *ngFor="let item of transportAllocatedOrders" (click)="openNavDetailsPage(item,'estimate')" icon-start> -->
+    <div ion-item *ngFor="let item of transportAllocatedOrders; let i = index" icon-start>
+      <!-- <h2>{{ item.customer_NAME }}</h2> -->
+      <!-- <h3>{{ item.product_NAME }}</h3> -->
+      <!-- <p> -->
+        <!-- <ion-grid> -->
+          <h2>{{i+1}} - {{ item.order_NO }}</h2>
+          <h2>{{ item.product_NAME }}</h2>
+          <h2>{{ item.unit_TYPE }} Qty # {{displayIndianNumber(item.unit_TYPE)}}</h2>
           <h3>{{ item.customer_NAME }}</h3>
-          <h3>{{ item.product_NAME }}</h3>
-          <h3>Qty # {{displayIndianNumber(item.total_ORDER_UNIT)}}</h3>
-          <p>Total Cost # {{ displayINR(item.total_COST) }}</p>
-          <p>Uom # {{ item.uom_ID }} </p>
-          <p>Date {{item.order_DT}}</p>
-        </ion-grid>
-      </p>
-    </button>
+          <h3>{{ item.site_NAME }}</h3>
+          <h3>{{ item.ordered_CREATED_BY }}</h3>
+          <button ion-button block color="secondary" (click)="updateSubOrder(item.order_NO,'LOADED','ALLOCATED')">Loading Completed</button>
+          <button ion-button block color="danger" (click)="updateSubOrder(item.order_NO,'APPROVED','ALLOCATED')">Loading Cancelled</button>
+        <!-- </ion-grid> -->
+      <!-- </p> -->
+    </div>
   </ion-list>
   <!-- </div> -->
 </ion-content>

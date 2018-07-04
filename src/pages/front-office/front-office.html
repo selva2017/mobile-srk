@@ -31,39 +31,43 @@
   </ion-refresher> -->
   <div [ngSwitch]="category">
     <ion-list padding *ngSwitchCase="'approved-orders'">
-      <div *ngFor="let item of approvedOrders">
+      <div *ngFor="let item of approvedOrders; let i = index">
         <ion-item>
+          <h2>{{i+1}} - {{ item.order_NO }}</h2>
           <h2>{{ item.product_NAME }}</h2>
-          <h2>Qty # {{displayIndianNumber(item.total_ORDER_UNIT)}}</h2>
+          <h2>{{ item.unit_TYPE }} Qty # {{displayIndianNumber(item.unit_TYPE)}}</h2>
           <h3>{{ item.customer_NAME }}</h3>
           <h3>{{ item.site_NAME }}</h3>
-          <h3>{{ item.order_GROUP_NO }}</h3>
-          <button ion-button block color="secondary" (click)="doRadio()">Allocate Vehicle</button>
+          <h3>{{ item.ordered_CREATED_BY }}</h3>
+          <button ion-button block color="secondary" (click)="doRadio(item.order_NO,'ALLOCATED','APPROVED')">Allocate Vehicle</button>
         </ion-item>
       </div>
     </ion-list>
 
     <ion-list *ngSwitchCase="'in-loading'">
-      <button ion-item *ngFor="let allocated_item of allocatedOrders" (click)="openNavDetailsPage(allocated_item,'approve')"
-        icon-start>
-        <h2>{{ allocated_item.customer_NAME }}</h2>
-        <h3>{{ allocated_item.product_NAME }}</h3>
-        <h3>Qty # {{displayIndianNumber(allocated_item.total_ORDER_UNIT)}}</h3>
-        <p>Total Cost # {{ displayINR(allocated_item.total_COST) }}</p>
-        <p>Order # {{ allocated_item.order_GROUP_NO }} </p>
-        <p>Date {{allocated_item.order_DT}}</p>
-      </button>
+      <div ion-item *ngFor="let allocated_item of allocatedOrders; let i = index" icon-start>
+        <h2>{{i+1}} - {{ allocated_item.order_NO }}</h2>
+        <h2>{{ allocated_item.product_NAME }}</h2>
+        <h2>{{ allocated_item.unit_TYPE }} Qty # {{displayIndianNumber(allocated_item.unit_TYPE)}}</h2>
+        <h3>{{ allocated_item.customer_NAME }}</h3>
+        <h3>{{ allocated_item.site_NAME }}</h3>
+        <h3>{{ allocated_item.ordered_CREATED_BY }}</h3>
+        <!-- <button ion-button block color="secondary" (click)="doRadio(allocated_item.order_NO,'LOADED')">Loading Complete</button> -->
+        <button ion-button block color="danger" (click)="updateSubOrder(allocated_item.order_NO,'APPROVED','ALLOCATED')">Cancel Vehicle</button>
+      </div>
     </ion-list>
 
     <ion-list *ngSwitchCase="'loaded'">
-      <button ion-item *ngFor="let loaded_item of loadedOrders" (click)="openNavDetailsPage(loaded_item,'reject')" icon-start>
-        <h2>{{ loaded_item.customer_NAME }}</h2>
+      <div ion-item *ngFor="let loaded_item of loadedOrders; let i = index" icon-start>
+        <h2>{{i+1}} - {{ loaded_item.order_NO }}</h2>
         <h3>{{ loaded_item.product_NAME }}</h3>
-        <h3>Qty # {{displayIndianNumber(loaded_item.total_ORDER_UNIT)}}</h3>
-        <p>Total Cost # {{ displayINR(loaded_item.total_COST) }}</p>
-        <p>Order # {{ loaded_item.order_GROUP_NO }} </p>
-        <p>Date {{loaded_item.order_DT}}</p>
-      </button>
+        <h2>{{ loaded_item.unit_TYPE }} Qty # {{displayIndianNumber(loaded_item.unit_TYPE)}}</h2>
+        <h3>{{ loaded_item.customer_NAME }}</h3>
+        <h3>{{ loaded_item.site_NAME }}</h3>
+        <h3>{{ loaded_item.ordered_CREATED_BY }}</h3>
+        <button ion-button block color="secondary" (click)="updateSubOrder(loaded_item.order_NO,'WEIGHED','LOADED')">Weighment Complete</button>
+        <button ion-button block color="danger" (click)="updateSubOrder(loaded_item.order_NO,'ALLOCATED','LOADED')">Cancel Loading</button>
+      </div>
     </ion-list>
   </div>
 </ion-content>
