@@ -7,7 +7,7 @@ import { HttpModule } from '@angular/http';
 
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
-import { LoadingPage } from './../pages/loading/loading';
+import { LoadingPage, LoadingDetailsPage } from './../pages/loading/loading';
 import { FrontOfficePage } from './../pages/front-office/front-office'
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -31,6 +31,7 @@ import { EstimatePage } from './../pages/estimate/estimate';
     LeadPage,
     NavigationDetailsPage,
     LoadingPage,
+    LoadingDetailsPage,
     FrontOfficePage,
     GatePage
   ],
@@ -49,6 +50,7 @@ import { EstimatePage } from './../pages/estimate/estimate';
     LeadPage,
     NavigationDetailsPage,
     LoadingPage,
+    LoadingDetailsPage,
     FrontOfficePage,
     GatePage
   ],
@@ -57,7 +59,7 @@ import { EstimatePage } from './../pages/estimate/estimate';
     SplashScreen,
     // Camera,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
-    AuthService, LoginPage, NavigationDetailsPage
+    AuthService, LoginPage, NavigationDetailsPage, LoadingDetailsPage
   ]
 })
 export class AppModule { }

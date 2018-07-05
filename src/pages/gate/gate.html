@@ -31,42 +31,65 @@
   <ion-refresher-content>Collecting Latest Data...</ion-refresher-content>
 </ion-refresher> -->
   <div [ngSwitch]="category">
-    <ion-list padding *ngSwitchCase="'weighed-orders'">
+    <ion-list *ngSwitchCase="'weighed-orders'">
       <div *ngFor="let  item of weighedOrders; let i = index">
-        <ion-item>
-          <h2>{{i+1}} - {{ item.order_NO }}</h2>
-          <h2>{{ item.product_NAME }}</h2>
-          <h2>{{ item.unit_TYPE }} Qty # {{displayIndianNumber(item.unit_TYPE)}}</h2>
-          <h3>{{ item.customer_NAME }}</h3>
-          <h3>{{ item.site_NAME }}</h3>
-          <h3>{{ item.ordered_CREATED_BY }}</h3>
-          <button ion-button block color="secondary" (click)="updateSubOrder(item.order_NO,'TRANSIT','WEIGHED')">Grant Out-Pass</button>
-        </ion-item>
+        <ion-item-divider color="light">
+          Vehicle Number : 
+          <!-- #{{i+1}} - {{ item.order_NO }} -->
+          <p>
+            <ion-item>
+              <!-- <h2>{{i+1}} - {{ item.order_NO }}</h2> -->
+              <h2>{{ item.product_NAME }}</h2>
+              <h2>{{ item.unit_TYPE }} Qty # {{displayIndianNumber(item.unit_TYPE)}}</h2>
+              <h3>{{ item.customer_NAME }}</h3>
+              <h3>{{ item.site_NAME }}</h3>
+              <h3>{{ item.ordered_CREATED_BY }}</h3>
+              <button ion-button block color="secondary" (click)="updateSubOrder(item.order_NO,'TRANSIT','WEIGHED')">Out-Pass</button>
+            </ion-item>
+          </p>
+        </ion-item-divider>
+
       </div>
     </ion-list>
 
     <ion-list *ngSwitchCase="'transit'">
       <div ion-item *ngFor="let transit_item of transitOrders; let i = index" icon-start>
-        <h2>{{i+1}} - {{ transit_item.order_NO }}</h2>
-        <h2>{{ transit_item.product_NAME }}</h2>
-        <h2>{{ transit_item.unit_TYPE }} Qty # {{displayIndianNumber(transit_item.unit_TYPE)}}</h2>
-        <h3>{{ transit_item.customer_NAME }}</h3>
-        <h3>{{ transit_item.site_NAME }}</h3>
-        <h3>{{ transit_item.ordered_CREATED_BY }}</h3>
-        <button ion-button block color="secondary" (click)="updateSubOrder(transit_item.order_NO,'DELIVERED','TRANSIT')">In-Pass</button>
-        <button ion-button block color="danger" (click)="updateSubOrder(transit_item.order_NO,'WEIGHED','TRANSIT')">Cancel Out-Pass</button>
+        <ion-item-divider color="light">
+            Vehicle Number : 
+          <!-- #{{i+1}} - {{ transit_item.order_NO }} -->
+          <p>
+            <ion-item>
+              <!-- <h2>{{i+1}} - {{ transit_item.order_NO }}</h2> -->
+              <h2>{{ transit_item.product_NAME }}</h2>
+              <h2>{{ transit_item.unit_TYPE }} Qty # {{displayIndianNumber(transit_item.unit_TYPE)}}</h2>
+              <h3>{{ transit_item.customer_NAME }}</h3>
+              <h3>{{ transit_item.site_NAME }}</h3>
+              <h3>{{ transit_item.ordered_CREATED_BY }}</h3>
+              <button ion-button block color="secondary" (click)="updateSubOrder(transit_item.order_NO,'DELIVERED','TRANSIT')">In-Pass</button>
+              <button ion-button block color="danger" (click)="updateSubOrder(transit_item.order_NO,'WEIGHED','TRANSIT')">Cancel Out-Pass</button>
+            </ion-item>
+          </p>
+        </ion-item-divider>
       </div>
     </ion-list>
 
     <ion-list *ngSwitchCase="'delivered'">
       <div ion-item *ngFor="let delivered_item of deliveredOrders; let i = index" icon-start>
-        <h2>{{i+1}} - {{ delivered_item.order_NO }}</h2>
-        <h2>{{ delivered_item.product_NAME }}</h2>
-        <h2>{{ delivered_item.unit_TYPE }} Qty # {{displayIndianNumber(delivered_item.unit_TYPE)}}</h2>
-        <h3>{{ delivered_item.customer_NAME }}</h3>
-        <h3>{{ delivered_item.site_NAME }}</h3>
-        <h3>{{ delivered_item.ordered_CREATED_BY }}</h3>
-        <button ion-button block color="danger" (click)="updateSubOrder(delivered_item.order_NO,'TRANSIT','DELIVERED')">Cancel In-Pass</button>
+        <ion-item-divider color="light">
+            Vehicle Number : 
+          <!-- #{{i+1}} - {{ delivered_item.order_NO }} -->
+          <p>
+            <ion-item>
+              <!-- <h2>{{i+1}} - {{ delivered_item.order_NO }}</h2> -->
+              <h2>{{ delivered_item.product_NAME }}</h2>
+              <h2>{{ delivered_item.unit_TYPE }} Qty # {{displayIndianNumber(delivered_item.unit_TYPE)}}</h2>
+              <h3>{{ delivered_item.customer_NAME }}</h3>
+              <h3>{{ delivered_item.site_NAME }}</h3>
+              <h3>{{ delivered_item.ordered_CREATED_BY }}</h3>
+              <button ion-button block color="danger" (click)="updateSubOrder(delivered_item.order_NO,'TRANSIT','DELIVERED')">Cancel In-Pass</button>
+            </ion-item>
+          </p>
+        </ion-item-divider>
       </div>
     </ion-list>
   </div>

@@ -1,6 +1,6 @@
 import { AuthService } from './../../providers/auth-service/auth-service';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, LoadingController } from 'ionic-angular';
 import { SubOrders } from '../../models/sub-orders';
 
 @IonicPage()
@@ -13,9 +13,16 @@ export class GatePage {
   transitOrders: SubOrders[] = [];
   deliveredOrders: SubOrders[] = [];
   constructor(public navCtrl: NavController, private alertCtrl: AlertController,
-    private authService: AuthService) {
+    private authService: AuthService, private loadingCtrl: LoadingController) {
   }
 
+  loading: any;
+  showLoader(message) {
+    this.loading = this.loadingCtrl.create({
+      content: message,
+    });
+    this.loading.present();
+  }
   ionViewDidLoad() {
     console.log('ionViewDidLoad GatePage');
   }
@@ -46,9 +53,10 @@ export class GatePage {
     return Number(Math.round(amount)).toLocaleString('en-IN');
   }
 
-  updateSubOrder(sub_order_number, status,refresh_list) {
+  updateSubOrder(sub_order_number, status, refresh_list) {
     // console.log(sub_order_number, status);
     // this.showLoader();
+    // this.showLoader("Updating Order Status....");
     this.authService.updateStatusOfSubOrder(sub_order_number, status)
       .subscribe(
         (success) => {
@@ -64,14 +72,15 @@ export class GatePage {
   retrieveSubOrders(status) {
     switch (status) {
       case "WEIGHED": {
-        this.weighedOrders =[];
+        this.weighedOrders = [];
         // status = "APPROVED"
+        this.showLoader("Collecting Out Pass Orders....");
         this.authService.fetchApprovedSubOrders(status)
           .subscribe(
             (list: SubOrders[]) => {
               this.weighedOrders = list;
               // console.log(this.weighedOrders);
-              // this.loading.dismiss();
+              this.loading.dismiss();
             },
             error => {
               // this.loading.dismiss();
@@ -82,13 +91,14 @@ export class GatePage {
       }
       case "TRANSIT": {
         // status = "APPROVED"
+        this.showLoader("Collecting In Pass Orders....");
         this.transitOrders = [];
         this.authService.fetchApprovedSubOrders(status)
           .subscribe(
             (list: SubOrders[]) => {
               this.transitOrders = list;
               // console.log(this.subOrders);
-              // this.loading.dismiss();
+              this.loading.dismiss();
             },
             error => {
               // this.loading.dismiss();
@@ -100,13 +110,14 @@ export class GatePage {
 
       case "DELIVERED": {
         // status = "APPROVED"
-        this.deliveredOrders =[];
+        this.showLoader("Collecting Delivered Orders....");
+        this.deliveredOrders = [];
         this.authService.fetchApprovedSubOrders(status)
           .subscribe(
             (list: SubOrders[]) => {
               this.deliveredOrders = list;
               // console.log(this.deliveredOrders);
-              // this.loading.dismiss();
+              this.loading.dismiss();
             },
             error => {
               // this.loading.dismiss();

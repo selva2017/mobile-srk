@@ -10,34 +10,89 @@
       <img alt="logo" height="40" src="assets/imgs/srk-0.png">
     </ion-buttons>
   </ion-navbar>
-</ion-header>
 
-<ion-content padding>
-  <!-- <div [ngSwitch]="category"> -->
-  <ion-list>
-    <!-- <ion-refresher (ionRefresh)="doRefreshEstimated($event)">
-      <ion-refresher-content>Collecting Estimated Orders...</ion-refresher-content>
-    </ion-refresher> -->
-    <!-- <button ion-item *ngFor="let item of transportAllocatedOrders" (click)="openNavDetailsPage(item,'estimate')" icon-start> -->
-    <div ion-item *ngFor="let item of transportAllocatedOrders; let i = index" icon-start>
-      <!-- <h2>{{ item.customer_NAME }}</h2> -->
-      <!-- <h3>{{ item.product_NAME }}</h3> -->
-      <!-- <p> -->
+  <ion-toolbar no-border-top [color]="isAndroid ? 'royal' : 'masters'">
+    <ion-segment [(ngModel)]="category" [color]="'head'">
+      <ion-segment-button value="in-loading" (click)="retrieveSubOrders('ALLOCATED')">
+        Ready for Loading
+      </ion-segment-button>
+      <ion-segment-button value="loaded" (click)="retrieveSubOrders('LOADED')">
+        Loaded
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div [ngSwitch]="category">
+    <ion-list *ngSwitchCase="'in-loading'">
+      <ion-refresher (ionRefresh)="doRefreshLoading($event)">
+        <ion-refresher-content>Collecting Orders ready for Loading...</ion-refresher-content>
+      </ion-refresher>
+      <!-- <button ion-item *ngFor="let item of allocatedOrders" (click)="openNavDetailsPage(item,'estimate')" icon-start> -->
+      <button ion-item *ngFor="let item of allocatedOrders; let i = index" (click)="openNavDetailsPage(item)" icon-start>
+        <!-- <h2>{{ item.customer_NAME }}</h2> -->
+        <!-- <h3>{{ item.product_NAME }}</h3> -->
+        <!-- <p> -->
         <!-- <ion-grid> -->
-          <h2>{{i+1}} - {{ item.order_NO }}</h2>
-          <h2>{{ item.product_NAME }}</h2>
-          <h2>{{ item.unit_TYPE }} Qty # {{displayIndianNumber(item.unit_TYPE)}}</h2>
-          <h3>{{ item.customer_NAME }}</h3>
-          <h3>{{ item.site_NAME }}</h3>
-          <h3>{{ item.ordered_CREATED_BY }}</h3>
-          <button ion-button block color="secondary" (click)="updateSubOrder(item.order_NO,'LOADED','ALLOCATED')">Loading Completed</button>
-          <button ion-button block color="danger" (click)="updateSubOrder(item.order_NO,'APPROVED','ALLOCATED')">Loading Cancelled</button>
-        <!-- </ion-grid> -->
-      <!-- </p> -->
-    </div>
-  </ion-list>
-  <!-- </div> -->
+        <ion-item-divider color="light">
+          #{{i+1}} - {{ item.order_NO }}
+          <p>
+            <ion-item>
+              <!-- <h2>{{i+1}} - {{ item.order_NO }}</h2> -->
+              <h2>{{ item.product_NAME }}</h2>
+              <div *ngIf="item.product_GROUP == 'PAVER' || item.product_GROUP == 'DESIGNER_TILES'">
+                <h2>Qty # {{displayIndianNumber(item.total_ORDER_UNIT)}} SqFt</h2>
+              </div>
+              <div *ngIf="item.product_GROUP == 'HOLLOW_BLOCK'">
+                <h2>Qty # {{displayIndianNumber(item.unit)}} Pieces</h2>
+              </div>
+              <div *ngIf="item.product_GROUP =='QUARRY'">
+                <h2>Qty # {{displayIndianNumber(item.unit_TYPE)}} Units</h2>
+              </div>
+              <h3>{{ item.customer_NAME }}</h3>
+              <h3>{{ item.site_NAME }}</h3>
+              <h3>{{ item.ordered_CREATED_BY }}</h3>
+              <!-- <button ion-button block color="secondary" (click)="updateSubOrder(item.order_NO,'LOADED','ALLOCATED')">Loading Completed</button> -->
+              <!-- <button ion-button block color="danger" (click)="updateSubOrder(item.order_NO,'APPROVED','ALLOCATED')">Loading Cancelled</button> -->
+              <!-- </ion-grid> -->
+              <!-- </p> -->
+            </ion-item>
+          </p>
+        </ion-item-divider>
+
+      </button>
+    </ion-list>
+
+    <ion-list *ngSwitchCase="'loaded'">
+      <div ion-item *ngFor="let loaded_item of loadedOrders; let i = index" icon-start>
+        <ion-item-divider color="light">
+          #{{i+1}} - {{ loaded_item.order_NO }}
+          <p>
+            <ion-item>
+              <!-- <h2>#{{i+1}} - {{ loaded_item.order_NO }}</h2> -->
+              <h3>{{ loaded_item.product_NAME }}</h3>
+              <div *ngIf="loaded_item.product_GROUP == 'PAVER' || loaded_item.product_GROUP == 'DESIGNER_TILES'">
+                <h2>Qty # {{displayIndianNumber(loaded_item.total_ORDER_UNIT)}} SqFt</h2>
+              </div>
+              <div *ngIf="loaded_item.product_GROUP == 'HOLLOW_BLOCK'">
+                <h2>Qty # {{displayIndianNumber(loaded_item.unit)}} Pieces</h2>
+              </div>
+              <div *ngIf="loaded_item.product_GROUP =='QUARRY'">
+                <h2>Qty # {{displayIndianNumber(loaded_item.unit_TYPE)}} Units</h2>
+              </div>
+              <h3>{{ loaded_item.customer_NAME }}</h3>
+              <h3>{{ loaded_item.site_NAME }}</h3>
+              <h3>{{ loaded_item.ordered_CREATED_BY }}</h3>
+              <!-- <button ion-button block color="secondary" (click)="updateSubOrder(loaded_item.order_NO,'WEIGHED','LOADED')">Weighment Complete</button> -->
+              <button ion-button block color="danger" (click)="updateSubOrder(loaded_item.order_NO,'ALLOCATED','LOADED')">Cancel Loading</button>
+            </ion-item>
+          </p>
+        </ion-item-divider>
+      </div>
+    </ion-list>
+  </div>
 </ion-content>
+
 <!-- <ion-content padding>
   <ion-row>
     <ion-col col-4>

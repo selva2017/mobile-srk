@@ -367,7 +367,8 @@
             <ion-col col-3>
               <ion-item>
                 <!-- <ion-input [(ngModel)]="item.qty" name={{item}} type="number" (ionBlur)="calculateTotals(item.qty)" text-right></ion-input> -->
-                <ion-input [(ngModel)]="item.qty" name={{item}} type="number" text-right></ion-input>
+                <ion-input [(ngModel)]="item.qty" name={{item}} type="number" (ionBlur)="calculateTotals(item.qty)" text-right></ion-input>
+                <!-- <ion-input [(ngModel)]="item.qty" name={{item}} type="number" text-right></ion-input> -->
               </ion-item>
             </ion-col>
           </ion-row>

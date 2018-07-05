@@ -14,9 +14,9 @@ export class NavigationDetailsPage {
   loading: any;
   role: string;
   showApprove: boolean = false;
-  showLoader() {
+  showLoader(message) {
     this.loading = this.loadingCtrl.create({
-      content: 'Collecting Orders...'
+      content: message,
     });
 
     this.loading.present();
@@ -30,7 +30,7 @@ export class NavigationDetailsPage {
     // }
     this.order = params.data.item;
     this.order_type = params.data.test;
-    this.showLoader();
+    this.showLoader("Collecting Order Details....");
     this.authService.fetchSubOrder(this.order['order_GROUP_NO'])
       .subscribe(
         // (list) => {
@@ -61,7 +61,7 @@ export class NavigationDetailsPage {
   }
   rejectOrder(order_GROUP_NO) {
     // console.log(order_GROUP_NO);
-    this.showLoader();
+    this.showLoader("Collecting Rejected Orders...");
     this.authService.updateStatusOfGroupOrder(order_GROUP_NO, "REJECTED")
       .subscribe(
         (success) => {
@@ -75,7 +75,7 @@ export class NavigationDetailsPage {
   }
   approveOrder(order_GROUP_NO) {
     // console.log(order_GROUP_NO);
-    this.showLoader();
+    this.showLoader("Collecting Approved Orders....");
     this.authService.updateStatusOfGroupOrder(order_GROUP_NO, "APPROVED")
       .subscribe(
         (success) => {
@@ -88,7 +88,7 @@ export class NavigationDetailsPage {
       );
   }
   getOrderByStatus() {
-    this.showLoader();
+    this.showLoader("Collecting Orders.....");
     this.authService.fetchSubOrder(this.order['order_GROUP_NO'])
       .subscribe(
         // (list) => {
@@ -206,9 +206,9 @@ export class OrdersPage {
   //     );
   //     return this.orders;
   // }
-  showLoader() {
+  showLoader(message) {
     this.loading = this.loadingCtrl.create({
-      content: 'Collecting Orders...'
+      content: message,
     });
 
     this.loading.present();
@@ -226,7 +226,7 @@ export class OrdersPage {
     alert.present();
   }
   retrieveEstimatedOrders() {
-    this.showLoader();
+    this.showLoader("Collecting Estimatd Orders....");
     this.estimatedOrders = [];
     this.authService.fetchOrderByStatus("ESTIMATED")
       .subscribe(
@@ -243,7 +243,7 @@ export class OrdersPage {
       );
   }
   retrieveAllEstimatedOrders() {
-    this.showLoader();
+    this.showLoader("Collecting Estimated Orders....");
     this.estimatedOrders = [];
     this.authService.fetchAllOrderByStatus("ESTIMATED")
       .subscribe(
@@ -259,7 +259,7 @@ export class OrdersPage {
       );
   }
   retrieveApprovedOrders() {
-    this.showLoader();
+    this.showLoader("Collecting Approved Orders....");
     this.approvedOrders = [];
     this.authService.fetchOrderByStatus("APPROVED")
       .subscribe(
@@ -276,7 +276,7 @@ export class OrdersPage {
       );
   }
   retrieveAllApprovedOrders() {
-    this.showLoader();
+    this.showLoader("Collecting Approved Orders....");
     this.approvedOrders = [];
     this.authService.fetchAllOrderByStatus("APPROVED")
       .subscribe(
@@ -293,13 +293,13 @@ export class OrdersPage {
       );
   }
   retrieveRejectedOrders() {
-    this.showLoader();
+    this.showLoader("Collecting Rejected Orders....");
     this.rejectedOrders = [];
     this.authService.fetchOrderByStatus("REJECTED")
       .subscribe(
         (list: Orders[]) => {
           this.rejectedOrders = list;
-          // console.log(this.rejectedOrders);
+          console.log(this.rejectedOrders);
           this.loading.dismiss();
         },
         error => {
@@ -309,7 +309,7 @@ export class OrdersPage {
       );
   }
   retrieveAllRejectedOrders() {
-    this.showLoader();
+    this.showLoader("Collecting Rejected Orders....");
     this.rejectedOrders = [];
     this.authService.fetchAllOrderByStatus("REJECTED")
       .subscribe(

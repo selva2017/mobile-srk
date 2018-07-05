@@ -1,7 +1,7 @@
 import { AuthService } from './../../providers/auth-service/auth-service';
 import { SubOrders, VehicleList } from './../../models/sub-orders';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, LoadingController } from 'ionic-angular';
 
 @IonicPage()
 @Component({
@@ -43,6 +43,14 @@ export class FrontOfficePage {
 
   ];
 
+  loading: any;
+  showLoader(message) {
+    this.loading = this.loadingCtrl.create({
+      content: message,
+    });
+
+    this.loading.present();
+  }
   // doRadio() {
 
   //   // prompt.present();
@@ -111,12 +119,13 @@ export class FrontOfficePage {
       case "APPROVED": {
         this.approvedOrders = [];
         // status = "APPROVED"
+        this.showLoader("Collecting Approved Orders....");
         this.authService.fetchApprovedSubOrders(status)
           .subscribe(
             (list: SubOrders[]) => {
               this.approvedOrders = list;
               // console.log(this.approvedOrders);
-              // this.loading.dismiss();
+              this.loading.dismiss();
             },
             error => {
               // this.loading.dismiss();
@@ -127,13 +136,14 @@ export class FrontOfficePage {
       }
       case "ALLOCATED": {
         // status = "APPROVED"
-        this.allocatedOrders =[];
+        this.allocatedOrders = [];
+        this.showLoader("Collecting Allocated Orders....");
         this.authService.fetchApprovedSubOrders(status)
           .subscribe(
             (list: SubOrders[]) => {
               this.allocatedOrders = list;
               // console.log(this.subOrders);
-              // this.loading.dismiss();
+              this.loading.dismiss();
             },
             error => {
               // this.loading.dismiss();
@@ -146,12 +156,13 @@ export class FrontOfficePage {
       case "LOADED": {
         // status = "APPROVED"
         this.loadedOrders = [];
+        this.showLoader("Collecting Loaded Orders....");
         this.authService.fetchApprovedSubOrders(status)
           .subscribe(
             (list: SubOrders[]) => {
               this.loadedOrders = list;
               // console.log(this.subOrders);
-              // this.loading.dismiss();
+              this.loading.dismiss();
             },
             error => {
               // this.loading.dismiss();
@@ -163,9 +174,10 @@ export class FrontOfficePage {
     }
   }
 
-  updateSubOrder(sub_order_number, status,refresh_list) {
-    console.log(sub_order_number, status,refresh_list);
+  updateSubOrder(sub_order_number, status, refresh_list) {
+    console.log(sub_order_number, status, refresh_list);
     // this.showLoader();
+    // this.showLoader("Updating the Order....");
     this.authService.updateStatusOfSubOrder(sub_order_number, status)
       .subscribe(
         (success) => {
@@ -180,79 +192,79 @@ export class FrontOfficePage {
   }
 
   constructor(public navCtrl: NavController, private alertCtrl: AlertController,
-    private authService: AuthService) {
+    private authService: AuthService, private loadingCtrl: LoadingController) {
 
     this.vehicles = [
       {
-        "vehicle_ID": "001",
+        "vehicle_ID": "TN 33 AC 8841",
         "vehicle_TYPE": "100",
         "vehicle_NAME": "TRUCK 1 ",
-        "vehicle_CAPACITY": "1000"
+        "vehicle_CAPACITY": "1 Unit"
       },
       {
-        "vehicle_ID": "002",
+        "vehicle_ID": "TN 33 AC 8842",
         "vehicle_TYPE": "100",
-        "vehicle_NAME": "TRUCK2",
-        "vehicle_CAPACITY": "1001"
+        "vehicle_NAME": "TRUCK 2",
+        "vehicle_CAPACITY": "1 Unit"
       },
       {
-        "vehicle_ID": "003",
+        "vehicle_ID": "TN 33 AC 8843",
         "vehicle_TYPE": "101",
         "vehicle_NAME": "TRUCK 3",
-        "vehicle_CAPACITY": "1002"
+        "vehicle_CAPACITY": "2 Unit"
       },
       {
-        "vehicle_ID": "004",
+        "vehicle_ID": "TN 33 AC 8844",
         "vehicle_TYPE": "101",
         "vehicle_NAME": "TRUCK 4",
-        "vehicle_CAPACITY": "1003"
+        "vehicle_CAPACITY": "3 Unit"
       },
       {
-        "vehicle_ID": "005",
+        "vehicle_ID": "TN 33 AC 8845",
         "vehicle_TYPE": "102",
         "vehicle_NAME": "TRUCK 5",
-        "vehicle_CAPACITY": "1004"
+        "vehicle_CAPACITY": "4 Unit"
       },
       {
-        "vehicle_ID": "006",
+        "vehicle_ID": "TN 33 AC 8846",
         "vehicle_TYPE": "103",
         "vehicle_NAME": "TRUCK 6",
-        "vehicle_CAPACITY": "1005"
+        "vehicle_CAPACITY": "5 Unit"
       },
       {
-        "vehicle_ID": "007",
+        "vehicle_ID": "TN 33 AC 8847",
         "vehicle_TYPE": "103",
         "vehicle_NAME": "TRUCK 7",
-        "vehicle_CAPACITY": "1006"
+        "vehicle_CAPACITY": "8 Unit"
       },
       {
-        "vehicle_ID": "008",
+        "vehicle_ID": "TN 33 AC 8848",
         "vehicle_TYPE": "103",
         "vehicle_NAME": "TRUCK 8",
-        "vehicle_CAPACITY": "1007"
+        "vehicle_CAPACITY": "8 Unit"
       },
       {
-        "vehicle_ID": "009",
+        "vehicle_ID": "TN 33 AC 8849",
         "vehicle_TYPE": "104",
         "vehicle_NAME": "TRUCK 9",
-        "vehicle_CAPACITY": "1008"
+        "vehicle_CAPACITY": "8 Unit"
       },
       {
         "vehicle_ID": "010",
         "vehicle_TYPE": "104",
         "vehicle_NAME": "TRUCK 10",
-        "vehicle_CAPACITY": "1009"
+        "vehicle_CAPACITY": "10 Unit"
       },
     ];
 
   }
-  doRadio(sub_order_number, status,refresh_list) {
+  doRadio(sub_order_number, status, refresh_list) {
     let alert = this.alertCtrl.create();
     alert.setTitle('Select Vehicle');
     for (var i = 0; i < this.vehicles.length; i++) {
       alert.addInput({
         type: 'radio',
-        label: this.vehicles[i].vehicle_NAME + '(' + this.vehicles[i].vehicle_CAPACITY + ')',
+        label: this.vehicles[i].vehicle_ID + ' - (' + this.vehicles[i].vehicle_CAPACITY + ')',
         value: this.vehicles[i].vehicle_NAME,
       });
     }
@@ -263,7 +275,7 @@ export class FrontOfficePage {
         console.log('Radio data:', data);
         this.testRadioOpen = false;
         this.testRadioResult = data;
-        this.updateSubOrder(sub_order_number, status,refresh_list);
+        this.updateSubOrder(sub_order_number, status, refresh_list);
       }
     });
 
@@ -271,5 +283,32 @@ export class FrontOfficePage {
       this.testRadioOpen = true;
     });
   }
-
+  showPrompt() {
+    const prompt = this.alertCtrl.create({
+      title: 'Weight',
+      message: "Enter the Loaded Truck Weight",
+      inputs: [
+        {
+          name: 'weight',
+          placeholder: 'Enter the Weight'
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Save',
+          handler: data => {
+            console.log(data);
+            console.log('Saved clicked');
+          }
+        }
+      ]
+    });
+    prompt.present();
+  }
 }

@@ -280,8 +280,8 @@ export class EstimatePage {
     // //console.log(product);
     this.estimate['unitsTotal'] = '';
     this.totalSqFtCount = 0;
-    this.productPricePerUnit=0;
-    this.loadingCostPerUnit=0;
+    this.productPricePerUnit = 0;
+    this.loadingCostPerUnit = 0;
     this.clearProductCosts();
     this.selectedProduct = product;
     this.uom = uom;
@@ -972,36 +972,39 @@ export class EstimatePage {
     // //console.log(this.items1);
   }
   // estimateOrder(orders: Orders) {
+  submitEstimation() {
+    this.estimate['salesRep'] = localStorage.getItem('employeeId');
+    this.estimate['salesRepName'] = localStorage.getItem('firstName');
+    switch (this.itemGroup) {
+      case "QUARRY": {
+        this.aggregateTotalUnitsCountMatch();
+        if (this.totalUnitsCountValidation) {
+          this.doEstimation();
+          break;
+        }
+        else
+          this.aggregateUnitsTotalNotExceedTotalQty();
+        break;
+      }
+      case "PAVER": {
+        this.doEstimation();
+        break;
+      }
+      case "DESIGNER_TILES": {
+        this.doEstimation();
+        break;
+      }
+      case "HOLLOW_BLOCK": {
+        this.doEstimation();
+        break;
+      }
+    }
+  }
   estimateOrder(estimateForm) {
     if (Number(this.unitsTotal) > 0 && Number(this.estimate['distanceKM']) > 0) {
       // console.log(estimateForm.distanceKM);
       // console.log(this.estimate);
-      this.estimate['salesRep'] = localStorage.getItem('employeeId');
-      this.estimate['salesRepName'] = localStorage.getItem('firstName');
-      switch (this.itemGroup) {
-        case "QUARRY": {
-          this.aggregateTotalUnitsCountMatch();
-          if (this.totalUnitsCountValidation) {
-            this.doEstimation();
-            break;
-          }
-          else
-            this.aggregateUnitsTotalNotExceedTotalQty();
-          break;
-        }
-        case "PAVER": {
-          this.doEstimation();
-          break;
-        }
-        case "DESIGNER_TILES": {
-          this.doEstimation();
-          break;
-        }
-        case "HOLLOW_BLOCK": {
-          this.doEstimation();
-          break;
-        }
-      }
+      this.showConfirm();
     } else {
       this.handleError("Total units and Distance Kms should not be zero...");
     }
@@ -1252,5 +1255,28 @@ export class EstimatePage {
       position: 'bottom',
       dismissOnPageChange: true
     });
+  }
+
+  showConfirm() {
+    const confirm = this.alertCtrl.create({
+      title: 'Confirmation',
+      message: 'Do you want to Submit the Estimate?',
+      buttons: [
+        {
+          text: 'No',
+          handler: () => {
+            console.log('Disagree clicked');
+          }
+        },
+        {
+          text: 'Yes',
+          handler: () => {
+            this.submitEstimation();
+            console.log('Agree clicked');
+          }
+        }
+      ]
+    });
+    confirm.present();
   }
 }

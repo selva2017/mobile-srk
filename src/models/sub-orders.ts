@@ -22,7 +22,10 @@ export interface SubOrders {
     unit: string, 
     unit_TYPE: string, 
     uom_ID: string, 
-    weight: string
+    weight: string,
+    total_ORDER_UNIT: string;
+    product_GROUP: string;
+    unitType: string;
 }
 
 export interface VehicleList {
