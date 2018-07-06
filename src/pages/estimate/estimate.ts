@@ -1,3 +1,4 @@
+import { SubOrders } from './../../models/sub-orders';
 import { AlertController, ToastController } from 'ionic-angular';
 import { AuthService } from './../../providers/auth-service/auth-service';
 import { Component } from '@angular/core';
@@ -157,6 +158,9 @@ export class EstimatePage {
     // unit1LoadingCostSum: 0,
     // unitlTransportCostSum: 0,
   }
+  openNavDetailsPage(item, test) {
+    this.navCtrl.push(EstimationDetailsPage, { item: item, test });
+  }
   aggregateUnitsTotalNotExceedTotalQty() {
     // console.log(Number(this.estimate['unit1'] * 1) + Number(this.estimate['unit2'] * 2) + Number(this.estimate['unit4'] * 4) + Number(this.estimate['unit6'] * 6));
     if (Number(this.estimate['unit1'] * 1) + Number(this.estimate['unit2'] * 2) + Number(this.estimate['unit4'] * 4) + Number(this.estimate['unit6'] * 6) > Number(this.unitsTotal)) {
@@ -191,6 +195,7 @@ export class EstimatePage {
       this.totalUnitsCountValidation = true;
 
   }
+  role: string;
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private authService: AuthService,
     private loadingCtrl: LoadingController,
@@ -198,6 +203,7 @@ export class EstimatePage {
     platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
     // this.getGroupOrdersByStatus("APPROVED");
     this.getGroupOrdersByStatus("ESTIMATION");
+
   }
 
 
@@ -1049,6 +1055,7 @@ export class EstimatePage {
   }
 
   ngOnInit() {
+    this.role = localStorage.getItem('role');
     // const loading = this.loadingCtrl.create({
     //   content: 'Please wait...'
     // });
@@ -1082,7 +1089,114 @@ export class EstimatePage {
         }
       );
   }
+  retrievePriceResponses() {
+    if (this.role == '1' || this.role == '2') {
+      this.retrieveAllRejectedOrders();
+    }
+    else if (this.role == '3') {
+      this.retrieveRejectedOrders();
+    }
 
+  }
+  doRefreshEstimated(refresher) {
+    this.retrievePriceRequests();
+    // if (this.role == '1' || this.role == '2') {
+    //   this.retrieveAllEstimatedOrders();
+    // }
+    // else if (this.role == '3') {
+    //   this.retrieveEstimatedOrders();
+    // }
+    refresher.complete();
+  }
+  doRefreshRejected(refresher) {
+    this.retrievePriceResponses();
+    // if (this.role == '1' || this.role == '2') {
+    //   this.retrieveAllRejectedOrders();
+    // }
+    // else if (this.role == '3') {
+    //   this.retrieveRejectedOrders();
+    // }
+    refresher.complete();
+  }
+
+  retrievePriceRequests() {
+    if (this.role == '1' || this.role == '2') {
+      this.retrieveAllEstimatedOrders();
+    }
+    else if (this.role == '3') {
+      this.retrieveEstimatedOrders();
+    }
+  }
+  retrieveRejectedOrders() {
+    this.showLoader("Collecting Rejected Orders....");
+    this.rejectedOrders = [];
+    this.authService.fetchOrderByStatus("REJECTED")
+      .subscribe(
+        (list: Orders[]) => {
+          this.rejectedOrders = list;
+          console.log(this.rejectedOrders);
+          this.loading.dismiss();
+        },
+        error => {
+          // this.loading.dismiss();
+          this.handleError(error.json().error);
+        }
+      );
+  }
+  rejectedOrders: Orders[] = [];
+
+  retrieveAllRejectedOrders() {
+    this.showLoader("Collecting Rejected Orders....");
+    this.rejectedOrders = [];
+    this.authService.fetchAllOrderByStatus("REJECTED")
+      .subscribe(
+        (list: Orders[]) => {
+          this.rejectedOrders = list;
+          // console.log(this.rejectedOrders);
+          this.loading.dismiss();
+        },
+        error => {
+          // this.loading.dismiss();
+          this.handleError(error.json().error);
+        }
+      );
+  }
+  retrieveEstimatedOrders() {
+    this.showLoader("Collecting Estimatd Orders....");
+    this.estimatedOrders = [];
+    this.authService.fetchOrderByStatus("ESTIMATED")
+      .subscribe(
+        (list: Orders[]) => {
+          this.estimatedOrders = list;
+          // console.log(this.estimatedOrders);
+          // this.loading_complete = true;
+          this.loading.dismiss();
+        },
+        error => {
+          // this.loading.dismiss();
+          this.handleError(error.json().error);
+        }
+      );
+  }
+
+  estimatedOrders: Orders[] = [];
+  approvedOrders: Orders[] = [];
+  retrieveAllEstimatedOrders() {
+    this.showLoader("Collecting Estimated Orders....");
+    this.estimatedOrders = [];
+    this.authService.fetchAllOrderByStatus("ESTIMATED")
+      .subscribe(
+        (list: Orders[]) => {
+          this.estimatedOrders = list;
+          // console.log(this.estimatedOrders);
+          this.loading.dismiss();
+        },
+        error => {
+          // this.loading.dismiss();
+          this.handleError(error.json().error);
+        }
+      );
+  }
   private handleMessage(message: string) {
     const alert = this.alertCtrl.create({
       // title: 'Network Connection error!',
@@ -1278,5 +1392,107 @@ export class EstimatePage {
       ]
     });
     confirm.present();
+  }
+}
+@Component({
+  selector: 'estimation-details',
+  templateUrl: 'estimation-details.html',
+})
+export class EstimationDetailsPage {
+  order;
+  order_type;
+  subOrders: SubOrders[];
+  loading: any;
+  role: string;
+  showApprove: boolean = false;
+  showLoader(message) {
+    this.loading = this.loadingCtrl.create({
+      content: message,
+    });
+
+    this.loading.present();
+  }
+  constructor(public nav: NavController, params: NavParams, private authService: AuthService,
+    private loadingCtrl: LoadingController) {
+    this.role = localStorage.getItem('role');
+    // if (this.role == '1' || this.role == '2') {
+    //   this.showApprove = true;
+    //   console.log(this.showApprove);
+    // }
+    this.order = params.data.item;
+    this.order_type = params.data.test;
+    this.showLoader("Collecting Order Details....");
+    this.authService.fetchSubOrder(this.order['order_GROUP_NO'])
+      .subscribe(
+        // (list) => {
+        (list: SubOrders[]) => {
+          this.subOrders = list;
+          // console.log(this.subOrders);
+          // this.loading_complete = true;
+          this.loading.dismiss();
+        },
+        error => {
+          // this.loading.dismiss();
+          // this.handleError(error.json().error);
+        }
+      );
+    // this.nav.push(OrdersPage, { item: this.subOrder });
+  }
+
+  displayDecimalINR(amount: number) {
+    return new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 2 }).format(amount);
+  }
+  displayINR(amount: number) {
+    return new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', minimumFractionDigits: 0 }).format(amount);
+  }  // displayINR(amount: number) {
+  //   return new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(amount);
+  // }
+  displayIndianNumber(amount: number) {
+    return Number(Math.round(amount)).toLocaleString('en-IN');
+  }
+  rejectOrder(order_GROUP_NO) {
+    // console.log(order_GROUP_NO);
+    this.showLoader("Collecting Rejected Orders...");
+    this.authService.updateStatusOfGroupOrder(order_GROUP_NO, "REJECTED")
+      .subscribe(
+        (success) => {
+          this.nav.pop();
+          this.nav.push(EstimatePage);
+          // this.refreshList();
+          this.loading.dismiss();
+        },
+        (error) => console.log(error)
+      );
+  }
+  approveOrder(order_GROUP_NO) {
+    console.log(order_GROUP_NO);
+    this.showLoader("Collecting Approved Orders....");
+    this.authService.updateStatusOfGroupOrder(order_GROUP_NO, "APPROVED")
+      .subscribe(
+        (success) => {
+          // this.refreshList();
+          this.nav.pop();
+          this.nav.push(EstimatePage);
+          this.loading.dismiss();
+        },
+        (error) => console.log(error)
+      );
+  }
+  getOrderByStatus() {
+    this.showLoader("Collecting Orders.....");
+    this.authService.fetchSubOrder(this.order['order_GROUP_NO'])
+      .subscribe(
+        // (list) => {
+        (list: SubOrders[]) => {
+          this.subOrders = list;
+          // console.log(this.subOrders);
+          // this.loading_complete = true;
+          this.loading.dismiss();
+        },
+        error => {
+          // this.loading.dismiss();
+          // this.handleError(error.json().error);
+        }
+      );
   }
 }

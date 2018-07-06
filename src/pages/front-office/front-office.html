@@ -18,8 +18,8 @@
       <ion-segment-button value="in-loading" (click)="retrieveSubOrders('ALLOCATED')">
         Allocated
       </ion-segment-button>
-      <ion-segment-button value="loaded" (click)="retrieveSubOrders('LOADED')">
-        Loaded
+      <ion-segment-button value="weighment" (click)="retrieveSubOrders('LOADED')">
+        Weighment
       </ion-segment-button>
     </ion-segment>
   </ion-toolbar>
@@ -84,7 +84,7 @@
       </div>
     </ion-list>
 
-    <ion-list *ngSwitchCase="'loaded'">
+    <ion-list *ngSwitchCase="'weighment'">
       <div ion-item *ngFor="let loaded_item of loadedOrders; let i = index" icon-start>
         <ion-item-divider color="light">
             #{{i+1}} - {{ loaded_item.order_NO }}

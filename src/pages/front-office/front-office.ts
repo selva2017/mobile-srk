@@ -303,7 +303,7 @@ export class FrontOfficePage {
         {
           text: 'Save',
           handler: data => {
-            console.log(data);
+            // console.log(data);
             console.log('Saved clicked');
           }
         }
