@@ -1,0 +1,157 @@
+export interface Pricing {
+    orderGroupNo: string;
+    orderDate: string;
+    status: string;
+    remark: string;
+    estimation: {
+        customerID: string;
+        siteID: string;
+        reference1: string;
+        reference2: string;
+        productGroup: string;
+        productGroupName: string;
+        product: {
+            productDetails: [
+                {
+                    qty: string;
+                    product_ID: string;
+                    product_DETAIL_NAME: string;
+                    product_DETAIL_ID: string;
+                }
+            ],
+            product_ID: string;
+            product_COST: string;
+            product_TAX1: string;
+            product_TAX2: string;
+            loading_COST: string;
+            uom_ID: string;
+            product_NAME: string;
+            uom: string;
+            product_CODE: string;
+            company_ID: string;
+            product_GROUP_ID: string;
+            to_UNIT_TYPE: string;
+            product_COST_ID: string;
+            product_UNIT_CONV_ID: string;
+            from_UNIT: string;
+            from_UNIT_TYPE: string;
+            to_UNIT: string;
+        },
+        distanceKM: string;
+        unitsTotal: string;
+        fullLoads: string;
+        fullLoadsCost: string;
+        fullLoadsTax: string;
+        fullLoadsTransportCost: string;
+        fullLoadsTotalCost: string;
+        partialLoad: string;
+        partialLoadCost: string;
+        partialLoadTax: string;
+        partialLoadTransportCost: string;
+        partialLoadTotalCost: string;
+        unit1: string;
+        unit1ProductCost: string;
+        unit1Tax: string;
+        unit1LoadingCost: string;
+        unitlTransportCost: string;
+        unit1TotalCost: string;
+        unit2: string;
+        unit2ProductCost: string;
+        unit2Tax: string;
+        unit2LoadingCost: string;
+        unit2TransportCost: string;
+        unit2TotalCost: string;
+        unit4: string;
+        unit4ProductCost: string;
+        unit4Tax: string;
+        unit4LoadingCost: string;
+        unit4TransportCost: string;
+        unit4TotalCost: string;
+        unit6: string;
+        unit6ProductCost: string;
+        unit6Tax: string;
+        unit6LoadingCost: string;
+        unit6TransportCost: string;
+        unit6TotalCost: string;
+        sqftLoadingCost: string;
+        sqftLayingCost: string;
+        sqftTransportCost: string;
+        sqftUnitCost: string;
+        totalLayingCost: string;
+        unit1KMCost: string;
+        unit2KMCost: string;
+        unit4KMCost: string;
+        unit6KMCost: string;
+        unitKMCostHB: string;
+        unitKMCostPavers: string;
+        unitKMCostTiles: string;
+        taxable: string;
+        salesRep: string;
+        transportPerKMCost: string;
+        totalProductCost: string;
+        totalTax: string;
+        totalLoadingCost: string;
+        totalTransportCost: string;
+        totalCost: string;
+        customerName: string;
+        siteName: string;
+        salesRepName: string;
+        referral1Name: string;
+        referral2Name: string;
+        orderPriority: string;
+    }
+}    // subOrders: string;
+    // tax2: string;
+    // order_CREATED_DT: string;
+    // order_MODIFIED_DT: string;
+    // order_GROUP_NO: string;
+    // order_DT: string;
+    // note: string;
+    // cust_ID: string;
+    // tax1: string;
+    // site_ID: string;
+    // sales_REP_ID: string;
+    // refrerel1_ID: string;
+    // referrel2_ID: string;
+    // product_GROUP: string;
+    // delivery_DISTANCE: string;
+    // total_ORDER_UNIT: string;
+    // taxable_STATUS: string;
+    // product_UNIT_COST: string;
+    // loading_UNIT_COST: string;
+    // transport_KM_COST: string;
+    // laying_COST: string;
+    // sqft_LOADING_COST: string;
+    // sqft_LAYING_COST: string;
+    // sqft_TRANSPORT_COST: string;
+    // sqft_UNIT_COST: string;
+    // total_PRODUCT_COST: string;
+    // total_TAX1: string;
+    // total_TAX2: string;
+    // total_LOADING_COST: string;
+    // total_TRANSPORT_COST: string;
+    // total_LAYING_COST: string;
+    // total_COST: string;
+    // order_STATUS: string;
+    // status_FLAG: string;
+    // order_CREATED_BY: string;
+    // customer_NAME: string;
+    // site_NAME: string;
+    // sales_REP_NAME: string;
+    // refrerel1_NAME: string;
+    // refrerel2_NAME: string;
+    // product_ID: string;
+    // uom_ID: string;
+    // product_NAME: string;
+    // uom: string;
+    // order_PRIORITY: string;
+    // full_LOAD: string;
+    // part_LOAD: string;
+    // orderAggregateUnits: [
+    //     {
+    //         order_GROUP_NO: string;
+    //         unit_TYPE: string;
+    //         quantity: string;
+    //     }
+    // ]
+// }

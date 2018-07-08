@@ -5,6 +5,7 @@ import { IonicPage, NavController, NavParams, LoadingController, AlertController
 
 import { AuthService } from './../../providers/auth-service/auth-service';
 import { Orders } from '../../models/orders';
+import { Pricing } from '../../models/pricing';
 import { SubOrders } from '../../models/sub-orders';
 
 @IonicPage()
@@ -16,6 +17,7 @@ export class PricingPage {
   // items = [];
   loading: any;
   orders: Orders[] = [];
+  pricing: Pricing[] = [];
   estimatedOrders: Orders[] = [];
   approvedOrders: Orders[] = [];
   rejectedOrders: Orders[] = [];
@@ -117,13 +119,81 @@ export class PricingPage {
     // unit1LoadingCostSum: 0,
     // unitlTransportCostSum: 0,
   }
-  
+
   constructor(public nav: NavController, private loadingCtrl: LoadingController,
     private authService: AuthService, private alertCtrl: AlertController,
     params: NavParams) {
     // this.subOrders = params.data.item;
     // console.log("Su Order")
-    // console.log(this.subOrders);
+    this.pricing =       {
+        "subOrders": "",
+        "tax2": "2.50",
+        "order_CREATED_DT": "2018-06-30 00:00:00.0",
+        "order_MODIFIED_DT": "2018-06-30 00:00:00.0",
+        "order_GROUP_NO": "201806300721575686",
+        "order_DT": "2018-06-30",
+        "note": "null",
+        "cust_ID": "1000",
+        "tax1": "2.50",
+        "site_ID": "601",
+        "sales_REP_ID": "1001",
+        "refrerel1_ID": "500",
+        "referrel2_ID": "501",
+        "product_GROUP": "QUARRY",
+        "delivery_DISTANCE": "25.00",
+        "total_ORDER_UNIT": "10.00",
+        "taxable_STATUS": "",
+        "product_UNIT_COST": "4500.00",
+        "loading_UNIT_COST": "150.00",
+        "transport_KM_COST": "0.00",
+        "laying_COST": "0.00",
+        "sqft_LOADING_COST": "0.00",
+        "sqft_LAYING_COST": "0.00",
+        "sqft_TRANSPORT_COST": "0.00",
+        "sqft_UNIT_COST": "0.00",
+        "total_PRODUCT_COST": "45000.00",
+        "total_TAX1": "2250.00",
+        "total_TAX2": "2250.00",
+        "total_LOADING_COST": "1500.00",
+        "total_TRANSPORT_COST": "2500.00",
+        "total_LAYING_COST": "0.00",
+        "total_COST": "51250.00",
+        "order_STATUS": "ESTIMATED",
+        "status_FLAG": "ACTIVE",
+        "order_CREATED_BY": "1001",
+        "customer_NAME": "VV Traders",
+        "site_NAME": "ED-001",
+        "sales_REP_NAME": "null",
+        "refrerel1_NAME": "Selva",
+        "refrerel2_NAME": "Raj",
+        "product_ID": "1014",
+        "uom_ID": "1",
+        "product_NAME": "AGGREGATES [ M SAND - P ]",
+        "uom": "Units",
+        "order_PRIORITY": "1",
+        "full_LOAD": "3",
+        "part_LOAD": "300",
+        "orderAggregateUnits": [
+          {
+            "order_GROUP_NO": "201806301525244816",
+            "unit_TYPE": "1",
+            "quantity": "10"
+          },
+          {
+            "order_GROUP_NO": "201806301525244816",
+            "unit_TYPE": "2",
+            "quantity": "5"
+          },
+          {
+            "order_GROUP_NO": "201806301525244816",
+            "unit_TYPE": "4",
+            "quantity": "1"
+          }
+        ],
+      };
+
+    console.log("this.pricing");
+    console.log(this.pricing);
   }
   role: string;
 
@@ -131,24 +201,24 @@ export class PricingPage {
 
   }
   customers: Customer[];
-  
-  prepareNewPricing(){
+
+  prepareNewPricing() {
     this.authService.fetchCustomerData()
-    .subscribe(
-      (list: Customer[]) => {
-        console.log(list);
-        this.customers = list;
-        // this.loading.dismiss();
-      },
-      error => {
-        // this.loading.dismiss();
-        this.handleError(error.json().error);
-      }
-    );
+      .subscribe(
+        (list: Customer[]) => {
+          console.log(list);
+          this.customers = list;
+          // this.loading.dismiss();
+        },
+        error => {
+          // this.loading.dismiss();
+          this.handleError(error.json().error);
+        }
+      );
   }
   references: Reference[] = [];
   sites: Site[] = [];
-  
+
   onSelectCustomer(customer_id, customer_name) {
     this.estimate['customerName'] = customer_name;
     this.authService.fetchSiteDetails(customer_id)
@@ -278,7 +348,7 @@ export class PricingPage {
   disableSiteName: boolean = true;
   disableItemName: boolean = true;
   itemGroup: string;
-  
+
   onItemGroupChange(product: Product[], product_group_id, product_group_name) {
     this.clearProductCosts();
     this.estimate['distanceKM'] = '';

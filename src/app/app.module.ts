@@ -17,7 +17,9 @@ import { RegisterPage } from '../pages/register/register';
 import { OrdersPage, NavigationDetailsPage } from './../pages/orders/orders';
 import { LeadPage } from './../pages/lead/lead';
 import { EstimatePage, EstimationDetailsPage } from './../pages/estimate/estimate';
-// import { Camera } from '@ionic-native/camera';
+import { PrintPage } from './../pages/print/print';
+import { Printer } from '@ionic-native/printer';
+import { Geolocation } from '@ionic-native/geolocation';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,8 @@ import { EstimatePage, EstimationDetailsPage } from './../pages/estimate/estimat
     LoadingDetailsPage,
     FrontOfficePage,
     GatePage,
-    EstimationDetailsPage
+    EstimationDetailsPage,
+    PrintPage
   ],
   imports: [
     IonicModule.forRoot(MyApp), BrowserModule, HttpModule
@@ -54,12 +57,14 @@ import { EstimatePage, EstimationDetailsPage } from './../pages/estimate/estimat
     LoadingDetailsPage,
     FrontOfficePage,
     GatePage,
-    EstimationDetailsPage
+    EstimationDetailsPage,
+    PrintPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    // Camera,
+    Printer,
+    Geolocation,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     AuthService, LoginPage, NavigationDetailsPage, LoadingDetailsPage, EstimationDetailsPage
   ]

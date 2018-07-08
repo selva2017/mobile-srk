@@ -128,6 +128,23 @@ export class OrdersPage {
     // console.log("Su Order")
     // console.log(this.subOrders);
   }
+  items = [];
+  getItems(ev) {
+    // Reset items back to all of the items
+   
+    
+
+    // set val to the value of the ev target
+    var val = ev.target.value;
+
+    // if the value is an empty string don't filter the items
+    if (val && val.trim() != '') {
+      this.approvedOrders = this.approvedOrders.filter((item) => {
+        return (item['customer_NAME'].toLowerCase().indexOf(val.toLowerCase()) > -1);
+      })
+    }
+  }
+  
   role: string;
 
   ionViewDidEnter() {

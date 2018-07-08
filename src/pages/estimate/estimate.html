@@ -530,61 +530,111 @@
       </button> -->
     </ion-list>
 
-    <ion-list *ngSwitchCase="'all-my-requests'">
-        <ion-refresher (ionRefresh)="doRefreshEstimated($event)">
-          <ion-refresher-content>Collecting Estimated Orders...</ion-refresher-content>
-        </ion-refresher>
-        <button ion-item *ngFor="let item of estimatedOrders; let i = index" (click)="openNavDetailsPage(item,'estimate')" icon-start>
-          <h2>#{{i+1}} - {{ item.customer_NAME }}</h2>
-          <!-- <h3>{{ item.product_NAME }}</h3> -->
-          <!-- <h3>Quantity : {{displayIndianNumber(item.total_ORDER_UNIT)}}</h3> -->
-          <!-- <p>Total Cost     : {{ displayINR(item.total_COST) }}</p>
+    <ion-list *ngSwitchCase="'all-my-requests-old'">
+      <ion-refresher (ionRefresh)="doRefreshEstimated($event)">
+        <ion-refresher-content>Collecting Estimated Orders...</ion-refresher-content>
+      </ion-refresher>
+      <button ion-item *ngFor="let item of pricing; let i = index" (click)="openNavDetailsPage(item,'estimate')" icon-start>
+        <h2>#{{i+1}} - {{ item.estimation.customerName }}</h2>
+        <!-- <h3>{{ item.product_NAME }}</h3> -->
+        <!-- <h3>Quantity : {{displayIndianNumber(item.total_ORDER_UNIT)}}</h3> -->
+        <!-- <p>Total Cost     : {{ displayINR(item.total_COST) }}</p>
           <p>Order          : {{ item.order_GROUP_NO }} </p>
           <p>Date           : {{item.order_DT}}</p>
           <p>Sales Rep ID   : {{item.sales_REP_ID}}</p>
           <p>Sales Rep Name : {{item.sales_REP_NAME}}</p> -->
+        <p>
+          <ion-grid>
+            <ion-row>
+              <ion-col col-5>Item</ion-col>
+              <ion-col col-7>
+                <h3>{{ item.estimation.productGroupName }}</h3>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-5>Quantity</ion-col>
+              <ion-col col-7> {{displayIndianNumber(item.estimation.unitsTotal)}} </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-5>Total Cost</ion-col>
+              <ion-col col-7>{{displayINR(item.estimation.totalCOST)}}</ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-5>Order</ion-col>
+              <ion-col col-7>{{item.orderGroupNo}}</ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-5>Date</ion-col>
+              <ion-col col-7>{{item.orderDate | date: 'dd-MM-yyyy'}}</ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-5>Sales Rep </ion-col>
+              <ion-col col-7>{{item.estimation.salesRep}} </ion-col>
+            </ion-row>
+            <!-- <ion-row>
+                <ion-col col-5>Sales Rep Name</ion-col>
+                <ion-col col-7>{{item.sales_REP_NAME}} </ion-col>
+              </ion-row> -->
+          </ion-grid>
+        </p>
+      </button>
+    </ion-list>
+    <ion-list *ngSwitchCase="'all-my-requests'">
+      <ion-refresher (ionRefresh)="doRefreshEstimated($event)">
+        <ion-refresher-content>Collecting Estimated Orders...</ion-refresher-content>
+      </ion-refresher>
+      <button ion-item *ngFor="let item of pricing; let i = index" (click)="openNavDetailsPage(item,'estimate')" icon-start>
+          <h2>#{{i+1}} - {{ item.estimation.customerName }}</h2>
+          <!-- <h3>{{ item.product_NAME }}</h3> -->
+          <!-- <h3>Quantity : {{displayIndianNumber(item.total_ORDER_UNIT)}}</h3> -->
+          <!-- <p>Total Cost     : {{ displayINR(item.total_COST) }}</p>
+              <p>Order          : {{ item.order_GROUP_NO }} </p>
+              <p>Date           : {{item.order_DT}}</p>
+              <p>Sales Rep ID   : {{item.sales_REP_ID}}</p>
+              <p>Sales Rep Name : {{item.sales_REP_NAME}}</p> -->
           <p>
             <ion-grid>
               <ion-row>
                 <ion-col col-5>Item</ion-col>
                 <ion-col col-7>
-                  <h3>{{ item.product_NAME }}</h3>
+                  <h3>{{ item.estimation.productGroupName }}</h3>
                 </ion-col>
               </ion-row>
               <ion-row>
                 <ion-col col-5>Quantity</ion-col>
-                <ion-col col-7> {{displayIndianNumber(item.total_ORDER_UNIT)}} {{item.uom}}</ion-col>
+                <ion-col col-7> {{displayIndianNumber(item.estimation.unitsTotal)}} </ion-col>
+                <!-- <ion-col col-7> {{displayIndianNumber(item.estimation.unitsTotal)}} {{item.uom}}</ion-col> -->
               </ion-row>
               <ion-row>
                 <ion-col col-5>Total Cost</ion-col>
-                <ion-col col-7>{{displayINR(item.total_COST)}}</ion-col>
+                <ion-col col-7>{{displayINR(item.estimation.totalCost)}}</ion-col>
               </ion-row>
               <ion-row>
                 <ion-col col-5>Order</ion-col>
-                <ion-col col-7>{{item.order_GROUP_NO}}</ion-col>
+                <ion-col col-7>{{item.orderGroupNo}}</ion-col>
               </ion-row>
               <ion-row>
                 <ion-col col-5>Date</ion-col>
-                <ion-col col-7>{{item.order_DT | date: 'dd-MM-yyyy'}}</ion-col>
+                <ion-col col-7>{{item.orderDate | date: 'dd-MM-yyyy'}}</ion-col>
               </ion-row>
               <ion-row>
                 <ion-col col-5>Sales Rep </ion-col>
-                <ion-col col-7>{{item.sales_REP_ID}} </ion-col>
+                <ion-col col-7>{{item.estimation.salesRep}} </ion-col>
               </ion-row>
               <!-- <ion-row>
-                <ion-col col-5>Sales Rep Name</ion-col>
-                <ion-col col-7>{{item.sales_REP_NAME}} </ion-col>
-              </ion-row> -->
+                    <ion-col col-5>Sales Rep Name</ion-col>
+                    <ion-col col-7>{{item.sales_REP_NAME}} </ion-col>
+                  </ion-row> -->
             </ion-grid>
           </p>
         </button>
-      </ion-list>
 
+    </ion-list>
     <ion-list *ngSwitchCase="'all-my-responses'">
       <ion-refresher (ionRefresh)="doRefreshRejected($event)">
         <ion-refresher-content>Collecting Rejected Orders...</ion-refresher-content>
       </ion-refresher>
-      <button ion-item *ngFor="let rejected_item of rejectedOrders; let i = index" (click)="openNavDetailsPage(rejected_item,'reject')"
+      <button ion-item *ngFor="let rejected_item of rejectedOrders; let i = index" (click)="openNavDetailsPage(rejected_item,'rejected')"
         icon-start>
         <h2>#{{i+1}} - {{ rejected_item.customer_NAME }}</h2>
         <p>

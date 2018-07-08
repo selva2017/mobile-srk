@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Printer, PrintOptions } from '@ionic-native/printer';
-// import { Printer, PrintOptions } from 'ionic-native';
+import { Geolocation } from '@ionic-native/geolocation';
 
 @IonicPage()
 @Component({
@@ -9,39 +9,43 @@ import { Printer, PrintOptions } from '@ionic-native/printer';
   templateUrl: 'print.html',
 })
 export class PrintPage {
-  
-  print() {
+ 
+  coords: any;
+  accuracy: any;
+  error: any;
 
-    // Printer.isAvailable().then(function () {
-    //   Printer.print("https://www.techiediaries.com").then(function () {
-    //     alert("printing done successfully !");
-    //   }, function () {
-    //     alert("Error while printing !");
-    //   });
-    // }, function () {
-    //   alert('Error : printing is unavailable on your device ');
-    // });
-
-  }
-  //   constructor(private printer: Printer) { 
-  //     this.printer.isAvailable().then(onSuccess, onError);
-
-  // let options: PrintOptions = {
-  //      name: 'MyDocument',
-  //      printerId: 'printer007',
-  //      duplex: true,
-  //      landscape: true,
-  //      grayscale: true
-  //    };
-
-  // this.printer.print(content, options).then(onSuccess, onError);
-  //   }
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+    private printer: Printer, private geolocation: Geolocation) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad PrintPage');
+    console.log('ionViewDidLoad HomePage');
   }
+  watch() {
+    this.geolocation.getCurrentPosition().then((resp) => {
+      this.coords = resp.coords.latitude + ' ' + resp.coords.longitude;
+      this.accuracy = resp.coords.accuracy + 'meters';
+    }).catch((error) => {
+      this.error = 'Error getting location: ' + error;
+    })
+  }
+  print_error: any;
+  content: string = "Testing....";
+  print() {
+    this.printer.isAvailable().then((resp) => {
+      this.printer.print(this.content, options);
+    }).catch((error) => {
+      this.print_error = 'Error connecting : ' + error;
+    })
 
+    let options: PrintOptions = {
+      name: 'MyDocument',
+      printerId: 'printer007',
+      duplex: true,
+      landscape: true,
+      grayscale: true
+    };
+
+    //  this.printer.print(content, options).then(onSuccess, onError);
+  }
 }

@@ -15,6 +15,7 @@ import { Customer, Site, Reference } from './../../models/customer';
 import { Product } from '../../models/product';
 import { ProductGroup } from '../../models/product-group';
 // import { Estimate } from './../../models/estimate';
+import { Pricing } from '../../models/pricing';
 
 
 @IonicPage()
@@ -28,6 +29,7 @@ export class EstimatePage {
   customer: Customer[] = [];
   // customer1: Customer[] = [];
   orders: Orders[];
+  pricing: Pricing[] = [];
   // customerName: string;
   loading: any;
   itemGroup: string;
@@ -152,12 +154,13 @@ export class EstimatePage {
     salesRepName: '',
     referral1Name: '',
     referral2Name: '',
-    // highPriority: ''//to be added when priority is added as a field in db
+    orderPriority: ''//to be added when priority is added as a field in db
     // unit1TaxSum: 0,
     // unit1TotalCostSum: 0,
     // unit1LoadingCostSum: 0,
     // unitlTransportCostSum: 0,
   }
+
   openNavDetailsPage(item, test) {
     this.navCtrl.push(EstimationDetailsPage, { item: item, test });
   }
@@ -203,7 +206,197 @@ export class EstimatePage {
     platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
     // this.getGroupOrdersByStatus("APPROVED");
     this.getGroupOrdersByStatus("ESTIMATION");
+    this.pricing = [{
+      "orderGroupNo": "2121",
+      "orderDate": "07-07-2018",
+      "status": "ORDERED",
+      "remark": "Remrk",
+      "estimation": {
+        "customerID": "1001",
+        "siteID": "603",
+        "reference1": "503",
+        "reference2": "",
+        "productGroup": "DESIGNER_TILES",
+        "productGroupName": "TILES",
+        "product": {
+          "productDetails": [
+            {
+              "qty": "1",
+              "product_ID": "1019",
+              "product_DETAIL_NAME": "TILES OPEL BROWN",
+              "product_DETAIL_ID": "3013"
+            },
+            {
+              "qty": "1",
+              "product_ID": "1019",
+              "product_DETAIL_NAME": "TILES OPEL GREY",
+              "product_DETAIL_ID": "3014"
+            },
+            {
+              "qty": "1",
+              "product_ID": "1019",
+              "product_DETAIL_NAME": "TILES OPEL RED",
+              "product_DETAIL_ID": "3015"
+            },
+            {
+              "qty": "997",
+              "product_ID": "1019",
+              "product_DETAIL_NAME": "TILES OPEL YELLOW",
+              "product_DETAIL_ID": "3016"
+            }
+          ],
+          "product_ID": "1019",
+          "product_COST": "28.00",
+          "product_TAX1": "9.00",
+          "product_TAX2": "9.00",
+          "loading_COST": "1",
+          "uom_ID": "1",
+          "product_NAME": "R.M OPEL Tiles",
+          "uom": "Units",
+          "product_CODE": "Tiles Opal Brown",
+          "company_ID": "2",
+          "product_GROUP_ID": "1004",
+          "to_UNIT_TYPE": "Units",
+          "product_COST_ID": "2019",
+          "product_UNIT_CONV_ID": "10",
+          "from_UNIT": "1000",
+          "from_UNIT_TYPE": "Kgs",
+          "to_UNIT": "2"
+        },
+        "distanceKM": "10",
+        "unitsTotal": "1000",
+        "fullLoads": 0,
+        "fullLoadsCost": 0,
+        "fullLoadsTax": 0,
+        "fullLoadsTransportCost": 0,
+        "fullLoadsTotalCost": 0,
+        "partialLoad": 0,
+        "partialLoadCost": 0,
+        "partialLoadTax": 0,
+        "partialLoadTransportCost": 0,
+        "partialLoadTotalCost": 0,
+        "unit1": 0,
+        "unit1ProductCost": 1600,
+        "unit1Tax": 80,
+        "unit1LoadingCost": 150,
+        "unitlTransportCost": 25,
+        "unit1TotalCost": 1855,
+        "unit2": 0,
+        "unit2ProductCost": 3200,
+        "unit2Tax": 160,
+        "unit2LoadingCost": 300,
+        "unit2TransportCost": 30,
+        "unit2TotalCost": 3690,
+        "unit4": 0,
+        "unit4ProductCost": 6400,
+        "unit4Tax": 320,
+        "unit4LoadingCost": 600,
+        "unit4TransportCost": 35,
+        "unit4TotalCost": 7355,
+        "unit6": 0,
+        "unit6ProductCost": 9600,
+        "unit6Tax": 480,
+        "unit6LoadingCost": 900,
+        "unit6TransportCost": 50,
+        "unit6TotalCost": 11030,
+        "sqftLoadingCost": 1,
+        "sqftLayingCost": 0,
+        "sqftTransportCost": 0,
+        "sqftUnitCost": 29,
+        "totalLayingCost": 0,
+        "unit1KMCost": 0,
+        "unit2KMCost": 0,
+        "unit4KMCost": 0,
+        "unit6KMCost": 0,
+        "unitKMCostHB": 0,
+        "unitKMCostPavers": 0,
+        "unitKMCostTiles": 0,
+        "taxable": "",
+        "salesRep": "1001",
+        "transportPerKMCost": 0,
+        "totalProductCost": 29000,
+        "totalTax": 5220,
+        "totalLoadingCost": 0,
+        "totalTransportCost": 0,
+        "totalCost": 34220,
+        "customerName": "ABC Inc",
+        "siteName": "Tirupur 001",
+        "salesRepName": null,
+        "referral1Name": "Arun",
+        "referral2Name": "",
+        "orderPriority": ""
+      }
+    }
+    ];
+    //   this.pricing = [      {
+    //     "subOrders": "",
+    //     "tax2": "2.50",
+    //     "order_CREATED_DT": "2018-06-30 00:00:00.0",
+    //     "order_MODIFIED_DT": "2018-06-30 00:00:00.0",
+    //     "order_GROUP_NO": "201806300721575686",
+    //     "order_DT": "2018-06-30",
+    //     "note": "null",
+    //     "cust_ID": "1000",
+    //     "tax1": "2.50",
+    //     "site_ID": "601",
+    //     "sales_REP_ID": "1001",
+    //     "refrerel1_ID": "500",
+    //     "referrel2_ID": "501",
+    //     "product_GROUP": "QUARRY",
+    //     "delivery_DISTANCE": "25.00",
+    //     "total_ORDER_UNIT": "10.00",
+    //     "taxable_STATUS": "",
+    //     "product_UNIT_COST": "4500.00",
+    //     "loading_UNIT_COST": "150.00",
+    //     "transport_KM_COST": "0.00",
+    //     "laying_COST": "0.00",
+    //     "sqft_LOADING_COST": "0.00",
+    //     "sqft_LAYING_COST": "0.00",
+    //     "sqft_TRANSPORT_COST": "0.00",
+    //     "sqft_UNIT_COST": "0.00",
+    //     "total_PRODUCT_COST": "45000.00",
+    //     "total_TAX1": "2250.00",
+    //     "total_TAX2": "2250.00",
+    //     "total_LOADING_COST": "1500.00",
+    //     "total_TRANSPORT_COST": "2500.00",
+    //     "total_LAYING_COST": "0.00",
+    //     "total_COST": "51250.00",
+    //     "order_STATUS": "ESTIMATED",
+    //     "status_FLAG": "ACTIVE",
+    //     "order_CREATED_BY": "1001",
+    //     "customer_NAME": "VV Traders",
+    //     "site_NAME": "ED-001",
+    //     "sales_REP_NAME": "null",
+    //     "refrerel1_NAME": "Selva",
+    //     "refrerel2_NAME": "Raj",
+    //     "product_ID": "1014",
+    //     "uom_ID": "1",
+    //     "product_NAME": "AGGREGATES [ M SAND - P ]",
+    //     "uom": "Units",
+    //     "order_PRIORITY": "1",
+    //     "full_LOAD": "3",
+    //     "part_LOAD": "300",
+    //     "orderAggregateUnits": [
+    //       {
+    //         "order_GROUP_NO": "201806301525244816",
+    //         "unit_TYPE": "1",
+    //         "quantity": "10"
+    //       },
+    //       {
+    //         "order_GROUP_NO": "201806301525244816",
+    //         "unit_TYPE": "2",
+    //         "quantity": "5"
+    //       },
+    //       {
+    //         "order_GROUP_NO": "201806301525244816",
+    //         "unit_TYPE": "4",
+    //         "quantity": "1"
+    //       }
+    //     ],
+    //   },
+    // ];
 
+    console.log(this.pricing);
   }
 
 
@@ -1187,7 +1380,7 @@ export class EstimatePage {
     this.authService.fetchAllOrderByStatus("ESTIMATED")
       .subscribe(
         (list: Orders[]) => {
-          this.estimatedOrders = list;
+          // this.estimatedOrders = list;
           // console.log(this.estimatedOrders);
           this.loading.dismiss();
         },
@@ -1421,21 +1614,22 @@ export class EstimationDetailsPage {
     // }
     this.order = params.data.item;
     this.order_type = params.data.test;
-    this.showLoader("Collecting Order Details....");
-    this.authService.fetchSubOrder(this.order['order_GROUP_NO'])
-      .subscribe(
-        // (list) => {
-        (list: SubOrders[]) => {
-          this.subOrders = list;
-          // console.log(this.subOrders);
-          // this.loading_complete = true;
-          this.loading.dismiss();
-        },
-        error => {
-          // this.loading.dismiss();
-          // this.handleError(error.json().error);
-        }
-      );
+    console.log(this.order);
+    // this.showLoader("Collecting Order Details....");
+    // this.authService.fetchSubOrder(this.order['order_GROUP_NO'])
+    //   .subscribe(
+    //     // (list) => {
+    //     (list: SubOrders[]) => {
+    //       this.subOrders = list;
+    //       // console.log(this.subOrders);
+    //       // this.loading_complete = true;
+    //       this.loading.dismiss();
+    //     },
+    //     error => {
+    //       // this.loading.dismiss();
+    //       // this.handleError(error.json().error);
+    //     }
+    //   );
     // this.nav.push(OrdersPage, { item: this.subOrder });
   }
 
@@ -1466,17 +1660,17 @@ export class EstimationDetailsPage {
   }
   approveOrder(order_GROUP_NO) {
     console.log(order_GROUP_NO);
-    this.showLoader("Collecting Approved Orders....");
-    this.authService.updateStatusOfGroupOrder(order_GROUP_NO, "APPROVED")
-      .subscribe(
-        (success) => {
-          // this.refreshList();
-          this.nav.pop();
-          this.nav.push(EstimatePage);
-          this.loading.dismiss();
-        },
-        (error) => console.log(error)
-      );
+    // this.showLoader("Collecting Approved Orders....");
+    // this.authService.updateStatusOfGroupOrder(order_GROUP_NO, "APPROVED")
+    //   .subscribe(
+    //     (success) => {
+    //       // this.refreshList();
+    //       this.nav.pop();
+    //       this.nav.push(EstimatePage);
+    //       this.loading.dismiss();
+    //     },
+    //     (error) => console.log(error)
+    //   );
   }
   getOrderByStatus() {
     this.showLoader("Collecting Orders.....");

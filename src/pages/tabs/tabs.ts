@@ -8,6 +8,7 @@ import { NavController } from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { LoginPage } from '../login/login';
 import { OrdersPage } from '../orders/orders';
+import { PrintPage } from '../print/print';
 
 @Component({
   templateUrl: 'tabs.html'
@@ -24,7 +25,8 @@ export class TabsPage {
   frontOfficePage = FrontOfficePage;
   loadingPage = LoadingPage;
   gatePage = GatePage;
-
+  printPage = PrintPage;
+  
   role: string;
 
   constructor(public navCtrl: NavController) {

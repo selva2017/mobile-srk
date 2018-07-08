@@ -96,6 +96,7 @@
       <ion-refresher (ionRefresh)="doRefreshApproved($event)">
         <ion-refresher-content>Collecting Approved Orders...</ion-refresher-content>
       </ion-refresher>
+      <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
       <button ion-item *ngFor="let approved_item of approvedOrders; let i = index" (click)="openNavDetailsPage(approved_item,'approve')"
         icon-start>
         <!-- <h2>{{ approved_item.customer_NAME }}</h2>
