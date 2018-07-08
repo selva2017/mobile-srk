@@ -261,67 +261,67 @@ export class EstimatePage {
           "product_UNIT_CONV_ID": "10",
           "from_UNIT": "1000",
           "from_UNIT_TYPE": "Kgs",
-          "to_UNIT": "2"
+          "to_UNIT": "2",
         },
         "distanceKM": "10",
         "unitsTotal": "1000",
-        "fullLoads": 0,
-        "fullLoadsCost": 0,
-        "fullLoadsTax": 0,
-        "fullLoadsTransportCost": 0,
-        "fullLoadsTotalCost": 0,
-        "partialLoad": 0,
-        "partialLoadCost": 0,
-        "partialLoadTax": 0,
-        "partialLoadTransportCost": 0,
-        "partialLoadTotalCost": 0,
-        "unit1": 0,
-        "unit1ProductCost": 1600,
-        "unit1Tax": 80,
-        "unit1LoadingCost": 150,
-        "unitlTransportCost": 25,
-        "unit1TotalCost": 1855,
-        "unit2": 0,
-        "unit2ProductCost": 3200,
-        "unit2Tax": 160,
-        "unit2LoadingCost": 300,
-        "unit2TransportCost": 30,
-        "unit2TotalCost": 3690,
-        "unit4": 0,
-        "unit4ProductCost": 6400,
-        "unit4Tax": 320,
-        "unit4LoadingCost": 600,
-        "unit4TransportCost": 35,
-        "unit4TotalCost": 7355,
-        "unit6": 0,
-        "unit6ProductCost": 9600,
-        "unit6Tax": 480,
-        "unit6LoadingCost": 900,
-        "unit6TransportCost": 50,
-        "unit6TotalCost": 11030,
-        "sqftLoadingCost": 1,
-        "sqftLayingCost": 0,
-        "sqftTransportCost": 0,
-        "sqftUnitCost": 29,
-        "totalLayingCost": 0,
-        "unit1KMCost": 0,
-        "unit2KMCost": 0,
-        "unit4KMCost": 0,
-        "unit6KMCost": 0,
-        "unitKMCostHB": 0,
-        "unitKMCostPavers": 0,
-        "unitKMCostTiles": 0,
+        "fullLoads": "0",
+        "fullLoadsCost": "0",
+        "fullLoadsTax": "0",
+        "fullLoadsTransportCost": "0",
+        "fullLoadsTotalCost": "0",
+        "partialLoad": "0",
+        "partialLoadCost": "0",
+        "partialLoadTax": "0",
+        "partialLoadTransportCost": "0",
+        "partialLoadTotalCost": "0",
+        "unit1": "0",
+        "unit1ProductCost": "0",
+        "unit1Tax": "0",
+        "unit1LoadingCost": "0",
+        "unitlTransportCost": "25",
+        "unit1TotalCost": "1855",
+        "unit2": "0",
+        "unit2ProductCost": "0",
+        "unit2Tax": "0",
+        "unit2LoadingCost": "0",
+        "unit2TransportCost": "0",
+        "unit2TotalCost": "0",
+        "unit4": "0",
+        "unit4ProductCost": "0",
+        "unit4Tax": "0",
+        "unit4LoadingCost": "0",
+        "unit4TransportCost": "35",
+        "unit4TotalCost": "7355",
+        "unit6": "0",
+        "unit6ProductCost": "0",
+        "unit6Tax": "0",
+        "unit6LoadingCost": "0",
+        "unit6TransportCost": "0",
+        "unit6TotalCost": "0",
+        "sqftLoadingCost": "1",
+        "sqftLayingCost": "0",
+        "sqftTransportCost": "0",
+        "sqftUnitCost": "9",
+        "totalLayingCost": "0",
+        "unit1KMCost": "0",
+        "unit2KMCost": "0",
+        "unit4KMCost": "0",
+        "unit6KMCost": "0",
+        "unitKMCostHB": "0",
+        "unitKMCostPavers": "0",
+        "unitKMCostTiles": "0",
         "taxable": "",
         "salesRep": "1001",
-        "transportPerKMCost": 0,
-        "totalProductCost": 29000,
-        "totalTax": 5220,
-        "totalLoadingCost": 0,
-        "totalTransportCost": 0,
-        "totalCost": 34220,
+        "transportPerKMCost": "0",
+        "totalProductCost": "0",
+        "totalTax": "0",
+        "totalLoadingCost": "0",
+        "totalTransportCost": "0",
+        "totalCost": "1110",
         "customerName": "ABC Inc",
         "siteName": "Tirupur 001",
-        "salesRepName": null,
+        "salesRepName": "null",
         "referral1Name": "Arun",
         "referral2Name": "",
         "orderPriority": ""
@@ -1200,6 +1200,7 @@ export class EstimatePage {
     }
   }
   estimateOrder(estimateForm) {
+    console.log(this.estimate);
     if (Number(this.unitsTotal) > 0 && Number(this.estimate['distanceKM']) > 0) {
       // console.log(estimateForm.distanceKM);
       // console.log(this.estimate);
@@ -1605,6 +1606,7 @@ export class EstimationDetailsPage {
 
     this.loading.present();
   }
+  
   constructor(public nav: NavController, params: NavParams, private authService: AuthService,
     private loadingCtrl: LoadingController) {
     this.role = localStorage.getItem('role');
@@ -1645,7 +1647,7 @@ export class EstimationDetailsPage {
     return Number(Math.round(amount)).toLocaleString('en-IN');
   }
   rejectOrder(order_GROUP_NO) {
-    // console.log(order_GROUP_NO);
+    console.log(order_GROUP_NO);
     this.showLoader("Collecting Rejected Orders...");
     this.authService.updateStatusOfGroupOrder(order_GROUP_NO, "REJECTED")
       .subscribe(
@@ -1657,6 +1659,10 @@ export class EstimationDetailsPage {
         },
         (error) => console.log(error)
       );
+  }
+  clear(row){
+    console.log(row);
+
   }
   approveOrder(order_GROUP_NO) {
     console.log(order_GROUP_NO);
@@ -1689,4 +1695,7 @@ export class EstimationDetailsPage {
         }
       );
   }
+  approvePriceCheck(estimateForm) {
+    console.log(this.order);}
+
 }

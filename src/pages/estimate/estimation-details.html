@@ -546,7 +546,7 @@
         </div>
     </div>
     <div *ngIf="order_type=='estimate'" padding>
-        <form (submit)="estimateOrder(estimateForm)" #estimateForm="ngForm">
+        <form (submit)="approvePriceCheck(priceForm)" #priceForm="ngForm">
             <!-- <form (ngSubmit)="submitOrder(ordersForm)" #ordersForm="ngForm"> -->
             <!-- <ion-card> -->
             <!-- <ion-card-header>
@@ -571,13 +571,12 @@
                 Customer Details
             </ion-item-divider>
             <ion-item>
-                <ion-label color="selva" floating>Customer Name</ion-label>
-                <ion-select [(ngModel)]="order.customerID" name="customerID" [compareWith]="">
-                    <ion-option *ngFor="let customer of customers" [value]="customer.cust_ID" (ionSelect)="onSelectCustomer(customer.cust_ID,customer.cust_NAME)"
-                        required>{{customer.cust_NAME}} ({{customer.cust_PHONE1}})</ion-option>
-                    <!-- <ion-option *ngFor="let customer of customers" [value]="customer.cust_ID" (ionSelect)="onSelectCustomer(customer.cust_ID)"
-                            required>{{customer.cust_NAME}} ({{customer.cust_PHONE1}})</ion-option> -->
-                </ion-select>
+                <ion-label color="selva">Customer Name</ion-label>
+                <ion-label>{{order.estimation.customerName}}</ion-label>
+                <!-- <ion-select [(ngModel)]="order.estimation.customerName" name="customerID" [compareWith]=""> -->
+                <!-- <ion-option *ngFor="let customer of customers" [value]="customer.cust_ID" (ionSelect)="onSelectCustomer(customer.cust_ID,customer.cust_NAME)"
+                        required>{{customer.cust_NAME}} ({{customer.cust_PHONE1}})</ion-option> -->
+                <!-- </ion-select> -->
             </ion-item>
             <!-- <ion-item>
                             <ion-label>Customer</ion-label>
@@ -652,15 +651,12 @@
                 Order Details
             </ion-item-divider>
             <ion-item>
-                <ion-label color="selva" floating>Item Group</ion-label>
-                <!-- </ion-item> -->
-                <!-- </ion-col> -->
-                <!-- <ion-col col-8> -->
-                <!-- <ion-item> -->
-                <ion-select [(ngModel)]="order.productGroupName" name="item_Group_NAME">
+                <ion-label color="selva">Item Group</ion-label>
+                <ion-label>{{order.estimation.productGroupName}}</ion-label>
+                <!-- <ion-select [(ngModel)]="order.productGroupName" name="item_Group_NAME">
                     <ion-option *ngFor="let row of productGroupModel" (ionSelect)="onItemGroupChange(row,row.product_GROUP_ID,row.division_ID)"
-                        required>{{row.product_GROUP_NAME}}</ion-option>
-                </ion-select>
+                    required>{{row.product_GROUP_NAME}}</ion-option>
+                </ion-select> -->
             </ion-item>
             <!-- </ion-col> -->
             <!-- </ion-row> -->
@@ -668,15 +664,16 @@
             <!-- <ion-row> -->
             <!-- <ion-col col-4> -->
             <ion-item>
-                <ion-label color="selva" floating>Item name</ion-label>
+                <ion-label color="selva">Item name</ion-label>
+                <ion-label>{{order.estimation.productGroup}}</ion-label>
                 <!-- </ion-item> -->
                 <!-- </ion-col> -->
                 <!-- <ion-col col-8>
                             <ion-item> -->
                 <!-- <ion-select name="product"> -->
-                <ion-select [(ngModel)]="order.product" name="product" [disabled]="disableItemName">
+                <!-- <ion-select [(ngModel)]="order.product" name="product" [disabled]="disableItemName">
                     <ion-option *ngFor="let item of products" [value]="item" (ionSelect)="onItemNameChange(item.productDetails,item.uom)" required>{{item.product_NAME}}</ion-option>
-                </ion-select>
+                </ion-select> -->
             </ion-item>
 
             <ion-item>
@@ -714,10 +711,10 @@
             <!-- <ion-card padding> -->
 
             <ion-list>
-                <ion-item-divider color="selva" *ngIf="itemGroup=='QUARRY' || itemGroup=='DESIGNER_TILES' || itemGroup=='PAVER' || itemGroup=='HOLLOW_BLOCK'">
+                <ion-item-divider color="selva" *ngIf="order.estimation.productGroup=='QUARRY' || order.estimation.productGroup=='DESIGNER_TILES' || order.estimation.productGroup=='PAVER' || order.estimation.productGroup=='HOLLOW_BLOCK'">
                     Product Details
                 </ion-item-divider>
-                <div *ngIf="itemGroup=='QUARRY'">
+                <div *ngIf="order.estimation.productGroup=='QUARRY'">
                     <!-- <div *ngIf="itemGroup=='Aggregate'"> -->
                     <ion-row>
                         <ion-col col-4>
@@ -818,57 +815,21 @@
                 </div>
                 <!-- </ion-card>
                     <ion-card> -->
-                <div *ngIf="itemGroup=='DESIGNER_TILES'">
-                    <!-- <ion-card>
-                          <ion-row>
-                            <ion-col col-6>
-                              <div style="font-size:1.6rem;font-weight:bold;text-align: center;">Quantity</div>
-                            </ion-col>
-                            <ion-col col-6>
-                              <div style="font-size:1.6rem;font-weight:bold;text-align:center;">Loads</div>
-                            </ion-col>
-                          </ion-row>
-                
-                          <ion-row>
-                            <ion-col col-6>
-                              <ion-item>
-                                <ion-label>850 Units</ion-label>
-                              </ion-item>
-                            </ion-col>
-                            <ion-col col-6>
-                              <ion-item>
-                                <ion-label>{{order.fullLoads}}</ion-label>
-                              </ion-item>
-                            </ion-col>
-                          </ion-row>
-                          <div *ngIf="partialLoadOption==true && order.partialLoad > 0">
-                
-                            <ion-row>
-                              <ion-col col-6>
-                                <ion-item>
-                                  <ion-label>{{order.partialLoad}} Units</ion-label>
-                                </ion-item>
-                              </ion-col>
-                              <ion-col col-6>
-                                <ion-item>
-                                  <ion-label>1</ion-label>
-                                </ion-item>
-                              </ion-col>
-                            </ion-row>
-                          </div>
-                        </ion-card> -->
-
-                    <!-- <ion-card> -->
-                    <div *ngFor="let item of selectedProduct">
+                <div *ngIf="order.estimation.productGroup=='DESIGNER_TILES'">
+                    <div *ngFor="let row of order.estimation.product.productDetails">
                         <ion-row>
                             <ion-col col-9>
                                 <ion-item text-wrap>
-                                    <ion-label> {{item.product_DETAIL_NAME}}</ion-label>
+                                    <ion-label> {{row.product_DETAIL_NAME}}</ion-label>
                                 </ion-item>
                             </ion-col>
                             <ion-col col-3>
                                 <ion-item>
-                                    <ion-input [(ngModel)]="item.qty" name={{item}} type="number" (ionBlur)="calculateTotals(item.qty)" text-right></ion-input>
+                                        <!-- <ion-input [(ngModel)]="item.qty" name={{item}} type="number" (ionBlur)="calculateTotals(item.qty)" text-right></ion-input> -->
+                                        <!-- <ion-input [ngModel]="item.qty" (ngModelChange)="item.qty=$event" name={{item}} type="number" (ionBlur)="calculateTotals(item.qty)" text-right></ion-input> -->
+                                        <ion-input [(ngModel)]="row.qty" name={{row.product_DETAIL_ID}} type="number"  text-right></ion-input>
+                                    <!-- <ion-label>{{row.qty}}</ion-label> -->
+                                    <!-- <ion-input [(ngModel)]="item.qty" name={{item}} type="number" (ionBlur)="calculateTotals(item.qty)" text-right></ion-input> -->
                                     <!-- <ion-input [(ngModel)]="item.qty" name={{item}} type="number" text-right></ion-input> -->
                                 </ion-item>
                             </ion-col>
@@ -882,13 +843,13 @@
                         </ion-col>
                         <ion-col col-4>
                             <ion-item>
-                                <ion-label text-center style="font-weight:bold;">{{totalSqFtCount}}</ion-label>
+                                <ion-label text-center style="font-weight:bold;">{{order.estimation.unitsTotal}}</ion-label>
                             </ion-item>
                         </ion-col>
                     </ion-row>
                     <!-- </ion-card> -->
                 </div>
-                <div *ngIf="itemGroup=='PAVER'">
+                <div *ngIf="order.estimation.productGroup=='PAVER'">
                     <div *ngFor="let item of selectedProduct">
                         <ion-row>
                             <ion-col col-9>
@@ -921,7 +882,7 @@
                 <!-- <div *ngIf="itemGroup=='CRUSHER / BUNKAR'">
                         inside crusher
                       </div> -->
-                <div *ngIf="itemGroup=='HOLLOW_BLOCK'">
+                <div *ngIf="order.estimation.productGroup=='HOLLOW_BLOCK'">
                     <!-- <div *ngIf="itemGroup=='Aggregate'"> -->
                     <ion-row>
                         <ion-col col-6>
@@ -967,7 +928,8 @@
                     <ion-card> -->
             <!-- <ion-card padding> -->
 
-            <ion-list *ngIf="showCostSummary">
+            <ion-list>
+            <!-- <ion-list *ngIf="showCostSummary"> -->
                 <ion-item-divider color="selva">
                     Cost Summary
                 </ion-item-divider>
@@ -994,7 +956,8 @@
                         </ion-item>
                         <ion-item>
                             <ion-label color="selva">Product Cost </ion-label>
-                            <ion-label>{{displayINR(order.totalProductCost)}}</ion-label>
+                            <ion-input class="text-in" [(ngModel)]="order.estimation.product.product_COST" name="product_COST" type="number" maxlength="5" required></ion-input>
+                            <!-- <ion-label>{{displayINR(order.totalProductCost)}}</ion-label> -->
                         </ion-item>
                         <ion-item *ngIf="isToggledTax">
                             <ion-label color="selva">Tax </ion-label>
@@ -1024,19 +987,25 @@
             <!-- </ion-card> -->
             <!-- <button ion-button block type="submit" [color]="'head'" [disabled]="!estimateForm.valid"> -->
             <div *ngIf="role == '1' || role == '2'" padding>
-                <button ion-button block color="one" type="submit" [disabled]="!estimateForm.valid || disableItemName || disableSiteName">
+                <button ion-button block color="one" type="submit" (click)="approveOrder(order)" [disabled]="!priceForm.valid || disableItemName || disableSiteName">
                     Submit
                 </button>
-                <button ion-button block color="danger" (click)="clearAllData(estimateForm)">
+                <button ion-button block color="danger" (click)="clearAllData(priceForm)">
                     Clear All
+                </button>
+                <button ion-button block color="danger" (click)="clear(order)">
+                    Clear 
                 </button>
             </div>
             <div *ngIf="role == '3'" padding>
-                <button ion-button block color="one" type="submit" [disabled]="!estimateForm.valid || disableItemName || disableSiteName">
+                <button ion-button block color="one" type="submit" >
                     Request Price
                 </button>
-                <button ion-button block color="danger" (click)="clearAllData(estimateForm)">
+                <button ion-button block color="danger" (click)="clearAllData(priceForm)">
                     Clear All
+                </button>
+                <button ion-button block color="danger" (click)="clear(order)">
+                    Clear 
                 </button>
             </div>
         </form>
