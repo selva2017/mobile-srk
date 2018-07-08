@@ -30,505 +30,505 @@
       <ion-refresher-content>Collecting Latest Data...</ion-refresher-content>
     </ion-refresher> -->
   <div [ngSwitch]="category">
-    <ion-list *ngSwitchCase="'new-requests'">
-      <form (submit)="estimateOrder(estimateForm)" #estimateForm="ngForm">
-        <!-- <form (ngSubmit)="submitOrder(ordersForm)" #ordersForm="ngForm"> -->
-        <!-- <ion-card> -->
-        <!-- <ion-card-header>
-            <ion-card-title>Customer</ion-card-title>
-          </ion-card-header> -->
-        <!-- <ion-row>
-            <ion-col>
-              <ion-item>
-                <ion-label>Name</ion-label>
-              </ion-item>
-            </ion-col>
-            <ion-col>
-              <ion-item>
-                <ion-select [(ngModel)]="estimate.customerID" name="customerID">
-                  <ion-option *ngFor="let customer of customers" [value]="customer.cust_ID" (ionSelect)="onSelectCustomer(customer.cust_ID)"
-                    >{{customer.cust_NAME}} ({{customer.cust_PHONE1}})</ion-option>
-                </ion-select>
-              </ion-item>
-            </ion-col>
-          </ion-row> -->
-        <ion-item-divider color="selva">
-          Customer Details
-        </ion-item-divider>
-        <ion-item>
-          <ion-label color="selva" floating>Customer Name</ion-label>
-          <ion-select [(ngModel)]="estimate.customerID" name="customerID" [compareWith]="">
-            <ion-option *ngFor="let customer of customers" [value]="customer.cust_ID" (ionSelect)="onSelectCustomer(customer.cust_ID,customer.cust_NAME)"
-              required>{{customer.cust_NAME}} ({{customer.cust_PHONE1}})</ion-option>
-            <!-- <ion-option *ngFor="let customer of customers" [value]="customer.cust_ID" (ionSelect)="onSelectCustomer(customer.cust_ID)"
-                required>{{customer.cust_NAME}} ({{customer.cust_PHONE1}})</ion-option> -->
-          </ion-select>
-        </ion-item>
-        <!-- <ion-item>
-                <ion-label>Customer</ion-label>
-                <ion-select [(ngModel)]="customer" name="customer" >
-                  <ion-option *ngFor="let customer of customers" [value]="customer" (change)="onChange(customer)"  text-left >{{customer.cust_NAME}}</ion-option>
-                </ion-select>
-              </ion-item> -->
-
-        <!-- <ion-row>
-            <ion-col col-4> -->
-        <ion-item>
-          <ion-label color="selva" floating>Site</ion-label>
-          <!-- </ion-item>
-            </ion-col>
-            <ion-col col-8>
-              <ion-item> -->
-          <ion-select [(ngModel)]="estimate.siteID" name="siteID" [disabled]="disableSiteName">
-            <ion-option *ngFor="let site of sites" [value]="site.site_ID" (ionSelect)="onSelectSite(site.site_NAME)" required>{{site.site_NAME}}</ion-option>
-          </ion-select>
-          <!-- <ion-label>{{customer.site_NAME}}</ion-label> -->
-          <!-- <ion-input [(ngModel)]="customer.site_NAME" name="site_NAME" type="text" [disabled]="true" ></ion-input> -->
-        </ion-item>
-        <!-- </ion-col>
-          </ion-row> -->
-
-
-        <!-- <ion-row>
-            <ion-col col-4> -->
-        <ion-item>
-          <ion-label color="selva" floating>Referer 1</ion-label>
-          <!-- </ion-item>
-            </ion-col>
-            <ion-col col-8>
-              <ion-item> -->
-          <!-- <ion-label>{{customer.reference_ID}}</ion-label> -->
-          <!-- <ion-input [(ngModel)]="customer.reference_ID" name="reference_ID" type="text" [disabled]="true" ></ion-input> -->
-          <ion-select [(ngModel)]="estimate.reference1" name="reference1" [disabled]="disableSiteName">
-            <ion-option *ngFor="let reference1 of references" [value]="reference1.reference_ID" (ionSelect)="onSelectReference1(reference1.refrer_NAME)">
-              {{reference1.refrer_NAME}} ({{reference1.referer_MOBILE1}}) - {{reference1.referer_TYPE}}
-            </ion-option>
-          </ion-select>
-        </ion-item>
-        <!-- </ion-col>
-          </ion-row> -->
-
-
-        <!-- <ion-row>
-            <ion-col col-4> -->
-        <ion-item>
-          <ion-label color="selva" floating>Referer 2</ion-label>
-          <!-- </ion-item>
-            </ion-col>
-            <ion-col col-8>
-              <ion-item> -->
-          <!-- <ion-label>{{customer.reference_ID}}</ion-label> -->
-          <!-- <ion-input [(ngModel)]="customer.reference_ID" name="reference_ID" type="text" [disabled]="true" ></ion-input> -->
-          <ion-select [(ngModel)]="estimate.reference2" name="reference2" [disabled]="disableSiteName">
-            <ion-option *ngFor="let reference2 of references" [value]="reference2.reference_ID" (ionSelect)="onSelectReference2(reference2.refrer_NAME)">
-              {{reference2.refrer_NAME}} ({{reference2.referer_MOBILE1}}) - {{reference2.referer_TYPE}}
-            </ion-option>
-          </ion-select>
-        </ion-item>
-        <ion-item>
-          <ion-label color="selva">Priority</ion-label>
-          <ion-label *ngIf="isToggledPriority" text-right>High</ion-label>
-          <ion-label *ngIf="!isToggledPriority" text-right>Normal</ion-label>
-          <ion-toggle [disabled]="disableSiteName" color="secondary" (ionChange)="notifyPriorityOption(estimate.highPriority)" [checked]="isToggledPriority"></ion-toggle>
-          <!-- <ion-toggle color="secondary" (ionChange)="notifyPriorityOption(estimate.highPriority)" [checked]="isToggledPriority"></ion-toggle> -->
-        </ion-item>
-
-        <ion-item-divider color="selva">
-          Order Details
-        </ion-item-divider>
-        <ion-item>
-          <ion-label color="selva" floating>Item Group</ion-label>
-          <!-- </ion-item> -->
-          <!-- </ion-col> -->
-          <!-- <ion-col col-8> -->
-          <!-- <ion-item> -->
-          <ion-select [(ngModel)]="estimate.productGroupName" name="item_Group_NAME">
-            <ion-option *ngFor="let row of productGroupModel" (ionSelect)="onItemGroupChange(row,row.product_GROUP_ID,row.division_ID)"
-              required>{{row.product_GROUP_NAME}}</ion-option>
-          </ion-select>
-        </ion-item>
-        <!-- </ion-col> -->
-        <!-- </ion-row> -->
-
-        <!-- <ion-row> -->
-        <!-- <ion-col col-4> -->
-        <ion-item>
-          <ion-label color="selva" floating>Item name</ion-label>
-          <!-- </ion-item> -->
-          <!-- </ion-col> -->
-          <!-- <ion-col col-8>
-                <ion-item> -->
-          <!-- <ion-select name="product"> -->
-          <ion-select [(ngModel)]="estimate.product" name="product" [disabled]="disableItemName">
-            <ion-option *ngFor="let item of products" [value]="item" (ionSelect)="onItemNameChange(item.productDetails,item.uom)" required>{{item.product_NAME}}</ion-option>
-          </ion-select>
-        </ion-item>
-
-        <ion-item>
-          <ion-label color="selva" fixed>Distance</ion-label>
-          <!-- </ion-item> -->
-          <!-- </ion-col>
-                <ion-col col-6> -->
-          <!-- <ion-item> -->
-          <!-- <ion-input [(ngModel)]="estimate.distanceKM" name="distanceKM" type="number" maxlength="3" placeholder="Enter the distance in KM"
-            required></ion-input> -->
-          <ion-input [(ngModel)]="estimate.distanceKM" name="distanceKM" type="number" maxlength="3" placeholder="Enter the distance in KM"
-            (ionBlur)="reCalculateTotals()" [disabled]="disableItemName" required> </ion-input>
-          <!-- [readonly]="distanceReadOnly" required></ion-input> -->
-        </ion-item>
-        <!-- </ion-col> -->
-        <!-- </ion-row> -->
-        <!-- <ion-row> -->
-        <!-- <ion-col col-6> -->
-        <ion-item>
-          <!-- <ion-label color="selva" fixed>Total Units</ion-label> -->
-          <ion-label color="selva" fixed>Total {{uom}}</ion-label>
-          <!-- </ion-item>
-            </ion-col>
-            <ion-col col-6>
-              <ion-item> -->
-          <ion-input [(ngModel)]="estimate.unitsTotal" name="unitsTotal" type="number" maxlength="4" (change)="onChangeTotalUnits(estimate.unitsTotal)"
-            placeholder="Enter the Total Units/Qty" [disabled]="disableItemName" required></ion-input>
-        </ion-item>
-        <!-- </ion-col> -->
-        <!-- </ion-row> -->
-        <!-- </ion-card>
-    
-    
-        <ion-card> -->
-        <!-- <ion-card padding> -->
-
-        <ion-list>
-          <ion-item-divider color="selva" *ngIf="itemGroup=='QUARRY' || itemGroup=='DESIGNER_TILES' || itemGroup=='PAVER' || itemGroup=='HOLLOW_BLOCK'">
-            Product Details
-          </ion-item-divider>
-          <div *ngIf="itemGroup=='QUARRY'">
-            <!-- <div *ngIf="itemGroup=='Aggregate'"> -->
-            <ion-row>
-              <ion-col col-4>
-                <div style="font-size:1.6rem;font-weight:bold;text-align: center;">Capacity</div>
-              </ion-col>
-              <ion-col col-4>
-                <div style="font-size:1.6rem;font-weight:bold;text-align:center;">Loads</div>
-              </ion-col>
-              <ion-col col-4>
-                <div style="font-size:1.6rem;font-weight:bold;text-align:center;">Total Units</div>
-              </ion-col>
-            </ion-row>
-
-            <ion-row>
-              <ion-col col-4>
-                <ion-item>
-                  <ion-label color="selva">1 Unit</ion-label>
-                </ion-item>
-              </ion-col>
-              <ion-col col-4>
-                <ion-item>
-                  <ion-input [(ngModel)]="estimate.unit1" name="unit1" (ionChange)="onChangeUnit1(estimate.unit1)" type="number" maxlength="4"></ion-input>
-                </ion-item>
-              </ion-col>
-              <ion-col col-4>
-                <ion-item>
-                  <ion-label text-center>{{unit1Total}}</ion-label>
-                  <!-- <ion-input [(ngModel)]="estimate.unit1Total" name="unit1Total" type="text" read-only></ion-input> -->
-                </ion-item>
-              </ion-col>
-            </ion-row>
-            <ion-row>
-              <ion-col col-4>
-                <ion-item>
-                  <ion-label color="selva">2 Units</ion-label>
-                </ion-item>
-              </ion-col>
-              <ion-col col-4>
-                <ion-item>
-                  <ion-input [(ngModel)]="estimate.unit2" name="unit2" (ionChange)="onChangeUnit2(estimate.unit2)" type="number" maxlength="4"></ion-input>
-                </ion-item>
-              </ion-col>
-              <ion-col col-4>
-                <ion-item>
-                  <ion-label text-center>{{unit2Total}}</ion-label>
-                  <!-- <ion-input [(ngModel)]="estimate.unit2Total" name="unit2Total" type="text"></ion-input> -->
-                </ion-item>
-              </ion-col>
-            </ion-row>
-            <ion-row>
-              <ion-col col-4>
-                <ion-item>
-                  <ion-label color="selva">4 Units</ion-label>
-                </ion-item>
-              </ion-col>
-              <ion-col col-4>
-                <ion-item>
-                  <ion-input [(ngModel)]="estimate.unit4" name="unit4" (ionChange)="onChangeUnit4(estimate.unit4)" type="number" maxlength="4"></ion-input>
-                </ion-item>
-              </ion-col>
-              <ion-col col-4>
-                <ion-item>
-                  <ion-label text-center>{{unit4Total}}</ion-label>
-                  <!-- <ion-input [(ngModel)]="estimate.unit4Total" name="unit4Total" type="text"></ion-input> -->
-                </ion-item>
-              </ion-col>
-            </ion-row>
-            <ion-row>
-              <ion-col col-4>
-                <ion-item>
-                  <ion-label color="selva">6 Units</ion-label>
-                </ion-item>
-              </ion-col>
-              <ion-col col-4>
-                <ion-item>
-                  <ion-input [(ngModel)]="estimate.unit6" name="unit6" (ionChange)="onChangeUnit6(estimate.unit6)" type="number" maxlength="4"></ion-input>
-                </ion-item>
-              </ion-col>
-              <ion-col col-4>
-                <ion-item>
-                  <ion-label text-center>{{unit6Total}}</ion-label>
-                  <!-- <ion-input [(ngModel)]="estimate.unit6Total" name="unit6Total" type="text"></ion-input> -->
-                </ion-item>
-              </ion-col>
-            </ion-row>
-            <ion-row>
-              <ion-col col-8>
-                <ion-item>
-                  <ion-label text-center style="font-size:1.6rem;font-weight:bold;">Total Units</ion-label>
-                </ion-item>
-              </ion-col>
-              <ion-col col-4>
-                <ion-item>
-                  <ion-label text-center style="font-weight:bold;">{{unitSumTotal}}</ion-label>
-                </ion-item>
-              </ion-col>
-            </ion-row>
-          </div>
-          <!-- </ion-card>
-        <ion-card> -->
-          <div *ngIf="itemGroup=='DESIGNER_TILES'">
-            <!-- <ion-card>
-              <ion-row>
-                <ion-col col-6>
-                  <div style="font-size:1.6rem;font-weight:bold;text-align: center;">Quantity</div>
-                </ion-col>
-                <ion-col col-6>
-                  <div style="font-size:1.6rem;font-weight:bold;text-align:center;">Loads</div>
-                </ion-col>
-              </ion-row>
-    
-              <ion-row>
-                <ion-col col-6>
+      <ion-list *ngSwitchCase="'new-requests'">
+          <form (submit)="estimateOrder(estimateForm)" #estimateForm="ngForm">
+            <!-- <form (ngSubmit)="submitOrder(ordersForm)" #ordersForm="ngForm"> -->
+            <!-- <ion-card> -->
+            <!-- <ion-card-header>
+                <ion-card-title>Customer</ion-card-title>
+              </ion-card-header> -->
+            <!-- <ion-row>
+                <ion-col>
                   <ion-item>
-                    <ion-label>850 Units</ion-label>
+                    <ion-label>Name</ion-label>
                   </ion-item>
                 </ion-col>
-                <ion-col col-6>
+                <ion-col>
                   <ion-item>
-                    <ion-label>{{estimate.fullLoads}}</ion-label>
+                    <ion-select [(ngModel)]="estimate.customerID" name="customerID">
+                      <ion-option *ngFor="let customer of customers" [value]="customer.cust_ID" (ionSelect)="onSelectCustomer(customer.cust_ID)"
+                        >{{customer.cust_NAME}} ({{customer.cust_PHONE1}})</ion-option>
+                    </ion-select>
                   </ion-item>
                 </ion-col>
-              </ion-row>
-              <div *ngIf="partialLoadOption==true && estimate.partialLoad > 0">
+              </ion-row> -->
+            <ion-item-divider color="selva">
+              Customer Details
+            </ion-item-divider>
+            <ion-item>
+              <ion-label color="selva" floating>Customer Name</ion-label>
+              <ion-select [(ngModel)]="estimate.estimation.customerID" name="customerID" [compareWith]="">
+                <ion-option *ngFor="let customer of customers" [value]="customer.cust_ID" (ionSelect)="onSelectCustomer(customer.cust_ID,customer.cust_NAME)"
+                  required>{{customer.cust_NAME}} ({{customer.cust_PHONE1}})</ion-option>
+                <!-- <ion-option *ngFor="let customer of customers" [value]="customer.cust_ID" (ionSelect)="onSelectCustomer(customer.cust_ID)"
+                    required>{{customer.cust_NAME}} ({{customer.cust_PHONE1}})</ion-option> -->
+              </ion-select>
+            </ion-item>
+            <!-- <ion-item>
+                    <ion-label>Customer</ion-label>
+                    <ion-select [(ngModel)]="customer" name="customer" >
+                      <ion-option *ngFor="let customer of customers" [value]="customer" (change)="onChange(customer)"  text-left >{{customer.cust_NAME}}</ion-option>
+                    </ion-select>
+                  </ion-item> -->
+    
+            <!-- <ion-row>
+                <ion-col col-4> -->
+            <ion-item>
+              <ion-label color="selva" floating>Site</ion-label>
+              <!-- </ion-item>
+                </ion-col>
+                <ion-col col-8>
+                  <ion-item> -->
+              <ion-select [(ngModel)]="estimate.estimation.siteID" name="siteID" [disabled]="disableSiteName">
+                <ion-option *ngFor="let site of sites" [value]="site.site_ID" (ionSelect)="onSelectSite(site.site_NAME)" required>{{site.site_NAME}}</ion-option>
+              </ion-select>
+              <!-- <ion-label>{{customer.site_NAME}}</ion-label> -->
+              <!-- <ion-input [(ngModel)]="customer.site_NAME" name="site_NAME" type="text" [disabled]="true" ></ion-input> -->
+            </ion-item>
+            <!-- </ion-col>
+              </ion-row> -->
+    
+    
+            <!-- <ion-row>
+                <ion-col col-4> -->
+            <ion-item>
+              <ion-label color="selva" floating>Referer 1</ion-label>
+              <!-- </ion-item>
+                </ion-col>
+                <ion-col col-8>
+                  <ion-item> -->
+              <!-- <ion-label>{{customer.reference_ID}}</ion-label> -->
+              <!-- <ion-input [(ngModel)]="customer.reference_ID" name="reference_ID" type="text" [disabled]="true" ></ion-input> -->
+              <ion-select [(ngModel)]="estimate.estimation.reference1" name="reference1" [disabled]="disableSiteName">
+                <ion-option *ngFor="let reference1 of references" [value]="reference1.reference_ID" (ionSelect)="onSelectReference1(reference1.refrer_NAME)">
+                  {{reference1.refrer_NAME}} ({{reference1.referer_MOBILE1}}) - {{reference1.referer_TYPE}}
+                </ion-option>
+              </ion-select>
+            </ion-item>
+            <!-- </ion-col>
+              </ion-row> -->
+    
+    
+            <!-- <ion-row>
+                <ion-col col-4> -->
+            <ion-item>
+              <ion-label color="selva" floating>Referer 2</ion-label>
+              <!-- </ion-item>
+                </ion-col>
+                <ion-col col-8>
+                  <ion-item> -->
+              <!-- <ion-label>{{customer.reference_ID}}</ion-label> -->
+              <!-- <ion-input [(ngModel)]="customer.reference_ID" name="reference_ID" type="text" [disabled]="true" ></ion-input> -->
+              <ion-select [(ngModel)]="estimate.estimation.reference2" name="reference2" [disabled]="disableSiteName">
+                <ion-option *ngFor="let reference2 of references" [value]="reference2.reference_ID" (ionSelect)="onSelectReference2(reference2.refrer_NAME)">
+                  {{reference2.refrer_NAME}} ({{reference2.referer_MOBILE1}}) - {{reference2.referer_TYPE}}
+                </ion-option>
+              </ion-select>
+            </ion-item>
+            <ion-item>
+              <ion-label color="selva">Priority</ion-label>
+              <ion-label *ngIf="isToggledPriority" text-right>High</ion-label>
+              <ion-label *ngIf="!isToggledPriority" text-right>Normal</ion-label>
+              <ion-toggle [disabled]="disableSiteName" color="secondary" (ionChange)="notifyPriorityOption(estimate.estimation.orderPriority)" [checked]="isToggledPriority"></ion-toggle>
+              <!-- <ion-toggle color="secondary" (ionChange)="notifyPriorityOption(estimate.highPriority)" [checked]="isToggledPriority"></ion-toggle> -->
+            </ion-item>
+    
+            <ion-item-divider color="selva">
+              Order Details
+            </ion-item-divider>
+            <ion-item>
+              <ion-label color="selva" floating>Item Group</ion-label>
+              <!-- </ion-item> -->
+              <!-- </ion-col> -->
+              <!-- <ion-col col-8> -->
+              <!-- <ion-item> -->
+              <ion-select [(ngModel)]="estimate.estimation.productGroupName" name="item_Group_NAME">
+                <ion-option *ngFor="let row of productGroupModel" (ionSelect)="onItemGroupChange(row,row.product_GROUP_ID,row.division_ID)"
+                  required>{{row.product_GROUP_NAME}}</ion-option>
+              </ion-select>
+            </ion-item>
+            <!-- </ion-col> -->
+            <!-- </ion-row> -->
+    
+            <!-- <ion-row> -->
+            <!-- <ion-col col-4> -->
+            <ion-item>
+              <ion-label color="selva" floating>Item name</ion-label>
+              <!-- </ion-item> -->
+              <!-- </ion-col> -->
+              <!-- <ion-col col-8>
+                    <ion-item> -->
+              <!-- <ion-select name="product"> -->
+              <ion-select [(ngModel)]="estimate.estimation.product" name="product" [disabled]="disableItemName">
+                <ion-option *ngFor="let item of products" [value]="item" (ionSelect)="onItemNameChange(item.productDetails,item.uom)" required>{{item.product_NAME}}</ion-option>
+              </ion-select>
+            </ion-item>
+    
+            <ion-item>
+              <ion-label color="selva" fixed>Distance</ion-label>
+              <!-- </ion-item> -->
+              <!-- </ion-col>
+                    <ion-col col-6> -->
+              <!-- <ion-item> -->
+              <!-- <ion-input [(ngModel)]="estimate.distanceKM" name="distanceKM" type="number" maxlength="3" placeholder="Enter the distance in KM"
+                required></ion-input> -->
+              <ion-input [(ngModel)]="estimate.estimation.distanceKM" name="distanceKM" type="number" maxlength="3" placeholder="Enter the distance in KM"
+                (ionBlur)="reCalculateTotals()" [disabled]="disableItemName" required> </ion-input>
+              <!-- [readonly]="distanceReadOnly" required></ion-input> -->
+            </ion-item>
+            <!-- </ion-col> -->
+            <!-- </ion-row> -->
+            <!-- <ion-row> -->
+            <!-- <ion-col col-6> -->
+            <ion-item>
+              <!-- <ion-label color="selva" fixed>Total Units</ion-label> -->
+              <ion-label color="selva" fixed>Total {{uom}}</ion-label>
+              <!-- </ion-item>
+                </ion-col>
+                <ion-col col-6>
+                  <ion-item> -->
+              <ion-input [(ngModel)]="estimate.estimation.unitsTotal" name="unitsTotal" type="number" maxlength="4" (change)="onChangeTotalUnits(estimate.estimation.unitsTotal)"
+                placeholder="Enter the Total Units/Qty" [disabled]="disableItemName" required></ion-input>
+            </ion-item>
+            <!-- </ion-col> -->
+            <!-- </ion-row> -->
+            <!-- </ion-card>
+        
+        
+            <ion-card> -->
+            <!-- <ion-card padding> -->
+    
+            <ion-list>
+              <ion-item-divider color="selva" *ngIf="itemGroup=='QUARRY' || itemGroup=='DESIGNER_TILES' || itemGroup=='PAVER' || itemGroup=='HOLLOW_BLOCK'">
+                Product Details
+              </ion-item-divider>
+              <div *ngIf="itemGroup=='QUARRY'">
+                <!-- <div *ngIf="itemGroup=='Aggregate'"> -->
+                <ion-row>
+                  <ion-col col-4>
+                    <div style="font-size:1.6rem;font-weight:bold;text-align: center;">Capacity</div>
+                  </ion-col>
+                  <ion-col col-4>
+                    <div style="font-size:1.6rem;font-weight:bold;text-align:center;">Loads</div>
+                  </ion-col>
+                  <ion-col col-4>
+                    <div style="font-size:1.6rem;font-weight:bold;text-align:center;">Total Units</div>
+                  </ion-col>
+                </ion-row>
     
                 <ion-row>
-                  <ion-col col-6>
+                  <ion-col col-4>
                     <ion-item>
-                      <ion-label>{{estimate.partialLoad}} Units</ion-label>
+                      <ion-label color="selva">1 Unit</ion-label>
                     </ion-item>
                   </ion-col>
-                  <ion-col col-6>
+                  <ion-col col-4>
                     <ion-item>
-                      <ion-label>1</ion-label>
+                      <ion-input [(ngModel)]="estimate.estimation.unit1" name="unit1" (ionChange)="onChangeUnit1(estimate.estimation.unit1)" type="number" maxlength="4"></ion-input>
+                    </ion-item>
+                  </ion-col>
+                  <ion-col col-4>
+                    <ion-item>
+                      <ion-label text-center>{{unit1Total}}</ion-label>
+                      <!-- <ion-input [(ngModel)]="estimate.unit1Total" name="unit1Total" type="text" read-only></ion-input> -->
+                    </ion-item>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col col-4>
+                    <ion-item>
+                      <ion-label color="selva">2 Units</ion-label>
+                    </ion-item>
+                  </ion-col>
+                  <ion-col col-4>
+                    <ion-item>
+                      <ion-input [(ngModel)]="estimate.estimation.unit2" name="unit2" (ionChange)="onChangeUnit2(estimate.estimation.unit2)" type="number" maxlength="4"></ion-input>
+                    </ion-item>
+                  </ion-col>
+                  <ion-col col-4>
+                    <ion-item>
+                      <ion-label text-center>{{unit2Total}}</ion-label>
+                      <!-- <ion-input [(ngModel)]="estimate.unit2Total" name="unit2Total" type="text"></ion-input> -->
+                    </ion-item>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col col-4>
+                    <ion-item>
+                      <ion-label color="selva">4 Units</ion-label>
+                    </ion-item>
+                  </ion-col>
+                  <ion-col col-4>
+                    <ion-item>
+                      <ion-input [(ngModel)]="estimate.estimation.unit4" name="unit4" (ionChange)="onChangeUnit4(estimate.estimation.unit4)" type="number" maxlength="4"></ion-input>
+                    </ion-item>
+                  </ion-col>
+                  <ion-col col-4>
+                    <ion-item>
+                      <ion-label text-center>{{unit4Total}}</ion-label>
+                      <!-- <ion-input [(ngModel)]="estimate.unit4Total" name="unit4Total" type="text"></ion-input> -->
+                    </ion-item>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col col-4>
+                    <ion-item>
+                      <ion-label color="selva">6 Units</ion-label>
+                    </ion-item>
+                  </ion-col>
+                  <ion-col col-4>
+                    <ion-item>
+                      <ion-input [(ngModel)]="estimate.estimation.unit6" name="unit6" (ionChange)="onChangeUnit6(estimate.estimation.unit6)" type="number" maxlength="4"></ion-input>
+                    </ion-item>
+                  </ion-col>
+                  <ion-col col-4>
+                    <ion-item>
+                      <ion-label text-center>{{unit6Total}}</ion-label>
+                      <!-- <ion-input [(ngModel)]="estimate.unit6Total" name="unit6Total" type="text"></ion-input> -->
+                    </ion-item>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col col-8>
+                    <ion-item>
+                      <ion-label text-center style="font-size:1.6rem;font-weight:bold;">Total Units</ion-label>
+                    </ion-item>
+                  </ion-col>
+                  <ion-col col-4>
+                    <ion-item>
+                      <ion-label text-center style="font-weight:bold;">{{unitSumTotal}}</ion-label>
                     </ion-item>
                   </ion-col>
                 </ion-row>
               </div>
-            </ion-card> -->
-
-            <!-- <ion-card> -->
-            <div *ngFor="let item of selectedProduct">
-              <ion-row>
-                <ion-col col-9>
-                  <ion-item text-wrap>
-                    <ion-label> {{item.product_DETAIL_NAME}}</ion-label>
-                  </ion-item>
-                </ion-col>
-                <ion-col col-3>
-                  <ion-item>
-                    <ion-input [(ngModel)]="item.qty" name={{item}} type="number" (ionBlur)="calculateTotals(item.qty)" text-right></ion-input>
-                    <!-- <ion-input [(ngModel)]="item.qty" name={{item}} type="number" text-right></ion-input> -->
-                  </ion-item>
-                </ion-col>
-              </ion-row>
-            </div>
-            <ion-row>
-              <ion-col col-8>
-                <ion-item>
-                  <ion-label text-center style="font-size:1.6rem;font-weight:bold;">Total Sq Ft</ion-label>
-                </ion-item>
-              </ion-col>
-              <ion-col col-4>
-                <ion-item>
-                  <ion-label text-center style="font-weight:bold;">{{totalSqFtCount}}</ion-label>
-                </ion-item>
-              </ion-col>
-            </ion-row>
+              <!-- </ion-card>
+            <ion-card> -->
+              <div *ngIf="itemGroup=='DESIGNER_TILES'">
+                <!-- <ion-card>
+                  <ion-row>
+                    <ion-col col-6>
+                      <div style="font-size:1.6rem;font-weight:bold;text-align: center;">Quantity</div>
+                    </ion-col>
+                    <ion-col col-6>
+                      <div style="font-size:1.6rem;font-weight:bold;text-align:center;">Loads</div>
+                    </ion-col>
+                  </ion-row>
+        
+                  <ion-row>
+                    <ion-col col-6>
+                      <ion-item>
+                        <ion-label>850 Units</ion-label>
+                      </ion-item>
+                    </ion-col>
+                    <ion-col col-6>
+                      <ion-item>
+                        <ion-label>{{estimate.fullLoads}}</ion-label>
+                      </ion-item>
+                    </ion-col>
+                  </ion-row>
+                  <div *ngIf="partialLoadOption==true && estimate.partialLoad > 0">
+        
+                    <ion-row>
+                      <ion-col col-6>
+                        <ion-item>
+                          <ion-label>{{estimate.partialLoad}} Units</ion-label>
+                        </ion-item>
+                      </ion-col>
+                      <ion-col col-6>
+                        <ion-item>
+                          <ion-label>1</ion-label>
+                        </ion-item>
+                      </ion-col>
+                    </ion-row>
+                  </div>
+                </ion-card> -->
+    
+                <!-- <ion-card> -->
+                <div *ngFor="let item of selectedProduct">
+                  <ion-row>
+                    <ion-col col-9>
+                      <ion-item text-wrap>
+                        <ion-label> {{item.product_DETAIL_NAME}}</ion-label>
+                      </ion-item>
+                    </ion-col>
+                    <ion-col col-3>
+                      <ion-item>
+                        <ion-input [(ngModel)]="item.qty" name={{item}} type="number" (ionBlur)="calculateTotals(item.qty)" text-right></ion-input>
+                        <!-- <ion-input [(ngModel)]="item.qty" name={{item}} type="number" text-right></ion-input> -->
+                      </ion-item>
+                    </ion-col>
+                  </ion-row>
+                </div>
+                <ion-row>
+                  <ion-col col-8>
+                    <ion-item>
+                      <ion-label text-center style="font-size:1.6rem;font-weight:bold;">Total Sq Ft</ion-label>
+                    </ion-item>
+                  </ion-col>
+                  <ion-col col-4>
+                    <ion-item>
+                      <ion-label text-center style="font-weight:bold;">{{totalSqFtCount}}</ion-label>
+                    </ion-item>
+                  </ion-col>
+                </ion-row>
+                <!-- </ion-card> -->
+              </div>
+              <div *ngIf="itemGroup=='PAVER'">
+                <div *ngFor="let item of selectedProduct">
+                  <ion-row>
+                    <ion-col col-9>
+                      <ion-item text-wrap>
+                        <ion-label> {{item.product_DETAIL_NAME}}</ion-label>
+                      </ion-item>
+                    </ion-col>
+                    <ion-col col-3>
+                      <ion-item>
+                        <!-- <ion-input [(ngModel)]="item.qty" name={{item}} type="number" (ionBlur)="calculateTotals(item.qty)" text-right></ion-input> -->
+                        <ion-input [(ngModel)]="item.qty" name={{item}} type="number" (ionBlur)="calculateTotals(item.qty)" text-right></ion-input>
+                        <!-- <ion-input [(ngModel)]="item.qty" name={{item}} type="number" text-right></ion-input> -->
+                      </ion-item>
+                    </ion-col>
+                  </ion-row>
+                </div>
+                <ion-row>
+                  <ion-col col-8>
+                    <ion-item>
+                      <ion-label text-center style="font-size:1.6rem;font-weight:bold;">Total Sq Ft</ion-label>
+                    </ion-item>
+                  </ion-col>
+                  <ion-col col-4>
+                    <ion-item>
+                      <ion-label text-center style="font-weight:bold;">{{totalSqFtCount}}</ion-label>
+                    </ion-item>
+                  </ion-col>
+                </ion-row>
+              </div>
+              <!-- <div *ngIf="itemGroup=='CRUSHER / BUNKAR'">
+                inside crusher
+              </div> -->
+              <div *ngIf="itemGroup=='HOLLOW_BLOCK'">
+                <!-- <div *ngIf="itemGroup=='Aggregate'"> -->
+                <ion-row>
+                  <ion-col col-6>
+                    <div style="font-size:1.6rem;font-weight:bold;text-align: center;">Quantity</div>
+                  </ion-col>
+                  <ion-col col-6>
+                    <div style="font-size:1.6rem;font-weight:bold;text-align:center;">Loads</div>
+                  </ion-col>
+                </ion-row>
+    
+                <ion-row>
+                  <ion-col col-6>
+                    <ion-item>
+                      <ion-label>700 Units</ion-label>
+                    </ion-item>
+                  </ion-col>
+                  <ion-col col-6>
+                    <ion-item>
+                      <ion-label>{{estimate.estimation.fullLoads}}</ion-label>
+                      <!-- <ion-input [(ngModel)]="estimate.fullLoads" name="fullLoads" type="text"></ion-input> -->
+                    </ion-item>
+                  </ion-col>
+                </ion-row>
+                <div *ngIf="partialLoadOption==true && estimate.estimation.partialLoad > 0">
+                  <ion-row>
+                    <ion-col col-6>
+                      <ion-item>
+                        <ion-label> {{estimate.estimation.partialLoad}} Units</ion-label>
+                      </ion-item>
+                    </ion-col>
+                    <ion-col col-6>
+                      <ion-item>
+                        <ion-label>1</ion-label>
+                        <!-- <ion-input [(ngModel)]="estimate.partialLoad" name="partialLoad" type="text"></ion-input> -->
+                      </ion-item>
+                    </ion-col>
+                  </ion-row>
+                </div>
+              </div>
+            </ion-list>
             <!-- </ion-card> -->
-          </div>
-          <div *ngIf="itemGroup=='PAVER'">
-            <div *ngFor="let item of selectedProduct">
+            <!-- </ion-card>
+            <ion-card> -->
+            <!-- <ion-card padding> -->
+    
+            <ion-list *ngIf="showCostSummary">
+              <ion-item-divider color="selva">
+                Cost Summary
+              </ion-item-divider>
               <ion-row>
-                <ion-col col-9>
-                  <ion-item text-wrap>
-                    <ion-label> {{item.product_DETAIL_NAME}}</ion-label>
+                <ion-col col-4>
+                  <ion-item>
+                    <ion-label color="selva">Taxable</ion-label>
                   </ion-item>
                 </ion-col>
-                <ion-col col-3>
+                <ion-col col-8>
                   <ion-item>
-                    <!-- <ion-input [(ngModel)]="item.qty" name={{item}} type="number" (ionBlur)="calculateTotals(item.qty)" text-right></ion-input> -->
-                    <ion-input [(ngModel)]="item.qty" name={{item}} type="number" (ionBlur)="calculateTotals(item.qty)" text-right></ion-input>
-                    <!-- <ion-input [(ngModel)]="item.qty" name={{item}} type="number" text-right></ion-input> -->
+                    <ion-label *ngIf="isToggledTax" text-right>Yes</ion-label>
+                    <ion-label *ngIf="!isToggledTax" text-right>No</ion-label>
+                    <ion-toggle (ionChange)="notifyTaxOption(estimate.estimation.taxable)" color="danger" [checked]="isToggledTax" required></ion-toggle>
+                    <!-- <ion-checkbox (ionChange)="notifyTaxOption(estimate.taxable)" [checked]="isToggledTax" required></ion-checkbox> -->
                   </ion-item>
                 </ion-col>
               </ion-row>
-            </div>
-            <ion-row>
-              <ion-col col-8>
-                <ion-item>
-                  <ion-label text-center style="font-size:1.6rem;font-weight:bold;">Total Sq Ft</ion-label>
-                </ion-item>
-              </ion-col>
-              <ion-col col-4>
-                <ion-item>
-                  <ion-label text-center style="font-weight:bold;">{{totalSqFtCount}}</ion-label>
-                </ion-item>
-              </ion-col>
-            </ion-row>
-          </div>
-          <!-- <div *ngIf="itemGroup=='CRUSHER / BUNKAR'">
-            inside crusher
-          </div> -->
-          <div *ngIf="itemGroup=='HOLLOW_BLOCK'">
-            <!-- <div *ngIf="itemGroup=='Aggregate'"> -->
-            <ion-row>
-              <ion-col col-6>
-                <div style="font-size:1.6rem;font-weight:bold;text-align: center;">Quantity</div>
-              </ion-col>
-              <ion-col col-6>
-                <div style="font-size:1.6rem;font-weight:bold;text-align:center;">Loads</div>
-              </ion-col>
-            </ion-row>
-
-            <ion-row>
-              <ion-col col-6>
-                <ion-item>
-                  <ion-label>700 Units</ion-label>
-                </ion-item>
-              </ion-col>
-              <ion-col col-6>
-                <ion-item>
-                  <ion-label>{{estimate.fullLoads}}</ion-label>
-                  <!-- <ion-input [(ngModel)]="estimate.fullLoads" name="fullLoads" type="text"></ion-input> -->
-                </ion-item>
-              </ion-col>
-            </ion-row>
-            <div *ngIf="partialLoadOption==true && estimate.partialLoad > 0">
               <ion-row>
-                <ion-col col-6>
+                <ion-col>
                   <ion-item>
-                    <ion-label> {{estimate.partialLoad}} Units</ion-label>
+                    <ion-label color="selva">Total Cost </ion-label>
+                    <ion-label>{{displayINR(estimate.estimation.totalCost)}}</ion-label>
                   </ion-item>
-                </ion-col>
-                <ion-col col-6>
                   <ion-item>
-                    <ion-label>1</ion-label>
-                    <!-- <ion-input [(ngModel)]="estimate.partialLoad" name="partialLoad" type="text"></ion-input> -->
+                    <ion-label color="selva">Product Cost </ion-label>
+                    <ion-label>{{displayINR(estimate.estimation.totalProductCost)}}</ion-label>
+                  </ion-item>
+                  <ion-item *ngIf="isToggledTax">
+                    <ion-label color="selva">Tax </ion-label>
+                    <ion-label>{{displayINR(estimate.estimation.totalTax)}}</ion-label>
+                  </ion-item>
+                  <ion-item *ngIf="showTransportCost">
+                    <ion-label color="selva">Transport Cost </ion-label>
+                    <ion-label>{{displayINR(estimate.estimation.totalTransportCost)}}</ion-label>
+                  </ion-item>
+                  <ion-item *ngIf="showLoadingCost">
+                    <ion-label color="selva">Loading Cost </ion-label>
+                    <ion-label>{{displayINR(estimate.estimation.totalLoadingCost)}}</ion-label>
+                  </ion-item>
+                  <ion-item>
+                    <ion-label color="selva">Cost per Unit</ion-label>
+                    <ion-label>{{displayINR(productPricePerUnit)}}</ion-label>
+                    <!-- <ion-label>{{displayINR(estimate['product'].product_COST)}}</ion-label> -->
+                  </ion-item>
+                  <ion-item>
+                    <ion-label color="selva">Loading per Unit</ion-label>
+                    <ion-label>{{displayDecimalINR(loadingCostPerUnit)}}</ion-label>
+                    <!-- <ion-label>{{displayINR(estimate['product'].loading_COST)}}</ion-label> -->
                   </ion-item>
                 </ion-col>
               </ion-row>
+            </ion-list>
+            <!-- </ion-card> -->
+            <!-- <button ion-button block type="submit" [color]="'head'" [disabled]="!estimateForm.valid"> -->
+            <div *ngIf="role == '1' || role == '2'" padding>
+              <button ion-button block color="one" type="submit" [disabled]="!estimateForm.valid || disableItemName || disableSiteName">
+                Submit
+              </button>
+              <button ion-button block color="danger" (click)="clearAllData(estimateForm)">
+                Clear All
+              </button>
             </div>
-          </div>
-        </ion-list>
-        <!-- </ion-card> -->
-        <!-- </ion-card>
-        <ion-card> -->
-        <!-- <ion-card padding> -->
-
-        <ion-list *ngIf="showCostSummary">
-          <ion-item-divider color="selva">
-            Cost Summary
-          </ion-item-divider>
-          <ion-row>
-            <ion-col col-4>
-              <ion-item>
-                <ion-label color="selva">Taxable</ion-label>
-              </ion-item>
-            </ion-col>
-            <ion-col col-8>
-              <ion-item>
-                <ion-label *ngIf="isToggledTax" text-right>Yes</ion-label>
-                <ion-label *ngIf="!isToggledTax" text-right>No</ion-label>
-                <ion-toggle (ionChange)="notifyTaxOption(estimate.taxable)" color="danger" [checked]="isToggledTax" required></ion-toggle>
-                <!-- <ion-checkbox (ionChange)="notifyTaxOption(estimate.taxable)" [checked]="isToggledTax" required></ion-checkbox> -->
-              </ion-item>
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col>
-              <ion-item>
-                <ion-label color="selva">Total Cost </ion-label>
-                <ion-label>{{displayINR(estimate.totalCost)}}</ion-label>
-              </ion-item>
-              <ion-item>
-                <ion-label color="selva">Product Cost </ion-label>
-                <ion-label>{{displayINR(estimate.totalProductCost)}}</ion-label>
-              </ion-item>
-              <ion-item *ngIf="isToggledTax">
-                <ion-label color="selva">Tax </ion-label>
-                <ion-label>{{displayINR(estimate.totalTax)}}</ion-label>
-              </ion-item>
-              <ion-item *ngIf="showTransportCost">
-                <ion-label color="selva">Transport Cost </ion-label>
-                <ion-label>{{displayINR(estimate.totalTransportCost)}}</ion-label>
-              </ion-item>
-              <ion-item *ngIf="showLoadingCost">
-                <ion-label color="selva">Loading Cost </ion-label>
-                <ion-label>{{displayINR(estimate.totalLoadingCost)}}</ion-label>
-              </ion-item>
-              <ion-item>
-                <ion-label color="selva">Cost per Unit</ion-label>
-                <ion-label>{{displayINR(productPricePerUnit)}}</ion-label>
-                <!-- <ion-label>{{displayINR(estimate['product'].product_COST)}}</ion-label> -->
-              </ion-item>
-              <ion-item>
-                <ion-label color="selva">Loading per Unit</ion-label>
-                <ion-label>{{displayDecimalINR(loadingCostPerUnit)}}</ion-label>
-                <!-- <ion-label>{{displayINR(estimate['product'].loading_COST)}}</ion-label> -->
-              </ion-item>
-            </ion-col>
-          </ion-row>
-        </ion-list>
-        <!-- </ion-card> -->
-        <!-- <button ion-button block type="submit" [color]="'head'" [disabled]="!estimateForm.valid"> -->
-        <div *ngIf="role == '1' || role == '2'" padding>
-          <button ion-button block color="one" type="submit" [disabled]="!estimateForm.valid || disableItemName || disableSiteName">
-            Submit
-          </button>
-          <button ion-button block color="danger" (click)="clearAllData(estimateForm)">
+            <div *ngIf="role == '3'" padding>
+              <button ion-button block color="one" type="submit" [disabled]="!estimateForm.valid || disableItemName || disableSiteName">
+                Request Price
+              </button>
+              <button ion-button block color="danger" (click)="clearAllData(estimateForm)">
+                Clear All
+              </button>
+            </div>
+          </form>
+          <!-- <button ion-button block color="danger" (click)="clearAllData(estimateForm)">
             Clear All
-          </button>
-        </div>
-        <div *ngIf="role == '3'" padding>
-          <button ion-button block color="one" type="submit" [disabled]="!estimateForm.valid || disableItemName || disableSiteName">
-            Request Price
-          </button>
-          <button ion-button block color="danger" (click)="clearAllData(estimateForm)">
-            Clear All
-          </button>
-        </div>
-      </form>
-      <!-- <button ion-button block color="danger" (click)="clearAllData(estimateForm)">
-        Clear All
-      </button> -->
-    </ion-list>
+          </button> -->
+        </ion-list>
 
     <ion-list *ngSwitchCase="'all-my-requests-old'">
       <ion-refresher (ionRefresh)="doRefreshEstimated($event)">
@@ -580,56 +580,57 @@
       </button>
     </ion-list>
     <ion-list *ngSwitchCase="'all-my-requests'">
-      <ion-refresher (ionRefresh)="doRefreshEstimated($event)">
-        <ion-refresher-content>Collecting Estimated Orders...</ion-refresher-content>
-      </ion-refresher>
-      <button ion-item *ngFor="let item of pricing; let i = index" (click)="openNavDetailsPage(item,'estimate')" icon-start>
-          <h2>#{{i+1}} - {{ item.estimation.customerName }}</h2>
-          <!-- <h3>{{ item.product_NAME }}</h3> -->
-          <!-- <h3>Quantity : {{displayIndianNumber(item.total_ORDER_UNIT)}}</h3> -->
-          <!-- <p>Total Cost     : {{ displayINR(item.total_COST) }}</p>
-              <p>Order          : {{ item.order_GROUP_NO }} </p>
-              <p>Date           : {{item.order_DT}}</p>
-              <p>Sales Rep ID   : {{item.sales_REP_ID}}</p>
-              <p>Sales Rep Name : {{item.sales_REP_NAME}}</p> -->
-          <p>
-            <ion-grid>
-              <ion-row>
-                <ion-col col-5>Item</ion-col>
-                <ion-col col-7>
-                  <h3>{{ item.estimation.productGroupName }}</h3>
-                </ion-col>
-              </ion-row>
-              <ion-row>
-                <ion-col col-5>Quantity</ion-col>
-                <ion-col col-7> {{displayIndianNumber(item.estimation.unitsTotal)}} </ion-col>
-                <!-- <ion-col col-7> {{displayIndianNumber(item.estimation.unitsTotal)}} {{item.uom}}</ion-col> -->
-              </ion-row>
-              <ion-row>
-                <ion-col col-5>Total Cost</ion-col>
-                <ion-col col-7>{{displayINR(item.estimation.totalCost)}}</ion-col>
-              </ion-row>
-              <ion-row>
-                <ion-col col-5>Order</ion-col>
-                <ion-col col-7>{{item.orderGroupNo}}</ion-col>
-              </ion-row>
-              <ion-row>
-                <ion-col col-5>Date</ion-col>
-                <ion-col col-7>{{item.orderDate | date: 'dd-MM-yyyy'}}</ion-col>
-              </ion-row>
-              <ion-row>
-                <ion-col col-5>Sales Rep </ion-col>
-                <ion-col col-7>{{item.estimation.salesRep}} </ion-col>
-              </ion-row>
-              <!-- <ion-row>
-                    <ion-col col-5>Sales Rep Name</ion-col>
-                    <ion-col col-7>{{item.sales_REP_NAME}} </ion-col>
-                  </ion-row> -->
-            </ion-grid>
-          </p>
-        </button>
-
-    </ion-list>
+        <!-- <ion-refresher (ionRefresh)="doRefreshEstimated($event)">
+          <ion-refresher-content>Collecting Estimated Orders...</ion-refresher-content>
+        </ion-refresher> -->
+        <!-- <button ion-item *ngFor="let item of pricing; let i = index" (click)="openNavDetailsPage(item,'estimate')" icon-start> -->
+        <button ion-item (click)="openNavDetailsPage(pricing,'estimate')" icon-start>
+            <h2>#{{i+1}} - {{ pricing.estimation.customerName }}</h2>
+            <!-- <h3>{{ item.product_NAME }}</h3> -->
+            <!-- <h3>Quantity : {{displayIndianNumber(item.total_ORDER_UNIT)}}</h3> -->
+            <!-- <p>Total Cost     : {{ displayINR(item.total_COST) }}</p>
+                <p>Order          : {{ item.order_GROUP_NO }} </p>
+                <p>Date           : {{pricing.order_DT}}</p>
+                <p>Sales Rep ID   : {{pricing.sales_REP_ID}}</p>
+                <p>Sales Rep Name : {{pricing.sales_REP_NAME}}</p> -->
+            <p>
+              <ion-grid>
+                <ion-row>
+                  <ion-col col-5>Item</ion-col>
+                  <ion-col col-7>
+                    <h3>{{ pricing.estimation.productGroupName }}</h3>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col col-5>Quantity</ion-col>
+                  <ion-col col-7> {{displayIndianNumber(pricing.estimation.unitsTotal)}} </ion-col>
+                  <!-- <ion-col col-7> {{displayIndianNumber(pricing.estimation.unitsTotal)}} {{pricing.uom}}</ion-col> -->
+                </ion-row>
+                <ion-row>
+                  <ion-col col-5>Total Cost</ion-col>
+                  <ion-col col-7>{{displayINR(pricing.estimation.totalCost)}}</ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col col-5>Order</ion-col>
+                  <ion-col col-7>{{pricing.orderGroupNo}}</ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col col-5>Date</ion-col>
+                  <ion-col col-7>{{pricing.orderDate | date: 'dd-MM-yyyy'}}</ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col col-5>Sales Rep </ion-col>
+                  <ion-col col-7>{{pricing.estimation.salesRep}} </ion-col>
+                </ion-row>
+                <!-- <ion-row>
+                      <ion-col col-5>Sales Rep Name</ion-col>
+                      <ion-col col-7>{{pricing.sales_REP_NAME}} </ion-col>
+                    </ion-row> -->
+              </ion-grid>
+            </p>
+          </button>
+  
+      </ion-list>
     <ion-list *ngSwitchCase="'all-my-responses'">
       <ion-refresher (ionRefresh)="doRefreshRejected($event)">
         <ion-refresher-content>Collecting Rejected Orders...</ion-refresher-content>
