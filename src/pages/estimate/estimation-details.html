@@ -945,8 +945,14 @@
                 <button ion-button block color="danger" (click)="clearAllData(priceForm)">
                     Clear All
                 </button>
-                <button ion-button block color="danger" (click)="clear(order)">
-                    Clear
+                <button ion-button block color="danger" (click)="sendPriceCheck(order)">
+                    Sumit New Price Check
+                </button>
+                <button ion-button block color="danger" (click)="sendNewEstimation(order)">
+                    Submit New Estimation
+                </button>
+                <button ion-button block color="danger" (click)="updatePriceCheckOrder(order.orderGroupNo)">
+                    Delete New Estimation
                 </button>
             </div>
             <div *ngIf="role == '3'" padding>
@@ -956,8 +962,14 @@
                 <button ion-button block color="danger" (click)="clearAllData(priceForm)">
                     Clear All
                 </button>
-                <button ion-button block color="danger" (click)="clear(order)">
-                    Clear
+                <button ion-button block color="danger" (click)="sendPriceCheck(order)">
+                    Submit New Price Check
+                </button>
+                <button ion-button block color="danger" (click)="sendNewEstimation(order)">
+                    Submit New Estimation
+                </button>
+                <button ion-button block color="danger" (click)="updatePriceCheckOrder(order.orderGroupNo)">
+                    Delete New Estimation
                 </button>
             </div>
         </form>

@@ -583,12 +583,12 @@
         <!-- <ion-refresher (ionRefresh)="doRefreshEstimated($event)">
           <ion-refresher-content>Collecting Estimated Orders...</ion-refresher-content>
         </ion-refresher> -->
-        <!-- <button ion-item *ngFor="let item of pricing; let i = index" (click)="openNavDetailsPage(item,'estimate')" icon-start> -->
-        <button ion-item (click)="openNavDetailsPage(pricing,'estimate')" icon-start>
-            <h2>#{{i+1}} - {{ pricing.estimation.customerName }}</h2>
-            <!-- <h3>{{ item.product_NAME }}</h3> -->
-            <!-- <h3>Quantity : {{displayIndianNumber(item.total_ORDER_UNIT)}}</h3> -->
-            <!-- <p>Total Cost     : {{ displayINR(item.total_COST) }}</p>
+        <button ion-item *ngFor="let item of pricing; let i = index" (click)="openNavDetailsPage(item,'estimate')" icon-start>
+        <!-- <button ion-item (click)="openNavDetailsPage(pricing,'estimate')" icon-start> -->
+            <!-- <h2>#{{i+1}} - {{ pricing.estimation.customerName }}</h2> -->
+            <!-- <h3>{{ item.product_NAME }}</h3>
+            <h3>Quantity : {{displayIndianNumber(item.total_ORDER_UNIT)}}</h3>
+            <p>Total Cost     : {{ displayINR(item.total_COST) }}</p>
                 <p>Order          : {{ item.order_GROUP_NO }} </p>
                 <p>Date           : {{pricing.order_DT}}</p>
                 <p>Sales Rep ID   : {{pricing.sales_REP_ID}}</p>
@@ -598,29 +598,29 @@
                 <ion-row>
                   <ion-col col-5>Item</ion-col>
                   <ion-col col-7>
-                    <h3>{{ pricing.estimation.productGroupName }}</h3>
+                    <h3>{{ item.estimation.productGroupName }}</h3>
                   </ion-col>
                 </ion-row>
                 <ion-row>
                   <ion-col col-5>Quantity</ion-col>
-                  <ion-col col-7> {{displayIndianNumber(pricing.estimation.unitsTotal)}} </ion-col>
+                  <ion-col col-7> {{displayIndianNumber(item.estimation.unitsTotal)}} </ion-col>
                   <!-- <ion-col col-7> {{displayIndianNumber(pricing.estimation.unitsTotal)}} {{pricing.uom}}</ion-col> -->
                 </ion-row>
                 <ion-row>
                   <ion-col col-5>Total Cost</ion-col>
-                  <ion-col col-7>{{displayINR(pricing.estimation.totalCost)}}</ion-col>
+                  <ion-col col-7>{{displayINR(item.estimation.totalCost)}}</ion-col>
                 </ion-row>
                 <ion-row>
                   <ion-col col-5>Order</ion-col>
-                  <ion-col col-7>{{pricing.orderGroupNo}}</ion-col>
+                  <ion-col col-7>{{item.orderGroupNo}}</ion-col>
                 </ion-row>
                 <ion-row>
                   <ion-col col-5>Date</ion-col>
-                  <ion-col col-7>{{pricing.orderDate | date: 'dd-MM-yyyy'}}</ion-col>
+                  <ion-col col-7>{{item.orderDate | date: 'dd-MM-yyyy'}}</ion-col>
                 </ion-row>
                 <ion-row>
                   <ion-col col-5>Sales Rep </ion-col>
-                  <ion-col col-7>{{pricing.estimation.salesRep}} </ion-col>
+                  <ion-col col-7>{{item.estimation.salesRep}} </ion-col>
                 </ion-row>
                 <!-- <ion-row>
                       <ion-col col-5>Sales Rep Name</ion-col>

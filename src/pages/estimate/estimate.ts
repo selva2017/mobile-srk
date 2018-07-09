@@ -1,3 +1,4 @@
+import { Pricing } from './../../models/pricing';
 import { SubOrders } from './../../models/sub-orders';
 import { AlertController, ToastController } from 'ionic-angular';
 import { AuthService } from './../../providers/auth-service/auth-service';
@@ -15,7 +16,6 @@ import { Customer, Site, Reference } from './../../models/customer';
 import { Product } from '../../models/product';
 import { ProductGroup } from '../../models/product-group';
 // import { Estimate } from './../../models/estimate';
-import { Pricing } from '../../models/pricing';
 
 
 @IonicPage()
@@ -29,7 +29,7 @@ export class EstimatePage {
   customer: Customer[] = [];
   // customer1: Customer[] = [];
   orders: Orders[];
-  pricing: Pricing[] = [];
+  pricing: Pricing[];
   // customerName: string;
   loading: any;
   itemGroup: string;
@@ -205,19 +205,13 @@ export class EstimatePage {
 
   }
   role: string;
-  constructor(public navCtrl: NavController, public navParams: NavParams,
-    private authService: AuthService,
-    private loadingCtrl: LoadingController,
-    private alertCtrl: AlertController, private toastCtrl: ToastController,
-    platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
-    // this.getGroupOrdersByStatus("APPROVED");
-    // this.getGroupOrdersByStatus("ESTIMATION");
+  retrieveAllPriceCheckOrders() {
     this.authService.fetchOrdersNew("ORDER_PRICE_CHECK")
       .subscribe(
-        (list) => {
-          console.log(list);
+        (list: Pricing[]) => {
           this.pricing = list;
           // this.sites = list;
+          console.log(this.pricing);
           this.loading.dismiss();
         },
         error => {
@@ -225,7 +219,16 @@ export class EstimatePage {
           this.handleError(error.json().error);
         }
       );
+  }
 
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+    private authService: AuthService,
+    private loadingCtrl: LoadingController,
+    private alertCtrl: AlertController, private toastCtrl: ToastController,
+    platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
+    // this.getGroupOrdersByStatus("APPROVED");
+    // this.getGroupOrdersByStatus("ESTIMATION");
+    this.retrieveAllPriceCheckOrders();
     // this.pricing = {
     //   "estimation": {
     //     "product": {
@@ -536,7 +539,7 @@ export class EstimatePage {
     //   },
     // ];
 
-    console.log(this.pricing);
+    // console.log(this.pricing);
   }
 
 
@@ -1342,6 +1345,8 @@ export class EstimatePage {
   estimateOrder(estimateForm) {
     console.log(this.estimate);
     // this.doEstimation();
+    this.estimate['estimation']['salesRep'] = localStorage.getItem('employeeId');
+    this.estimate['estimation']['salesRepName'] = localStorage.getItem('firstName');
     this.doNewEstimation();
     if (Number(this.unitsTotal) > 0 && Number(this.estimate['estimation']['distanceKM']) > 0) {
       // console.log(estimateForm.distanceKM);
@@ -1457,10 +1462,11 @@ export class EstimatePage {
 
   retrievePriceRequests() {
     if (this.role == '1' || this.role == '2') {
-      this.retrieveAllEstimatedOrders();
+      // this.retrieveAllEstimatedOrders();
+      this.retrieveAllPriceCheckOrders();
     }
     else if (this.role == '3') {
-      this.retrieveEstimatedOrders();
+      // this.retrieveEstimatedOrders();
     }
   }
   retrieveRejectedOrders() {
@@ -1693,7 +1699,7 @@ export class EstimatePage {
     console.log(this.estimate);
     this.showLoader("Submitting the Estimation...");
     // this.handleError("estimation");
-    this.authService.sendNewEstimation(this.estimate)
+    this.authService.sendPriceCheckRequest(this.estimate)
       .subscribe(
         success => {
           // console.log("success");
@@ -1856,9 +1862,13 @@ export class EstimationDetailsPage {
         (error) => console.log(error)
       );
   }
-  clear(row) {
+  sendPriceCheck(row) {
     console.log(row);
     this.doEstimation();
+  }
+  sendNewEstimation(row) {
+    console.log(row);
+    this.doNewEstimation();
   }
   approveOrder(order_GROUP_NO) {
     console.log(order_GROUP_NO);
@@ -1900,7 +1910,7 @@ export class EstimationDetailsPage {
     console.log("old estimation");
     this.showLoader("Submitting the Estimation...");
     // this.handleError("estimation");
-    this.authService.sendNewEstimation(this.order)
+    this.authService.sendPriceCheckRequest(this.order)
       .subscribe(
         success => {
           // console.log("success");
@@ -1929,5 +1939,38 @@ export class EstimationDetailsPage {
           // this.handleError("error");
           // this.presentToast(error);
         });
+  }
+  doNewEstimation() {
+    console.log("new  estimation");
+    this.showLoader("Submitting the Estimation...");
+    // this.handleError("estimation");
+    this.authService.sendNewEstimation(this.order)
+      .subscribe(
+        success => {
+          // console.log("success");
+          if (success == 200) {
+            this.loading.dismiss();
+          }
+          else {
+            this.loading.dismiss();
+          }
+        },
+        (error) => {
+          this.loading.dismiss();
+        });
+  }
+  updatePriceCheckOrder(order_GROUP_NO) {
+    // console.log(order_GROUP_NO);
+    this.showLoader("Collecting Rejected Orders...");
+    this.authService.updatePriceCheckStatusOfGroupOrder(order_GROUP_NO, "DELETED")
+      .subscribe(
+        (success) => {
+          // this.nav.pop();
+          // this.nav.push(OrdersPage);
+          // this.refreshList();
+          this.loading.dismiss();
+        },
+        (error) => console.log(error)
+      );
   }
 }
