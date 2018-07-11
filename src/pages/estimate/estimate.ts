@@ -30,6 +30,7 @@ export class EstimatePage {
   // customer1: Customer[] = [];
   orders: Orders[];
   pricing: Pricing[];
+  pricing1: Pricing[];
   // customerName: string;
   loading: any;
   itemGroup: string;
@@ -205,13 +206,66 @@ export class EstimatePage {
 
   }
   role: string;
-  retrieveAllPriceCheckOrders() {
-    this.authService.fetchOrdersNew("ORDER_PRICE_CHECK")
+  retrieveAllPriceCheckOrders(status) {
+    this.pricing = [];
+    console.log(status);
+    this.authService.fetchAllOrdersNew(status)
       .subscribe(
         (list: Pricing[]) => {
           this.pricing = list;
           // this.sites = list;
           console.log(this.pricing);
+          this.loading.dismiss();
+        },
+        error => {
+          this.loading.dismiss();
+          this.handleError(error.json().error);
+        }
+      );
+  }
+  retrievePriceCheckOrders(status) {
+    this.pricing = [];
+    console.log(status);
+    this.authService.fetchOrdersNew(status)
+      .subscribe(
+        (list: Pricing[]) => {
+          this.pricing = list;
+          // this.sites = list;
+          console.log(this.pricing);
+          this.loading.dismiss();
+        },
+        error => {
+          this.loading.dismiss();
+          this.handleError(error.json().error);
+        }
+      );
+  }
+  retrieveAllPriceCheckResponse(status) {
+    this.pricing1 = [];
+    console.log(status);
+    this.authService.fetchAllPriceCheckResponse(status)
+      .subscribe(
+        (list: Pricing[]) => {
+          this.pricing1 = list;
+          // this.sites = list;
+          console.log(this.pricing1);
+          this.loading.dismiss();
+        },
+        error => {
+          this.loading.dismiss();
+          this.handleError(error.json().error);
+        }
+      );
+  }
+  retrievePriceCheckResponse(status) {
+    this.pricing1 = [];
+    console.log(status);
+    this.authService.fetchPriceCheckResponse(status)
+      .subscribe(
+        (list: Pricing[]) => {
+          this.pricing1 = list;
+          // this.sites = list;
+          console.log(this.pricing1);
           this.loading.dismiss();
         },
         error => {
@@ -228,7 +282,7 @@ export class EstimatePage {
     platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
     // this.getGroupOrdersByStatus("APPROVED");
     // this.getGroupOrdersByStatus("ESTIMATION");
-    this.retrieveAllPriceCheckOrders();
+    // this.retrieveAllPriceCheckOrders();
     // this.pricing = {
     //   "estimation": {
     //     "product": {
@@ -1342,6 +1396,34 @@ export class EstimatePage {
       }
     }
   }
+  submitNewEstimation() {
+    this.estimate['estimation']['salesRep'] = localStorage.getItem('employeeId');
+    this.estimate['estimation']['salesRepName'] = localStorage.getItem('firstName');
+    switch (this.itemGroup) {
+      case "QUARRY": {
+        this.aggregateTotalUnitsCountMatch();
+        if (this.totalUnitsCountValidation) {
+          this.doNewEstimation();
+          break;
+        }
+        else
+          this.aggregateUnitsTotalNotExceedTotalQty();
+        break;
+      }
+      case "PAVER": {
+        this.doNewEstimation();
+        break;
+      }
+      case "DESIGNER_TILES": {
+        this.doNewEstimation();
+        break;
+      }
+      case "HOLLOW_BLOCK": {
+        this.doNewEstimation();
+        break;
+      }
+    }
+  }
   estimateOrder(estimateForm) {
     console.log(this.estimate);
     // this.doEstimation();
@@ -1384,6 +1466,17 @@ export class EstimatePage {
     // this.orderData.slice();
     // this.orderData.push(orders);
     // //console.log(this.orderData);
+  }
+  priceCheckNew(estimateForm) {
+    console.log(this.estimate);
+    this.estimate['estimation']['salesRep'] = localStorage.getItem('employeeId');
+    this.estimate['estimation']['salesRepName'] = localStorage.getItem('firstName');
+    // this.doNewEstimation();
+    if (Number(this.unitsTotal) > 0 && Number(this.estimate['estimation']['distanceKM']) > 0) {
+      this.showPriceCheckConfirm();
+    } else {
+      this.handleError("Total units and Distance Kms should not be zero...");
+    }
   }
 
   showLoader(message) {
@@ -1430,17 +1523,18 @@ export class EstimatePage {
         }
       );
   }
-  retrievePriceResponses() {
-    if (this.role == '1' || this.role == '2') {
-      this.retrieveAllRejectedOrders();
-    }
-    else if (this.role == '3') {
-      this.retrieveRejectedOrders();
-    }
-
+  retrievePriceResponses(status) {
+      if (this.role == '1' || this.role == '2') {
+        // this.retrieveAllEstimatedOrders();
+        this.retrieveAllPriceCheckResponse(status);
+      }
+      else if (this.role == '3') {
+        // this.retrieveEstimatedOrders();
+        this.retrievePriceCheckResponse(status);
+      }
   }
   doRefreshEstimated(refresher) {
-    this.retrievePriceRequests();
+    this.retrievePriceRequests(status);
     // if (this.role == '1' || this.role == '2') {
     //   this.retrieveAllEstimatedOrders();
     // }
@@ -1450,7 +1544,7 @@ export class EstimatePage {
     refresher.complete();
   }
   doRefreshRejected(refresher) {
-    this.retrievePriceResponses();
+    this.retrievePriceResponses(status);
     // if (this.role == '1' || this.role == '2') {
     //   this.retrieveAllRejectedOrders();
     // }
@@ -1460,13 +1554,14 @@ export class EstimatePage {
     refresher.complete();
   }
 
-  retrievePriceRequests() {
+  retrievePriceRequests(status) {
+    console.log("retrievePriceRequests");
     if (this.role == '1' || this.role == '2') {
       // this.retrieveAllEstimatedOrders();
-      this.retrieveAllPriceCheckOrders();
+      this.retrieveAllPriceCheckOrders(status);
     }
     else if (this.role == '3') {
-      // this.retrieveEstimatedOrders();
+      this.retrievePriceCheckOrders(status);
     }
   }
   retrieveRejectedOrders() {
@@ -1697,7 +1792,7 @@ export class EstimatePage {
   doNewEstimation() {
     console.log("new estimate");
     console.log(this.estimate);
-    this.showLoader("Submitting the Estimation...");
+    this.showLoader("Submitting the Price Check request...");
     // this.handleError("estimation");
     this.authService.sendPriceCheckRequest(this.estimate)
       .subscribe(
@@ -1778,6 +1873,28 @@ export class EstimatePage {
           text: 'Yes',
           handler: () => {
             this.submitEstimation();
+            console.log('Agree clicked');
+          }
+        }
+      ]
+    });
+    confirm.present();
+  }
+  showPriceCheckConfirm() {
+    const confirm = this.alertCtrl.create({
+      title: 'Confirmation',
+      message: 'Do you want to Submit a Price Consideration?',
+      buttons: [
+        {
+          text: 'No',
+          handler: () => {
+            console.log('Disagree clicked');
+          }
+        },
+        {
+          text: 'Yes',
+          handler: () => {
+            this.doNewEstimation();
             console.log('Agree clicked');
           }
         }
@@ -1959,10 +2076,10 @@ export class EstimationDetailsPage {
           this.loading.dismiss();
         });
   }
-  updatePriceCheckOrder(order_GROUP_NO) {
+  updatePriceCheckOrder(order_GROUP_NO, status) {
     // console.log(order_GROUP_NO);
     this.showLoader("Collecting Rejected Orders...");
-    this.authService.updatePriceCheckStatusOfGroupOrder(order_GROUP_NO, "DELETED")
+    this.authService.updatePriceCheckStatusOfGroupOrder(order_GROUP_NO, status)
       .subscribe(
         (success) => {
           // this.nav.pop();

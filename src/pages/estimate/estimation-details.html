@@ -319,7 +319,7 @@
             </button>
         </div>
     </div>
-    <div *ngIf="order_type=='rejected'" padding>
+    <div *ngIf="order_type=='rejected1'" padding>
 
         <ion-card>
             <ion-item-divider color="selva">
@@ -545,7 +545,7 @@
             </button>
         </div>
     </div>
-    <div *ngIf="order_type=='estimate'" padding>
+    <div *ngIf="order_type=='estimate' || order_type=='rejected'" padding>
         <form (submit)="approvePriceCheck(priceForm)" #priceForm="ngForm">
             <!-- <form (ngSubmit)="submitOrder(ordersForm)" #ordersForm="ngForm"> -->
             <!-- <ion-card> -->
@@ -639,19 +639,22 @@
                                 <ion-option *ngFor="let item of products" [value]="item" (ionSelect)="onItemNameChange(item.productDetails,item.uom)" required>{{item.product_NAME}}</ion-option>
                             </ion-select> -->
             </ion-item>
-
-            <ion-item>
+            <ion-item *ngIf="order_type=='estimate'">
                 <ion-label color="selva" fixed>Distance</ion-label>
                 <ion-label>{{order.estimation.distanceKM}}</ion-label>
-                <!-- <ion-input [(ngModel)]="order.distanceKM" name="distanceKM" type="number" maxlength="3" placeholder="Enter the distance in KM"
-                    (ionBlur)="reCalculateTotals()" [disabled]="disableItemName" required> </ion-input> -->
             </ion-item>
-            <ion-item>
-                <!-- <ion-label color="selva" fixed>Total Units</ion-label> -->
+
+            <ion-item *ngIf="order_type=='rejected'">
+                <ion-label color="selva" fixed>Distance</ion-label>
+                <ion-input class="text-in" [(ngModel)]="order.estimation.distanceKM" name="distanceKM" type="number" maxlength="3" required></ion-input>
+            </ion-item>
+            <ion-item *ngIf="order_type=='estimate'">
                 <ion-label color="selva" fixed>Total {{uom}}</ion-label>
                 <ion-label>{{order.estimation.unitsTotal}}</ion-label>
-                <!-- <ion-input [(ngModel)]="order.unitsTotal" name="unitsTotal" type="number" maxlength="4" (change)="onChangeTotalUnits(order.unitsTotal)"
-                        placeholder="Enter the Total Units/Qty" [disabled]="disableItemName" required></ion-input> -->
+            </ion-item>
+            <ion-item *ngIf="order_type=='rejected'">
+                <ion-label color="selva" fixed>Total {{uom}}</ion-label>
+                <ion-input class="text-in" [(ngModel)]="order.estimation.unitsTotal" name="unitsTotal" type="number" maxlength="5" required></ion-input>
             </ion-item>
             <ion-list>
                 <ion-item-divider color="selva" *ngIf="order.estimation.productGroup=='QUARRY' || order.estimation.productGroup=='DESIGNER_TILES' || order.estimation.productGroup=='PAVER' || order.estimation.productGroup=='HOLLOW_BLOCK'">
@@ -678,9 +681,12 @@
                             </ion-item>
                         </ion-col>
                         <ion-col col-4>
-                            <ion-item>
+                            <ion-item *ngIf="(order_type=='estimated' || order_type=='rejected' ) && (role == '1' || role=='2')">
                                 <ion-label>{{order.estimation.unit1}}</ion-label>
-                                <!-- <ion-input [(ngModel)]="order.unit1" name="unit1" (ionChange)="onChangeUnit1(order.unit1)" type="number" maxlength="4"></ion-input> -->
+                            </ion-item>
+                            <ion-item *ngIf="order_type=='rejected' && role == '3'">
+                                <ion-input [(ngModel)]="order.estimation.unit1" name="unit1" (ionChange)="onChangeUnit1(order.estimation.unit1)" type="number"
+                                    maxlength="4"></ion-input>
                             </ion-item>
                         </ion-col>
                         <ion-col col-4>
@@ -905,11 +911,17 @@
                             <ion-label color="selva">Total Cost </ion-label>
                             <ion-label>{{displayINR(order.estimation.totalCost)}}</ion-label>
                         </ion-item>
-                        <ion-item>
+                        <ion-item *ngIf="order_type=='estimate'">
                             <ion-label color="selva">Product Cost </ion-label>
                             <ion-input class="text-in" [(ngModel)]="order.estimation.product.product_COST" name="product_COST" type="number" maxlength="5"
                                 required></ion-input>
                             <!-- <ion-label>{{displayINR(order.totalProductCost)}}</ion-label> -->
+                        </ion-item>
+                        <ion-item *ngIf="order_type=='rejected'">
+                            <ion-label color="selva">Product Cost </ion-label>
+                            <!-- <ion-input class="text-in" [(ngModel)]="order.estimation.product.product_COST" name="product_COST" type="number" maxlength="5"
+                                required></ion-input> -->
+                            <ion-label>{{displayINR(order.estimation.product.product_COST)}}</ion-label>
                         </ion-item>
                         <ion-item *ngIf="isToggledTax">
                             <ion-label color="selva">Tax </ion-label>
@@ -939,10 +951,11 @@
             <!-- </ion-card> -->
             <!-- <button ion-button block type="submit" [color]="'head'" [disabled]="!estimateForm.valid"> -->
             <div *ngIf="role == '1' || role == '2'" padding>
-                <button ion-button block color="one" type="submit" (click)="approveOrder(order)" [disabled]="!priceForm.valid || disableItemName || disableSiteName">
-                    Submit
+                <!-- <button *ngIf="order_type=='estimate'" ion-button block color="one" type="submit" (click)="updatePriceCheckOrder(order.orderGroupNo,'ORDER_PRICE_CHECK_APPROVED')"> -->
+                <button *ngIf="order_type=='estimate'" ion-button block color="one" type="submit" (click)="sendPriceCheck(order)">
+                    Approve
                 </button>
-                <button ion-button block color="danger" (click)="clearAllData(priceForm)">
+                <!-- <button ion-button block color="danger" (click)="clearAllData(priceForm)">
                     Clear All
                 </button>
                 <button ion-button block color="danger" (click)="sendPriceCheck(order)">
@@ -953,24 +966,28 @@
                 </button>
                 <button ion-button block color="danger" (click)="updatePriceCheckOrder(order.orderGroupNo)">
                     Delete New Estimation
-                </button>
+                </button> -->
             </div>
             <div *ngIf="role == '3'" padding>
-                <button ion-button block color="one" type="submit">
+                <!-- <button ion-button block color="one" type="submit">
                     Request Price
-                </button>
-                <button ion-button block color="danger" (click)="clearAllData(priceForm)">
+                </button> -->
+                <!-- <button ion-button block color="danger" (click)="clearAllData(priceForm)">
                     Clear All
-                </button>
-                <button ion-button block color="danger" (click)="sendPriceCheck(order)">
+                </button> -->
+                <!-- <button ion-button block color="danger" (click)="sendPriceCheck(order)">
                     Submit New Price Check
                 </button>
                 <button ion-button block color="danger" (click)="sendNewEstimation(order)">
                     Submit New Estimation
+                </button> -->
+                <button *ngIf="order_type=='estimate'" ion-button block color="danger" (click)="updatePriceCheckOrder(order.orderGroupNo,'DELETED')">
+                    Delete Estimation
                 </button>
-                <button ion-button block color="danger" (click)="updatePriceCheckOrder(order.orderGroupNo)">
-                    Delete New Estimation
+                <button *ngIf="order_type=='rejected'" ion-button block color="secondary" (click)="sendNewEstimation(order)">
+                    Submit Estimation
                 </button>
+
             </div>
         </form>
     </div>
