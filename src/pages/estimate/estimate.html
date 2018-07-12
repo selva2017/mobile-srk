@@ -514,9 +514,10 @@
         <!-- </ion-card> -->
         <!-- <button ion-button block type="submit" [color]="'head'" [disabled]="!estimateForm.valid"> -->
         <div *ngIf="role == '1' || role == '2'" padding>
-          <button ion-button block color="one" type="submit" [disabled]="!estimateForm.valid || disableItemName || disableSiteName">
-            Approve Price
-          </button>
+          <!-- <button ion-button block color="one" type="submit" [disabled]="!estimateForm.valid || disableItemName || disableSiteName"
+            (click)="sendNewEstimation(order)">
+            Submit Estimate
+          </button> -->
           <!-- <button ion-button block color="danger" (click)="clearAllData()">
                 Clear All
               </button> -->
@@ -528,9 +529,11 @@
 
         </div>
       </form>
-      <button ion-button block color="danger" (click)="clearAllData()">
-        Clear All
-      </button>
+      <div padding>
+        <button ion-button block color="danger" (click)="clearAllData()">
+          Clear All
+        </button>
+      </div>
       <!-- <button ion-button block color="danger" (click)="clearAllData(estimateForm)">
             Clear All
           </button> -->
@@ -589,7 +592,7 @@
       <!-- <ion-refresher (ionRefresh)="doRefreshEstimated($event)">
           <ion-refresher-content>Collecting Estimated Orders...</ion-refresher-content>
         </ion-refresher> -->
-      <button ion-item *ngFor="let item of pricing; let i = index" (click)="openNavDetailsPage(item,'estimate')" icon-start>
+      <button ion-item *ngFor="let item of pricing; let i = index" (click)="openNavDetailsPage(item,'requests')" icon-start>
         <!-- <button ion-item (click)="openNavDetailsPage(pricing,'estimate')" icon-start> -->
         <h2>#{{i+1}} - {{ item.estimation.customerName }}</h2>
         <!-- <h3>{{ item.product_NAME }}</h3>
@@ -641,7 +644,8 @@
       <ion-refresher (ionRefresh)="doRefreshRejected($event)">
         <ion-refresher-content>Collecting Rejected Orders...</ion-refresher-content>
       </ion-refresher>
-      <button ion-item *ngFor="let rejected_item of pricing1; let i = index" (click)="openNavDetailsPage(rejected_item,'rejected')" icon-start>
+      <button ion-item *ngFor="let rejected_item of pricing1; let i = index" (click)="openNavDetailsPage(rejected_item,'responses')"
+        icon-start>
         <!-- <button ion-item (click)="openNavDetailsPage(pricing,'estimate')" icon-start> -->
         <h2>#{{i+1}} - {{ rejected_item.estimation.customerName }}</h2>
         <!-- <h3>{{ rejected_item.product_NAME }}</h3>
