@@ -782,7 +782,7 @@
                                 <ion-item>
                                     <!-- <ion-input [(ngModel)]="item.qty" name={{item}} type="number" (ionBlur)="calculateTotals(item.qty)" text-right></ion-input> -->
                                     <!-- <ion-input [ngModel]="item.qty" (ngModelChange)="item.qty=$event" name={{item}} type="number" (ionBlur)="calculateTotals(item.qty)" text-right></ion-input> -->
-                                    <ion-input [(ngModel)]="row.qty" name={{row.product_DETAIL_ID}} type="number" text-right></ion-input>
+                                    <ion-input [(ngModel)]="row.qty" name={{row.product_DETAIL_ID}} type="number" text-center></ion-input>
                                     <!-- <ion-label>{{row.qty}}</ion-label> -->
                                     <!-- <ion-input [(ngModel)]="item.qty" name={{item}} type="number" (ionBlur)="calculateTotals(item.qty)" text-right></ion-input> -->
                                     <!-- <ion-input [(ngModel)]="item.qty" name={{item}} type="number" text-right></ion-input> -->
@@ -814,7 +814,7 @@
                             </ion-col>
                             <ion-col col-3>
                                 <ion-item>
-                                    <ion-input [(ngModel)]="row.qty" name={{row.product_DETAIL_ID}} type="number" text-right></ion-input>
+                                    <ion-input [(ngModel)]="row.qty" name={{row.product_DETAIL_ID}} type="number" text-center></ion-input>
                                     <!-- <ion-input [(ngModel)]="item.qty" name={{item}} type="number" (ionBlur)="calculateTotals(item.qty)" text-right></ion-input> -->
                                 </ion-item>
                             </ion-col>
@@ -1086,17 +1086,17 @@
             </ion-item>
             <ion-item>
                 <ion-label color="selva" fixed>Distance</ion-label>
-                <ion-label *ngIf="(order_type=='requests' || order_type=='responses' ) && (role == '1' || role=='2')">{{order.estimation.distanceKM}}</ion-label>
-                <ion-label *ngIf="order_type=='requests' && role == '3'" text-right>{{order.estimation.distanceKM}}</ion-label>
+                <ion-label *ngIf="(order_type=='requests' || order_type=='responses' ) && (role == '1' || role=='2')" text-center>{{order.estimation.distanceKM}}</ion-label>
+                <ion-label *ngIf="order_type=='requests' && role == '3'" text-center>{{order.estimation.distanceKM}}</ion-label>
                 <ion-input *ngIf="order_type=='responses' && role == '3'" class="text-in" [(ngModel)]="order.estimation.distanceKM" name="distanceKM"
-                    type="number" maxlength="3" required></ion-input>
+                    (ionChange)="reCalculateTotals()" type="number" maxlength="3" text-center required></ion-input>
             </ion-item>
             <ion-item>
                 <ion-label color="selva" fixed>Total {{uom}}</ion-label>
-                <ion-label *ngIf="(order_type=='requests' || order_type=='responses' ) && (role == '1' || role=='2')">{{order.estimation.unitsTotal}}</ion-label>
-                <ion-label *ngIf="order_type=='requests' && role == '3'" text-right>{{order.estimation.unitsTotal}}</ion-label>
+                <ion-label *ngIf="(order_type=='requests' || order_type=='responses' ) && (role == '1' || role=='2')" text-center>{{order.estimation.unitsTotal}}</ion-label>
+                <ion-label *ngIf="order_type=='requests' && role == '3'" text-center>{{order.estimation.unitsTotal}}</ion-label>
                 <ion-input *ngIf="order_type=='responses' && role == '3'" class="text-in" [(ngModel)]="order.estimation.unitsTotal" name="unitsTotal"
-                    type="number" maxlength="5" required></ion-input>
+                    (ionChange)="reCalculateTotals()" type="number" maxlength="5" text-center required></ion-input>
             </ion-item>
             <!-- <ion-item *ngIf="order_type=='responses'"> -->
             <!-- <ion-label color="selva" fixed>Total {{uom}}</ion-label> -->
@@ -1127,12 +1127,12 @@
                         </ion-col>
                         <ion-col col-4>
                             <ion-item>
-                                <ion-label *ngIf="(order_type=='requests' || order_type=='responses' ) && (role == '1' || role=='2')">{{order.estimation.unit1}}</ion-label>
-                                <ion-label *ngIf="order_type=='requests' && role == '3'" text-right>{{order.estimation.unit1}}</ion-label>
+                                <ion-label *ngIf="(order_type=='requests' || order_type=='responses' ) && (role == '1' || role=='2')" text-center>{{order.estimation.unit1}}</ion-label>
+                                <ion-label *ngIf="order_type=='requests' && role == '3'" text-center>{{order.estimation.unit1}}</ion-label>
                                 <!-- </ion-item> -->
                                 <!-- <ion-item *ngIf="order_type=='responses' && role == '3'"> -->
                                 <ion-input *ngIf="order_type=='responses' && role == '3'" [(ngModel)]="order.estimation.unit1" name="unit1" (ionChange)="onChangeUnit1(order.estimation.unit1)"
-                                    type="number" maxlength="4"></ion-input>
+                                    (ionChange)="reCalculateTotals()" type="number" maxlength="4"></ion-input>
                             </ion-item>
                         </ion-col>
                         <ion-col col-4>
@@ -1151,10 +1151,10 @@
                         </ion-col>
                         <ion-col col-4>
                             <ion-item>
-                                <ion-label *ngIf="(order_type=='requests' || order_type=='responses' ) && (role == '1' || role=='2')">{{order.estimation.unit2}}</ion-label>
-                                <ion-label *ngIf="order_type=='requests' && role == '3'" text-right>{{order.estimation.unit2}}</ion-label>
+                                <ion-label *ngIf="(order_type=='requests' || order_type=='responses' ) && (role == '1' || role=='2')" text-center>{{order.estimation.unit2}}</ion-label>
+                                <ion-label *ngIf="order_type=='requests' && role == '3'" text-center>{{order.estimation.unit2}}</ion-label>
                                 <ion-input *ngIf="order_type=='responses' && role == '3'" [(ngModel)]="order.estimation.unit2" name="unit2" (ionChange)="onChangeUnit2(order.estimation.unit2)"
-                                    type="number" maxlength="4"></ion-input>
+                                    (ionChange)="reCalculateTotals()" type="number" maxlength="4"></ion-input>
                                 <!-- <ion-input [(ngModel)]="order.unit2" name="unit2" (ionChange)="onChangeUnit2(order.unit2)" type="number" maxlength="4"></ion-input> -->
                             </ion-item>
                         </ion-col>
@@ -1174,10 +1174,10 @@
                         </ion-col>
                         <ion-col col-4>
                             <ion-item>
-                                <ion-label *ngIf="(order_type=='requests' || order_type=='responses' ) && (role == '1' || role=='2')">{{order.estimation.unit4}}</ion-label>
-                                <ion-label *ngIf="order_type=='requests' && role == '3'" text-right>{{order.estimation.unit4}}</ion-label>
+                                <ion-label *ngIf="(order_type=='requests' || order_type=='responses' ) && (role == '1' || role=='2')" text-center>{{order.estimation.unit4}}</ion-label>
+                                <ion-label *ngIf="order_type=='requests' && role == '3'" text-center>{{order.estimation.unit4}}</ion-label>
                                 <ion-input *ngIf="order_type=='responses' && role == '3'" [(ngModel)]="order.estimation.unit4" name="unit4" (ionChange)="onChangeUnit4(order.estimation.unit4)"
-                                    type="number" maxlength="4"></ion-input>
+                                    (ionChange)="reCalculateTotals()" type="number" maxlength="4"></ion-input>
                                 <!-- <ion-input [(ngModel)]="order.unit4" name="unit4" (ionChange)="onChangeUnit4(order.unit4)" type="number" maxlength="4"></ion-input> -->
                             </ion-item>
                         </ion-col>
@@ -1197,10 +1197,10 @@
                         </ion-col>
                         <ion-col col-4>
                             <ion-item>
-                                <ion-label *ngIf="(order_type=='requests' || order_type=='responses' ) && (role == '1' || role=='2')">{{order.estimation.unit6}}</ion-label>
-                                <ion-label *ngIf="order_type=='requests' && role == '3'" text-right>{{order.estimation.unit6}}</ion-label>
+                                <ion-label *ngIf="(order_type=='requests' || order_type=='responses' ) && (role == '1' || role=='2')" text-center>{{order.estimation.unit6}}</ion-label>
+                                <ion-label *ngIf="order_type=='requests' && role == '3'" text-center>{{order.estimation.unit6}}</ion-label>
                                 <ion-input *ngIf="order_type=='responses' && role == '3'" [(ngModel)]="order.estimation.unit6" name="unit6" (ionChange)="onChangeUnit6(order.estimation.unit6)"
-                                    type="number" maxlength="4"></ion-input>
+                                    (ionChange)="reCalculateTotals()" type="number" maxlength="4"></ion-input>
                                 <!-- <ion-input [(ngModel)]="order.unit6" name="unit6" (ionChange)="onChangeUnit6(order.unit6)" type="number" maxlength="4"></ion-input> -->
                             </ion-item>
                         </ion-col>
@@ -1240,10 +1240,10 @@
                                 <ion-item>
                                     <!-- <ion-input [(ngModel)]="item.qty" name={{item}} type="number" (ionBlur)="calculateTotals(item.qty)" text-right></ion-input> -->
                                     <!-- <ion-input [ngModel]="item.qty" (ngModelChange)="item.qty=$event" name={{item}} type="number" (ionBlur)="calculateTotals(item.qty)" text-right></ion-input> -->
-                                    <ion-label *ngIf="(order_type=='requests' || order_type=='responses' ) && (role == '1' || role=='2')">{{row.qty}}</ion-label>
-                                    <ion-label *ngIf="order_type=='requests' && role == '3'" text-right>{{row.qty}}</ion-label>
+                                    <ion-label *ngIf="(order_type=='requests' || order_type=='responses' ) && (role == '1' || role=='2')" text-center>{{row.qty}}</ion-label>
+                                    <ion-label *ngIf="order_type=='requests' && role == '3'" text-center>{{row.qty}}</ion-label>
                                     <ion-input *ngIf="order_type=='responses' && role == '3'" [(ngModel)]="row.qty" name={{row.product_DETAIL_ID}} type="number"
-                                        text-right></ion-input>
+                                        text-center></ion-input>
                                     <!-- <ion-label>{{row.qty}}</ion-label> -->
                                     <!-- <ion-input [(ngModel)]="item.qty" name={{item}} type="number" (ionBlur)="calculateTotals(item.qty)" text-right></ion-input> -->
                                     <!-- <ion-input [(ngModel)]="item.qty" name={{item}} type="number" text-right></ion-input> -->
@@ -1275,12 +1275,11 @@
                             </ion-col>
                             <ion-col col-3>
                                 <ion-item>
-                                    <ion-label *ngIf="(order_type=='requests' || order_type=='responses' ) && (role == '1' || role=='2')">{{row.qty}}</ion-label>
-                                    <ion-label *ngIf="order_type=='requests' && role == '3'" text-right>{{row.qty}}</ion-label>
+                                    <ion-label *ngIf="(order_type=='requests' || order_type=='responses' ) && (role == '1' || role=='2')" text-center>{{row.qty}}</ion-label>
+                                    <ion-label *ngIf="order_type=='requests' && role == '3'" text-center>{{row.qty}}</ion-label>
                                     <ion-input *ngIf="order_type=='responses' && role == '3'" [(ngModel)]="row.qty" name={{row.product_DETAIL_ID}} type="number"
                                         text-right></ion-input>
-
-                                    <ion-input [(ngModel)]="row.qty" name={{row.product_DETAIL_ID}} type="number" text-right></ion-input>
+                                    <!-- <ion-input [(ngModel)]="row.qty" name={{row.product_DETAIL_ID}} type="number" text-right></ion-input> -->
                                     <!-- <ion-input [(ngModel)]="item.qty" name={{item}} type="number" (ionBlur)="calculateTotals(item.qty)" text-right></ion-input> -->
                                 </ion-item>
                             </ion-col>
@@ -1321,12 +1320,12 @@
                         </ion-col>
                         <ion-col col-6>
                             <ion-item>
-                                <ion-label>{{order.estimation.fullLoads}}</ion-label>
+                                <ion-label text-center>{{order.estimation.fullLoads}}</ion-label>
                                 <!-- <ion-input [(ngModel)]="order.fullLoads" name="fullLoads" type="text"></ion-input> -->
                             </ion-item>
                         </ion-col>
                     </ion-row>
-                    <div *ngIf="partialLoadOption==true && order.partialLoad > 0">
+                    <div *ngIf="partialLoadOption==true">
                         <ion-row>
                             <ion-col col-6>
                                 <ion-item>
@@ -1335,7 +1334,7 @@
                             </ion-col>
                             <ion-col col-6>
                                 <ion-item>
-                                    <ion-label>1</ion-label>
+                                    <ion-label text-center>1</ion-label>
                                     <!-- <ion-input [(ngModel)]="order.partialLoad" name="partialLoad" type="text"></ion-input> -->
                                 </ion-item>
                             </ion-col>
@@ -1377,17 +1376,23 @@
                         <ion-item>
                             <ion-label color="selva">Product Cost </ion-label>
                             <ion-input *ngIf="order_type=='requests' && (role == '1' || role=='2')" class="text-in" [(ngModel)]="order.estimation.product.product_COST"
-                                name="product_COST" type="number" maxlength="5" required></ion-input>
+                                (ionChange)="reCalculateTotals()" name="product_COST" type="number" maxlength="5" required></ion-input>
                             <ion-label *ngIf="order_type=='requests' && role == '3'">{{displayINR(order.estimation.product.product_COST)}}</ion-label>
                             <ion-label *ngIf="order_type=='responses' &&  (role == '1' || role=='2' || role == '3')">{{displayINR(order.estimation.product.product_COST)}}</ion-label>
                             <!-- *ngIf="(order_type=='requests' || order_type=='responses' ) && (role == '1' || role=='2')">{{order.estimation.distanceKM}} -->
                             <!-- <ion-label>{{displayINR(order.totalProductCost)}}</ion-label> -->
                         </ion-item>
+                        <ion-item>
+                            <ion-label color="selva">Remarks </ion-label>
+                            <ion-label *ngIf="order_type=='responses' && role == '3'" class="text-in">{{order.remark}}</ion-label>
+                            <ion-input *ngIf="order_type=='requests' && (role == '1' || role=='2')" class="text-in" [(ngModel)]="order.remark" name="remark"
+                                type="text"></ion-input>
+                        </ion-item>
                         <!-- <ion-item *ngIf="order_type=='responses'"> -->
-                            <!-- <ion-label color="selva">Product Cost </ion-label> -->
-                            <!-- <ion-input class="text-in" [(ngModel)]="order.estimation.product.product_COST" name="product_COST" type="number" maxlength="5"
+                        <!-- <ion-label color="selva">Product Cost </ion-label> -->
+                        <!-- <ion-input class="text-in" [(ngModel)]="order.estimation.product.product_COST" name="product_COST" type="number" maxlength="5"
                                 required></ion-input> -->
-                            <!-- <ion-label>{{displayINR(order.estimation.product.product_COST)}}</ion-label> -->
+                        <!-- <ion-label>{{displayINR(order.estimation.product.product_COST)}}</ion-label> -->
                         <!-- </ion-item> -->
                         <ion-item *ngIf="isToggledTax">
                             <ion-label color="selva">Tax </ion-label>
@@ -1420,6 +1425,9 @@
                 <!-- <button *ngIf="order_type=='requests'" ion-button block color="one" type="submit" (click)="updatePriceCheckOrder(order.orderGroupNo,'ORDER_PRICE_CHECK_APPROVED')"> -->
                 <button *ngIf="order_type=='requests'" ion-button block color="one" type="submit" (click)="sendPriceCheck(order)">
                     Approve
+                </button>
+                <button *ngIf="order_type=='requests'" ion-button block color="danger" type="submit" (click)="updatePriceCheckOrder(order.orderGroupNo,'REJECTED')">
+                    Reject
                 </button>
                 <!-- <button ion-button block color="danger" (click)="clearAllData(priceForm)">
                     Clear All

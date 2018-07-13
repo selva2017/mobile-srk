@@ -14,10 +14,10 @@
   <ion-toolbar no-border-top [color]="isAndroid ? 'royal' : 'masters'">
     <ion-segment [(ngModel)]="category" [color]="'head'">
       <ion-segment-button value="weighed-orders" (click)="retrieveSubOrders('WEIGHED')">
-        Weighed
+        Out Pass
       </ion-segment-button>
       <ion-segment-button value="transit" (click)="retrieveSubOrders('TRANSIT')">
-        Transit
+        In Pass
       </ion-segment-button>
       <ion-segment-button value="delivered" (click)="retrieveSubOrders('DELIVERED')">
         Delivered
