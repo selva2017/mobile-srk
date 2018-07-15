@@ -124,7 +124,7 @@ export class FrontOfficePage {
           .subscribe(
             (list: SubOrders[]) => {
               this.approvedOrders = list;
-              // console.log(this.approvedOrders);
+              console.log(this.approvedOrders);
               this.loading.dismiss();
             },
             error => {

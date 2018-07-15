@@ -16,6 +16,7 @@ export interface Product {
   to_UNIT_TYPE: string;
   uom: string;
   uom_ID: string;
+  hsn: string;
   productDetails: [
     {
       product_ID: string;

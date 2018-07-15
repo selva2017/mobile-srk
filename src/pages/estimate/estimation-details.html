@@ -1384,9 +1384,15 @@
                         </ion-item>
                         <ion-item>
                             <ion-label color="selva">Remarks </ion-label>
-                            <ion-label *ngIf="order_type=='responses' && role == '3'" class="text-in">{{order.remark}}</ion-label>
-                            <ion-input *ngIf="order_type=='requests' && (role == '1' || role=='2')" class="text-in" [(ngModel)]="order.remark" name="remark"
-                                type="text"></ion-input>
+                            <ion-label class="text-in">{{order.remarkMgr}}</ion-label>
+                            <ion-label *ngIf="order_type=='responses' && role == '3'" class="text-in">{{order.remarkMgr}}</ion-label>
+                            <ion-input *ngIf="order_type=='requests' && (role == '1' || role=='2')" class="text-in" [(ngModel)]="order.remarkMgr" name="remarkMgr"
+                            type="text"></ion-input>
+                        </ion-item>
+                        <ion-item>
+                            <ion-label color="selva">Rep Remarks </ion-label>
+                            <ion-label class="text-in">{{order.remarkRep}}</ion-label>
+                            <ion-label *ngIf="order_type=='responses' && role == '3'" class="text-in">{{order.remarkRep}}</ion-label>
                         </ion-item>
                         <!-- <ion-item *ngIf="order_type=='responses'"> -->
                         <!-- <ion-label color="selva">Product Cost </ion-label> -->

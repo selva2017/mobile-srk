@@ -2,7 +2,9 @@ export interface Pricing {
     orderGroupNo: string;
     orderDate: string;
     status: string;
-    remark: string;
+    remarkRep: string;
+    remarkMgr: string;
+    onBehalf: string;
     estimation: {
         customerID: string;
         siteID: string;
@@ -98,7 +100,7 @@ export interface Pricing {
         salesRepName: string;
         referral1Name: string;
         referral2Name: string;
-        orderPriority: string;
+        priceCheckPriority: string;
     }
 }    // subOrders: string;
     // tax2: string;

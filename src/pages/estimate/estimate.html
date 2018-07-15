@@ -133,6 +133,17 @@
             [checked]="isToggledPriority"></ion-toggle>
           <!-- <ion-toggle color="secondary" (ionChange)="notifyPriorityOption(estimate.highPriority)" [checked]="isToggledPriority"></ion-toggle> -->
         </ion-item>
+        <div *ngIf="role == '1' || role == '2'">
+          <ion-item *ngIf="role == '1' || role == '2'">
+            <ion-label color="selva">On Behalf of</ion-label>
+            <!-- Need to add sales Rep name  -->
+            <ion-select [(ngModel)]="estimate.estimation.salesRep" name="onBehalf" [disabled]="disableSiteName">
+              <!-- <ion-option *ngFor="let customer of customers" [value]="customer.cust_ID" (ionSelect)="onSelectCustomer(customer.cust_ID,customer.cust_NAME)" -->
+              <ion-option *ngFor="let user of userList.users" [value]="user.employeeId" (ionSelect)="onSelectSalesRep(user.firstName,user.lastName)"
+                required>{{user.userName}}</ion-option>
+            </ion-select>
+          </ion-item>
+        </div>
 
         <ion-item-divider color="selva">
           Order Details
@@ -510,14 +521,30 @@
               </ion-item>
             </ion-col>
           </ion-row>
+          <ion-item>
+            <ion-label color="selva">Remarks</ion-label>
+            <ion-input class="text-in" [(ngModel)]="estimate.remarkRep" name="remarkRep" type="text"></ion-input>
+          </ion-item>
+
+          <ion-item *ngIf="itemGroup=='DESIGNER_TILES'">
+            <ion-label color="selva">Tiles Trans Cost/Km </ion-label>
+            <ion-label>{{transportPerKMCostTiles}}</ion-label>
+          </ion-item>
+          <ion-item *ngIf="itemGroup=='PAVER'">
+            <ion-label color="selva">Paver Trans Cost/Km </ion-label>
+            <ion-label>{{transportPerKMCostPavers}}</ion-label>
+          </ion-item>
+
         </ion-list>
+
+
         <!-- </ion-card> -->
         <!-- <button ion-button block type="submit" [color]="'head'" [disabled]="!estimateForm.valid"> -->
         <div *ngIf="role == '1' || role == '2'" padding>
-          <!-- <button ion-button block color="one" type="submit" [disabled]="!estimateForm.valid || disableItemName || disableSiteName"
-            (click)="sendNewEstimation(order)">
+          <button ion-button block color="one" type="submit" [disabled]="!estimateForm.valid || disableItemName || disableSiteName">
+            <!-- (click)="sendNewEstimation(order)"> -->
             Submit Estimate
-          </button> -->
+          </button>
           <!-- <button ion-button block color="danger" (click)="clearAllData()">
                 Clear All
               </button> -->
@@ -578,7 +605,7 @@
             </ion-row>
             <ion-row>
               <ion-col col-5>Sales Rep </ion-col>
-              <ion-col col-7>{{item.estimation.salesRep}} </ion-col>
+              <ion-col col-7>{{item.estimation.salesRepName}} </ion-col>
             </ion-row>
             <!-- <ion-row>
                 <ion-col col-5>Sales Rep Name</ion-col>
@@ -595,6 +622,7 @@
       <button ion-item *ngFor="let item of pricing; let i = index" (click)="openNavDetailsPage(item,'requests')" icon-start>
         <!-- <button ion-item (click)="openNavDetailsPage(pricing,'estimate')" icon-start> -->
         <h2>#{{i+1}} - {{ item.estimation.customerName }}</h2>
+        <h2>Priority # {{ item.priceCheckPriority }}</h2>
         <!-- <h3>{{ item.product_NAME }}</h3>
             <h3>Quantity : {{displayIndianNumber(item.total_ORDER_UNIT)}}</h3>
             <p>Total Cost     : {{ displayINR(item.total_COST) }}</p>
@@ -629,7 +657,7 @@
             </ion-row>
             <ion-row>
               <ion-col col-5>Sales Rep </ion-col>
-              <ion-col col-7>{{item.estimation.salesRep}} </ion-col>
+              <ion-col col-7>{{item.estimation.salesRepName}} </ion-col>
             </ion-row>
             <!-- <ion-row>
                       <ion-col col-5>Sales Rep Name</ion-col>
@@ -648,6 +676,7 @@
         icon-start>
         <!-- <button ion-item (click)="openNavDetailsPage(pricing,'estimate')" icon-start> -->
         <h2>#{{i+1}} - {{ rejected_item.estimation.customerName }}</h2>
+        <h2>Priority # {{ rejected_item.priceCheckPriority }}</h2>
         <!-- <h3>{{ rejected_item.product_NAME }}</h3>
             <h3>Quantity : {{displayIndianNumber(rejected_item.total_ORDER_UNIT)}}</h3>
             <p>Total Cost     : {{ displayINR(rejected_item.total_COST) }}</p>

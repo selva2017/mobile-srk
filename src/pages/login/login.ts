@@ -19,44 +19,46 @@ export class LoginPage {
     password: '',
   };
   isAuthenticated = false;
-  
-  constructor(public navCtrl: NavController, public authService: AuthService, public loadingCtrl: LoadingController, private toastCtrl: ToastController) {}
 
-  
+  constructor(public navCtrl: NavController, public authService: AuthService, public loadingCtrl: LoadingController, private toastCtrl: ToastController) { }
+
+
   doLogin(user) {
     this.showLoader();
     this.authService.login(this.loginData)
-        .subscribe(
+      .subscribe(
         success => {
-            console.log(success);
-            
-            if (success.statusMessage == "AUTH_SUCCESS") {
-              this.token = true;
-              this.token_name = success.token;
-              localStorage.setItem('token', this.token_name);
-              localStorage.setItem('role', success.role);
-              localStorage.setItem('employeeId', success.employeeId);
-              localStorage.setItem('companyId', success.companyId);
-              localStorage.setItem('isAuthenticated', 'true');
-              //console.log('Company Id -' + success.companyId);
-              console.log('Employee Id -' + localStorage.getItem('employeeId'));
-              // this.isAuthenticated = true;
-              this.navCtrl.setRoot(TabsPage);
-              this.loading.dismiss();
-            }
-              else {
-                this.token = false;
-                // this.isAuthenticated = false;
-                localStorage.setItem('isAuthenticated', 'false');
-                this.loading.dismiss();
-                // this.invalidLogin.emit(true);
-            }
+          console.log(success);
+
+          if (success.statusMessage == "AUTH_SUCCESS") {
+            this.token = true;
+            this.token_name = success.token;
+            localStorage.setItem('token', this.token_name);
+            localStorage.setItem('role', success.role);
+            localStorage.setItem('employeeId', success.employeeId);
+            localStorage.setItem('companyId', success.companyId);
+            localStorage.setItem('userName', success.firstName + ' '+ success.lastName);
+            localStorage.setItem('isAuthenticated', 'true');
+            //console.log('Company Id -' + success.companyId);
+            console.log('Employee Id -' + localStorage.getItem('employeeId'));
+            // this.isAuthenticated = true;
+            this.navCtrl.setRoot(TabsPage);
+            this.loading.dismiss();
+          }
+          else {
+            this.token = false;
+            // this.isAuthenticated = false;
+            localStorage.setItem('isAuthenticated', 'false');
+            this.loading.dismiss();
+            // this.invalidLogin.emit(true);
+            this.presentToast("Invalid Username or Password");
+          }
         },
         (error) => {
           this.loading.dismiss();
           this.presentToast(error);
         });
-}
+  }
   // doLogin() {
   //   this.showLoader();
   //   this.authService.login(this.loginData).then((result) => {
@@ -74,9 +76,9 @@ export class LoginPage {
     this.navCtrl.push(RegisterPage);
   }
 
-  showLoader(){
+  showLoader() {
     this.loading = this.loadingCtrl.create({
-        content: 'Authenticating...'
+      content: 'Authenticating...'
     });
 
     this.loading.present();
@@ -85,7 +87,9 @@ export class LoginPage {
   presentToast(msg) {
     let toast = this.toastCtrl.create({
       message: msg,
-      duration: 3000,
+      duration: 10000,
+      showCloseButton: true,
+      closeButtonText: 'Close',
       position: 'bottom',
       dismissOnPageChange: true
     });

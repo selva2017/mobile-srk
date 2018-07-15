@@ -43,4 +43,5 @@ export interface Orders {
     transport_KM_COST: string;
     uom: string;
     uom_ID: string;
+    order_PRORITY: string;
 }

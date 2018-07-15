@@ -36,7 +36,7 @@ export class RegisterPage {
           },
           (error) => {
             this.loading.dismiss();
-            this.presentToast(error);
+            this.presentToast("Please enter valida data...");
           });
       this.error_message = "";
     }
@@ -60,6 +60,8 @@ export class RegisterPage {
       message: msg,
       duration: 3000,
       position: 'bottom',
+      showCloseButton: true,
+      closeButtonText: 'Close',
       dismissOnPageChange: true
     });
 
