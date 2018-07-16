@@ -616,7 +616,7 @@
             </ion-item-divider>
             <ion-item>
                 <ion-label color="selva">Item Group</ion-label>
-                <ion-label>{{order.estimation.productGroupName}}</ion-label>
+                <ion-label>{{order.estimation.productGroup}}</ion-label>
                 <!-- <ion-select [(ngModel)]="order.productGroupName" name="item_Group_NAME">
                     <ion-option *ngFor="let row of productGroupModel" (ionSelect)="onItemGroupChange(row,row.product_GROUP_ID,row.division_ID)"
                     required>{{row.product_GROUP_NAME}}</ion-option>
@@ -629,7 +629,7 @@
             <!-- <ion-col col-4> -->
             <ion-item>
                 <ion-label color="selva">Item name</ion-label>
-                <ion-label>{{order.estimation.productGroup}}</ion-label>
+                <ion-label>{{order.estimation.productGroupName}}</ion-label>
                 <!-- </ion-item> -->
                 <!-- </ion-col> -->
                 <!-- <ion-col col-8>
@@ -1061,7 +1061,7 @@
             </ion-item-divider>
             <ion-item>
                 <ion-label color="selva">Item Group</ion-label>
-                <ion-label>{{order.estimation.productGroupName}}</ion-label>
+                <ion-label>{{order.estimation.productGroup}}</ion-label>
                 <!-- <ion-select [(ngModel)]="order.productGroupName" name="item_Group_NAME">
                     <ion-option *ngFor="let row of productGroupModel" (ionSelect)="onItemGroupChange(row,row.product_GROUP_ID,row.division_ID)"
                     required>{{row.product_GROUP_NAME}}</ion-option>
@@ -1069,13 +1069,13 @@
             </ion-item>
             <!-- </ion-col> -->
             <!-- </ion-row> -->
-
+            
             <!-- <ion-row> -->
-            <!-- <ion-col col-4> -->
-            <ion-item>
-                <ion-label color="selva">Item name</ion-label>
-                <ion-label>{{order.estimation.productGroup}}</ion-label>
-                <!-- </ion-item> -->
+                <!-- <ion-col col-4> -->
+                    <ion-item>
+                        <ion-label color="selva">Item name</ion-label>
+                        <ion-label>{{order.estimation.productGroupName}}</ion-label>
+                        <!-- </ion-item> -->
                 <!-- </ion-col> -->
                 <!-- <ion-col col-8>
                     <ion-item> -->
@@ -1383,11 +1383,11 @@
                             <!-- <ion-label>{{displayINR(order.totalProductCost)}}</ion-label> -->
                         </ion-item>
                         <ion-item>
-                            <ion-label color="selva">Remarks </ion-label>
+                            <ion-label color="selva">Manager Remarks </ion-label>
                             <ion-label class="text-in">{{order.remarkMgr}}</ion-label>
                             <ion-label *ngIf="order_type=='responses' && role == '3'" class="text-in">{{order.remarkMgr}}</ion-label>
                             <ion-input *ngIf="order_type=='requests' && (role == '1' || role=='2')" class="text-in" [(ngModel)]="order.remarkMgr" name="remarkMgr"
-                            type="text"></ion-input>
+                                type="text"></ion-input>
                         </ion-item>
                         <ion-item>
                             <ion-label color="selva">Rep Remarks </ion-label>

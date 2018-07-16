@@ -219,7 +219,7 @@ export class EstimatePage {
   role: string;
   retrieveAllPriceCheckOrders(status) {
     this.pricing = [];
-    console.log(status);
+    // console.log(status);
     this.showLoader("Collecting all Price check requests ....");
     this.authService.fetchAllOrdersNew(status)
       .subscribe(
@@ -1024,7 +1024,7 @@ export class EstimatePage {
     }
     this.unit6Total = this.estimate['estimation']['unit6'] * 6;
     this.unitSumTotal = this.unit1Total + this.unit2Total + this.unit4Total + this.unit6Total;
-    console.log(this.unitSumTotal);
+    // console.log(this.unitSumTotal);
     // this.estimate['estimation']['unit6Total'] = this.estimate['estimation']['unit6'] * 6;
     //console.log(this.productPricePerUnit);
     //console.log(this.loadingCostPerUnit);
@@ -1208,21 +1208,21 @@ export class EstimatePage {
     // this.tax2 = Number(this.estimate['estimation']['product']['product_TAX2']);
     // this.distanceKM = Number(this.estimate['estimation']['distanceKM']);
     // this.unitsTotal = Number(this.estimate['estimation']['unitsTotal']);
-    console.log(this.transportPerKMCostTiles);
-    console.log(this.unitsTotal);
-    console.log(this.distanceKM);
+    // console.log(this.transportPerKMCostTiles);
+    // console.log(this.unitsTotal);
+    // console.log(this.distanceKM);
 
     this.calculatedTransportCost = this.roundTransportCost((Number(this.distanceKM) * this.transportPerKMCostTiles) / Number(this.unitsTotal));
     // this.calculatedTransportCost = this.roundTransportCost((this.distanceKM * this.transportPerKMCostTiles) / this.unitsTotal);
-    console.log(this.calculatedTransportCost);
+    // console.log(this.calculatedTransportCost);
     this.calculatedSqFtUnitCost = this.loadingCostPerUnit + this.productPricePerUnit + this.calculatedTransportCost;
-    console.log(this.calculatedSqFtUnitCost);
+    // console.log(this.calculatedSqFtUnitCost);
     this.estimate['estimation']['sqftLoadingCost'] = this.loadingCostPerUnit;
-    console.log(this.estimate['estimation']['sqftLoadingCost']);
+    // console.log(this.estimate['estimation']['sqftLoadingCost']);
     this.estimate['estimation']['sqftTransportCost'] = this.calculatedTransportCost;
-    console.log(this.estimate['estimation']['sqftTransportCost']);
+    // console.log(this.estimate['estimation']['sqftTransportCost']);
     this.estimate['estimation']['sqftUnitCost'] = this.calculatedSqFtUnitCost;
-    console.log(this.estimate['estimation']['sqftUnitCost']);
+    // console.log(this.estimate['estimation']['sqftUnitCost']);
 
   }
   calculateHBCost() {
@@ -1332,7 +1332,7 @@ export class EstimatePage {
     this.authService.fetchProductDetailForGroup(product_group_id)
       .subscribe(
         (list: Product[]) => {
-          console.log(list);
+          // console.log(list);
           this.products = list;
           this.loading.dismiss();
           this.disableItemName = false;
@@ -1511,7 +1511,7 @@ export class EstimatePage {
   }
   priceCheckNew(estimateForm) {
     // console.log(this.estimate);
-    console.log(this.estimate['estimation']['salesRep']);
+    // console.log(this.estimate['estimation']['salesRep']);
     if (localStorage.getItem('role') == '3') {
       this.estimate['estimation']['salesRep'] = localStorage.getItem('employeeId');
       this.estimate['estimation']['salesRepName'] = localStorage.getItem('userName');
@@ -1605,7 +1605,7 @@ export class EstimatePage {
   }
 
   retrievePriceRequests(status) {
-    console.log("retrievePriceRequests");
+    // console.log("retrievePriceRequests");
     if (this.role == '1' || this.role == '2') {
       // this.retrieveAllEstimatedOrders();
       this.retrieveAllPriceCheckOrders(status);
@@ -1726,7 +1726,7 @@ export class EstimatePage {
     } else {
       this.estimate['estimation']['orderPriority'] = "0";
     }
-    console.log(this.estimate['estimation']['orderPriority']);
+    // console.log(this.estimate['estimation']['orderPriority']);
   }
   reCalculateTotals() {
     switch (this.itemGroup) {
@@ -1990,7 +1990,7 @@ export class EstimationDetailsPage {
     // }
     this.order = params.data.item;
     this.order_type = params.data.test;
-    console.log(this.order);
+    // console.log(this.order);
     // console.log(Number(this.order['estimation']['partialLoad']));
     if (Number(this.order['estimation']['partialLoad']) > 0) {
       this.partialLoadOption = true;
@@ -2379,27 +2379,27 @@ export class EstimationDetailsPage {
     this.showTransportCost = false;
     this.showLoadingCost = false;
     this.transportPerKMCostTiles = 50;
-    console.log(this.transportPerKMCostTiles);
+    // console.log(this.transportPerKMCostTiles);
     // this.loadingCostPerUnit = 2;
     // this.loadingCostPerUnit = Number(this.order['estimation']['product']['loading_COST']);
     // this.tax1 = Number(this.order['estimation']['product']['product_TAX1']);
     // this.tax2 = Number(this.order['estimation']['product']['product_TAX2']);
     // this.distanceKM = Number(this.order['estimation']['distanceKM']);
     // this.unitsTotal = Number(this.order['estimation']['unitsTotal']);
-    console.log(this.unitsTotal);
-    console.log(this.distanceKM);
+    // console.log(this.unitsTotal);
+    // console.log(this.distanceKM);
 
     this.calculatedTransportCost = this.roundTransportCost((Number(this.distanceKM) * this.transportPerKMCostTiles) / Number(this.unitsTotal));
     // this.calculatedTransportCost = this.roundTransportCost((this.distanceKM * this.transportPerKMCostTiles) / this.unitsTotal);
-    console.log(this.calculatedTransportCost);
+    // console.log(this.calculatedTransportCost);
     this.calculatedSqFtUnitCost = this.loadingCostPerUnit + this.productPricePerUnit + this.calculatedTransportCost;
-    console.log(this.calculatedSqFtUnitCost);
+    // console.log(this.calculatedSqFtUnitCost);
     this.order['estimation']['sqftLoadingCost'] = this.loadingCostPerUnit;
-    console.log(this.order['estimation']['sqftLoadingCost']);
+    // console.log(this.order['estimation']['sqftLoadingCost']);
     this.order['estimation']['sqftTransportCost'] = this.calculatedTransportCost;
-    console.log(this.order['estimation']['sqftTransportCost']);
+    // console.log(this.order['estimation']['sqftTransportCost']);
     this.order['estimation']['sqftUnitCost'] = this.calculatedSqFtUnitCost;
-    console.log(this.order['estimation']['sqftUnitCost']);
+    // console.log(this.order['estimation']['sqftUnitCost']);
 
   }
   calculateTotalPaverCost() {
