@@ -1,3 +1,4 @@
+import { AuthService } from './../../providers/auth-service/auth-service';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
@@ -15,77 +16,120 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class LeadPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  customers: any;
+  showSiteDetails: boolean = false;
+
+  siteOption() {
+    this.showSiteDetails = !this.showSiteDetails;
+  }
+  showReferenceDetails: boolean = false;
+
+  referenceOption() {
+    this.showReferenceDetails = !this.showReferenceDetails;
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad LeadPage');
-  }
-  doRefresh(refresher) {
-    console.log('Begin async operation', refresher);
+  reference_types = [
+    { id: 1, name: 'Engineer' },
+    { id: 2, name: 'Masteri' },
+    { id: 3, name: 'Other' },
 
-    setTimeout(() => {
-      console.log('Async operation has ended');
-      refresher.complete();
-    }, 2000);
-  }
-  orders = [] = [{
-    order_ID: '',
-    order_QTY: ''
-  }];
-  onSelectCustomer(customer_name) {
-    
-    console.log(customer_name);
-  }
-  public addrow(): void {
+  ];
 
-    console.log(this.orders);
-    
-    this.orders.push({
-      order_ID: '',
-      order_QTY: '',
-      
-    });
+  cities = [
+    { id: 1, name: 'Perundurai' },
+    { id: 2, name: 'Tiruppur' },
+    { id: 3, name: 'Coimbatore' },
+    { id: 4, name: 'Mettupalayam' },
+    { id: 5, name: 'Salem' },
+    { id: 7, name: 'Namakkal' }
+  ];
+  districts = [
+    { id: 1, name: 'Erode' },
+    { id: 2, name: 'Tiruppur' },
+    { id: 3, name: 'Coimbatore' },
+    { id: 4, name: 'Nilgris' },
+    { id: 5, name: 'Salem' },
+    { id: 7, name: 'Namakkal' }
+  ];
+  constructor(private authService: AuthService) {
+    this.customers = {
+      "sales_REP_ID": '',
+      "site_ID": '',
+      "cust_ID": "",
+      "cust_TYPE": "",
+      "cust_NAME": "",
+      "cust_ADDRESS_ID": "",
+      "cust_PHONE1": "",
+      "cust_PHONE2": "",
+      "cust_EMAIL": "",
+      "gst_NUMBER": "",
+      "balance": "",
+      "cust_CRM_ID": "",
+      "locality_ID": "",
+      "reference_ID": "",
+      "site_ADDRESS_ID": '',
+      "site_CONTACT_NUMBER": '',
+      "site_NAME": '',
+      "address": {
+        "addressId": "",
+        "address": "",
+        "city": "",
+        "district": "",
+        "pinCode": ""
+      }
+    }
+    //   this.customers = {
+    //   "sales_REP_ID": '1001',
+    //   "site_ID": '',
+    //   "cust_ID": "",
+    //   "cust_TYPE": "Contract",
+    //   "cust_NAME": "VV Traders",
+    //   "cust_ADDRESS_ID": "",
+    //   "cust_PHONE1": "1166778916",
+    //   "cust_PHONE2": "1010953117",
+    //   "cust_EMAIL": "s2@s.com",
+    //   "gst_NUMBER": "GST007",
+    //   "balance": "30000.00",
+    //   "cust_CRM_ID": "101",
+    //   "locality_ID": "",
+    //       "reference_ID": {
+    //     "name": "",
+    //     "type": "",
+    //     "phone": ""
+    //   },
+    //   "site_ADDRESS_ID": 'null',
+    //   "site_CONTACT_NUMBER": 'null',
+    //   "site_NAME": 'null',
+    //   "address" : {
+    //     "addressId": "",
+    //     "address": "123",
+    //     "city": "chennai",
+    //     "district": "ch",
+    //     "pinCode": "12345"
+    //   }
+    // }
   }
-   public products: Array < { product_ID: string, product_TYPE: string, product_NAME: string, product_GROUP: string, product_PRICE: string, product_QTY: string } > = [
-  {
-    "product_ID": "001",
-    "product_TYPE": "100",
-    "product_NAME": "Paper 100 inch",
-    "product_GROUP": "1000",
-    "product_PRICE": "100.00",
-    "product_QTY": ""
-  },
-  {
-    "product_ID": "002",
-    "product_TYPE": "100",
-    "product_NAME": "Copier",
-    "product_GROUP": "1001",
-    "product_PRICE": "20.00",
-    "product_QTY": ""
-  },
-  {
-    "product_ID": "003",
-    "product_TYPE": "101",
-    "product_NAME": "NoteBooks 3 x 12",
-    "product_GROUP": "1002",
-    "product_PRICE": "12.00",
-    "product_QTY": ""
-  },
-  {
-    "product_ID": "004",
-    "product_TYPE": "101",
-    "product_NAME": "NoteBooks 4 x 5",
-    "product_GROUP": "1003",
-    "product_PRICE": "15.00",
-    "product_QTY": ""
-  },
-  {
-    "product_ID": "005",
-    "product_TYPE": "102",
-    "product_NAME": "NoteBooks 5 x 9",
-    "product_GROUP": "1004",
-    "product_PRICE": "30.00",
-    "product_QTY": ""
-  }];
+
+  ngOnInit() {
+  }
+  onSubmitCustomer(customer) {
+    console.log(customer);
+    this.authService.customerAddition(this.customers)
+      .subscribe(
+        success => {
+          if (success == 200) {
+            // this.loading.dismiss();
+            // this.handleMessage("Success");
+          }
+          else {
+            // this.loading.dismiss();
+            // this.handleError("error");
+          }
+        },
+        (error) => {
+          // this.loading.dismiss();
+          // this.handleError("error");
+          // this.presentToast(error);
+        });
+  }
 }
