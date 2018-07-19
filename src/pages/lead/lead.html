@@ -95,18 +95,18 @@
         <ion-item>
           <ion-label color="selva" stacked stacked>Site Name</ion-label>
           <!-- <ion-input [(ngModel)]="customers.cust_NAME" name="cust_NAME" type="text"></ion-input> -->
-          <ion-input [(ngModel)]="customers.site_NAME" name="site_NAME" type="text"></ion-input>
+          <ion-input [(ngModel)]="customers.site.site_NAME" name="site_NAME" type="text"></ion-input>
         </ion-item>
 
         <ion-item>
           <ion-label color="selva" stacked>Site Address</ion-label>
           <!-- <ion-input [(ngModel)]="customers.address" name="address" type="text"></ion-input> -->
-          <ion-input [(ngModel)]="customers.site_ADDRESS_ID" name="site_ADDRESS_ID" type="text"></ion-input>
+          <ion-input [(ngModel)]="customers.site.address.address" name="site_ADDRESS_ID" type="text"></ion-input>
         </ion-item>
 
         <ion-item>
           <ion-label color="selva" stacked floating>City</ion-label>
-          <ion-select [(ngModel)]="customers.address.city" name="city" [compareWith]="">
+          <ion-select [(ngModel)]="customers.site.address.city" name="city" [compareWith]="">
             <ion-option *ngFor="let city of cities" [value]="city.name">{{city.name}} </ion-option>
           </ion-select>
         </ion-item>
@@ -122,7 +122,7 @@
       </ion-item> -->
         <ion-item>
           <ion-label color="selva" stacked>Site Contact Number</ion-label>
-          <ion-input [(ngModel)]="customers.site_CONTACT_NUMBER" name="site_CONTACT_NUMBER" type="number"></ion-input>
+          <ion-input [(ngModel)]="customers.site.site_CONTACT_NUMBER" name="site_CONTACT_NUMBER" type="number"></ion-input>
         </ion-item>
 
       </div>
@@ -137,18 +137,18 @@
         <ion-item>
           <ion-label color="selva" stacked floating>Type</ion-label>
           <!-- <ion-select [(ngModel)]="customers.reference_ID.type" name="reference_ID.type" [compareWith]=""> -->
-          <ion-select [(ngModel)]="customers.reference_ID" name="customers.reference_ID" [compareWith]="">
+          <ion-select [(ngModel)]="customers.reference.referer_TYPE" name="customers.referer_TYPE" [compareWith]="">
             <ion-option *ngFor="let type of reference_types" [value]="type.name">{{type.name}} </ion-option>
           </ion-select>
         </ion-item>
-        <!-- <ion-item>
+        <ion-item>
         <ion-label color="selva" stacked stacked>Name</ion-label>
-        <ion-input [(ngModel)]="customers.reference_ID.name" name="reference_ID.name" type="text"></ion-input>
+        <ion-input [(ngModel)]="customers.reference.refrer_NAME" name="refrer_NAME" type="text"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label color="selva" stacked>Contact Number</ion-label>
-        <ion-input [(ngModel)]="customers.reference_ID.phone" name="reference_ID.phone" type="number"></ion-input>
-      </ion-item> -->
+        <ion-input [(ngModel)]="customers.reference.referer_MOBILE1" name="referer_MOBILE1" type="number"></ion-input>
+      </ion-item>
 
       </div>
       <button ion-button block type="submit" (click)="onSubmitCustomer(customers)">

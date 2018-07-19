@@ -53,31 +53,80 @@ export class LeadPage {
   ];
   constructor(private authService: AuthService) {
     this.customers = {
-      "sales_REP_ID": '',
-      "site_ID": '',
+      "sales_REP_ID": 1001,
+      "site_ID": null,
       "cust_ID": "",
-      "cust_TYPE": "",
-      "cust_NAME": "",
+      "cust_TYPE": "Contract",
+      "cust_NAME": "VV Traders",
       "cust_ADDRESS_ID": "",
-      "cust_PHONE1": "",
-      "cust_PHONE2": "",
-      "cust_EMAIL": "",
-      "gst_NUMBER": "",
-      "balance": "",
-      "cust_CRM_ID": "",
+      "cust_PHONE1": "9566778916",
+      "cust_PHONE2": "7010953117",
+      "cust_EMAIL": "s2@s.com",
+      "gst_NUMBER": "GST007",
+      "balance": "30000.00",
+      "cust_CRM_ID": "101",
       "locality_ID": "",
       "reference_ID": "",
-      "site_ADDRESS_ID": '',
-      "site_CONTACT_NUMBER": '',
-      "site_NAME": '',
+      "site_ADDRESS_ID": null,
+      "site_CONTACT_NUMBER": null,
+      "site_NAME": null,
       "address": {
         "addressId": "",
-        "address": "",
-        "city": "",
-        "district": "",
-        "pinCode": ""
+        "address": "123",
+        "city": "chennai",
+        "district": "ch",
+        "pinCode": "12345"
+      },
+      "reference": {
+        "reference_ID": null,
+        "refrer_NAME": "Suresh",
+        "referer_ADDRESS": "no 13",
+        "referer_MOBILE1": "923456725",
+        "referer_MOBILE2": "82534212",
+        "referer_EMAIL": "a@gmail.com",
+        "referer_TYPE": "Manager"
+      },
+      "site": {
+        "cust_ID": null,
+        "site_ID": null,
+        "site_ADDRESS_ID": null,
+        "site_CONTACT_NUMBER": "82345634",
+        "site_NAME": "Tour",
+        "address": {
+          "addressId": "",
+          "address": "123",
+          "city": "chennai",
+          "district": "ch",
+          "pinCode": "12345"
+        }
       }
     }
+    // this.customers = {
+    //   "sales_REP_ID": '',
+    //   "site_ID": '',
+    //   "cust_ID": "",
+    //   "cust_TYPE": "",
+    //   "cust_NAME": "",
+    //   "cust_ADDRESS_ID": "",
+    //   "cust_PHONE1": "",
+    //   "cust_PHONE2": "",
+    //   "cust_EMAIL": "",
+    //   "gst_NUMBER": "",
+    //   "balance": "",
+    //   "cust_CRM_ID": "",
+    //   "locality_ID": "",
+    //   "reference_ID": "",
+    //   "site_ADDRESS_ID": '',
+    //   "site_CONTACT_NUMBER": '',
+    //   "site_NAME": '',
+    //   "address": {
+    //     "addressId": "",
+    //     "address": "",
+    //     "city": "",
+    //     "district": "",
+    //     "pinCode": ""
+    //   }
+    // }
     //   this.customers = {
     //   "sales_REP_ID": '1001',
     //   "site_ID": '',
@@ -113,7 +162,8 @@ export class LeadPage {
   ngOnInit() {
   }
   onSubmitCustomer(customer) {
-    console.log(customer);
+    console.log(customer);;
+    this.customers['sales_REP_ID'] = localStorage.getItem('employeeId');
     this.authService.customerAddition(this.customers)
       .subscribe(
         success => {

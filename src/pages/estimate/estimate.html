@@ -27,31 +27,42 @@
 
 <ion-content padding>
   <!-- <ion-refresher (ionRefresh)="doRefresh($event)">
-      <ion-refresher-content>Collecting Latest Data...</ion-refresher-content>
-    </ion-refresher> -->
+        <ion-refresher-content>Collecting Latest Data...</ion-refresher-content>
+      </ion-refresher> -->
   <div [ngSwitch]="category">
     <ion-list *ngSwitchCase="'new-requests'">
       <form (submit)="priceCheckNew(estimateForm)" #estimateForm="ngForm">
         <!-- <form (ngSubmit)="submitOrder(ordersForm)" #ordersForm="ngForm"> -->
         <!-- <ion-card> -->
         <!-- <ion-card-header>
-                <ion-card-title>Customer</ion-card-title>
-              </ion-card-header> -->
+                  <ion-card-title>Customer</ion-card-title>
+                </ion-card-header> -->
         <!-- <ion-row>
-                <ion-col>
-                  <ion-item>
-                    <ion-label>Name</ion-label>
-                  </ion-item>
-                </ion-col>
-                <ion-col>
-                  <ion-item>
-                    <ion-select [(ngModel)]="estimate.customerID" name="customerID">
-                      <ion-option *ngFor="let customer of customers" [value]="customer.cust_ID" (ionSelect)="onSelectCustomer(customer.cust_ID)"
-                        >{{customer.cust_NAME}} ({{customer.cust_PHONE1}})</ion-option>
-                    </ion-select>
-                  </ion-item>
-                </ion-col>
-              </ion-row> -->
+                  <ion-col>
+                    <ion-item>
+                      <ion-label>Name</ion-label>
+                    </ion-item>
+                  </ion-col>
+                  <ion-col>
+                    <ion-item>
+                      <ion-select [(ngModel)]="estimate.customerID" name="customerID">
+                        <ion-option *ngFor="let customer of customers" [value]="customer.cust_ID" (ionSelect)="onSelectCustomer(customer.cust_ID)"
+                          >{{customer.cust_NAME}} ({{customer.cust_PHONE1}})</ion-option>
+                      </ion-select>
+                    </ion-item>
+                  </ion-col>
+                </ion-row> -->
+        <div *ngIf="role == '1' || role == '2'">
+          <ion-item *ngIf="role == '1' || role == '2'">
+            <ion-label color="selva">On Behalf of</ion-label>
+            <!-- Need to add sales Rep name  -->
+            <ion-select [(ngModel)]="estimate.estimation.salesRep" name="onBehalf">
+              <!-- <ion-option *ngFor="let customer of customers" [value]="customer.cust_ID" (ionSelect)="onSelectCustomer(customer.cust_ID,customer.cust_NAME)" -->
+              <ion-option *ngFor="let user of userList.users" [value]="user.employeeId" (ionSelect)="onSelectSalesRep(user.firstName,user.lastName)"
+                required>{{user.userName}}</ion-option>
+            </ion-select>
+          </ion-item>
+        </div>
         <ion-item-divider color="selva">
           Customer Details
         </ion-item-divider>
@@ -61,24 +72,24 @@
             <ion-option *ngFor="let customer of customers" [value]="customer.cust_ID" (ionSelect)="onSelectCustomer(customer.cust_ID,customer.cust_NAME)"
               required>{{customer.cust_NAME}} ({{customer.cust_PHONE1}})</ion-option>
             <!-- <ion-option *ngFor="let customer of customers" [value]="customer.cust_ID" (ionSelect)="onSelectCustomer(customer.cust_ID)"
-                    required>{{customer.cust_NAME}} ({{customer.cust_PHONE1}})</ion-option> -->
+                      required>{{customer.cust_NAME}} ({{customer.cust_PHONE1}})</ion-option> -->
           </ion-select>
         </ion-item>
         <!-- <ion-item>
-                    <ion-label>Customer</ion-label>
-                    <ion-select [(ngModel)]="customer" name="customer" >
-                      <ion-option *ngFor="let customer of customers" [value]="customer" (change)="onChange(customer)"  text-left >{{customer.cust_NAME}}</ion-option>
-                    </ion-select>
-                  </ion-item> -->
+                      <ion-label>Customer</ion-label>
+                      <ion-select [(ngModel)]="customer" name="customer" >
+                        <ion-option *ngFor="let customer of customers" [value]="customer" (change)="onChange(customer)"  text-left >{{customer.cust_NAME}}</ion-option>
+                      </ion-select>
+                    </ion-item> -->
 
         <!-- <ion-row>
-                <ion-col col-4> -->
+                  <ion-col col-4> -->
         <ion-item>
           <ion-label color="selva" floating>Site</ion-label>
           <!-- </ion-item>
-                </ion-col>
-                <ion-col col-8>
-                  <ion-item> -->
+                  </ion-col>
+                  <ion-col col-8>
+                    <ion-item> -->
           <ion-select [(ngModel)]="estimate.estimation.siteID" name="siteID" [disabled]="disableSiteName">
             <ion-option *ngFor="let site of sites" [value]="site.site_ID" (ionSelect)="onSelectSite(site.site_NAME)" required>{{site.site_NAME}}</ion-option>
           </ion-select>
@@ -86,17 +97,17 @@
           <!-- <ion-input [(ngModel)]="customer.site_NAME" name="site_NAME" type="text" [disabled]="true" ></ion-input> -->
         </ion-item>
         <!-- </ion-col>
-              </ion-row> -->
+                </ion-row> -->
 
 
         <!-- <ion-row>
-                <ion-col col-4> -->
+                  <ion-col col-4> -->
         <ion-item>
           <ion-label color="selva" floating>Referer 1</ion-label>
           <!-- </ion-item>
-                </ion-col>
-                <ion-col col-8>
-                  <ion-item> -->
+                  </ion-col>
+                  <ion-col col-8>
+                    <ion-item> -->
           <!-- <ion-label>{{customer.reference_ID}}</ion-label> -->
           <!-- <ion-input [(ngModel)]="customer.reference_ID" name="reference_ID" type="text" [disabled]="true" ></ion-input> -->
           <ion-select [(ngModel)]="estimate.estimation.reference1" name="reference1" [disabled]="disableSiteName">
@@ -106,17 +117,17 @@
           </ion-select>
         </ion-item>
         <!-- </ion-col>
-              </ion-row> -->
+                </ion-row> -->
 
 
         <!-- <ion-row>
-                <ion-col col-4> -->
+                  <ion-col col-4> -->
         <ion-item>
           <ion-label color="selva" floating>Referer 2</ion-label>
           <!-- </ion-item>
-                </ion-col>
-                <ion-col col-8>
-                  <ion-item> -->
+                  </ion-col>
+                  <ion-col col-8>
+                    <ion-item> -->
           <!-- <ion-label>{{customer.reference_ID}}</ion-label> -->
           <!-- <ion-input [(ngModel)]="customer.reference_ID" name="reference_ID" type="text" [disabled]="true" ></ion-input> -->
           <ion-select [(ngModel)]="estimate.estimation.reference2" name="reference2" [disabled]="disableSiteName">
@@ -133,17 +144,7 @@
             [checked]="isToggledPriority"></ion-toggle>
           <!-- <ion-toggle color="secondary" (ionChange)="notifyPriorityOption(estimate.highPriority)" [checked]="isToggledPriority"></ion-toggle> -->
         </ion-item>
-        <div *ngIf="role == '1' || role == '2'">
-          <ion-item *ngIf="role == '1' || role == '2'">
-            <ion-label color="selva">On Behalf of</ion-label>
-            <!-- Need to add sales Rep name  -->
-            <ion-select [(ngModel)]="estimate.estimation.salesRep" name="onBehalf" [disabled]="disableSiteName">
-              <!-- <ion-option *ngFor="let customer of customers" [value]="customer.cust_ID" (ionSelect)="onSelectCustomer(customer.cust_ID,customer.cust_NAME)" -->
-              <ion-option *ngFor="let user of userList.users" [value]="user.employeeId" (ionSelect)="onSelectSalesRep(user.firstName,user.lastName)"
-                required>{{user.userName}}</ion-option>
-            </ion-select>
-          </ion-item>
-        </div>
+
 
         <ion-item-divider color="selva">
           Order Details
@@ -169,7 +170,7 @@
           <!-- </ion-item> -->
           <!-- </ion-col> -->
           <!-- <ion-col col-8>
-                    <ion-item> -->
+                      <ion-item> -->
           <!-- <ion-select name="product"> -->
           <ion-select [(ngModel)]="estimate.estimation.product" name="product" [disabled]="disableItemName">
             <ion-option *ngFor="let item of products" [value]="item" (ionSelect)="onItemNameChange(item.productDetails,item.uom)" required>{{item.product_NAME}}</ion-option>
@@ -180,10 +181,10 @@
           <ion-label color="selva" fixed>Distance</ion-label>
           <!-- </ion-item> -->
           <!-- </ion-col>
-                    <ion-col col-6> -->
+                      <ion-col col-6> -->
           <!-- <ion-item> -->
           <!-- <ion-input [(ngModel)]="estimate.distanceKM" name="distanceKM" type="number" maxlength="3" placeholder="Enter the distance in KM"
-                required></ion-input> -->
+                  required></ion-input> -->
           <ion-input [(ngModel)]="estimate.estimation.distanceKM" name="distanceKM" type="number" maxlength="3" placeholder="Enter the distance in KM"
             (ionBlur)="reCalculateTotals()" [disabled]="disableItemName" required> </ion-input>
           <!-- [readonly]="distanceReadOnly" required></ion-input> -->
@@ -196,18 +197,18 @@
           <!-- <ion-label color="selva" fixed>Total Units</ion-label> -->
           <ion-label color="selva" fixed>Total {{uom}}</ion-label>
           <!-- </ion-item>
-                </ion-col>
-                <ion-col col-6>
-                  <ion-item> -->
+                  </ion-col>
+                  <ion-col col-6>
+                    <ion-item> -->
           <ion-input [(ngModel)]="estimate.estimation.unitsTotal" name="unitsTotal" type="number" maxlength="4" (change)="onChangeTotalUnits(estimate.estimation.unitsTotal)"
             placeholder="Enter the Total Units/Qty" [disabled]="disableItemName" required></ion-input>
         </ion-item>
         <!-- </ion-col> -->
         <!-- </ion-row> -->
         <!-- </ion-card>
-        
-        
-            <ion-card> -->
+          
+          
+              <ion-card> -->
         <!-- <ion-card padding> -->
 
         <ion-list>
@@ -269,6 +270,25 @@
             <ion-row>
               <ion-col col-4>
                 <ion-item>
+                  <ion-label color="selva">3 Units</ion-label>
+                </ion-item>
+              </ion-col>
+              <ion-col col-4>
+                <ion-item>
+                  <ion-input [(ngModel)]="estimate.estimation.unit3" name="unit3" (ionChange)="onChangeUnit3(estimate.estimation.unit3)" type="number"
+                    maxlength="4"></ion-input>
+                </ion-item>
+              </ion-col>
+              <ion-col col-4>
+                <ion-item>
+                  <ion-label text-center>{{unit3Total}}</ion-label>
+                  <!-- <ion-input [(ngModel)]="estimate.unit2Total" name="unit2Total" type="text"></ion-input> -->
+                </ion-item>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col col-4>
+                <ion-item>
                   <ion-label color="selva">4 Units</ion-label>
                 </ion-item>
               </ion-col>
@@ -318,46 +338,46 @@
             </ion-row>
           </div>
           <!-- </ion-card>
-            <ion-card> -->
+              <ion-card> -->
           <div *ngIf="itemGroup=='DESIGNER_TILES'">
             <!-- <ion-card>
-                  <ion-row>
-                    <ion-col col-6>
-                      <div style="font-size:1.6rem;font-weight:bold;text-align: center;">Quantity</div>
-                    </ion-col>
-                    <ion-col col-6>
-                      <div style="font-size:1.6rem;font-weight:bold;text-align:center;">Loads</div>
-                    </ion-col>
-                  </ion-row>
-        
-                  <ion-row>
-                    <ion-col col-6>
-                      <ion-item>
-                        <ion-label>850 Units</ion-label>
-                      </ion-item>
-                    </ion-col>
-                    <ion-col col-6>
-                      <ion-item>
-                        <ion-label>{{estimate.fullLoads}}</ion-label>
-                      </ion-item>
-                    </ion-col>
-                  </ion-row>
-                  <div *ngIf="partialLoadOption==true && estimate.partialLoad > 0">
-        
+                    <ion-row>
+                      <ion-col col-6>
+                        <div style="font-size:1.6rem;font-weight:bold;text-align: center;">Quantity</div>
+                      </ion-col>
+                      <ion-col col-6>
+                        <div style="font-size:1.6rem;font-weight:bold;text-align:center;">Loads</div>
+                      </ion-col>
+                    </ion-row>
+          
                     <ion-row>
                       <ion-col col-6>
                         <ion-item>
-                          <ion-label>{{estimate.partialLoad}} Units</ion-label>
+                          <ion-label>850 Units</ion-label>
                         </ion-item>
                       </ion-col>
                       <ion-col col-6>
                         <ion-item>
-                          <ion-label>1</ion-label>
+                          <ion-label>{{estimate.fullLoads}}</ion-label>
                         </ion-item>
                       </ion-col>
                     </ion-row>
-                  </div>
-                </ion-card> -->
+                    <div *ngIf="partialLoadOption==true && estimate.partialLoad > 0">
+          
+                      <ion-row>
+                        <ion-col col-6>
+                          <ion-item>
+                            <ion-label>{{estimate.partialLoad}} Units</ion-label>
+                          </ion-item>
+                        </ion-col>
+                        <ion-col col-6>
+                          <ion-item>
+                            <ion-label>1</ion-label>
+                          </ion-item>
+                        </ion-col>
+                      </ion-row>
+                    </div>
+                  </ion-card> -->
 
             <!-- <ion-card> -->
             <div *ngFor="let item of selectedProduct">
@@ -420,8 +440,8 @@
             </ion-row>
           </div>
           <!-- <div *ngIf="itemGroup=='CRUSHER / BUNKAR'">
-                inside crusher
-              </div> -->
+                  inside crusher
+                </div> -->
           <div *ngIf="itemGroup=='HOLLOW_BLOCK'">
             <!-- <div *ngIf="itemGroup=='Aggregate'"> -->
             <ion-row>
@@ -465,7 +485,7 @@
         </ion-list>
         <!-- </ion-card> -->
         <!-- </ion-card>
-            <ion-card> -->
+              <ion-card> -->
         <!-- <ion-card padding> -->
 
         <ion-list *ngIf="showCostSummary">
@@ -546,8 +566,8 @@
             Submit Estimate
           </button>
           <!-- <button ion-button block color="danger" (click)="clearAllData()">
-                Clear All
-              </button> -->
+                  Clear All
+                </button> -->
         </div>
         <div *ngIf="role == '3'" padding>
           <button ion-button block color="one" type="submit" [disabled]="!estimateForm.valid || disableItemName || disableSiteName">
@@ -562,8 +582,8 @@
         </button>
       </div>
       <!-- <button ion-button block color="danger" (click)="clearAllData(estimateForm)">
-            Clear All
-          </button> -->
+              Clear All
+            </button> -->
     </ion-list>
 
     <ion-list *ngSwitchCase="'all-my-requests-old'">
@@ -575,10 +595,10 @@
         <!-- <h3>{{ item.product_NAME }}</h3> -->
         <!-- <h3>Quantity : {{displayIndianNumber(item.total_ORDER_UNIT)}}</h3> -->
         <!-- <p>Total Cost     : {{ displayINR(item.total_COST) }}</p>
-          <p>Order          : {{ item.order_GROUP_NO }} </p>
-          <p>Date           : {{item.order_DT}}</p>
-          <p>Sales Rep ID   : {{item.sales_REP_ID}}</p>
-          <p>Sales Rep Name : {{item.sales_REP_NAME}}</p> -->
+            <p>Order          : {{ item.order_GROUP_NO }} </p>
+            <p>Date           : {{item.order_DT}}</p>
+            <p>Sales Rep ID   : {{item.sales_REP_ID}}</p>
+            <p>Sales Rep Name : {{item.sales_REP_NAME}}</p> -->
         <p>
           <ion-grid>
             <ion-row>
@@ -608,28 +628,28 @@
               <ion-col col-7>{{item.estimation.salesRepName}} </ion-col>
             </ion-row>
             <!-- <ion-row>
-                <ion-col col-5>Sales Rep Name</ion-col>
-                <ion-col col-7>{{item.sales_REP_NAME}} </ion-col>
-              </ion-row> -->
+                  <ion-col col-5>Sales Rep Name</ion-col>
+                  <ion-col col-7>{{item.sales_REP_NAME}} </ion-col>
+                </ion-row> -->
           </ion-grid>
         </p>
       </button>
     </ion-list>
     <ion-list *ngSwitchCase="'all-my-requests'">
       <!-- <ion-refresher (ionRefresh)="doRefreshEstimated($event)">
-          <ion-refresher-content>Collecting Estimated Orders...</ion-refresher-content>
-        </ion-refresher> -->
+            <ion-refresher-content>Collecting Estimated Orders...</ion-refresher-content>
+          </ion-refresher> -->
       <button ion-item *ngFor="let item of pricing; let i = index" (click)="openNavDetailsPage(item,'requests')" icon-start>
         <!-- <button ion-item (click)="openNavDetailsPage(pricing,'estimate')" icon-start> -->
         <h2>#{{i+1}} - {{ item.estimation.customerName }}</h2>
         <h2>Priority # {{ item.priceCheckPriority }}</h2>
         <!-- <h3>{{ item.product_NAME }}</h3>
-            <h3>Quantity : {{displayIndianNumber(item.total_ORDER_UNIT)}}</h3>
-            <p>Total Cost     : {{ displayINR(item.total_COST) }}</p>
-                <p>Order          : {{ item.order_GROUP_NO }} </p>
-                <p>Date           : {{pricing.order_DT}}</p>
-                <p>Sales Rep ID   : {{pricing.sales_REP_ID}}</p>
-                <p>Sales Rep Name : {{pricing.sales_REP_NAME}}</p> -->
+              <h3>Quantity : {{displayIndianNumber(item.total_ORDER_UNIT)}}</h3>
+              <p>Total Cost     : {{ displayINR(item.total_COST) }}</p>
+                  <p>Order          : {{ item.order_GROUP_NO }} </p>
+                  <p>Date           : {{pricing.order_DT}}</p>
+                  <p>Sales Rep ID   : {{pricing.sales_REP_ID}}</p>
+                  <p>Sales Rep Name : {{pricing.sales_REP_NAME}}</p> -->
         <p>
           <ion-grid>
             <ion-row>
@@ -660,9 +680,9 @@
               <ion-col col-7>{{item.estimation.salesRepName}} </ion-col>
             </ion-row>
             <!-- <ion-row>
-                      <ion-col col-5>Sales Rep Name</ion-col>
-                      <ion-col col-7>{{pricing.sales_REP_NAME}} </ion-col>
-                    </ion-row> -->
+                        <ion-col col-5>Sales Rep Name</ion-col>
+                        <ion-col col-7>{{pricing.sales_REP_NAME}} </ion-col>
+                      </ion-row> -->
           </ion-grid>
         </p>
       </button>
@@ -678,12 +698,12 @@
         <h2>#{{i+1}} - {{ rejected_item.estimation.customerName }}</h2>
         <h2>Priority # {{ rejected_item.priceCheckPriority }}</h2>
         <!-- <h3>{{ rejected_item.product_NAME }}</h3>
-            <h3>Quantity : {{displayIndianNumber(rejected_item.total_ORDER_UNIT)}}</h3>
-            <p>Total Cost     : {{ displayINR(rejected_item.total_COST) }}</p>
-                <p>Order          : {{ rejected_item.order_GROUP_NO }} </p>
-                <p>Date           : {{pricing.order_DT}}</p>
-                <p>Sales Rep ID   : {{pricing.sales_REP_ID}}</p>
-                <p>Sales Rep Name : {{pricing.sales_REP_NAME}}</p> -->
+              <h3>Quantity : {{displayIndianNumber(rejected_item.total_ORDER_UNIT)}}</h3>
+              <p>Total Cost     : {{ displayINR(rejected_item.total_COST) }}</p>
+                  <p>Order          : {{ rejected_item.order_GROUP_NO }} </p>
+                  <p>Date           : {{pricing.order_DT}}</p>
+                  <p>Sales Rep ID   : {{pricing.sales_REP_ID}}</p>
+                  <p>Sales Rep Name : {{pricing.sales_REP_NAME}}</p> -->
         <p>
           <ion-grid>
             <ion-row>
@@ -714,9 +734,9 @@
               <ion-col col-7>{{rejected_item.estimation.salesRep}} </ion-col>
             </ion-row>
             <!-- <ion-row>
-                      <ion-col col-5>Sales Rep Name</ion-col>
-                      <ion-col col-7>{{pricing.sales_REP_NAME}} </ion-col>
-                    </ion-row> -->
+                        <ion-col col-5>Sales Rep Name</ion-col>
+                        <ion-col col-7>{{pricing.sales_REP_NAME}} </ion-col>
+                      </ion-row> -->
           </ion-grid>
         </p>
       </button>
