@@ -124,7 +124,7 @@ export class FrontOfficePage {
           .subscribe(
             (list: SubOrders[]) => {
               this.approvedOrders = list;
-              console.log(this.approvedOrders);
+              // console.log(this.approvedOrders);
               this.loading.dismiss();
             },
             error => {
@@ -175,7 +175,7 @@ export class FrontOfficePage {
   }
 
   updateSubOrder(sub_order_number, status, refresh_list) {
-    console.log(sub_order_number, status, refresh_list);
+    // console.log(sub_order_number, status, refresh_list);
     // this.showLoader();
     // this.showLoader("Updating the Order....");
     this.authService.updateStatusOfSubOrder(sub_order_number, status)

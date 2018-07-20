@@ -304,7 +304,7 @@ export class EstimatePage {
         (list) => {
           // this.pricing1 = list;
           this.userList = list;
-          console.log(list);
+          // console.log(list);
           // this.loading.dismiss();
         },
         error => {
@@ -1515,7 +1515,7 @@ export class EstimatePage {
     }
   }
   estimateOrder(estimateForm) {
-    console.log(this.estimate);
+    // console.log(this.estimate);
     // this.doEstimation();
 
     this.estimate['estimation']['salesRep'] = localStorage.getItem('employeeId');

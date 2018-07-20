@@ -45,7 +45,7 @@ export class LoadingPage {
     refresher.complete();
   }
   updateSubOrder(sub_order_number, status, refresh_list) {
-    console.log(sub_order_number, status);
+    // console.log(sub_order_number, status);
     // this.showLoader();
     // this.showLoader("Updating the Order....");
     this.authService.updateStatusOfSubOrder(sub_order_number, status)
