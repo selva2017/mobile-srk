@@ -1,19 +1,19 @@
 <ion-header>
-        <ion-navbar [color]="'head'">
-            <ion-buttons left>
-                <button ion-button icon-only menuToggle>
-                    <ion-icon name="menu"></ion-icon>
-                </button>
-            </ion-buttons>
-            <ion-title center>Order Details</ion-title>
-            <ion-buttons right>
-                <img alt="logo" height="40" src="assets/imgs/srk-0.png">
-            </ion-buttons>
-        </ion-navbar>
-    </ion-header>
-    
-    <ion-content>
-        <!-- <ion-card padding>
+    <ion-navbar [color]="'head'">
+        <ion-buttons left>
+            <button ion-button icon-only menuToggle>
+                <ion-icon name="menu"></ion-icon>
+            </button>
+        </ion-buttons>
+        <ion-title center>Order Details</ion-title>
+        <ion-buttons right>
+            <img alt="logo" height="40" src="assets/imgs/srk-0.png">
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <!-- <ion-card padding>
             <ion-card-header>
                 {{ order.customer_NAME}}
             </ion-card-header>
@@ -23,7 +23,7 @@
             <p>Taxable {{order.taxable_STATUS}}</p>
             <p>Reference 1 {{order.refrerel1_NAME}}</p>
             <p>Reference 2 {{order.refrerel2_NAME}}</p> -->
-        <!-- <ion-item stacked>
+    <!-- <ion-item stacked>
                 <ion-label>Order #</ion-label>
                 <ion-label>{{order.order_GROUP_NO }}</ion-label>
             </ion-item>
@@ -47,66 +47,66 @@
                 <ion-label>Reference 2</ion-label>
                 <ion-label>{{order.refrerel2_NAME}}</ion-label>
             </ion-item> -->
-        <!-- </ion-card> -->
-        <div *ngIf="order_type=='estimate-1'" padding>
-    
-            <ion-card>
-                <ion-item-divider color="selva">
-                    Order Summary : {{order.estimation.customerName}}
-                </ion-item-divider>
-                <ion-grid>
-                    <ion-row>
-                        <ion-col col-5>Site</ion-col>
-                        <ion-col col-7>{{order.site_NAME}}</ion-col>
-                    </ion-row>
-                    <ion-row>
-                        <ion-col col-5>Order #</ion-col>
-                        <ion-col col-7>{{order.order_GROUP_NO}}</ion-col>
-                    </ion-row>
-                    <ion-row>
-                        <ion-col col-5>Referer 1</ion-col>
-                        <ion-col col-7>{{order.refrerel1_NAME}}</ion-col>
-                    </ion-row>
-                    <ion-row>
-                        <ion-col col-5>Referer 2</ion-col>
-                        <ion-col col-7>{{order.refrerel2_NAME}}</ion-col>
-                    </ion-row>
-                    <ion-row>
-                        <ion-col col-5>Distance</ion-col>
-                        <ion-col col-7>{{displayIndianNumber(order.delivery_DISTANCE)}} Kms</ion-col>
-                    </ion-row>
-                    <ion-row>
-                        <ion-col col-5>Taxable</ion-col>
-                        <ion-col col-7>{{order.taxable_STATUS}}</ion-col>
-                    </ion-row>
-                </ion-grid>
-            </ion-card>
-            <ion-card>
-                <ion-item-divider color="selva">
-                    Product Summary : {{order.product_NAME}}
-                </ion-item-divider>
-                <ion-grid>
-                    <ion-row>
-                        <ion-col col-5>Product Group</ion-col>
-                        <ion-col col-7>{{order.product_GROUP}}</ion-col>
-                    </ion-row>
-                    <ion-row>
-                        <ion-col col-5>Cost per Unit</ion-col>
-                        <!-- <ion-col col-7>{{displayINR(order.product_UNIT_COST)}}</ion-col> -->
-                        <ion-col col-7>
-                            <ion-input class="text-in" [(ngModel)]="order.product_UNIT_COST" name="product_UNIT_COST" type="number" maxlength="5" required></ion-input>
-                        </ion-col>
-                    </ion-row>
-                    <ion-row>
-                        <ion-col col-5>Total Units</ion-col>
-                        <ion-col col-7>{{displayINR(order.total_ORDER_UNIT)}}</ion-col>
-                    </ion-row>
-                </ion-grid>
-                <!-- <h2>Product Group {{order.product_GROUP}}</h2> -->
-                <!-- <h3>Product {{order.product_NAME}}</h3> -->
-                <!-- <p>Cost per Unit {{displayINR(order.product_UNIT_COST)}}</p> -->
-                <!-- <p>Total Units {{displayIndianNumber(order.total_ORDER_UNIT)}}</p> -->
-                <!-- <ion-item stacked>
+    <!-- </ion-card> -->
+    <div *ngIf="order_type=='estimate-1'" padding>
+
+        <ion-card>
+            <ion-item-divider color="selva">
+                Order Summary : {{order.estimation.customerName}}
+            </ion-item-divider>
+            <ion-grid>
+                <ion-row>
+                    <ion-col col-5>Site</ion-col>
+                    <ion-col col-7>{{order.site_NAME}}</ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col col-5>Order #</ion-col>
+                    <ion-col col-7>{{order.order_GROUP_NO}}</ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col col-5>Referer 1</ion-col>
+                    <ion-col col-7>{{order.refrerel1_NAME}}</ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col col-5>Referer 2</ion-col>
+                    <ion-col col-7>{{order.refrerel2_NAME}}</ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col col-5>Distance</ion-col>
+                    <ion-col col-7>{{displayIndianNumber(order.delivery_DISTANCE)}} Kms</ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col col-5>Taxable</ion-col>
+                    <ion-col col-7>{{order.taxable_STATUS}}</ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-card>
+        <ion-card>
+            <ion-item-divider color="selva">
+                Product Summary : {{order.product_NAME}}
+            </ion-item-divider>
+            <ion-grid>
+                <ion-row>
+                    <ion-col col-5>Product Group</ion-col>
+                    <ion-col col-7>{{order.product_GROUP}}</ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col col-5>Cost per Unit</ion-col>
+                    <!-- <ion-col col-7>{{displayINR(order.product_UNIT_COST)}}</ion-col> -->
+                    <ion-col col-7>
+                        <ion-input class="text-in" [(ngModel)]="order.product_UNIT_COST" name="product_UNIT_COST" type="number" maxlength="5" required></ion-input>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col col-5>Total Units</ion-col>
+                    <ion-col col-7>{{displayINR(order.total_ORDER_UNIT)}}</ion-col>
+                </ion-row>
+            </ion-grid>
+            <!-- <h2>Product Group {{order.product_GROUP}}</h2> -->
+            <!-- <h3>Product {{order.product_NAME}}</h3> -->
+            <!-- <p>Cost per Unit {{displayINR(order.product_UNIT_COST)}}</p> -->
+            <!-- <p>Total Units {{displayIndianNumber(order.total_ORDER_UNIT)}}</p> -->
+            <!-- <ion-item stacked>
                 <ion-label>Product Group</ion-label>
                 <ion-label>{{order.product_GROUP}}</ion-label>
             </ion-item>
@@ -122,10 +122,543 @@
                 <ion-label>Total Units</ion-label>
                 <ion-label>{{displayIndianNumber(order.total_ORDER_UNIT)}}</ion-label>
             </ion-item> -->
-                <div *ngIf="order.orderAggregateUnits?.length > 0">
-                    <!-- <div *ngFor="let row of order.orderAggregateUnits"> -->
-                    <!-- {{row.unit_TYPE}} -->
-                    <!-- {{row.qty}} -->
+            <div *ngIf="order.orderAggregateUnits?.length > 0">
+                <!-- <div *ngFor="let row of order.orderAggregateUnits"> -->
+                <!-- {{row.unit_TYPE}} -->
+                <!-- {{row.qty}} -->
+                <ion-row>
+                    <ion-col col-4>
+                        <div style="font-size:1.6rem;font-weight:bold;text-align: center;">Capacity</div>
+                    </ion-col>
+                    <ion-col col-4>
+                        <div style="font-size:1.6rem;font-weight:bold;text-align:center;">Loads</div>
+                    </ion-col>
+                    <ion-col col-4>
+                        <div style="font-size:1.6rem;font-weight:bold;text-align:center;">Total Units</div>
+                    </ion-col>
+                </ion-row>
+                <ion-row *ngFor="let row of order.orderAggregateUnits">
+                    <ion-col col-4>
+                        <ion-item>
+                            <ion-label color="selva">{{row.unit_TYPE}} Unit</ion-label>
+                        </ion-item>
+                    </ion-col>
+                    <ion-col col-4>
+                        <ion-item>
+                            <!-- <ion-label color="selva">{{row.quantity}} </ion-label> -->
+                            <!-- <ion-input [(ngModel)]="row.quantity" name="quantity" (ionChange)="onChangeUnit1(estimate.unit1)" type="number" maxlength="4"></ion-input> -->
+                            <ion-input [(ngModel)]="row.quantity" name="quantity" type="number" maxlength="4"></ion-input>
+                        </ion-item>
+                    </ion-col>
+                    <ion-col col-4>
+                        <ion-item>
+                            <ion-label text-center>{{row.quantity * row.unit_TYPE}}</ion-label>
+                            <!-- <ion-input [(ngModel)]="estimate.unit1Total" name="unit1Total" type="text" read-only></ion-input> -->
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
+
+                <ion-row>
+                    <ion-col col-8>
+                        <ion-item>
+                            <ion-label text-center style="font-size:1.6rem;font-weight:bold;">Total Units</ion-label>
+                        </ion-item>
+                    </ion-col>
+                    <ion-col col-4>
+                        <ion-item>
+                            <ion-label text-center style="font-weight:bold;">{{order.total_ORDER_UNIT}}</ion-label>
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
+                <!-- </div> -->
+            </div>
+            <div *ngIf="subOrders?.length > 0 && subOrders?.length != 1">
+                <!-- <ion-card> -->
+
+                <ion-item-divider color="light">
+                    Suborder Details
+                </ion-item-divider>
+                <!-- <ion-card-header>Order Details</ion-card-header> -->
+                <ion-grid *ngFor="let row of subOrders">
+                    <ion-row>
+                        <ion-col col-6>Unit {{displayIndianNumber(row.unit_TYPE)}} </ion-col>
+                        <ion-col col-6>{{displayIndianNumber(row.unit)}}</ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col col-5>Total Cost:</ion-col>
+                        <ion-col col-7>{{displayINR(row.order_TOTAL_COST)}}</ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col col-5>Transport:</ion-col>
+                        <ion-col col-7>{{displayINR(row.order_TRANSPORT_COST)}}</ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col col-5>Tax 1:</ion-col>
+                        <ion-col col-7>{{displayINR(row.order_TAX1)}} </ion-col>
+                        <ion-col col-5>Tax 2:</ion-col>
+                        <ion-col col-5> {{displayINR(row.order_TAX2)}}</ion-col>
+                    </ion-row>
+                </ion-grid>
+
+                <!-- <ion-list *ngFor="let row of subOrders">
+                    <h2>Unit(s): {{displayIndianNumber(row.unit_TYPE)}} Load: {{displayIndianNumber(row.unit)}}</h2>
+                    <h3>Total Cost: {{displayINR(row.order_TOTAL_COST)}}</h3>
+                    <p>Transport: {{displayINR(row.order_TRANSPORT_COST)}}</p>
+                    <p>Tax 1: {{displayINR(row.order_TAX1)}} Tax 2: {{displayINR(row.order_TAX2)}}</p>
+                </ion-list> -->
+                <!-- </ion-card> -->
+            </div>
+            <div *ngIf="subOrders?.length == 1">
+                <div *ngFor="let item of subOrders">
+                    <div *ngIf="item.orderDetails?.length > 0">
+                        <div *ngIf="item.orderDetails?.length != 1">
+                            <ion-item-divider color="light">
+                                Product Details
+                            </ion-item-divider>
+                            <!-- <ion-card-header>Product Details </ion-card-header> -->
+                            <!-- <div *ngFor="let row of item.orderDetails"> -->
+                            <ion-row *ngFor="let row of item.orderAggregateUnits">
+                                <ion-col col-7>
+                                    <ion-item text-wrap>
+                                        <ion-label> {{row.name}}</ion-label>
+                                    </ion-item>
+                                </ion-col>
+                                <ion-col col-5>
+                                    <ion-item>
+                                        <ion-label> {{row.quantity}}</ion-label>
+                                    </ion-item>
+                                </ion-col>
+                            </ion-row>
+                            <!-- </div> -->
+                        </div>
+                    </div>
+                    <div *ngIf="item.orderDetails?.length == 1">
+                        <ion-grid>
+                            <ion-row>
+                                <ion-col col-5>Unit(s) : {{displayIndianNumber(item.unit_TYPE)}}</ion-col>
+                                <ion-col col-5>Load : {{displayIndianNumber(item.unit)}}</ion-col>
+                            </ion-row>
+                            <ion-row>
+                                <ion-col col-5>Total Cost :</ion-col>
+                                <ion-col col-5> {{displayINR(item.order_TOTAL_COST)}}</ion-col>
+                            </ion-row>
+                            <ion-row>
+                                <ion-col col-5>Transport :</ion-col>
+                                <ion-col col-5> {{displayINR(item.order_TRANSPORT_COST)}}</ion-col>
+                            </ion-row>
+                            <ion-row>
+                                <ion-col col-5>Tax 1: {{displayINR(item.order_TAX1)}} </ion-col>
+                                <ion-col col-5> Tax 2: {{displayINR(item.order_TAX2)}}</ion-col>
+                            </ion-row>
+                        </ion-grid>
+                        <!-- <ion-card>
+                            <h2>Unit(s): {{displayIndianNumber(item.unit_TYPE)}} Load: {{displayIndianNumber(item.unit)}}</h2>
+                            <h3>Total Cost: {{displayINR(item.order_TOTAL_COST)}}</h3>
+                            <p>Transport: {{displayINR(item.order_TRANSPORT_COST)}}</p>
+                            <p>Tax 1: {{displayINR(item.order_TAX1)}} Tax 2: {{displayINR(item.order_TAX2)}}</p>
+                        </ion-card> -->
+                    </div>
+                </div>
+            </div>
+        </ion-card>
+        <ion-card>
+            <ion-item-divider color="selva">
+                Cost Summary
+            </ion-item-divider>
+
+            <ion-grid>
+                <ion-row>
+                    <ion-col col-5>Total Cost :</ion-col>
+                    <ion-col col-7>{{displayINR(order.total_COST)}}</ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col col-5>Product Cost :</ion-col>
+                    <ion-col col-7>{{displayINR(order.total_PRODUCT_COST)}}</ion-col>
+                </ion-row>
+
+                <div *ngIf="order.taxable_STATUS == 'Yes'">
+                    <ion-row>
+                        <ion-col col-5>Tax 1 :</ion-col>
+                        <ion-col col-7>{{displayINR(order.total_TAX1)}}</ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col col-5>Tax 2 :</ion-col>
+                        <ion-col col-7>{{displayINR(order.total_TAX2)}}</ion-col>
+                    </ion-row>
+                </div>
+
+                <ion-row>
+                    <ion-col col-5>Loading Cost :</ion-col>
+                    <ion-col col-7>{{displayINR(order.total_LOADING_COST)}}</ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col col-5>Transport Cost :</ion-col>
+                    <ion-col col-7>{{displayINR(order.total_TRANSPORT_COST)}}</ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-card>
+        <div *ngIf="role == '1' && order_type=='estimate'" padding>
+            <button ion-button block color="secondary" (click)="approveOrder(order)">
+                Approve
+            </button>
+            <button ion-button block color="danger" (click)="rejectOrder(order.order_GROUP_NO)">
+                Reject
+            </button>
+        </div>
+        <div *ngIf="role == '2' && order_type=='estimate'" padding>
+            <button ion-button block color="secondary" (click)="approveOrder(order)">
+                Approve
+            </button>
+            <button ion-button block color="danger" (click)="rejectOrder(order.order_GROUP_NO)">
+                Reject
+            </button>
+        </div>
+        <div *ngIf="role == '3' && order_type=='estimate'" padding>
+            <button ion-button block color="danger" (click)="rejectOrder(order.order_GROUP_NO)">
+                Cancel Request
+            </button>
+        </div>
+    </div>
+    <div *ngIf="order_type=='rejected1'" padding>
+
+        <ion-card>
+            <ion-item-divider color="selva">
+                Order Summary : {{order.customer_NAME}}
+            </ion-item-divider>
+            <ion-grid>
+                <ion-row>
+                    <ion-col col-5>Site</ion-col>
+                    <ion-col col-7>{{order.site_NAME}}</ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col col-5>Order #</ion-col>
+                    <ion-col col-7>{{order.order_GROUP_NO}}</ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col col-5>Referer 1</ion-col>
+                    <ion-col col-7>{{order.refrerel1_NAME}}</ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col col-5>Referer 2</ion-col>
+                    <ion-col col-7>{{order.refrerel2_NAME}}</ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col col-5>Distance</ion-col>
+                    <ion-input class="text-in" [(ngModel)]="order.delivery_DISTANCE" name="delivery_DISTANCE" type="number" maxlength="3" required></ion-input>
+                    <!-- <ion-col col-7>{{displayIndianNumber(order.delivery_DISTANCE)}} Kms</ion-col> -->
+                </ion-row>
+                <ion-row>
+                    <ion-col col-5>Taxable</ion-col>
+                    <ion-col col-7>{{order.taxable_STATUS}}</ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-card>
+        <ion-card>
+            <ion-item-divider color="selva">
+                Product Summary : {{order.product_NAME}}
+            </ion-item-divider>
+            <ion-grid>
+                <ion-row>
+                    <ion-col col-5>Product Group</ion-col>
+                    <ion-col col-7>{{order.product_GROUP}}</ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col col-5>Cost per Unit</ion-col>
+                    <!-- <ion-col col-7>{{displayINR(order.product_UNIT_COST)}}</ion-col> -->
+                    <ion-col col-7>
+                        <ion-input class="text-in" [(ngModel)]="order.product_UNIT_COST" name="product_UNIT_COST" type="number" maxlength="5" readonly
+                            required></ion-input>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col col-5>Total Units</ion-col>
+                    <ion-input class="text-in" [(ngModel)]="order.total_ORDER_UNIT" name="total_ORDER_UNIT" type="number" maxlength="5" readonly
+                        required></ion-input>
+                    <!-- <ion-col col-7>{{displayINR(order.total_ORDER_UNIT)}}</ion-col> -->
+                </ion-row>
+            </ion-grid>
+            <!-- <h2>Product Group {{order.product_GROUP}}</h2> -->
+            <!-- <h3>Product {{order.product_NAME}}</h3> -->
+            <!-- <p>Cost per Unit {{displayINR(order.product_UNIT_COST)}}</p> -->
+            <!-- <p>Total Units {{displayIndianNumber(order.total_ORDER_UNIT)}}</p> -->
+            <!-- <ion-item stacked>
+                <ion-label>Product Group</ion-label>
+                <ion-label>{{order.product_GROUP}}</ion-label>
+            </ion-item>
+            <ion-item stacked text-wrap>
+                <ion-label>Product</ion-label>
+                <ion-label>{{order.product_NAME}}</ion-label>
+            </ion-item>
+            <ion-item stacked>
+                <ion-label>Cost per Unit</ion-label>
+                <ion-label>{{displayINR(order.product_UNIT_COST)}}</ion-label>
+            </ion-item>
+            <ion-item stacked>
+                <ion-label>Total Units</ion-label>
+                <ion-label>{{displayIndianNumber(order.total_ORDER_UNIT)}}</ion-label>
+            </ion-item> -->
+
+            <div *ngIf="subOrders?.length > 0 && subOrders?.length != 1">
+                <!-- <ion-card> -->
+
+                <ion-item-divider color="light">
+                    Suborder Details
+                </ion-item-divider>
+                <!-- <ion-card-header>Order Details</ion-card-header> -->
+                <ion-grid *ngFor="let row of subOrders">
+                    <ion-row>
+                        <ion-col col-6>Unit {{displayIndianNumber(row.unit_TYPE)}} </ion-col>
+                        <ion-col col-6>{{displayIndianNumber(row.unit)}}</ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col col-5>Total Cost:</ion-col>
+                        <ion-col col-7>{{displayINR(row.order_TOTAL_COST)}}</ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col col-5>Transport:</ion-col>
+                        <ion-col col-7>{{displayINR(row.order_TRANSPORT_COST)}}</ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col col-5>Tax 1:</ion-col>
+                        <ion-col col-7>{{displayINR(row.order_TAX1)}} </ion-col>
+                        <ion-col col-5>Tax 2:</ion-col>
+                        <ion-col col-5> {{displayINR(row.order_TAX2)}}</ion-col>
+                    </ion-row>
+                </ion-grid>
+
+                <!-- <ion-list *ngFor="let row of subOrders">
+                    <h2>Unit(s): {{displayIndianNumber(row.unit_TYPE)}} Load: {{displayIndianNumber(row.unit)}}</h2>
+                    <h3>Total Cost: {{displayINR(row.order_TOTAL_COST)}}</h3>
+                    <p>Transport: {{displayINR(row.order_TRANSPORT_COST)}}</p>
+                    <p>Tax 1: {{displayINR(row.order_TAX1)}} Tax 2: {{displayINR(row.order_TAX2)}}</p>
+                </ion-list> -->
+                <!-- </ion-card> -->
+            </div>
+            <div *ngIf="subOrders?.length == 1">
+                <div *ngFor="let item of subOrders">
+                    <div *ngIf="item.orderDetails?.length > 0">
+                        <div *ngIf="item.orderDetails?.length != 1">
+                            <ion-item-divider color="light">
+                                Product Details
+                            </ion-item-divider>
+                            <!-- <ion-card-header>Product Details </ion-card-header> -->
+                            <!-- <div *ngFor="let row of item.orderDetails"> -->
+                            <ion-row *ngFor="let row of item.orderDetails">
+                                <ion-col col-7>
+                                    <ion-item text-wrap>
+                                        <ion-label> {{row.name}}</ion-label>
+                                    </ion-item>
+                                </ion-col>
+                                <ion-col col-5>
+                                    <ion-item>
+                                        <ion-label> {{row.quantity}}</ion-label>
+                                    </ion-item>
+                                </ion-col>
+                            </ion-row>
+                            <!-- </div> -->
+                        </div>
+                    </div>
+                    <div *ngIf="item.orderDetails?.length == 1">
+                        <ion-grid>
+                            <ion-row>
+                                <ion-col col-5>Unit(s) : {{displayIndianNumber(item.unit_TYPE)}}</ion-col>
+                                <ion-col col-5>Load : {{displayIndianNumber(item.unit)}}</ion-col>
+                            </ion-row>
+                            <ion-row>
+                                <ion-col col-5>Total Cost :</ion-col>
+                                <ion-col col-5> {{displayINR(item.order_TOTAL_COST)}}</ion-col>
+                            </ion-row>
+                            <ion-row>
+                                <ion-col col-5>Transport :</ion-col>
+                                <ion-col col-5> {{displayINR(item.order_TRANSPORT_COST)}}</ion-col>
+                            </ion-row>
+                            <ion-row>
+                                <ion-col col-5>Tax 1: {{displayINR(item.order_TAX1)}} </ion-col>
+                                <ion-col col-5> Tax 2: {{displayINR(item.order_TAX2)}}</ion-col>
+                            </ion-row>
+                        </ion-grid>
+                        <!-- <ion-card>
+                            <h2>Unit(s): {{displayIndianNumber(item.unit_TYPE)}} Load: {{displayIndianNumber(item.unit)}}</h2>
+                            <h3>Total Cost: {{displayINR(item.order_TOTAL_COST)}}</h3>
+                            <p>Transport: {{displayINR(item.order_TRANSPORT_COST)}}</p>
+                            <p>Tax 1: {{displayINR(item.order_TAX1)}} Tax 2: {{displayINR(item.order_TAX2)}}</p>
+                        </ion-card> -->
+                    </div>
+                </div>
+            </div>
+        </ion-card>
+        <ion-card>
+            <ion-item-divider color="selva">
+                Cost Summary
+            </ion-item-divider>
+
+            <ion-grid>
+                <ion-row>
+                    <ion-col col-5>Total Cost :</ion-col>
+                    <ion-col col-7>{{displayINR(order.total_COST)}}</ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col col-5>Product Cost :</ion-col>
+                    <ion-col col-7>{{displayINR(order.total_PRODUCT_COST)}}</ion-col>
+                </ion-row>
+
+                <div *ngIf="order.taxable_STATUS == 'Yes'">
+                    <ion-row>
+                        <ion-col col-5>Tax 1 :</ion-col>
+                        <ion-col col-7>{{displayINR(order.total_TAX1)}}</ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col col-5>Tax 2 :</ion-col>
+                        <ion-col col-7>{{displayINR(order.total_TAX2)}}</ion-col>
+                    </ion-row>
+                </div>
+
+                <ion-row>
+                    <ion-col col-5>Loading Cost :</ion-col>
+                    <ion-col col-7>{{displayINR(order.total_LOADING_COST)}}</ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col col-5>Transport Cost :</ion-col>
+                    <ion-col col-7>{{displayINR(order.total_TRANSPORT_COST)}}</ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-card>
+        <div *ngIf="role == '1' && order_type=='rejected'" padding>
+            <button ion-button block color="secondary" (click)="approveOrder(order)">
+                Approve
+            </button>
+            <button ion-button block color="danger" (click)="rejectOrder(order.order_GROUP_NO)">
+                Reject
+            </button>
+        </div>
+        <div *ngIf="role == '2' && order_type=='rejected'" padding>
+            <button ion-button block color="secondary" (click)="approveOrder(order.order_GROUP_NO)">
+                Approve
+            </button>
+            <button ion-button block color="danger" (click)="rejectOrder(order.order_GROUP_NO)">
+                Reject
+            </button>
+        </div>
+        <div *ngIf="role == '3' && order_type=='rejected'" padding>
+            <button ion-button block color="danger" (click)="rejectOrder(order.order_GROUP_NO)">
+                Cancel Request
+            </button>
+        </div>
+    </div>
+    <div *ngIf="order_type=='estimate' || order_type=='rejected'" padding>
+        <form (submit)="approvePriceCheck(priceForm)" #priceForm="ngForm">
+            <!-- <form (ngSubmit)="submitOrder(ordersForm)" #ordersForm="ngForm"> -->
+            <!-- <ion-card> -->
+            <!-- <ion-card-header>
+                            <ion-card-title>Customer</ion-card-title>
+                          </ion-card-header> -->
+            <!-- <ion-row>
+                            <ion-col>
+                              <ion-item>
+                                <ion-label>Name</ion-label>
+                              </ion-item>
+                            </ion-col>
+                            <ion-col>
+                              <ion-item>
+                                <ion-select [(ngModel)]="order.customerID" name="customerID">
+                                  <ion-option *ngFor="let customer of customers" [value]="customer.cust_ID" (ionSelect)="onSelectCustomer(customer.cust_ID)"
+                                    >{{customer.cust_NAME}} ({{customer.cust_PHONE1}})</ion-option>
+                                </ion-select>
+                              </ion-item>
+                            </ion-col>
+                          </ion-row> -->
+            <ion-item-divider color="selva">
+                Customer Details
+            </ion-item-divider>
+            <ion-item>
+                <ion-label color="selva">Customer Name</ion-label>
+                <ion-label>{{order.estimation.customerName}}</ion-label>
+                <!-- <ion-select [(ngModel)]="order.estimation.customerName" name="customerID" [compareWith]=""> -->
+                <!-- <ion-option *ngFor="let customer of customers" [value]="customer.cust_ID" (ionSelect)="onSelectCustomer(customer.cust_ID,customer.cust_NAME)"
+                            required>{{customer.cust_NAME}} ({{customer.cust_PHONE1}})</ion-option> -->
+                <!-- </ion-select> -->
+            </ion-item>
+            <ion-item>
+                <ion-label color="selva">Site</ion-label>
+                <ion-label>{{order.estimation.siteName}}</ion-label>
+                <!-- <ion-select [(ngModel)]="order.siteID" name="siteID" [disabled]="disableSiteName"> -->
+                <!-- <ion-option *ngFor="let site of sites" [value]="site.site_ID" (ionSelect)="onSelectSite(site.site_NAME)" required>{{site.site_NAME}}</ion-option> -->
+                <!-- </ion-select> -->
+            </ion-item>
+            <ion-item>
+                <ion-label color="selva">Referer 1</ion-label>
+                <ion-label>{{order.estimation.referral1Name}}</ion-label>
+                <!-- <ion-select [(ngModel)]="order.reference1" name="reference1" [disabled]="disableSiteName"> -->
+                <!-- <ion-option *ngFor="let reference1 of references" [value]="reference1.reference_ID" (ionSelect)="onSelectReference1(reference1.refrer_NAME)">
+                            {{reference1.refrer_NAME}} ({{reference1.referer_MOBILE1}}) - {{reference1.referer_TYPE}} -->
+                <!-- </ion-option> -->
+                <!-- </ion-select> -->
+            </ion-item>
+            <ion-item>
+                <ion-label color="selva">Referer 2</ion-label>
+                <ion-label>{{order.estimation.referral2Name}}</ion-label>
+                <!-- <ion-select [(ngModel)]="order.reference2" name="reference2" [disabled]="disableSiteName"> -->
+                <!-- <ion-option *ngFor="let reference2 of references" [value]="reference2.reference_ID" (ionSelect)="onSelectReference2(reference2.refrer_NAME)">
+                            {{reference2.refrer_NAME}} ({{reference2.referer_MOBILE1}}) - {{reference2.referer_TYPE}} -->
+                <!-- </ion-option> -->
+                <!-- </ion-select> -->
+            </ion-item>
+            <ion-item>
+                <ion-label color="selva">Priority</ion-label>
+                <ion-label *ngIf="isToggledPriority" text-right>High</ion-label>
+                <ion-label *ngIf="!isToggledPriority" text-right>Normal</ion-label>
+                <ion-toggle [disabled]="disableSiteName" color="secondary" (ionChange)="notifyPriorityOption(order.highPriority)" [checked]="isToggledPriority"></ion-toggle>
+                <!-- <ion-toggle color="secondary" (ionChange)="notifyPriorityOption(order.highPriority)" [checked]="isToggledPriority"></ion-toggle> -->
+            </ion-item>
+
+            <ion-item-divider color="selva">
+                Order Details
+            </ion-item-divider>
+            <ion-item>
+                <ion-label color="selva">Item Group</ion-label>
+                <ion-label>{{order.estimation.productGroup}}</ion-label>
+                <!-- <ion-select [(ngModel)]="order.productGroupName" name="item_Group_NAME">
+                        <ion-option *ngFor="let row of productGroupModel" (ionSelect)="onItemGroupChange(row,row.product_GROUP_ID,row.division_ID)"
+                        required>{{row.product_GROUP_NAME}}</ion-option>
+                    </ion-select> -->
+            </ion-item>
+            <!-- </ion-col> -->
+            <!-- </ion-row> -->
+
+            <!-- <ion-row> -->
+            <!-- <ion-col col-4> -->
+            <ion-item>
+                <ion-label color="selva">Item name</ion-label>
+                <ion-label>{{order.estimation.productGroupName}}</ion-label>
+                <!-- </ion-item> -->
+                <!-- </ion-col> -->
+                <!-- <ion-col col-8>
+                        <ion-item> -->
+                <!-- <ion-select name="product"> -->
+                <!-- <ion-select [(ngModel)]="order.product" name="product" [disabled]="disableItemName">
+                                    <ion-option *ngFor="let item of products" [value]="item" (ionSelect)="onItemNameChange(item.productDetails,item.uom)" required>{{item.product_NAME}}</ion-option>
+                                </ion-select> -->
+            </ion-item>
+            <ion-item>
+                <ion-label color="selva" fixed>Distance</ion-label>
+                <ion-label *ngIf="(order_type=='estimate' || order_type=='rejected' ) && (role == '1' || role=='2')">{{order.estimation.distanceKM}}</ion-label>
+                <ion-input *ngIf="order_type=='rejected' && role == '3'" class="text-in" [(ngModel)]="order.estimation.distanceKM" name="distanceKM"
+                    type="number" maxlength="3" required></ion-input>
+            </ion-item>
+            <ion-item *ngIf="order_type=='estimate'">
+                <ion-label color="selva" fixed>Total {{uom}}</ion-label>
+                <ion-label>{{order.estimation.unitsTotal}}</ion-label>
+            </ion-item>
+            <ion-item *ngIf="order_type=='rejected'">
+                <ion-label color="selva" fixed>Total {{uom}}</ion-label>
+                <ion-input class="text-in" [(ngModel)]="order.estimation.unitsTotal" name="unitsTotal" type="number" maxlength="5" required></ion-input>
+            </ion-item>
+            <ion-list>
+                <ion-item-divider color="selva" *ngIf="order.estimation.productGroup=='QUARRY' || order.estimation.productGroup=='DESIGNER_TILES' || order.estimation.productGroup=='PAVER' || order.estimation.productGroup=='HOLLOW_BLOCK'">
+                    Product Details
+                </ion-item-divider>
+                <div *ngIf="order.estimation.productGroup=='QUARRY'">
+                    <!-- <div *ngIf="itemGroup=='Aggregate'"> -->
                     <ion-row>
                         <ion-col col-4>
                             <div style="font-size:1.6rem;font-weight:bold;text-align: center;">Capacity</div>
@@ -137,27 +670,110 @@
                             <div style="font-size:1.6rem;font-weight:bold;text-align:center;">Total Units</div>
                         </ion-col>
                     </ion-row>
-                    <ion-row *ngFor="let row of order.orderAggregateUnits">
+
+                    <ion-row>
                         <ion-col col-4>
                             <ion-item>
-                                <ion-label color="selva">{{row.unit_TYPE}} Unit</ion-label>
+                                <ion-label color="selva">1 Unit</ion-label>
+                            </ion-item>
+                        </ion-col>
+                        <ion-col col-4>
+                            <ion-item *ngIf="(order_type=='estimate' || order_type=='rejected' ) && (role == '1' || role=='2')">
+                                <ion-label>{{order.estimation.unit1}}</ion-label>
+                            </ion-item>
+                            <ion-item *ngIf="order_type=='rejected' && role == '3'">
+                                <ion-input [(ngModel)]="order.estimation.unit1" name="unit1" (ionChange)="onChangeUnit1(order.estimation.unit1)" type="number"
+                                    maxlength="4"></ion-input>
                             </ion-item>
                         </ion-col>
                         <ion-col col-4>
                             <ion-item>
-                                <!-- <ion-label color="selva">{{row.quantity}} </ion-label> -->
-                                <!-- <ion-input [(ngModel)]="row.quantity" name="quantity" (ionChange)="onChangeUnit1(estimate.unit1)" type="number" maxlength="4"></ion-input> -->
-                                <ion-input [(ngModel)]="row.quantity" name="quantity" type="number" maxlength="4"></ion-input>
-                            </ion-item>
-                        </ion-col>
-                        <ion-col col-4>
-                            <ion-item>
-                                <ion-label text-center>{{row.quantity * row.unit_TYPE}}</ion-label>
-                                <!-- <ion-input [(ngModel)]="estimate.unit1Total" name="unit1Total" type="text" read-only></ion-input> -->
+                                <ion-label text-center>{{order.estimation.unit1 * 1}}</ion-label>
+                                <!-- <ion-label text-center>{{unit1Total}}</ion-label> -->
+                                <!-- <ion-input [(ngModel)]="order.unit1Total" name="unit1Total" type="text" read-only></ion-input> -->
                             </ion-item>
                         </ion-col>
                     </ion-row>
-    
+                    <ion-row>
+                        <ion-col col-4>
+                            <ion-item>
+                                <ion-label color="selva">2 Units</ion-label>
+                            </ion-item>
+                        </ion-col>
+                        <ion-col col-4>
+                            <ion-item>
+                                <ion-label>{{order.estimation.unit2}}</ion-label>
+                                <!-- <ion-input [(ngModel)]="order.unit2" name="unit2" (ionChange)="onChangeUnit2(order.unit2)" type="number" maxlength="4"></ion-input> -->
+                            </ion-item>
+                        </ion-col>
+                        <ion-col col-4>
+                            <ion-item>
+                                <ion-label text-center>{{order.estimation.unit2 * 2}}</ion-label>
+                                <!-- <ion-label text-center>{{unit2Total}}</ion-label> -->
+                                <!-- <ion-input [(ngModel)]="order.unit2Total" name="unit2Total" type="text"></ion-input> -->
+                            </ion-item>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col col-4>
+                            <ion-item>
+                                <ion-label color="selva">3 Units</ion-label>
+                            </ion-item>
+                        </ion-col>
+                        <ion-col col-4>
+                            <ion-item>
+                                <ion-label>{{order.estimation.unit3}}</ion-label>
+                                <!-- <ion-input [(ngModel)]="order.unit2" name="unit2" (ionChange)="onChangeUnit2(order.unit2)" type="number" maxlength="4"></ion-input> -->
+                            </ion-item>
+                        </ion-col>
+                        <ion-col col-4>
+                            <ion-item>
+                                <ion-label text-center>{{order.estimation.unit3 * 3}}</ion-label>
+                                <!-- <ion-label text-center>{{unit2Total}}</ion-label> -->
+                                <!-- <ion-input [(ngModel)]="order.unit2Total" name="unit2Total" type="text"></ion-input> -->
+                            </ion-item>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col col-4>
+                            <ion-item>
+                                <ion-label color="selva">4 Units</ion-label>
+                            </ion-item>
+                        </ion-col>
+                        <ion-col col-4>
+                            <ion-item>
+                                <ion-label>{{order.estimation.unit4}}</ion-label>
+                                <!-- <ion-input [(ngModel)]="order.unit4" name="unit4" (ionChange)="onChangeUnit4(order.unit4)" type="number" maxlength="4"></ion-input> -->
+                            </ion-item>
+                        </ion-col>
+                        <ion-col col-4>
+                            <ion-item>
+                                <ion-label text-center>{{order.estimation.unit4 * 4}}</ion-label>
+                                <!-- <ion-label text-center>{{unit4Total}}</ion-label> -->
+                                <!-- <ion-input [(ngModel)]="order.unit4Total" name="unit4Total" type="text"></ion-input> -->
+                            </ion-item>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col col-4>
+                            <ion-item>
+                                <ion-label color="selva">6 Units</ion-label>
+                            </ion-item>
+                        </ion-col>
+                        <ion-col col-4>
+                            <ion-item>
+                                <ion-label>{{order.estimation.unit6}}</ion-label>
+                                <!-- <ion-input [(ngModel)]="order.unit6" name="unit6" (ionChange)="onChangeUnit6(order.unit6)" type="number" maxlength="4"></ion-input> -->
+                            </ion-item>
+                        </ion-col>
+                        <ion-col col-4>
+                            <ion-item>
+                                <ion-label text-center>{{order.estimation.unit6 * 6}}</ion-label>
+                                <!-- <ion-label text-center>{{unit6Total}}</ion-label> -->
+                                <!-- <ion-input [(ngModel)]="order.unit6Total" name="unit6Total" type="text"></ion-input> -->
+                            </ion-item>
+                        </ion-col>
+                    </ion-row>
                     <ion-row>
                         <ion-col col-8>
                             <ion-item>
@@ -166,1319 +782,199 @@
                         </ion-col>
                         <ion-col col-4>
                             <ion-item>
-                                <ion-label text-center style="font-weight:bold;">{{order.total_ORDER_UNIT}}</ion-label>
+                                <ion-label text-center style="font-weight:bold;">{{order.estimation.unitsTotal}}</ion-label>
+                                <!-- <ion-label text-center style="font-weight:bold;">{{unitSumTotal}}</ion-label> -->
                             </ion-item>
                         </ion-col>
                     </ion-row>
-                    <!-- </div> -->
                 </div>
-                <div *ngIf="subOrders?.length > 0 && subOrders?.length != 1">
-                    <!-- <ion-card> -->
-    
-                    <ion-item-divider color="light">
-                        Suborder Details
-                    </ion-item-divider>
-                    <!-- <ion-card-header>Order Details</ion-card-header> -->
-                    <ion-grid *ngFor="let row of subOrders">
-                        <ion-row>
-                            <ion-col col-6>Unit {{displayIndianNumber(row.unit_TYPE)}} </ion-col>
-                            <ion-col col-6>{{displayIndianNumber(row.unit)}}</ion-col>
-                        </ion-row>
-                        <ion-row>
-                            <ion-col col-5>Total Cost:</ion-col>
-                            <ion-col col-7>{{displayINR(row.order_TOTAL_COST)}}</ion-col>
-                        </ion-row>
-                        <ion-row>
-                            <ion-col col-5>Transport:</ion-col>
-                            <ion-col col-7>{{displayINR(row.order_TRANSPORT_COST)}}</ion-col>
-                        </ion-row>
-                        <ion-row>
-                            <ion-col col-5>Tax 1:</ion-col>
-                            <ion-col col-7>{{displayINR(row.order_TAX1)}} </ion-col>
-                            <ion-col col-5>Tax 2:</ion-col>
-                            <ion-col col-5> {{displayINR(row.order_TAX2)}}</ion-col>
-                        </ion-row>
-                    </ion-grid>
-    
-                    <!-- <ion-list *ngFor="let row of subOrders">
-                    <h2>Unit(s): {{displayIndianNumber(row.unit_TYPE)}} Load: {{displayIndianNumber(row.unit)}}</h2>
-                    <h3>Total Cost: {{displayINR(row.order_TOTAL_COST)}}</h3>
-                    <p>Transport: {{displayINR(row.order_TRANSPORT_COST)}}</p>
-                    <p>Tax 1: {{displayINR(row.order_TAX1)}} Tax 2: {{displayINR(row.order_TAX2)}}</p>
-                </ion-list> -->
-                    <!-- </ion-card> -->
-                </div>
-                <div *ngIf="subOrders?.length == 1">
-                    <div *ngFor="let item of subOrders">
-                        <div *ngIf="item.orderDetails?.length > 0">
-                            <div *ngIf="item.orderDetails?.length != 1">
-                                <ion-item-divider color="light">
-                                    Product Details
-                                </ion-item-divider>
-                                <!-- <ion-card-header>Product Details </ion-card-header> -->
-                                <!-- <div *ngFor="let row of item.orderDetails"> -->
-                                <ion-row *ngFor="let row of item.orderAggregateUnits">
-                                    <ion-col col-7>
-                                        <ion-item text-wrap>
-                                            <ion-label> {{row.name}}</ion-label>
-                                        </ion-item>
-                                    </ion-col>
-                                    <ion-col col-5>
-                                        <ion-item>
-                                            <ion-label> {{row.quantity}}</ion-label>
-                                        </ion-item>
-                                    </ion-col>
-                                </ion-row>
-                                <!-- </div> -->
-                            </div>
-                        </div>
-                        <div *ngIf="item.orderDetails?.length == 1">
-                            <ion-grid>
-                                <ion-row>
-                                    <ion-col col-5>Unit(s) : {{displayIndianNumber(item.unit_TYPE)}}</ion-col>
-                                    <ion-col col-5>Load : {{displayIndianNumber(item.unit)}}</ion-col>
-                                </ion-row>
-                                <ion-row>
-                                    <ion-col col-5>Total Cost :</ion-col>
-                                    <ion-col col-5> {{displayINR(item.order_TOTAL_COST)}}</ion-col>
-                                </ion-row>
-                                <ion-row>
-                                    <ion-col col-5>Transport :</ion-col>
-                                    <ion-col col-5> {{displayINR(item.order_TRANSPORT_COST)}}</ion-col>
-                                </ion-row>
-                                <ion-row>
-                                    <ion-col col-5>Tax 1: {{displayINR(item.order_TAX1)}} </ion-col>
-                                    <ion-col col-5> Tax 2: {{displayINR(item.order_TAX2)}}</ion-col>
-                                </ion-row>
-                            </ion-grid>
-                            <!-- <ion-card>
-                            <h2>Unit(s): {{displayIndianNumber(item.unit_TYPE)}} Load: {{displayIndianNumber(item.unit)}}</h2>
-                            <h3>Total Cost: {{displayINR(item.order_TOTAL_COST)}}</h3>
-                            <p>Transport: {{displayINR(item.order_TRANSPORT_COST)}}</p>
-                            <p>Tax 1: {{displayINR(item.order_TAX1)}} Tax 2: {{displayINR(item.order_TAX2)}}</p>
-                        </ion-card> -->
-                        </div>
-                    </div>
-                </div>
-            </ion-card>
-            <ion-card>
-                <ion-item-divider color="selva">
-                    Cost Summary
-                </ion-item-divider>
-    
-                <ion-grid>
-                    <ion-row>
-                        <ion-col col-5>Total Cost :</ion-col>
-                        <ion-col col-7>{{displayINR(order.total_COST)}}</ion-col>
-                    </ion-row>
-                    <ion-row>
-                        <ion-col col-5>Product Cost :</ion-col>
-                        <ion-col col-7>{{displayINR(order.total_PRODUCT_COST)}}</ion-col>
-                    </ion-row>
-    
-                    <div *ngIf="order.taxable_STATUS == 'Yes'">
-                        <ion-row>
-                            <ion-col col-5>Tax 1 :</ion-col>
-                            <ion-col col-7>{{displayINR(order.total_TAX1)}}</ion-col>
-                        </ion-row>
-                        <ion-row>
-                            <ion-col col-5>Tax 2 :</ion-col>
-                            <ion-col col-7>{{displayINR(order.total_TAX2)}}</ion-col>
-                        </ion-row>
-                    </div>
-    
-                    <ion-row>
-                        <ion-col col-5>Loading Cost :</ion-col>
-                        <ion-col col-7>{{displayINR(order.total_LOADING_COST)}}</ion-col>
-                    </ion-row>
-                    <ion-row>
-                        <ion-col col-5>Transport Cost :</ion-col>
-                        <ion-col col-7>{{displayINR(order.total_TRANSPORT_COST)}}</ion-col>
-                    </ion-row>
-                </ion-grid>
-            </ion-card>
-            <div *ngIf="role == '1' && order_type=='estimate'" padding>
-                <button ion-button block color="secondary" (click)="approveOrder(order)">
-                    Approve
-                </button>
-                <button ion-button block color="danger" (click)="rejectOrder(order.order_GROUP_NO)">
-                    Reject
-                </button>
-            </div>
-            <div *ngIf="role == '2' && order_type=='estimate'" padding>
-                <button ion-button block color="secondary" (click)="approveOrder(order)">
-                    Approve
-                </button>
-                <button ion-button block color="danger" (click)="rejectOrder(order.order_GROUP_NO)">
-                    Reject
-                </button>
-            </div>
-            <div *ngIf="role == '3' && order_type=='estimate'" padding>
-                <button ion-button block color="danger" (click)="rejectOrder(order.order_GROUP_NO)">
-                    Cancel Request
-                </button>
-            </div>
-        </div>
-        <div *ngIf="order_type=='rejected1'" padding>
-    
-            <ion-card>
-                <ion-item-divider color="selva">
-                    Order Summary : {{order.customer_NAME}}
-                </ion-item-divider>
-                <ion-grid>
-                    <ion-row>
-                        <ion-col col-5>Site</ion-col>
-                        <ion-col col-7>{{order.site_NAME}}</ion-col>
-                    </ion-row>
-                    <ion-row>
-                        <ion-col col-5>Order #</ion-col>
-                        <ion-col col-7>{{order.order_GROUP_NO}}</ion-col>
-                    </ion-row>
-                    <ion-row>
-                        <ion-col col-5>Referer 1</ion-col>
-                        <ion-col col-7>{{order.refrerel1_NAME}}</ion-col>
-                    </ion-row>
-                    <ion-row>
-                        <ion-col col-5>Referer 2</ion-col>
-                        <ion-col col-7>{{order.refrerel2_NAME}}</ion-col>
-                    </ion-row>
-                    <ion-row>
-                        <ion-col col-5>Distance</ion-col>
-                        <ion-input class="text-in" [(ngModel)]="order.delivery_DISTANCE" name="delivery_DISTANCE" type="number" maxlength="3" required></ion-input>
-                        <!-- <ion-col col-7>{{displayIndianNumber(order.delivery_DISTANCE)}} Kms</ion-col> -->
-                    </ion-row>
-                    <ion-row>
-                        <ion-col col-5>Taxable</ion-col>
-                        <ion-col col-7>{{order.taxable_STATUS}}</ion-col>
-                    </ion-row>
-                </ion-grid>
-            </ion-card>
-            <ion-card>
-                <ion-item-divider color="selva">
-                    Product Summary : {{order.product_NAME}}
-                </ion-item-divider>
-                <ion-grid>
-                    <ion-row>
-                        <ion-col col-5>Product Group</ion-col>
-                        <ion-col col-7>{{order.product_GROUP}}</ion-col>
-                    </ion-row>
-                    <ion-row>
-                        <ion-col col-5>Cost per Unit</ion-col>
-                        <!-- <ion-col col-7>{{displayINR(order.product_UNIT_COST)}}</ion-col> -->
-                        <ion-col col-7>
-                            <ion-input class="text-in" [(ngModel)]="order.product_UNIT_COST" name="product_UNIT_COST" type="number" maxlength="5" readonly
-                                required></ion-input>
-                        </ion-col>
-                    </ion-row>
-                    <ion-row>
-                        <ion-col col-5>Total Units</ion-col>
-                        <ion-input class="text-in" [(ngModel)]="order.total_ORDER_UNIT" name="total_ORDER_UNIT" type="number" maxlength="5" readonly
-                            required></ion-input>
-                        <!-- <ion-col col-7>{{displayINR(order.total_ORDER_UNIT)}}</ion-col> -->
-                    </ion-row>
-                </ion-grid>
-                <!-- <h2>Product Group {{order.product_GROUP}}</h2> -->
-                <!-- <h3>Product {{order.product_NAME}}</h3> -->
-                <!-- <p>Cost per Unit {{displayINR(order.product_UNIT_COST)}}</p> -->
-                <!-- <p>Total Units {{displayIndianNumber(order.total_ORDER_UNIT)}}</p> -->
-                <!-- <ion-item stacked>
-                <ion-label>Product Group</ion-label>
-                <ion-label>{{order.product_GROUP}}</ion-label>
-            </ion-item>
-            <ion-item stacked text-wrap>
-                <ion-label>Product</ion-label>
-                <ion-label>{{order.product_NAME}}</ion-label>
-            </ion-item>
-            <ion-item stacked>
-                <ion-label>Cost per Unit</ion-label>
-                <ion-label>{{displayINR(order.product_UNIT_COST)}}</ion-label>
-            </ion-item>
-            <ion-item stacked>
-                <ion-label>Total Units</ion-label>
-                <ion-label>{{displayIndianNumber(order.total_ORDER_UNIT)}}</ion-label>
-            </ion-item> -->
-    
-                <div *ngIf="subOrders?.length > 0 && subOrders?.length != 1">
-                    <!-- <ion-card> -->
-    
-                    <ion-item-divider color="light">
-                        Suborder Details
-                    </ion-item-divider>
-                    <!-- <ion-card-header>Order Details</ion-card-header> -->
-                    <ion-grid *ngFor="let row of subOrders">
-                        <ion-row>
-                            <ion-col col-6>Unit {{displayIndianNumber(row.unit_TYPE)}} </ion-col>
-                            <ion-col col-6>{{displayIndianNumber(row.unit)}}</ion-col>
-                        </ion-row>
-                        <ion-row>
-                            <ion-col col-5>Total Cost:</ion-col>
-                            <ion-col col-7>{{displayINR(row.order_TOTAL_COST)}}</ion-col>
-                        </ion-row>
-                        <ion-row>
-                            <ion-col col-5>Transport:</ion-col>
-                            <ion-col col-7>{{displayINR(row.order_TRANSPORT_COST)}}</ion-col>
-                        </ion-row>
-                        <ion-row>
-                            <ion-col col-5>Tax 1:</ion-col>
-                            <ion-col col-7>{{displayINR(row.order_TAX1)}} </ion-col>
-                            <ion-col col-5>Tax 2:</ion-col>
-                            <ion-col col-5> {{displayINR(row.order_TAX2)}}</ion-col>
-                        </ion-row>
-                    </ion-grid>
-    
-                    <!-- <ion-list *ngFor="let row of subOrders">
-                    <h2>Unit(s): {{displayIndianNumber(row.unit_TYPE)}} Load: {{displayIndianNumber(row.unit)}}</h2>
-                    <h3>Total Cost: {{displayINR(row.order_TOTAL_COST)}}</h3>
-                    <p>Transport: {{displayINR(row.order_TRANSPORT_COST)}}</p>
-                    <p>Tax 1: {{displayINR(row.order_TAX1)}} Tax 2: {{displayINR(row.order_TAX2)}}</p>
-                </ion-list> -->
-                    <!-- </ion-card> -->
-                </div>
-                <div *ngIf="subOrders?.length == 1">
-                    <div *ngFor="let item of subOrders">
-                        <div *ngIf="item.orderDetails?.length > 0">
-                            <div *ngIf="item.orderDetails?.length != 1">
-                                <ion-item-divider color="light">
-                                    Product Details
-                                </ion-item-divider>
-                                <!-- <ion-card-header>Product Details </ion-card-header> -->
-                                <!-- <div *ngFor="let row of item.orderDetails"> -->
-                                <ion-row *ngFor="let row of item.orderDetails">
-                                    <ion-col col-7>
-                                        <ion-item text-wrap>
-                                            <ion-label> {{row.name}}</ion-label>
-                                        </ion-item>
-                                    </ion-col>
-                                    <ion-col col-5>
-                                        <ion-item>
-                                            <ion-label> {{row.quantity}}</ion-label>
-                                        </ion-item>
-                                    </ion-col>
-                                </ion-row>
-                                <!-- </div> -->
-                            </div>
-                        </div>
-                        <div *ngIf="item.orderDetails?.length == 1">
-                            <ion-grid>
-                                <ion-row>
-                                    <ion-col col-5>Unit(s) : {{displayIndianNumber(item.unit_TYPE)}}</ion-col>
-                                    <ion-col col-5>Load : {{displayIndianNumber(item.unit)}}</ion-col>
-                                </ion-row>
-                                <ion-row>
-                                    <ion-col col-5>Total Cost :</ion-col>
-                                    <ion-col col-5> {{displayINR(item.order_TOTAL_COST)}}</ion-col>
-                                </ion-row>
-                                <ion-row>
-                                    <ion-col col-5>Transport :</ion-col>
-                                    <ion-col col-5> {{displayINR(item.order_TRANSPORT_COST)}}</ion-col>
-                                </ion-row>
-                                <ion-row>
-                                    <ion-col col-5>Tax 1: {{displayINR(item.order_TAX1)}} </ion-col>
-                                    <ion-col col-5> Tax 2: {{displayINR(item.order_TAX2)}}</ion-col>
-                                </ion-row>
-                            </ion-grid>
-                            <!-- <ion-card>
-                            <h2>Unit(s): {{displayIndianNumber(item.unit_TYPE)}} Load: {{displayIndianNumber(item.unit)}}</h2>
-                            <h3>Total Cost: {{displayINR(item.order_TOTAL_COST)}}</h3>
-                            <p>Transport: {{displayINR(item.order_TRANSPORT_COST)}}</p>
-                            <p>Tax 1: {{displayINR(item.order_TAX1)}} Tax 2: {{displayINR(item.order_TAX2)}}</p>
-                        </ion-card> -->
-                        </div>
-                    </div>
-                </div>
-            </ion-card>
-            <ion-card>
-                <ion-item-divider color="selva">
-                    Cost Summary
-                </ion-item-divider>
-    
-                <ion-grid>
-                    <ion-row>
-                        <ion-col col-5>Total Cost :</ion-col>
-                        <ion-col col-7>{{displayINR(order.total_COST)}}</ion-col>
-                    </ion-row>
-                    <ion-row>
-                        <ion-col col-5>Product Cost :</ion-col>
-                        <ion-col col-7>{{displayINR(order.total_PRODUCT_COST)}}</ion-col>
-                    </ion-row>
-    
-                    <div *ngIf="order.taxable_STATUS == 'Yes'">
-                        <ion-row>
-                            <ion-col col-5>Tax 1 :</ion-col>
-                            <ion-col col-7>{{displayINR(order.total_TAX1)}}</ion-col>
-                        </ion-row>
-                        <ion-row>
-                            <ion-col col-5>Tax 2 :</ion-col>
-                            <ion-col col-7>{{displayINR(order.total_TAX2)}}</ion-col>
-                        </ion-row>
-                    </div>
-    
-                    <ion-row>
-                        <ion-col col-5>Loading Cost :</ion-col>
-                        <ion-col col-7>{{displayINR(order.total_LOADING_COST)}}</ion-col>
-                    </ion-row>
-                    <ion-row>
-                        <ion-col col-5>Transport Cost :</ion-col>
-                        <ion-col col-7>{{displayINR(order.total_TRANSPORT_COST)}}</ion-col>
-                    </ion-row>
-                </ion-grid>
-            </ion-card>
-            <div *ngIf="role == '1' && order_type=='rejected'" padding>
-                <button ion-button block color="secondary" (click)="approveOrder(order)">
-                    Approve
-                </button>
-                <button ion-button block color="danger" (click)="rejectOrder(order.order_GROUP_NO)">
-                    Reject
-                </button>
-            </div>
-            <div *ngIf="role == '2' && order_type=='rejected'" padding>
-                <button ion-button block color="secondary" (click)="approveOrder(order.order_GROUP_NO)">
-                    Approve
-                </button>
-                <button ion-button block color="danger" (click)="rejectOrder(order.order_GROUP_NO)">
-                    Reject
-                </button>
-            </div>
-            <div *ngIf="role == '3' && order_type=='rejected'" padding>
-                <button ion-button block color="danger" (click)="rejectOrder(order.order_GROUP_NO)">
-                    Cancel Request
-                </button>
-            </div>
-        </div>
-        <div *ngIf="order_type=='estimate' || order_type=='rejected'" padding>
-            <form (submit)="approvePriceCheck(priceForm)" #priceForm="ngForm">
-                <!-- <form (ngSubmit)="submitOrder(ordersForm)" #ordersForm="ngForm"> -->
-                <!-- <ion-card> -->
-                <!-- <ion-card-header>
-                            <ion-card-title>Customer</ion-card-title>
-                          </ion-card-header> -->
-                <!-- <ion-row>
-                            <ion-col>
-                              <ion-item>
-                                <ion-label>Name</ion-label>
-                              </ion-item>
-                            </ion-col>
-                            <ion-col>
-                              <ion-item>
-                                <ion-select [(ngModel)]="order.customerID" name="customerID">
-                                  <ion-option *ngFor="let customer of customers" [value]="customer.cust_ID" (ionSelect)="onSelectCustomer(customer.cust_ID)"
-                                    >{{customer.cust_NAME}} ({{customer.cust_PHONE1}})</ion-option>
-                                </ion-select>
-                              </ion-item>
-                            </ion-col>
-                          </ion-row> -->
-                <ion-item-divider color="selva">
-                    Customer Details
-                </ion-item-divider>
-                <ion-item>
-                    <ion-label color="selva">Customer Name</ion-label>
-                    <ion-label>{{order.estimation.customerName}}</ion-label>
-                    <!-- <ion-select [(ngModel)]="order.estimation.customerName" name="customerID" [compareWith]=""> -->
-                    <!-- <ion-option *ngFor="let customer of customers" [value]="customer.cust_ID" (ionSelect)="onSelectCustomer(customer.cust_ID,customer.cust_NAME)"
-                            required>{{customer.cust_NAME}} ({{customer.cust_PHONE1}})</ion-option> -->
-                    <!-- </ion-select> -->
-                </ion-item>
-                <ion-item>
-                    <ion-label color="selva">Site</ion-label>
-                    <ion-label>{{order.estimation.siteName}}</ion-label>
-                    <!-- <ion-select [(ngModel)]="order.siteID" name="siteID" [disabled]="disableSiteName"> -->
-                    <!-- <ion-option *ngFor="let site of sites" [value]="site.site_ID" (ionSelect)="onSelectSite(site.site_NAME)" required>{{site.site_NAME}}</ion-option> -->
-                    <!-- </ion-select> -->
-                </ion-item>
-                <ion-item>
-                    <ion-label color="selva">Referer 1</ion-label>
-                    <ion-label>{{order.estimation.referral1Name}}</ion-label>
-                    <!-- <ion-select [(ngModel)]="order.reference1" name="reference1" [disabled]="disableSiteName"> -->
-                    <!-- <ion-option *ngFor="let reference1 of references" [value]="reference1.reference_ID" (ionSelect)="onSelectReference1(reference1.refrer_NAME)">
-                            {{reference1.refrer_NAME}} ({{reference1.referer_MOBILE1}}) - {{reference1.referer_TYPE}} -->
-                    <!-- </ion-option> -->
-                    <!-- </ion-select> -->
-                </ion-item>
-                <ion-item>
-                    <ion-label color="selva">Referer 2</ion-label>
-                    <ion-label>{{order.estimation.referral2Name}}</ion-label>
-                    <!-- <ion-select [(ngModel)]="order.reference2" name="reference2" [disabled]="disableSiteName"> -->
-                    <!-- <ion-option *ngFor="let reference2 of references" [value]="reference2.reference_ID" (ionSelect)="onSelectReference2(reference2.refrer_NAME)">
-                            {{reference2.refrer_NAME}} ({{reference2.referer_MOBILE1}}) - {{reference2.referer_TYPE}} -->
-                    <!-- </ion-option> -->
-                    <!-- </ion-select> -->
-                </ion-item>
-                <ion-item>
-                    <ion-label color="selva">Priority</ion-label>
-                    <ion-label *ngIf="isToggledPriority" text-right>High</ion-label>
-                    <ion-label *ngIf="!isToggledPriority" text-right>Normal</ion-label>
-                    <ion-toggle [disabled]="disableSiteName" color="secondary" (ionChange)="notifyPriorityOption(order.highPriority)" [checked]="isToggledPriority"></ion-toggle>
-                    <!-- <ion-toggle color="secondary" (ionChange)="notifyPriorityOption(order.highPriority)" [checked]="isToggledPriority"></ion-toggle> -->
-                </ion-item>
-    
-                <ion-item-divider color="selva">
-                    Order Details
-                </ion-item-divider>
-                <ion-item>
-                    <ion-label color="selva">Item Group</ion-label>
-                    <ion-label>{{order.estimation.productGroup}}</ion-label>
-                    <!-- <ion-select [(ngModel)]="order.productGroupName" name="item_Group_NAME">
-                        <ion-option *ngFor="let row of productGroupModel" (ionSelect)="onItemGroupChange(row,row.product_GROUP_ID,row.division_ID)"
-                        required>{{row.product_GROUP_NAME}}</ion-option>
-                    </ion-select> -->
-                </ion-item>
-                <!-- </ion-col> -->
-                <!-- </ion-row> -->
-    
-                <!-- <ion-row> -->
-                <!-- <ion-col col-4> -->
-                <ion-item>
-                    <ion-label color="selva">Item name</ion-label>
-                    <ion-label>{{order.estimation.productGroupName}}</ion-label>
-                    <!-- </ion-item> -->
-                    <!-- </ion-col> -->
-                    <!-- <ion-col col-8>
-                        <ion-item> -->
-                    <!-- <ion-select name="product"> -->
-                    <!-- <ion-select [(ngModel)]="order.product" name="product" [disabled]="disableItemName">
-                                    <ion-option *ngFor="let item of products" [value]="item" (ionSelect)="onItemNameChange(item.productDetails,item.uom)" required>{{item.product_NAME}}</ion-option>
-                                </ion-select> -->
-                </ion-item>
-                <ion-item>
-                    <ion-label color="selva" fixed>Distance</ion-label>
-                    <ion-label *ngIf="(order_type=='estimate' || order_type=='rejected' ) && (role == '1' || role=='2')">{{order.estimation.distanceKM}}</ion-label>
-                    <ion-input *ngIf="order_type=='rejected' && role == '3'" class="text-in" [(ngModel)]="order.estimation.distanceKM" name="distanceKM"
-                        type="number" maxlength="3" required></ion-input>
-                </ion-item>
-                <ion-item *ngIf="order_type=='estimate'">
-                    <ion-label color="selva" fixed>Total {{uom}}</ion-label>
-                    <ion-label>{{order.estimation.unitsTotal}}</ion-label>
-                </ion-item>
-                <ion-item *ngIf="order_type=='rejected'">
-                    <ion-label color="selva" fixed>Total {{uom}}</ion-label>
-                    <ion-input class="text-in" [(ngModel)]="order.estimation.unitsTotal" name="unitsTotal" type="number" maxlength="5" required></ion-input>
-                </ion-item>
-                <ion-list>
-                    <ion-item-divider color="selva" *ngIf="order.estimation.productGroup=='QUARRY' || order.estimation.productGroup=='DESIGNER_TILES' || order.estimation.productGroup=='PAVER' || order.estimation.productGroup=='HOLLOW_BLOCK'">
-                        Product Details
-                    </ion-item-divider>
-                    <div *ngIf="order.estimation.productGroup=='QUARRY'">
-                        <!-- <div *ngIf="itemGroup=='Aggregate'"> -->
-                        <ion-row>
-                            <ion-col col-4>
-                                <div style="font-size:1.6rem;font-weight:bold;text-align: center;">Capacity</div>
-                            </ion-col>
-                            <ion-col col-4>
-                                <div style="font-size:1.6rem;font-weight:bold;text-align:center;">Loads</div>
-                            </ion-col>
-                            <ion-col col-4>
-                                <div style="font-size:1.6rem;font-weight:bold;text-align:center;">Total Units</div>
-                            </ion-col>
-                        </ion-row>
-    
-                        <ion-row>
-                            <ion-col col-4>
-                                <ion-item>
-                                    <ion-label color="selva">1 Unit</ion-label>
-                                </ion-item>
-                            </ion-col>
-                            <ion-col col-4>
-                                <ion-item *ngIf="(order_type=='estimate' || order_type=='rejected' ) && (role == '1' || role=='2')">
-                                    <ion-label>{{order.estimation.unit1}}</ion-label>
-                                </ion-item>
-                                <ion-item *ngIf="order_type=='rejected' && role == '3'">
-                                    <ion-input [(ngModel)]="order.estimation.unit1" name="unit1" (ionChange)="onChangeUnit1(order.estimation.unit1)" type="number"
-                                        maxlength="4"></ion-input>
-                                </ion-item>
-                            </ion-col>
-                            <ion-col col-4>
-                                <ion-item>
-                                    <ion-label text-center>{{order.estimation.unit1 * 1}}</ion-label>
-                                    <!-- <ion-label text-center>{{unit1Total}}</ion-label> -->
-                                    <!-- <ion-input [(ngModel)]="order.unit1Total" name="unit1Total" type="text" read-only></ion-input> -->
-                                </ion-item>
-                            </ion-col>
-                        </ion-row>
-                        <ion-row>
-                            <ion-col col-4>
-                                <ion-item>
-                                    <ion-label color="selva">2 Units</ion-label>
-                                </ion-item>
-                            </ion-col>
-                            <ion-col col-4>
-                                <ion-item>
-                                    <ion-label>{{order.estimation.unit2}}</ion-label>
-                                    <!-- <ion-input [(ngModel)]="order.unit2" name="unit2" (ionChange)="onChangeUnit2(order.unit2)" type="number" maxlength="4"></ion-input> -->
-                                </ion-item>
-                            </ion-col>
-                            <ion-col col-4>
-                                <ion-item>
-                                    <ion-label text-center>{{order.estimation.unit2 * 2}}</ion-label>
-                                    <!-- <ion-label text-center>{{unit2Total}}</ion-label> -->
-                                    <!-- <ion-input [(ngModel)]="order.unit2Total" name="unit2Total" type="text"></ion-input> -->
-                                </ion-item>
-                            </ion-col>
-                        </ion-row>
-                        <ion-row>
-                            <ion-col col-4>
-                                <ion-item>
-                                    <ion-label color="selva">3 Units</ion-label>
-                                </ion-item>
-                            </ion-col>
-                            <ion-col col-4>
-                                <ion-item>
-                                    <ion-label>{{order.estimation.unit3}}</ion-label>
-                                    <!-- <ion-input [(ngModel)]="order.unit2" name="unit2" (ionChange)="onChangeUnit2(order.unit2)" type="number" maxlength="4"></ion-input> -->
-                                </ion-item>
-                            </ion-col>
-                            <ion-col col-4>
-                                <ion-item>
-                                    <ion-label text-center>{{order.estimation.unit3 * 3}}</ion-label>
-                                    <!-- <ion-label text-center>{{unit2Total}}</ion-label> -->
-                                    <!-- <ion-input [(ngModel)]="order.unit2Total" name="unit2Total" type="text"></ion-input> -->
-                                </ion-item>
-                            </ion-col>
-                        </ion-row>
-                        <ion-row>
-                            <ion-col col-4>
-                                <ion-item>
-                                    <ion-label color="selva">4 Units</ion-label>
-                                </ion-item>
-                            </ion-col>
-                            <ion-col col-4>
-                                <ion-item>
-                                    <ion-label>{{order.estimation.unit4}}</ion-label>
-                                    <!-- <ion-input [(ngModel)]="order.unit4" name="unit4" (ionChange)="onChangeUnit4(order.unit4)" type="number" maxlength="4"></ion-input> -->
-                                </ion-item>
-                            </ion-col>
-                            <ion-col col-4>
-                                <ion-item>
-                                    <ion-label text-center>{{order.estimation.unit4 * 4}}</ion-label>
-                                    <!-- <ion-label text-center>{{unit4Total}}</ion-label> -->
-                                    <!-- <ion-input [(ngModel)]="order.unit4Total" name="unit4Total" type="text"></ion-input> -->
-                                </ion-item>
-                            </ion-col>
-                        </ion-row>
-                        <ion-row>
-                            <ion-col col-4>
-                                <ion-item>
-                                    <ion-label color="selva">6 Units</ion-label>
-                                </ion-item>
-                            </ion-col>
-                            <ion-col col-4>
-                                <ion-item>
-                                    <ion-label>{{order.estimation.unit6}}</ion-label>
-                                    <!-- <ion-input [(ngModel)]="order.unit6" name="unit6" (ionChange)="onChangeUnit6(order.unit6)" type="number" maxlength="4"></ion-input> -->
-                                </ion-item>
-                            </ion-col>
-                            <ion-col col-4>
-                                <ion-item>
-                                    <ion-label text-center>{{order.estimation.unit6 * 6}}</ion-label>
-                                    <!-- <ion-label text-center>{{unit6Total}}</ion-label> -->
-                                    <!-- <ion-input [(ngModel)]="order.unit6Total" name="unit6Total" type="text"></ion-input> -->
-                                </ion-item>
-                            </ion-col>
-                        </ion-row>
-                        <ion-row>
-                            <ion-col col-8>
-                                <ion-item>
-                                    <ion-label text-center style="font-size:1.6rem;font-weight:bold;">Total Units</ion-label>
-                                </ion-item>
-                            </ion-col>
-                            <ion-col col-4>
-                                <ion-item>
-                                    <ion-label text-center style="font-weight:bold;">{{order.estimation.unitsTotal}}</ion-label>
-                                    <!-- <ion-label text-center style="font-weight:bold;">{{unitSumTotal}}</ion-label> -->
-                                </ion-item>
-                            </ion-col>
-                        </ion-row>
-                    </div>
-                    <!-- </ion-card>
-                        <ion-card> -->
-                    <div *ngIf="order.estimation.productGroup=='DESIGNER_TILES'">
-                        <div *ngFor="let row of order.estimation.product.productDetails">
-                            <ion-row>
-                                <ion-col col-9>
-                                    <ion-item text-wrap>
-                                        <ion-label> {{row.product_DETAIL_NAME}}</ion-label>
-                                    </ion-item>
-                                </ion-col>
-                                <ion-col col-3>
-                                    <ion-item>
-                                        <!-- <ion-input [(ngModel)]="item.qty" name={{item}} type="number" (ionBlur)="calculateTotals(item.qty)" text-right></ion-input> -->
-                                        <!-- <ion-input [ngModel]="item.qty" (ngModelChange)="item.qty=$event" name={{item}} type="number" (ionBlur)="calculateTotals(item.qty)" text-right></ion-input> -->
-                                        <ion-input [(ngModel)]="row.qty" name={{row.product_DETAIL_ID}} type="number" text-center></ion-input>
-                                        <!-- <ion-label>{{row.qty}}</ion-label> -->
-                                        <!-- <ion-input [(ngModel)]="item.qty" name={{item}} type="number" (ionBlur)="calculateTotals(item.qty)" text-right></ion-input> -->
-                                        <!-- <ion-input [(ngModel)]="item.qty" name={{item}} type="number" text-right></ion-input> -->
-                                    </ion-item>
-                                </ion-col>
-                            </ion-row>
-                        </div>
-                        <ion-row>
-                            <ion-col col-8>
-                                <ion-item>
-                                    <ion-label text-center style="font-size:1.6rem;font-weight:bold;">Total Sq Ft</ion-label>
-                                </ion-item>
-                            </ion-col>
-                            <ion-col col-4>
-                                <ion-item>
-                                    <ion-label text-center style="font-weight:bold;">{{order.estimation.unitsTotal}}</ion-label>
-                                </ion-item>
-                            </ion-col>
-                        </ion-row>
-                        <!-- </ion-card> -->
-                    </div>
-                    <div *ngIf="order.estimation.productGroup=='PAVER'">
-                        <div *ngFor="let row of order.estimation.product.productDetails">
-                            <ion-row>
-                                <ion-col col-9>
-                                    <ion-item text-wrap>
-                                        <ion-label> {{row.product_DETAIL_NAME}}</ion-label>
-                                    </ion-item>
-                                </ion-col>
-                                <ion-col col-3>
-                                    <ion-item>
-                                        <ion-input [(ngModel)]="row.qty" name={{row.product_DETAIL_ID}} type="number" text-center></ion-input>
-                                        <!-- <ion-input [(ngModel)]="item.qty" name={{item}} type="number" (ionBlur)="calculateTotals(item.qty)" text-right></ion-input> -->
-                                    </ion-item>
-                                </ion-col>
-                            </ion-row>
-                        </div>
-                        <ion-row>
-                            <ion-col col-8>
-                                <ion-item>
-                                    <ion-label text-center style="font-size:1.6rem;font-weight:bold;">Total Sq Ft</ion-label>
-                                </ion-item>
-                            </ion-col>
-                            <ion-col col-4>
-                                <ion-item>
-                                    <ion-label text-center style="font-weight:bold;">{{order.estimation.unitsTotal}}</ion-label>
-                                </ion-item>
-                            </ion-col>
-                        </ion-row>
-                    </div>
-                    <!-- <div *ngIf="itemGroup=='CRUSHER / BUNKAR'">
-                            inside crusher
-                          </div> -->
-                    <div *ngIf="order.estimation.productGroup=='HOLLOW_BLOCK'">
-                        <!-- <div *ngIf="itemGroup=='Aggregate'"> -->
-                        <ion-row>
-                            <ion-col col-6>
-                                <div style="font-size:1.6rem;font-weight:bold;text-align: center;">Quantity</div>
-                            </ion-col>
-                            <ion-col col-6>
-                                <div style="font-size:1.6rem;font-weight:bold;text-align:center;">Loads</div>
-                            </ion-col>
-                        </ion-row>
-    
-                        <ion-row>
-                            <ion-col col-6>
-                                <ion-item>
-                                    <ion-label>700 Units</ion-label>
-                                </ion-item>
-                            </ion-col>
-                            <ion-col col-6>
-                                <ion-item>
-                                    <ion-label>{{order.estimation.fullLoads}}</ion-label>
-                                    <!-- <ion-input [(ngModel)]="order.fullLoads" name="fullLoads" type="text"></ion-input> -->
-                                </ion-item>
-                            </ion-col>
-                        </ion-row>
-                        <div *ngIf="partialLoadOption==true && order.partialLoad > 0">
-                            <ion-row>
-                                <ion-col col-6>
-                                    <ion-item>
-                                        <ion-label> {{order.estimation.partialLoad}} Units</ion-label>
-                                    </ion-item>
-                                </ion-col>
-                                <ion-col col-6>
-                                    <ion-item>
-                                        <ion-label>1</ion-label>
-                                        <!-- <ion-input [(ngModel)]="order.partialLoad" name="partialLoad" type="text"></ion-input> -->
-                                    </ion-item>
-                                </ion-col>
-                            </ion-row>
-                        </div>
-                    </div>
-                </ion-list>
-                <!-- </ion-card> -->
                 <!-- </ion-card>
                         <ion-card> -->
-                <!-- <ion-card padding> -->
-    
-                <ion-list>
-                    <!-- <ion-list *ngIf="showCostSummary"> -->
-                    <ion-item-divider color="selva">
-                        Cost Summary
-                    </ion-item-divider>
+                <div *ngIf="order.estimation.productGroup=='DESIGNER_TILES'">
+                    <div *ngFor="let row of order.estimation.product.productDetails">
+                        <ion-row>
+                            <ion-col col-9>
+                                <ion-item text-wrap>
+                                    <ion-label> {{row.product_DETAIL_NAME}}</ion-label>
+                                </ion-item>
+                            </ion-col>
+                            <ion-col col-3>
+                                <ion-item>
+                                    <!-- <ion-input [(ngModel)]="item.qty" name={{item}} type="number" (ionBlur)="calculateTotals(item.qty)" text-right></ion-input> -->
+                                    <!-- <ion-input [ngModel]="item.qty" (ngModelChange)="item.qty=$event" name={{item}} type="number" (ionBlur)="calculateTotals(item.qty)" text-right></ion-input> -->
+                                    <ion-input [(ngModel)]="row.qty" name={{row.product_DETAIL_ID}} type="number" text-center></ion-input>
+                                    <!-- <ion-label>{{row.qty}}</ion-label> -->
+                                    <!-- <ion-input [(ngModel)]="item.qty" name={{item}} type="number" (ionBlur)="calculateTotals(item.qty)" text-right></ion-input> -->
+                                    <!-- <ion-input [(ngModel)]="item.qty" name={{item}} type="number" text-right></ion-input> -->
+                                </ion-item>
+                            </ion-col>
+                        </ion-row>
+                    </div>
                     <ion-row>
-                        <ion-col col-4>
-                            <ion-item>
-                                <ion-label color="selva">Taxable</ion-label>
-                            </ion-item>
-                        </ion-col>
                         <ion-col col-8>
                             <ion-item>
-                                <ion-label *ngIf="isToggledTax" text-right>Yes</ion-label>
-                                <ion-label *ngIf="!isToggledTax" text-right>No</ion-label>
-                                <ion-toggle (ionChange)="notifyTaxOption(order.taxable)" color="danger" [checked]="isToggledTax" required></ion-toggle>
-                                <!-- <ion-checkbox (ionChange)="notifyTaxOption(order.taxable)" [checked]="isToggledTax" required></ion-checkbox> -->
+                                <ion-label text-center style="font-size:1.6rem;font-weight:bold;">Total Sq Ft</ion-label>
+                            </ion-item>
+                        </ion-col>
+                        <ion-col col-4>
+                            <ion-item>
+                                <ion-label text-center style="font-weight:bold;">{{order.estimation.unitsTotal}}</ion-label>
                             </ion-item>
                         </ion-col>
                     </ion-row>
+                    <!-- </ion-card> -->
+                </div>
+                <div *ngIf="order.estimation.productGroup=='PAVER'">
+                    <div *ngFor="let row of order.estimation.product.productDetails">
+                        <ion-row>
+                            <ion-col col-9>
+                                <ion-item text-wrap>
+                                    <ion-label> {{row.product_DETAIL_NAME}}</ion-label>
+                                </ion-item>
+                            </ion-col>
+                            <ion-col col-3>
+                                <ion-item>
+                                    <ion-input [(ngModel)]="row.qty" name={{row.product_DETAIL_ID}} type="number" text-center></ion-input>
+                                    <!-- <ion-input [(ngModel)]="item.qty" name={{item}} type="number" (ionBlur)="calculateTotals(item.qty)" text-right></ion-input> -->
+                                </ion-item>
+                            </ion-col>
+                        </ion-row>
+                    </div>
                     <ion-row>
-                        <ion-col>
+                        <ion-col col-8>
                             <ion-item>
-                                <ion-label color="selva">Total Cost </ion-label>
-                                <ion-label>{{displayINR(order.estimation.totalCost)}}</ion-label>
+                                <ion-label text-center style="font-size:1.6rem;font-weight:bold;">Total Sq Ft</ion-label>
                             </ion-item>
+                        </ion-col>
+                        <ion-col col-4>
                             <ion-item>
-                                <ion-label color="selva">Product Cost </ion-label>
-                                <ion-input *ngIf="order_type=='estimate' && (role == '1' || role=='2')" class="text-in" [(ngModel)]="order.estimation.product.product_COST"
-                                    name="product_COST" type="number" maxlength="5" required></ion-input>
-                                <ion-label *ngIf="order_type=='estimate' && role == '3'">{{displayINR(order.estimation.product.product_COST)}}</ion-label>
-                                <!-- *ngIf="(order_type=='estimate' || order_type=='rejected' ) && (role == '1' || role=='2')">{{order.estimation.distanceKM}} -->
-                                <!-- <ion-label>{{displayINR(order.totalProductCost)}}</ion-label> -->
-                            </ion-item>
-                            <ion-item *ngIf="order_type=='rejected'">
-                                <ion-label color="selva">Product Cost </ion-label>
-                                <!-- <ion-input class="text-in" [(ngModel)]="order.estimation.product.product_COST" name="product_COST" type="number" maxlength="5"
-                                    required></ion-input> -->
-                                <ion-label>{{displayINR(order.estimation.product.product_COST)}}</ion-label>
-                            </ion-item>
-                            <ion-item *ngIf="isToggledTax">
-                                <ion-label color="selva">Tax </ion-label>
-                                <ion-label>{{displayINR(order.estimation.totalTax)}}</ion-label>
-                            </ion-item>
-                            <ion-item *ngIf="showTransportCost">
-                                <ion-label color="selva">Transport Cost </ion-label>
-                                <ion-label>{{displayINR(order.estimation.totalTransportCost)}}</ion-label>
-                            </ion-item>
-                            <ion-item *ngIf="showLoadingCost">
-                                <ion-label color="selva">Loading Cost </ion-label>
-                                <ion-label>{{displayINR(order.estimation.totalLoadingCost)}}</ion-label>
-                            </ion-item>
-                            <ion-item>
-                                <ion-label color="selva">Cost per Unit</ion-label>
-                                <ion-label>{{displayINR(order.estimation.product.product_COST)}}</ion-label>
-                                <!-- <ion-label>{{displayINR(estimate['product'].product_COST)}}</ion-label> -->
-                            </ion-item>
-                            <ion-item>
-                                <ion-label color="selva">Loading per Unit</ion-label>
-                                <ion-label>{{displayDecimalINR(order.estimation.sqftLoadingCost)}}</ion-label>
-                                <!-- <ion-label>{{displayINR(estimate['product'].loading_COST)}}</ion-label> -->
+                                <ion-label text-center style="font-weight:bold;">{{order.estimation.unitsTotal}}</ion-label>
                             </ion-item>
                         </ion-col>
                     </ion-row>
-                </ion-list>
-                <!-- </ion-card> -->
-                <!-- <button ion-button block type="submit" [color]="'head'" [disabled]="!estimateForm.valid"> -->
-                <div *ngIf="role == '1' || role == '2'" padding>
-                    <!-- <button *ngIf="order_type=='estimate'" ion-button block color="one" type="submit" (click)="updatePriceCheckOrder(order.orderGroupNo,'ORDER_PRICE_CHECK_APPROVED')"> -->
-                    <button *ngIf="order_type=='estimate'" ion-button block color="one" type="submit" (click)="sendPriceCheck(order)">
-                        Approve
-                    </button>
-                    <!-- <button ion-button block color="danger" (click)="clearAllData(priceForm)">
-                        Clear All
-                    </button>
-                    <button ion-button block color="danger" (click)="sendPriceCheck(order)">
-                        Sumit New Price Check
-                    </button>
-                    <button ion-button block color="danger" (click)="sendNewEstimation(order)">
-                        Submit New Estimation
-                    </button>
-                    <button ion-button block color="danger" (click)="updatePriceCheckOrder(order.orderGroupNo)">
-                        Delete New Estimation
-                    </button> -->
                 </div>
-                <div *ngIf="role == '3'" padding>
-                    <!-- <button ion-button block color="one" type="submit">
-                        Request Price
-                    </button> -->
-                    <!-- <button ion-button block color="danger" (click)="clearAllData(priceForm)">
-                        Clear All
-                    </button> -->
-                    <!-- <button ion-button block color="danger" (click)="sendPriceCheck(order)">
-                        Submit New Price Check
-                    </button>
-                    <button ion-button block color="danger" (click)="sendNewEstimation(order)">
-                        Submit New Estimation
-                    </button> -->
-                    <button *ngIf="order_type=='estimate'" ion-button block color="danger" (click)="updatePriceCheckOrder(order.orderGroupNo,'DELETED')">
-                        Delete Estimation
-                    </button>
-                    <button *ngIf="order_type=='rejected'" ion-button block color="secondary" (click)="sendNewEstimation(order)">
-                        Submit Estimation
-                    </button>
-    
+                <!-- <div *ngIf="itemGroup=='CRUSHER / BUNKAR'">
+                            inside crusher
+                          </div> -->
+                <div *ngIf="order.estimation.productGroup=='HOLLOW_BLOCK'">
+                    <!-- <div *ngIf="itemGroup=='Aggregate'"> -->
+                    <ion-row>
+                        <ion-col col-6>
+                            <div style="font-size:1.6rem;font-weight:bold;text-align: center;">Quantity</div>
+                        </ion-col>
+                        <ion-col col-6>
+                            <div style="font-size:1.6rem;font-weight:bold;text-align:center;">Loads</div>
+                        </ion-col>
+                    </ion-row>
+
+                    <ion-row>
+                        <ion-col col-6>
+                            <ion-item>
+                                <ion-label>700 Units</ion-label>
+                            </ion-item>
+                        </ion-col>
+                        <ion-col col-6>
+                            <ion-item>
+                                <ion-label>{{order.estimation.fullLoads}}</ion-label>
+                                <!-- <ion-input [(ngModel)]="order.fullLoads" name="fullLoads" type="text"></ion-input> -->
+                            </ion-item>
+                        </ion-col>
+                    </ion-row>
+                    <div *ngIf="partialLoadOption==true && order.partialLoad > 0">
+                        <ion-row>
+                            <ion-col col-6>
+                                <ion-item>
+                                    <ion-label> {{order.estimation.partialLoad}} Units</ion-label>
+                                </ion-item>
+                            </ion-col>
+                            <ion-col col-6>
+                                <ion-item>
+                                    <ion-label>1</ion-label>
+                                    <!-- <ion-input [(ngModel)]="order.partialLoad" name="partialLoad" type="text"></ion-input> -->
+                                </ion-item>
+                            </ion-col>
+                        </ion-row>
+                    </div>
                 </div>
-            </form>
-        </div>
-        <div *ngIf="order_type=='requests' || order_type=='responses'" padding>
-            <form (submit)="approvePriceCheck(priceForm)" #priceForm="ngForm">
-                <!-- <form (ngSubmit)="submitOrder(ordersForm)" #ordersForm="ngForm"> -->
-                <!-- <ion-card> -->
-                <!-- <ion-card-header>
-                            <ion-card-title>Customer</ion-card-title>
-                          </ion-card-header> -->
-                <!-- <ion-row>
-                            <ion-col>
-                              <ion-item>
-                                <ion-label>Name</ion-label>
-                              </ion-item>
-                            </ion-col>
-                            <ion-col>
-                              <ion-item>
-                                <ion-select [(ngModel)]="order.customerID" name="customerID">
-                                  <ion-option *ngFor="let customer of customers" [value]="customer.cust_ID" (ionSelect)="onSelectCustomer(customer.cust_ID)"
-                                    >{{customer.cust_NAME}} ({{customer.cust_PHONE1}})</ion-option>
-                                </ion-select>
-                              </ion-item>
-                            </ion-col>
-                          </ion-row> -->
+            </ion-list>
+            <!-- </ion-card> -->
+            <!-- </ion-card>
+                        <ion-card> -->
+            <!-- <ion-card padding> -->
+
+            <ion-list>
+                <!-- <ion-list *ngIf="showCostSummary"> -->
                 <ion-item-divider color="selva">
-                    Customer Details
+                    Cost Summary
                 </ion-item-divider>
-                <ion-item>
-                    <ion-label color="selva">Customer Name</ion-label>
-                    <ion-label>{{order.estimation.customerName}}</ion-label>
-                    <!-- <ion-select [(ngModel)]="order.estimation.customerName" name="customerID" [compareWith]=""> -->
-                    <!-- <ion-option *ngFor="let customer of customers" [value]="customer.cust_ID" (ionSelect)="onSelectCustomer(customer.cust_ID,customer.cust_NAME)"
-                            required>{{customer.cust_NAME}} ({{customer.cust_PHONE1}})</ion-option> -->
-                    <!-- </ion-select> -->
-                </ion-item>
-                <ion-item>
-                    <ion-label color="selva">Site</ion-label>
-                    <ion-label>{{order.estimation.siteName}}</ion-label>
-                    <!-- <ion-select [(ngModel)]="order.siteID" name="siteID" [disabled]="disableSiteName"> -->
-                    <!-- <ion-option *ngFor="let site of sites" [value]="site.site_ID" (ionSelect)="onSelectSite(site.site_NAME)" required>{{site.site_NAME}}</ion-option> -->
-                    <!-- </ion-select> -->
-                </ion-item>
-                <ion-item>
-                    <ion-label color="selva">Referer 1</ion-label>
-                    <ion-label>{{order.estimation.referral1Name}}</ion-label>
-                    <!-- <ion-select [(ngModel)]="order.reference1" name="reference1" [disabled]="disableSiteName"> -->
-                    <!-- <ion-option *ngFor="let reference1 of references" [value]="reference1.reference_ID" (ionSelect)="onSelectReference1(reference1.refrer_NAME)">
-                            {{reference1.refrer_NAME}} ({{reference1.referer_MOBILE1}}) - {{reference1.referer_TYPE}} -->
-                    <!-- </ion-option> -->
-                    <!-- </ion-select> -->
-                </ion-item>
-                <ion-item>
-                    <ion-label color="selva">Referer 2</ion-label>
-                    <ion-label>{{order.estimation.referral2Name}}</ion-label>
-                    <!-- <ion-select [(ngModel)]="order.reference2" name="reference2" [disabled]="disableSiteName"> -->
-                    <!-- <ion-option *ngFor="let reference2 of references" [value]="reference2.reference_ID" (ionSelect)="onSelectReference2(reference2.refrer_NAME)">
-                            {{reference2.refrer_NAME}} ({{reference2.referer_MOBILE1}}) - {{reference2.referer_TYPE}} -->
-                    <!-- </ion-option> -->
-                    <!-- </ion-select> -->
-                </ion-item>
-                <ion-item>
-                    <ion-label color="selva">Priority</ion-label>
-                    <ion-label *ngIf="isToggledPriority" text-right>High</ion-label>
-                    <ion-label *ngIf="!isToggledPriority" text-right>Normal</ion-label>
-                    <ion-toggle [disabled]="disableSiteName" color="secondary" (ionChange)="notifyPriorityOption(order.highPriority)" [checked]="isToggledPriority"></ion-toggle>
-                    <!-- <ion-toggle color="secondary" (ionChange)="notifyPriorityOption(order.highPriority)" [checked]="isToggledPriority"></ion-toggle> -->
-                </ion-item>
-    
-                <ion-item-divider color="selva">
-                    Order Details
-                </ion-item-divider>
-                <ion-item>
-                    <ion-label color="selva">Item Group</ion-label>
-                    <ion-label>{{order.estimation.productGroup}}</ion-label>
-                    <!-- <ion-select [(ngModel)]="order.productGroupName" name="item_Group_NAME">
-                        <ion-option *ngFor="let row of productGroupModel" (ionSelect)="onItemGroupChange(row,row.product_GROUP_ID,row.division_ID)"
-                        required>{{row.product_GROUP_NAME}}</ion-option>
-                    </ion-select> -->
-                </ion-item>
-                <!-- </ion-col> -->
-                <!-- </ion-row> -->
-                
-                <!-- <ion-row> -->
-                    <!-- <ion-col col-4> -->
+                <ion-row>
+                    <ion-col col-4>
                         <ion-item>
-                            <ion-label color="selva">Item name</ion-label>
-                            <ion-label>{{order.estimation.productGroupName}}</ion-label>
-                            <!-- </ion-item> -->
-                    <!-- </ion-col> -->
-                    <!-- <ion-col col-8>
-                        <ion-item> -->
-                    <!-- <ion-select name="product"> -->
-                    <!-- <ion-select [(ngModel)]="order.product" name="product" [disabled]="disableItemName">
-                                    <ion-option *ngFor="let item of products" [value]="item" (ionSelect)="onItemNameChange(item.productDetails,item.uom)" required>{{item.product_NAME}}</ion-option>
-                                </ion-select> -->
-                </ion-item>
-                <ion-item>
-                    <ion-label color="selva" fixed>Distance</ion-label>
-                    <ion-label *ngIf="(order_type=='requests' || order_type=='responses' ) && (role == '1' || role=='2')" text-center>{{order.estimation.distanceKM}}</ion-label>
-                    <ion-label *ngIf="order_type=='requests' && role == '3'" text-center>{{order.estimation.distanceKM}}</ion-label>
-                    <ion-input *ngIf="order_type=='responses' && role == '3'" class="text-in" [(ngModel)]="order.estimation.distanceKM" name="distanceKM"
-                        (ionChange)="reCalculateTotals()" type="number" maxlength="3" text-center required></ion-input>
-                </ion-item>
-                <ion-item>
-                    <ion-label color="selva" fixed>Total {{uom}}</ion-label>
-                    <ion-label *ngIf="(order_type=='requests' || order_type=='responses' ) && (role == '1' || role=='2')" text-center>{{order.estimation.unitsTotal}}</ion-label>
-                    <ion-label *ngIf="order_type=='requests' && role == '3'" text-center>{{order.estimation.unitsTotal}}</ion-label>
-                    <ion-input *ngIf="order_type=='responses' && role == '3'" class="text-in" [(ngModel)]="order.estimation.unitsTotal" name="unitsTotal"
-                        (ionChange)="reCalculateTotals()" type="number" maxlength="5" text-center required></ion-input>
-                </ion-item>
-                <!-- <ion-item *ngIf="order_type=='responses'"> -->
-                <!-- <ion-label color="selva" fixed>Total {{uom}}</ion-label> -->
-                <!-- </ion-item> -->
-                <ion-list>
-                    <ion-item-divider color="selva" *ngIf="order.estimation.productGroup=='QUARRY' || order.estimation.productGroup=='DESIGNER_TILES' || order.estimation.productGroup=='PAVER' || order.estimation.productGroup=='HOLLOW_BLOCK'">
-                        Product Details
-                    </ion-item-divider>
-                    <div *ngIf="order.estimation.productGroup=='QUARRY'">
-                        <!-- <div *ngIf="itemGroup=='Aggregate'"> -->
-                        <ion-row>
-                            <ion-col col-4>
-                                <div style="font-size:1.6rem;font-weight:bold;text-align: center;">Capacity</div>
-                            </ion-col>
-                            <ion-col col-4>
-                                <div style="font-size:1.6rem;font-weight:bold;text-align:center;">Loads</div>
-                            </ion-col>
-                            <ion-col col-4>
-                                <div style="font-size:1.6rem;font-weight:bold;text-align:center;">Total Units</div>
-                            </ion-col>
-                        </ion-row>
-    
-                        <ion-row>
-                            <ion-col col-4>
-                                <ion-item>
-                                    <ion-label color="selva">1 Unit</ion-label>
-                                </ion-item>
-                            </ion-col>
-                            <ion-col col-4>
-                                <ion-item>
-                                    <ion-label *ngIf="(order_type=='requests' || order_type=='responses' ) && (role == '1' || role=='2')" text-center>{{order.estimation.unit1}}</ion-label>
-                                    <ion-label *ngIf="order_type=='requests' && role == '3'" text-center>{{order.estimation.unit1}}</ion-label>
-                                    <!-- </ion-item> -->
-                                    <!-- <ion-item *ngIf="order_type=='responses' && role == '3'"> -->
-                                    <ion-input *ngIf="order_type=='responses' && role == '3'" [(ngModel)]="order.estimation.unit1" name="unit1" (ionChange)="onChangeUnit1(order.estimation.unit1)"
-                                        (ionChange)="reCalculateTotals()" type="number" maxlength="4"></ion-input>
-                                </ion-item>
-                            </ion-col>
-                            <ion-col col-4>
-                                <ion-item>
-                                    <ion-label text-center>{{order.estimation.unit1 * 1}}</ion-label>
-                                    <!-- <ion-label text-center>{{unit1Total}}</ion-label> -->
-                                    <!-- <ion-input [(ngModel)]="order.unit1Total" name="unit1Total" type="text" read-only></ion-input> -->
-                                </ion-item>
-                            </ion-col>
-                        </ion-row>
-                        <ion-row>
-                            <ion-col col-4>
-                                <ion-item>
-                                    <ion-label color="selva">2 Units</ion-label>
-                                </ion-item>
-                            </ion-col>
-                            <ion-col col-4>
-                                <ion-item>
-                                    <ion-label *ngIf="(order_type=='requests' || order_type=='responses' ) && (role == '1' || role=='2')" text-center>{{order.estimation.unit2}}</ion-label>
-                                    <ion-label *ngIf="order_type=='requests' && role == '3'" text-center>{{order.estimation.unit2}}</ion-label>
-                                    <ion-input *ngIf="order_type=='responses' && role == '3'" [(ngModel)]="order.estimation.unit2" name="unit2" (ionChange)="onChangeUnit2(order.estimation.unit2)"
-                                        (ionChange)="reCalculateTotals()" type="number" maxlength="4"></ion-input>
-                                    <!-- <ion-input [(ngModel)]="order.unit2" name="unit2" (ionChange)="onChangeUnit2(order.unit2)" type="number" maxlength="4"></ion-input> -->
-                                </ion-item>
-                            </ion-col>
-                            <ion-col col-4>
-                                <ion-item>
-                                    <ion-label text-center>{{order.estimation.unit2 * 2}}</ion-label>
-                                    <!-- <ion-label text-center>{{unit2Total}}</ion-label> -->
-                                    <!-- <ion-input [(ngModel)]="order.unit2Total" name="unit2Total" type="text"></ion-input> -->
-                                </ion-item>
-                            </ion-col>
-                        </ion-row>
-                        <ion-row>
-                            <ion-col col-4>
-                                <ion-item>
-                                    <ion-label color="selva">3 Units</ion-label>
-                                </ion-item>
-                            </ion-col>
-                            <ion-col col-4>
-                                <ion-item>
-                                    <ion-label *ngIf="(order_type=='requests' || order_type=='responses' ) && (role == '1' || role=='2')" text-center>{{order.estimation.unit3}}</ion-label>
-                                    <ion-label *ngIf="order_type=='requests' && role == '3'" text-center>{{order.estimation.unit3}}</ion-label>
-                                    <ion-input *ngIf="order_type=='responses' && role == '3'" [(ngModel)]="order.estimation.unit3" name="unit3" (ionChange)="onChangeUnit3(order.estimation.unit3)"
-                                        (ionChange)="reCalculateTotals()" type="number" maxlength="4"></ion-input>
-                                    <!-- <ion-input [(ngModel)]="order.unit2" name="unit2" (ionChange)="onChangeUnit2(order.unit2)" type="number" maxlength="4"></ion-input> -->
-                                </ion-item>
-                            </ion-col>
-                            <ion-col col-4>
-                                <ion-item>
-                                    <ion-label text-center>{{order.estimation.unit3 * 3}}</ion-label>
-                                    <!-- <ion-label text-center>{{unit2Total}}</ion-label> -->
-                                    <!-- <ion-input [(ngModel)]="order.unit2Total" name="unit2Total" type="text"></ion-input> -->
-                                </ion-item>
-                            </ion-col>
-                        </ion-row>
-                        <ion-row>
-                            <ion-col col-4>
-                                <ion-item>
-                                    <ion-label color="selva">4 Units</ion-label>
-                                </ion-item>
-                            </ion-col>
-                            <ion-col col-4>
-                                <ion-item>
-                                    <ion-label *ngIf="(order_type=='requests' || order_type=='responses' ) && (role == '1' || role=='2')" text-center>{{order.estimation.unit4}}</ion-label>
-                                    <ion-label *ngIf="order_type=='requests' && role == '3'" text-center>{{order.estimation.unit4}}</ion-label>
-                                    <ion-input *ngIf="order_type=='responses' && role == '3'" [(ngModel)]="order.estimation.unit4" name="unit4" (ionChange)="onChangeUnit4(order.estimation.unit4)"
-                                        (ionChange)="reCalculateTotals()" type="number" maxlength="4"></ion-input>
-                                    <!-- <ion-input [(ngModel)]="order.unit4" name="unit4" (ionChange)="onChangeUnit4(order.unit4)" type="number" maxlength="4"></ion-input> -->
-                                </ion-item>
-                            </ion-col>
-                            <ion-col col-4>
-                                <ion-item>
-                                    <ion-label text-center>{{order.estimation.unit4 * 4}}</ion-label>
-                                    <!-- <ion-label text-center>{{unit4Total}}</ion-label> -->
-                                    <!-- <ion-input [(ngModel)]="order.unit4Total" name="unit4Total" type="text"></ion-input> -->
-                                </ion-item>
-                            </ion-col>
-                        </ion-row>
-                        <ion-row>
-                            <ion-col col-4>
-                                <ion-item>
-                                    <ion-label color="selva">6 Units</ion-label>
-                                </ion-item>
-                            </ion-col>
-                            <ion-col col-4>
-                                <ion-item>
-                                    <ion-label *ngIf="(order_type=='requests' || order_type=='responses' ) && (role == '1' || role=='2')" text-center>{{order.estimation.unit6}}</ion-label>
-                                    <ion-label *ngIf="order_type=='requests' && role == '3'" text-center>{{order.estimation.unit6}}</ion-label>
-                                    <ion-input *ngIf="order_type=='responses' && role == '3'" [(ngModel)]="order.estimation.unit6" name="unit6" (ionChange)="onChangeUnit6(order.estimation.unit6)"
-                                        (ionChange)="reCalculateTotals()" type="number" maxlength="4"></ion-input>
-                                    <!-- <ion-input [(ngModel)]="order.unit6" name="unit6" (ionChange)="onChangeUnit6(order.unit6)" type="number" maxlength="4"></ion-input> -->
-                                </ion-item>
-                            </ion-col>
-                            <ion-col col-4>
-                                <ion-item>
-                                    <ion-label text-center>{{order.estimation.unit6 * 6}}</ion-label>
-                                    <!-- <ion-label text-center>{{unit6Total}}</ion-label> -->
-                                    <!-- <ion-input [(ngModel)]="order.unit6Total" name="unit6Total" type="text"></ion-input> -->
-                                </ion-item>
-                            </ion-col>
-                        </ion-row>
-                        <ion-row>
-                            <ion-col col-8>
-                                <ion-item>
-                                    <ion-label text-center style="font-size:1.6rem;font-weight:bold;">Total Units</ion-label>
-                                </ion-item>
-                            </ion-col>
-                            <ion-col col-4>
-                                <ion-item>
-                                    <ion-label text-center style="font-weight:bold;">{{order.estimation.unitsTotal}}</ion-label>
-                                    <!-- <ion-label text-center style="font-weight:bold;">{{unitSumTotal}}</ion-label> -->
-                                </ion-item>
-                            </ion-col>
-                        </ion-row>
-                    </div>
-                    <!-- </ion-card>
-                        <ion-card> -->
-                    <div *ngIf="order.estimation.productGroup=='DESIGNER_TILES'">
-                        <div *ngFor="let row of order.estimation.product.productDetails">
-                            <ion-row>
-                                <ion-col col-9>
-                                    <ion-item text-wrap>
-                                        <ion-label> {{row.product_DETAIL_NAME}}</ion-label>
-                                    </ion-item>
-                                </ion-col>
-                                <ion-col col-3>
-                                    <ion-item>
-                                        <!-- <ion-input [(ngModel)]="item.qty" name={{item}} type="number" (ionBlur)="calculateTotals(item.qty)" text-right></ion-input> -->
-                                        <!-- <ion-input [ngModel]="item.qty" (ngModelChange)="item.qty=$event" name={{item}} type="number" (ionBlur)="calculateTotals(item.qty)" text-right></ion-input> -->
-                                        <ion-label *ngIf="(order_type=='requests' || order_type=='responses' ) && (role == '1' || role=='2')" text-center>{{row.qty}}</ion-label>
-                                        <ion-label *ngIf="order_type=='requests' && role == '3'" text-center>{{row.qty}}</ion-label>
-                                        <ion-input *ngIf="order_type=='responses' && role == '3'" [(ngModel)]="row.qty" name={{row.product_DETAIL_ID}} type="number"
-                                            text-center></ion-input>
-                                        <!-- <ion-label>{{row.qty}}</ion-label> -->
-                                        <!-- <ion-input [(ngModel)]="item.qty" name={{item}} type="number" (ionBlur)="calculateTotals(item.qty)" text-right></ion-input> -->
-                                        <!-- <ion-input [(ngModel)]="item.qty" name={{item}} type="number" text-right></ion-input> -->
-                                    </ion-item>
-                                </ion-col>
-                            </ion-row>
-                        </div>
-                        <ion-row>
-                            <ion-col col-8>
-                                <ion-item>
-                                    <ion-label text-center style="font-size:1.6rem;font-weight:bold;">Total Sq Ft</ion-label>
-                                </ion-item>
-                            </ion-col>
-                            <ion-col col-4>
-                                <ion-item>
-                                    <ion-label text-center style="font-weight:bold;">{{order.estimation.unitsTotal}}</ion-label>
-                                </ion-item>
-                            </ion-col>
-                        </ion-row>
-                        <!-- </ion-card> -->
-                    </div>
-                    <div *ngIf="order.estimation.productGroup=='PAVER'">
-                        <div *ngFor="let row of order.estimation.product.productDetails">
-                            <ion-row>
-                                <ion-col col-9>
-                                    <ion-item text-wrap>
-                                        <ion-label> {{row.product_DETAIL_NAME}}</ion-label>
-                                    </ion-item>
-                                </ion-col>
-                                <ion-col col-3>
-                                    <ion-item>
-                                        <ion-label *ngIf="(order_type=='requests' || order_type=='responses' ) && (role == '1' || role=='2')" text-center>{{row.qty}}</ion-label>
-                                        <ion-label *ngIf="order_type=='requests' && role == '3'" text-center>{{row.qty}}</ion-label>
-                                        <ion-input *ngIf="order_type=='responses' && role == '3'" [(ngModel)]="row.qty" name={{row.product_DETAIL_ID}} type="number"
-                                            text-right></ion-input>
-                                        <!-- <ion-input [(ngModel)]="row.qty" name={{row.product_DETAIL_ID}} type="number" text-right></ion-input> -->
-                                        <!-- <ion-input [(ngModel)]="item.qty" name={{item}} type="number" (ionBlur)="calculateTotals(item.qty)" text-right></ion-input> -->
-                                    </ion-item>
-                                </ion-col>
-                            </ion-row>
-                        </div>
-                        <ion-row>
-                            <ion-col col-8>
-                                <ion-item>
-                                    <ion-label text-center style="font-size:1.6rem;font-weight:bold;">Total Sq Ft</ion-label>
-                                </ion-item>
-                            </ion-col>
-                            <ion-col col-4>
-                                <ion-item>
-                                    <ion-label text-center style="font-weight:bold;">{{order.estimation.unitsTotal}}</ion-label>
-                                </ion-item>
-                            </ion-col>
-                        </ion-row>
-                    </div>
-                    <!-- <div *ngIf="itemGroup=='CRUSHER / BUNKAR'">
-                            inside crusher
-                          </div> -->
-                    <div *ngIf="order.estimation.productGroup=='HOLLOW_BLOCK'">
-                        <!-- <div *ngIf="itemGroup=='Aggregate'"> -->
-                        <ion-row>
-                            <ion-col col-6>
-                                <div style="font-size:1.6rem;font-weight:bold;text-align: center;">Quantity</div>
-                            </ion-col>
-                            <ion-col col-6>
-                                <div style="font-size:1.6rem;font-weight:bold;text-align:center;">Loads</div>
-                            </ion-col>
-                        </ion-row>
-    
-                        <ion-row>
-                            <ion-col col-6>
-                                <ion-item>
-                                    <ion-label>700 Units</ion-label>
-                                </ion-item>
-                            </ion-col>
-                            <ion-col col-6>
-                                <ion-item>
-                                    <ion-label text-center>{{order.estimation.fullLoads}}</ion-label>
-                                    <!-- <ion-input [(ngModel)]="order.fullLoads" name="fullLoads" type="text"></ion-input> -->
-                                </ion-item>
-                            </ion-col>
-                        </ion-row>
-                        <div *ngIf="partialLoadOption==true">
-                            <ion-row>
-                                <ion-col col-6>
-                                    <ion-item>
-                                        <ion-label> {{order.estimation.partialLoad}} Units</ion-label>
-                                    </ion-item>
-                                </ion-col>
-                                <ion-col col-6>
-                                    <ion-item>
-                                        <ion-label text-center>1</ion-label>
-                                        <!-- <ion-input [(ngModel)]="order.partialLoad" name="partialLoad" type="text"></ion-input> -->
-                                    </ion-item>
-                                </ion-col>
-                            </ion-row>
-                        </div>
-                    </div>
-                </ion-list>
-                <!-- </ion-card> -->
-                <!-- </ion-card>
-                        <ion-card> -->
-                <!-- <ion-card padding> -->
-    
-                <ion-list>
-                    <!-- <ion-list *ngIf="showCostSummary"> -->
-                    <ion-item-divider color="selva">
-                        Cost Summary
-                    </ion-item-divider>
-                    <ion-row>
-                        <ion-col col-4>
-                            <ion-item>
-                                <ion-label color="selva">Taxable</ion-label>
-                            </ion-item>
-                        </ion-col>
-                        <ion-col col-8>
-                            <ion-item>
-                                <ion-label *ngIf="isToggledTax" text-right>Yes</ion-label>
-                                <ion-label *ngIf="!isToggledTax" text-right>No</ion-label>
-                                <ion-toggle (ionChange)="notifyTaxOption(order.taxable)" color="danger" [checked]="isToggledTax" required></ion-toggle>
-                                <!-- <ion-checkbox (ionChange)="notifyTaxOption(order.taxable)" [checked]="isToggledTax" required></ion-checkbox> -->
-                            </ion-item>
-                        </ion-col>
-                    </ion-row>
-                    <ion-row>
-                        <ion-col>
-                            <ion-item>
-                                <ion-label color="selva">Total Cost </ion-label>
-                                <ion-label>{{displayINR(order.estimation.totalCost)}}</ion-label>
-                            </ion-item>
-                            <ion-item>
-                                <ion-label color="selva">Product Cost </ion-label>
-                                <ion-input *ngIf="order_type=='requests' && (role == '1' || role=='2')" class="text-in" [(ngModel)]="order.estimation.product.product_COST"
-                                    (ionChange)="reCalculateTotals()" name="product_COST" type="number" maxlength="5" required></ion-input>
-                                <ion-label *ngIf="order_type=='requests' && role == '3'">{{displayINR(order.estimation.product.product_COST)}}</ion-label>
-                                <ion-label *ngIf="order_type=='responses' &&  (role == '1' || role=='2' || role == '3')">{{displayINR(order.estimation.product.product_COST)}}</ion-label>
-                                <!-- *ngIf="(order_type=='requests' || order_type=='responses' ) && (role == '1' || role=='2')">{{order.estimation.distanceKM}} -->
-                                <!-- <ion-label>{{displayINR(order.totalProductCost)}}</ion-label> -->
-                            </ion-item>
-                            <ion-item>
-                                <ion-label color="selva">Manager Remarks </ion-label>
-                                <ion-label class="text-in">{{order.remarkMgr}}</ion-label>
-                                <ion-label *ngIf="order_type=='responses' && role == '3'" class="text-in">{{order.remarkMgr}}</ion-label>
-                                <ion-input *ngIf="order_type=='requests' && (role == '1' || role=='2')" class="text-in" [(ngModel)]="order.remarkMgr" name="remarkMgr"
-                                    type="text"></ion-input>
-                            </ion-item>
-                            <ion-item>
-                                <ion-label color="selva">Rep Remarks </ion-label>
-                                <ion-label class="text-in">{{order.remarkRep}}</ion-label>
-                                <ion-label *ngIf="order_type=='responses' && role == '3'" class="text-in">{{order.remarkRep}}</ion-label>
-                            </ion-item>
-                            <!-- <ion-item *ngIf="order_type=='responses'"> -->
-                            <!-- <ion-label color="selva">Product Cost </ion-label> -->
+                            <ion-label color="selva">Taxable</ion-label>
+                        </ion-item>
+                    </ion-col>
+                    <ion-col col-8>
+                        <ion-item>
+                            <ion-label *ngIf="isToggledTax" text-right>Yes</ion-label>
+                            <ion-label *ngIf="!isToggledTax" text-right>No</ion-label>
+                            <ion-toggle (ionChange)="notifyTaxOption(order.taxable)" color="danger" [checked]="isToggledTax" required></ion-toggle>
+                            <!-- <ion-checkbox (ionChange)="notifyTaxOption(order.taxable)" [checked]="isToggledTax" required></ion-checkbox> -->
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col>
+                        <ion-item>
+                            <ion-label color="selva">Total Cost </ion-label>
+                            <ion-label>{{displayINR(order.estimation.totalCost)}}</ion-label>
+                        </ion-item>
+                        <ion-item>
+                            <ion-label color="selva">Product Cost </ion-label>
+                            <ion-input *ngIf="order_type=='estimate' && (role == '1' || role=='2')" class="text-in" [(ngModel)]="order.estimation.product.product_COST"
+                                name="product_COST" type="number" maxlength="5" required></ion-input>
+                            <ion-label *ngIf="order_type=='estimate' && role == '3'">{{displayINR(order.estimation.product.product_COST)}}</ion-label>
+                            <!-- *ngIf="(order_type=='estimate' || order_type=='rejected' ) && (role == '1' || role=='2')">{{order.estimation.distanceKM}} -->
+                            <!-- <ion-label>{{displayINR(order.totalProductCost)}}</ion-label> -->
+                        </ion-item>
+                        <ion-item *ngIf="order_type=='rejected'">
+                            <ion-label color="selva">Product Cost </ion-label>
                             <!-- <ion-input class="text-in" [(ngModel)]="order.estimation.product.product_COST" name="product_COST" type="number" maxlength="5"
                                     required></ion-input> -->
-                            <!-- <ion-label>{{displayINR(order.estimation.product.product_COST)}}</ion-label> -->
-                            <!-- </ion-item> -->
-                            <ion-item *ngIf="isToggledTax">
-                                <ion-label color="selva">Tax </ion-label>
-                                <ion-label>{{displayINR(order.estimation.totalTax)}}</ion-label>
-                            </ion-item>
-                            <ion-item *ngIf="showTransportCost">
-                                <ion-label color="selva">Transport Cost </ion-label>
-                                <ion-label>{{displayINR(order.estimation.totalTransportCost)}}</ion-label>
-                            </ion-item>
-                            <ion-item *ngIf="showLoadingCost">
-                                <ion-label color="selva">Loading Cost </ion-label>
-                                <ion-label>{{displayINR(order.estimation.totalLoadingCost)}}</ion-label>
-                            </ion-item>
-                            <ion-item>
-                                <ion-label color="selva">Cost per Unit</ion-label>
-                                <ion-label>{{displayINR(order.estimation.product.product_COST)}}</ion-label>
-                                <!-- <ion-label>{{displayINR(estimate['product'].product_COST)}}</ion-label> -->
-                            </ion-item>
-                            <ion-item>
-                                <ion-label color="selva">Loading per Unit</ion-label>
-                                <ion-label>{{displayDecimalINR(order.estimation.sqftLoadingCost)}}</ion-label>
-                                <!-- <ion-label>{{displayINR(estimate['product'].loading_COST)}}</ion-label> -->
-                            </ion-item>
-                        </ion-col>
-                    </ion-row>
-                </ion-list>
-                <!-- </ion-card> -->
-                <!-- <button ion-button block type="submit" [color]="'head'" [disabled]="!estimateForm.valid"> -->
-                <div *ngIf="role == '1' || role == '2'" padding>
-                    <!-- <button *ngIf="order_type=='requests'" ion-button block color="one" type="submit" (click)="updatePriceCheckOrder(order.orderGroupNo,'ORDER_PRICE_CHECK_APPROVED')"> -->
-                    <button *ngIf="order_type=='requests'" ion-button block color="one" type="submit" (click)="sendPriceCheck(order)">
-                        Approve
-                    </button>
-                    <button *ngIf="order_type=='requests'" ion-button block color="danger" type="submit" (click)="updatePriceCheckOrder(order.orderGroupNo,'REJECTED')">
-                        Reject
-                    </button>
-                    <!-- <button ion-button block color="danger" (click)="clearAllData(priceForm)">
+                            <ion-label>{{displayINR(order.estimation.product.product_COST)}}</ion-label>
+                        </ion-item>
+                        <ion-item *ngIf="isToggledTax">
+                            <ion-label color="selva">Tax </ion-label>
+                            <ion-label>{{displayINR(order.estimation.totalTax)}}</ion-label>
+                        </ion-item>
+                        <ion-item *ngIf="showTransportCost">
+                            <ion-label color="selva">Transport Cost </ion-label>
+                            <ion-label>{{displayINR(order.estimation.totalTransportCost)}}</ion-label>
+                        </ion-item>
+                        <ion-item *ngIf="showLoadingCost">
+                            <ion-label color="selva">Loading Cost </ion-label>
+                            <ion-label>{{displayINR(order.estimation.totalLoadingCost)}}</ion-label>
+                        </ion-item>
+                        <ion-item>
+                            <ion-label color="selva">Cost per Unit</ion-label>
+                            <ion-label>{{displayINR(order.estimation.product.product_COST)}}</ion-label>
+                            <!-- <ion-label>{{displayINR(estimate['product'].product_COST)}}</ion-label> -->
+                        </ion-item>
+                        <ion-item>
+                            <ion-label color="selva">Loading per Unit</ion-label>
+                            <ion-label>{{displayDecimalINR(order.estimation.sqftLoadingCost)}}</ion-label>
+                            <!-- <ion-label>{{displayINR(estimate['product'].loading_COST)}}</ion-label> -->
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
+            </ion-list>
+            <!-- </ion-card> -->
+            <!-- <button ion-button block type="submit" [color]="'head'" [disabled]="!estimateForm.valid"> -->
+            <div *ngIf="role == '1' || role == '2'" padding>
+                <!-- <button *ngIf="order_type=='estimate'" ion-button block color="one" type="submit" (click)="updatePriceCheckOrder(order.orderGroupNo,'ORDER_PRICE_CHECK_APPROVED')"> -->
+                <button *ngIf="order_type=='estimate'" ion-button block color="one" type="submit" (click)="sendPriceCheck(order)">
+                    Approve
+                </button>
+                <!-- <button ion-button block color="danger" (click)="clearAllData(priceForm)">
                         Clear All
                     </button>
                     <button ion-button block color="danger" (click)="sendPriceCheck(order)">
@@ -1490,28 +986,540 @@
                     <button ion-button block color="danger" (click)="updatePriceCheckOrder(order.orderGroupNo)">
                         Delete New Estimation
                     </button> -->
-                </div>
-                <div *ngIf="role == '3'" padding>
-                    <!-- <button ion-button block color="one" type="submit">
+            </div>
+            <div *ngIf="role == '3'" padding>
+                <!-- <button ion-button block color="one" type="submit">
                         Request Price
                     </button> -->
-                    <!-- <button ion-button block color="danger" (click)="clearAllData(priceForm)">
+                <!-- <button ion-button block color="danger" (click)="clearAllData(priceForm)">
                         Clear All
                     </button> -->
-                    <!-- <button ion-button block color="danger" (click)="sendPriceCheck(order)">
+                <!-- <button ion-button block color="danger" (click)="sendPriceCheck(order)">
                         Submit New Price Check
                     </button>
                     <button ion-button block color="danger" (click)="sendNewEstimation(order)">
                         Submit New Estimation
                     </button> -->
-                    <button *ngIf="order_type=='requests'" ion-button block color="danger" (click)="updatePriceCheckOrder(order.orderGroupNo,'DELETED')">
-                        Delete Estimation
-                    </button>
-                    <button *ngIf="order_type=='responses'" ion-button block color="secondary" (click)="sendNewEstimation(order)">
-                        Submit Estimation
-                    </button>
-    
+                <button *ngIf="order_type=='estimate'" ion-button block color="danger" (click)="updatePriceCheckOrder(order.orderGroupNo,'DELETED')">
+                    Delete Estimation
+                </button>
+                <button *ngIf="order_type=='rejected'" ion-button block color="secondary" (click)="sendNewEstimation(order)">
+                    Submit Estimation
+                </button>
+
+            </div>
+        </form>
+    </div>
+    <div *ngIf="order_type=='requests' || order_type=='responses'" padding>
+        <form (submit)="approvePriceCheck(priceForm)" #priceForm="ngForm">
+            <!-- <form (ngSubmit)="submitOrder(ordersForm)" #ordersForm="ngForm"> -->
+            <!-- <ion-card> -->
+            <!-- <ion-card-header>
+                            <ion-card-title>Customer</ion-card-title>
+                          </ion-card-header> -->
+            <!-- <ion-row>
+                            <ion-col>
+                              <ion-item>
+                                <ion-label>Name</ion-label>
+                              </ion-item>
+                            </ion-col>
+                            <ion-col>
+                              <ion-item>
+                                <ion-select [(ngModel)]="order.customerID" name="customerID">
+                                  <ion-option *ngFor="let customer of customers" [value]="customer.cust_ID" (ionSelect)="onSelectCustomer(customer.cust_ID)"
+                                    >{{customer.cust_NAME}} ({{customer.cust_PHONE1}})</ion-option>
+                                </ion-select>
+                              </ion-item>
+                            </ion-col>
+                          </ion-row> -->
+            <ion-item-divider color="selva">
+                Customer Details
+            </ion-item-divider>
+            <ion-item>
+                <ion-label color="selva">Customer Name</ion-label>
+                <ion-label>{{order.estimation.customerName}}</ion-label>
+                <!-- <ion-select [(ngModel)]="order.estimation.customerName" name="customerID" [compareWith]=""> -->
+                <!-- <ion-option *ngFor="let customer of customers" [value]="customer.cust_ID" (ionSelect)="onSelectCustomer(customer.cust_ID,customer.cust_NAME)"
+                            required>{{customer.cust_NAME}} ({{customer.cust_PHONE1}})</ion-option> -->
+                <!-- </ion-select> -->
+            </ion-item>
+            <ion-item>
+                <ion-label color="selva">Site</ion-label>
+                <ion-label>{{order.estimation.siteName}}</ion-label>
+                <!-- <ion-select [(ngModel)]="order.siteID" name="siteID" [disabled]="disableSiteName"> -->
+                <!-- <ion-option *ngFor="let site of sites" [value]="site.site_ID" (ionSelect)="onSelectSite(site.site_NAME)" required>{{site.site_NAME}}</ion-option> -->
+                <!-- </ion-select> -->
+            </ion-item>
+            <ion-item>
+                <ion-label color="selva">Referer 1</ion-label>
+                <ion-label>{{order.estimation.referral1Name}}</ion-label>
+                <!-- <ion-select [(ngModel)]="order.reference1" name="reference1" [disabled]="disableSiteName"> -->
+                <!-- <ion-option *ngFor="let reference1 of references" [value]="reference1.reference_ID" (ionSelect)="onSelectReference1(reference1.refrer_NAME)">
+                            {{reference1.refrer_NAME}} ({{reference1.referer_MOBILE1}}) - {{reference1.referer_TYPE}} -->
+                <!-- </ion-option> -->
+                <!-- </ion-select> -->
+            </ion-item>
+            <ion-item>
+                <ion-label color="selva">Referer 2</ion-label>
+                <ion-label>{{order.estimation.referral2Name}}</ion-label>
+                <!-- <ion-select [(ngModel)]="order.reference2" name="reference2" [disabled]="disableSiteName"> -->
+                <!-- <ion-option *ngFor="let reference2 of references" [value]="reference2.reference_ID" (ionSelect)="onSelectReference2(reference2.refrer_NAME)">
+                            {{reference2.refrer_NAME}} ({{reference2.referer_MOBILE1}}) - {{reference2.referer_TYPE}} -->
+                <!-- </ion-option> -->
+                <!-- </ion-select> -->
+            </ion-item>
+            <ion-item *ngIf="order_type=='responses'">
+                <ion-label color="selva">Priority</ion-label>
+                <ion-label *ngIf="order.priceCheckPriority" text-right>High</ion-label>
+                <ion-label *ngIf="!order.priceCheckPriority" text-right>Normal</ion-label>
+                <ion-toggle [disabled]="disableSiteName" color="secondary" [checked]="order.priceCheckPriority=='1'"></ion-toggle>
+                <!-- <ion-toggle color="secondary" (ionChange)="notifyPriorityOption(order.highPriority)" [checked]="isToggledPriority"></ion-toggle> -->
+            </ion-item>
+
+            <ion-item *ngIf="order_type=='requests'">
+                <ion-label color="selva">Priority</ion-label>
+                <ion-label *ngIf="order.priceCheckPriority" text-right>High</ion-label>
+                <ion-label *ngIf="!order.priceCheckPriority" text-right>Normal</ion-label>
+                <ion-toggle [disabled]="disableSiteName" color="secondary" [checked]="order.priceCheckPriority=='1'"></ion-toggle>
+                <!-- <ion-toggle color="secondary" (ionChange)="notifyPriorityOption(order.highPriority)" [checked]="isToggledPriority"></ion-toggle> -->
+            </ion-item>
+
+            <ion-item-divider color="selva">
+                Order Details
+            </ion-item-divider>
+            <ion-item>
+                <ion-label color="selva">Item Group</ion-label>
+                <ion-label>{{order.estimation.productGroup}}</ion-label>
+                <!-- <ion-select [(ngModel)]="order.productGroupName" name="item_Group_NAME">
+                        <ion-option *ngFor="let row of productGroupModel" (ionSelect)="onItemGroupChange(row,row.product_GROUP_ID,row.division_ID)"
+                        required>{{row.product_GROUP_NAME}}</ion-option>
+                    </ion-select> -->
+            </ion-item>
+            <!-- </ion-col> -->
+            <!-- </ion-row> -->
+
+            <!-- <ion-row> -->
+            <!-- <ion-col col-4> -->
+            <ion-item>
+                <ion-label color="selva">Item name</ion-label>
+                <ion-label>{{order.estimation.productGroupName}}</ion-label>
+                <!-- </ion-item> -->
+                <!-- </ion-col> -->
+                <!-- <ion-col col-8>
+                        <ion-item> -->
+                <!-- <ion-select name="product"> -->
+                <!-- <ion-select [(ngModel)]="order.product" name="product" [disabled]="disableItemName">
+                                    <ion-option *ngFor="let item of products" [value]="item" (ionSelect)="onItemNameChange(item.productDetails,item.uom)" required>{{item.product_NAME}}</ion-option>
+                                </ion-select> -->
+            </ion-item>
+            <ion-item>
+                <ion-label color="selva" fixed>Distance</ion-label>
+                <ion-label *ngIf="(order_type=='requests' || order_type=='responses' ) && (role == '1' || role=='2')" text-center>{{order.estimation.distanceKM}}</ion-label>
+                <ion-label *ngIf="order_type=='requests' && role == '3'" text-center>{{order.estimation.distanceKM}}</ion-label>
+                <ion-input *ngIf="order_type=='responses' && role == '3'" class="text-in" [(ngModel)]="order.estimation.distanceKM" name="distanceKM"
+                    (ionChange)="reCalculateTotals()" type="number" maxlength="3" text-center required></ion-input>
+            </ion-item>
+            <ion-item>
+                <ion-label color="selva" fixed>Total {{uom}}</ion-label>
+                <ion-label *ngIf="(order_type=='requests' || order_type=='responses' ) && (role == '1' || role=='2')" text-center>{{order.estimation.unitsTotal}}</ion-label>
+                <ion-label *ngIf="order_type=='requests' && role == '3'" text-center>{{order.estimation.unitsTotal}}</ion-label>
+                <ion-input *ngIf="order_type=='responses' && role == '3'" class="text-in" [(ngModel)]="order.estimation.unitsTotal" name="unitsTotal"
+                    (ionChange)="reCalculateTotals()" type="number" maxlength="5" text-center required></ion-input>
+            </ion-item>
+            <!-- <ion-item *ngIf="order_type=='responses'"> -->
+            <!-- <ion-label color="selva" fixed>Total {{uom}}</ion-label> -->
+            <!-- </ion-item> -->
+            <ion-list>
+                <ion-item-divider color="selva" *ngIf="order.estimation.productGroup=='QUARRY' || order.estimation.productGroup=='DESIGNER_TILES' || order.estimation.productGroup=='PAVER' || order.estimation.productGroup=='HOLLOW_BLOCK'">
+                    Product Details
+                </ion-item-divider>
+                <div *ngIf="order.estimation.productGroup=='QUARRY'">
+                    <!-- <div *ngIf="itemGroup=='Aggregate'"> -->
+                    <ion-row>
+                        <ion-col col-4>
+                            <div style="font-size:1.6rem;font-weight:bold;text-align: center;">Capacity</div>
+                        </ion-col>
+                        <ion-col col-4>
+                            <div style="font-size:1.6rem;font-weight:bold;text-align:center;">Loads</div>
+                        </ion-col>
+                        <ion-col col-4>
+                            <div style="font-size:1.6rem;font-weight:bold;text-align:center;">Total Units</div>
+                        </ion-col>
+                    </ion-row>
+
+                    <ion-row>
+                        <ion-col col-4>
+                            <ion-item>
+                                <ion-label color="selva">1 Unit</ion-label>
+                            </ion-item>
+                        </ion-col>
+                        <ion-col col-4>
+                            <ion-item>
+                                <ion-label *ngIf="(order_type=='requests' || order_type=='responses' ) && (role == '1' || role=='2')" text-center>{{order.estimation.unit1}}</ion-label>
+                                <ion-label *ngIf="order_type=='requests' && role == '3'" text-center>{{order.estimation.unit1}}</ion-label>
+                                <!-- </ion-item> -->
+                                <!-- <ion-item *ngIf="order_type=='responses' && role == '3'"> -->
+                                <ion-input *ngIf="order_type=='responses' && role == '3'" [(ngModel)]="order.estimation.unit1" name="unit1" (ionChange)="onChangeUnit1(order.estimation.unit1)"
+                                    (ionChange)="reCalculateTotals()" type="number" maxlength="4"></ion-input>
+                            </ion-item>
+                        </ion-col>
+                        <ion-col col-4>
+                            <ion-item>
+                                <ion-label text-center>{{order.estimation.unit1 * 1}}</ion-label>
+                                <!-- <ion-label text-center>{{unit1Total}}</ion-label> -->
+                                <!-- <ion-input [(ngModel)]="order.unit1Total" name="unit1Total" type="text" read-only></ion-input> -->
+                            </ion-item>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col col-4>
+                            <ion-item>
+                                <ion-label color="selva">2 Units</ion-label>
+                            </ion-item>
+                        </ion-col>
+                        <ion-col col-4>
+                            <ion-item>
+                                <ion-label *ngIf="(order_type=='requests' || order_type=='responses' ) && (role == '1' || role=='2')" text-center>{{order.estimation.unit2}}</ion-label>
+                                <ion-label *ngIf="order_type=='requests' && role == '3'" text-center>{{order.estimation.unit2}}</ion-label>
+                                <ion-input *ngIf="order_type=='responses' && role == '3'" [(ngModel)]="order.estimation.unit2" name="unit2" (ionChange)="onChangeUnit2(order.estimation.unit2)"
+                                    (ionChange)="reCalculateTotals()" type="number" maxlength="4"></ion-input>
+                                <!-- <ion-input [(ngModel)]="order.unit2" name="unit2" (ionChange)="onChangeUnit2(order.unit2)" type="number" maxlength="4"></ion-input> -->
+                            </ion-item>
+                        </ion-col>
+                        <ion-col col-4>
+                            <ion-item>
+                                <ion-label text-center>{{order.estimation.unit2 * 2}}</ion-label>
+                                <!-- <ion-label text-center>{{unit2Total}}</ion-label> -->
+                                <!-- <ion-input [(ngModel)]="order.unit2Total" name="unit2Total" type="text"></ion-input> -->
+                            </ion-item>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col col-4>
+                            <ion-item>
+                                <ion-label color="selva">3 Units</ion-label>
+                            </ion-item>
+                        </ion-col>
+                        <ion-col col-4>
+                            <ion-item>
+                                <ion-label *ngIf="(order_type=='requests' || order_type=='responses' ) && (role == '1' || role=='2')" text-center>{{order.estimation.unit3}}</ion-label>
+                                <ion-label *ngIf="order_type=='requests' && role == '3'" text-center>{{order.estimation.unit3}}</ion-label>
+                                <ion-input *ngIf="order_type=='responses' && role == '3'" [(ngModel)]="order.estimation.unit3" name="unit3" (ionChange)="onChangeUnit3(order.estimation.unit3)"
+                                    (ionChange)="reCalculateTotals()" type="number" maxlength="4"></ion-input>
+                                <!-- <ion-input [(ngModel)]="order.unit2" name="unit2" (ionChange)="onChangeUnit2(order.unit2)" type="number" maxlength="4"></ion-input> -->
+                            </ion-item>
+                        </ion-col>
+                        <ion-col col-4>
+                            <ion-item>
+                                <ion-label text-center>{{order.estimation.unit3 * 3}}</ion-label>
+                                <!-- <ion-label text-center>{{unit2Total}}</ion-label> -->
+                                <!-- <ion-input [(ngModel)]="order.unit2Total" name="unit2Total" type="text"></ion-input> -->
+                            </ion-item>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col col-4>
+                            <ion-item>
+                                <ion-label color="selva">4 Units</ion-label>
+                            </ion-item>
+                        </ion-col>
+                        <ion-col col-4>
+                            <ion-item>
+                                <ion-label *ngIf="(order_type=='requests' || order_type=='responses' ) && (role == '1' || role=='2')" text-center>{{order.estimation.unit4}}</ion-label>
+                                <ion-label *ngIf="order_type=='requests' && role == '3'" text-center>{{order.estimation.unit4}}</ion-label>
+                                <ion-input *ngIf="order_type=='responses' && role == '3'" [(ngModel)]="order.estimation.unit4" name="unit4" (ionChange)="onChangeUnit4(order.estimation.unit4)"
+                                    (ionChange)="reCalculateTotals()" type="number" maxlength="4"></ion-input>
+                                <!-- <ion-input [(ngModel)]="order.unit4" name="unit4" (ionChange)="onChangeUnit4(order.unit4)" type="number" maxlength="4"></ion-input> -->
+                            </ion-item>
+                        </ion-col>
+                        <ion-col col-4>
+                            <ion-item>
+                                <ion-label text-center>{{order.estimation.unit4 * 4}}</ion-label>
+                                <!-- <ion-label text-center>{{unit4Total}}</ion-label> -->
+                                <!-- <ion-input [(ngModel)]="order.unit4Total" name="unit4Total" type="text"></ion-input> -->
+                            </ion-item>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col col-4>
+                            <ion-item>
+                                <ion-label color="selva">6 Units</ion-label>
+                            </ion-item>
+                        </ion-col>
+                        <ion-col col-4>
+                            <ion-item>
+                                <ion-label *ngIf="(order_type=='requests' || order_type=='responses' ) && (role == '1' || role=='2')" text-center>{{order.estimation.unit6}}</ion-label>
+                                <ion-label *ngIf="order_type=='requests' && role == '3'" text-center>{{order.estimation.unit6}}</ion-label>
+                                <ion-input *ngIf="order_type=='responses' && role == '3'" [(ngModel)]="order.estimation.unit6" name="unit6" (ionChange)="onChangeUnit6(order.estimation.unit6)"
+                                    (ionChange)="reCalculateTotals()" type="number" maxlength="4"></ion-input>
+                                <!-- <ion-input [(ngModel)]="order.unit6" name="unit6" (ionChange)="onChangeUnit6(order.unit6)" type="number" maxlength="4"></ion-input> -->
+                            </ion-item>
+                        </ion-col>
+                        <ion-col col-4>
+                            <ion-item>
+                                <ion-label text-center>{{order.estimation.unit6 * 6}}</ion-label>
+                                <!-- <ion-label text-center>{{unit6Total}}</ion-label> -->
+                                <!-- <ion-input [(ngModel)]="order.unit6Total" name="unit6Total" type="text"></ion-input> -->
+                            </ion-item>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col col-8>
+                            <ion-item>
+                                <ion-label text-center style="font-size:1.6rem;font-weight:bold;">Total Units</ion-label>
+                            </ion-item>
+                        </ion-col>
+                        <ion-col col-4>
+                            <ion-item>
+                                <ion-label text-center style="font-weight:bold;">{{order.estimation.unitsTotal}}</ion-label>
+                                <!-- <ion-label text-center style="font-weight:bold;">{{unitSumTotal}}</ion-label> -->
+                            </ion-item>
+                        </ion-col>
+                    </ion-row>
                 </div>
-            </form>
-        </div>
-    </ion-content>
+                <!-- </ion-card>
+                        <ion-card> -->
+                <div *ngIf="order.estimation.productGroup=='DESIGNER_TILES'">
+                    <div *ngFor="let row of order.estimation.product.productDetails">
+                        <ion-row>
+                            <ion-col col-9>
+                                <ion-item text-wrap>
+                                    <ion-label> {{row.product_DETAIL_NAME}}</ion-label>
+                                </ion-item>
+                            </ion-col>
+                            <ion-col col-3>
+                                <ion-item>
+                                    <!-- <ion-input [(ngModel)]="item.qty" name={{item}} type="number" (ionBlur)="calculateTotals(item.qty)" text-right></ion-input> -->
+                                    <!-- <ion-input [ngModel]="item.qty" (ngModelChange)="item.qty=$event" name={{item}} type="number" (ionBlur)="calculateTotals(item.qty)" text-right></ion-input> -->
+                                    <ion-label *ngIf="(order_type=='requests' || order_type=='responses' ) && (role == '1' || role=='2')" text-center>{{row.qty}}</ion-label>
+                                    <ion-label *ngIf="order_type=='requests' && role == '3'" text-center>{{row.qty}}</ion-label>
+                                    <ion-input *ngIf="order_type=='responses' && role == '3'" [(ngModel)]="row.qty" name={{row.product_DETAIL_ID}} type="number"
+                                        text-center></ion-input>
+                                    <!-- <ion-label>{{row.qty}}</ion-label> -->
+                                    <!-- <ion-input [(ngModel)]="item.qty" name={{item}} type="number" (ionBlur)="calculateTotals(item.qty)" text-right></ion-input> -->
+                                    <!-- <ion-input [(ngModel)]="item.qty" name={{item}} type="number" text-right></ion-input> -->
+                                </ion-item>
+                            </ion-col>
+                        </ion-row>
+                    </div>
+                    <ion-row>
+                        <ion-col col-8>
+                            <ion-item>
+                                <ion-label text-center style="font-size:1.6rem;font-weight:bold;">Total Sq Ft</ion-label>
+                            </ion-item>
+                        </ion-col>
+                        <ion-col col-4>
+                            <ion-item>
+                                <ion-label text-center style="font-weight:bold;">{{order.estimation.unitsTotal}}</ion-label>
+                            </ion-item>
+                        </ion-col>
+                    </ion-row>
+                    <!-- </ion-card> -->
+                </div>
+                <div *ngIf="order.estimation.productGroup=='PAVER'">
+                    <div *ngFor="let row of order.estimation.product.productDetails">
+                        <ion-row>
+                            <ion-col col-9>
+                                <ion-item text-wrap>
+                                    <ion-label> {{row.product_DETAIL_NAME}}</ion-label>
+                                </ion-item>
+                            </ion-col>
+                            <ion-col col-3>
+                                <ion-item>
+                                    <ion-label *ngIf="(order_type=='requests' || order_type=='responses' ) && (role == '1' || role=='2')" text-center>{{row.qty}}</ion-label>
+                                    <ion-label *ngIf="order_type=='requests' && role == '3'" text-center>{{row.qty}}</ion-label>
+                                    <ion-input *ngIf="order_type=='responses' && role == '3'" [(ngModel)]="row.qty" name={{row.product_DETAIL_ID}} type="number"
+                                        text-right></ion-input>
+                                    <!-- <ion-input [(ngModel)]="row.qty" name={{row.product_DETAIL_ID}} type="number" text-right></ion-input> -->
+                                    <!-- <ion-input [(ngModel)]="item.qty" name={{item}} type="number" (ionBlur)="calculateTotals(item.qty)" text-right></ion-input> -->
+                                </ion-item>
+                            </ion-col>
+                        </ion-row>
+                    </div>
+                    <ion-row>
+                        <ion-col col-8>
+                            <ion-item>
+                                <ion-label text-center style="font-size:1.6rem;font-weight:bold;">Total Sq Ft</ion-label>
+                            </ion-item>
+                        </ion-col>
+                        <ion-col col-4>
+                            <ion-item>
+                                <ion-label text-center style="font-weight:bold;">{{order.estimation.unitsTotal}}</ion-label>
+                            </ion-item>
+                        </ion-col>
+                    </ion-row>
+                </div>
+                <!-- <div *ngIf="itemGroup=='CRUSHER / BUNKAR'">
+                            inside crusher
+                          </div> -->
+                <div *ngIf="order.estimation.productGroup=='HOLLOW_BLOCK'">
+                    <!-- <div *ngIf="itemGroup=='Aggregate'"> -->
+                    <ion-row>
+                        <ion-col col-6>
+                            <div style="font-size:1.6rem;font-weight:bold;text-align: center;">Quantity</div>
+                        </ion-col>
+                        <ion-col col-6>
+                            <div style="font-size:1.6rem;font-weight:bold;text-align:center;">Loads</div>
+                        </ion-col>
+                    </ion-row>
+
+                    <ion-row>
+                        <ion-col col-6>
+                            <ion-item>
+                                <ion-label>700 Units</ion-label>
+                            </ion-item>
+                        </ion-col>
+                        <ion-col col-6>
+                            <ion-item>
+                                <ion-label text-center>{{order.estimation.fullLoads}}</ion-label>
+                                <!-- <ion-input [(ngModel)]="order.fullLoads" name="fullLoads" type="text"></ion-input> -->
+                            </ion-item>
+                        </ion-col>
+                    </ion-row>
+                    <div *ngIf="partialLoadOption==true">
+                        <ion-row>
+                            <ion-col col-6>
+                                <ion-item>
+                                    <ion-label> {{order.estimation.partialLoad}} Units</ion-label>
+                                </ion-item>
+                            </ion-col>
+                            <ion-col col-6>
+                                <ion-item>
+                                    <ion-label text-center>1</ion-label>
+                                    <!-- <ion-input [(ngModel)]="order.partialLoad" name="partialLoad" type="text"></ion-input> -->
+                                </ion-item>
+                            </ion-col>
+                        </ion-row>
+                    </div>
+                </div>
+            </ion-list>
+            <!-- </ion-card> -->
+            <!-- </ion-card>
+                        <ion-card> -->
+            <!-- <ion-card padding> -->
+
+            <ion-list>
+                <!-- <ion-list *ngIf="showCostSummary"> -->
+                <ion-item-divider color="selva">
+                    Cost Summary
+                </ion-item-divider>
+                <ion-row>
+                    <ion-col col-4>
+                        <ion-item>
+                            <ion-label color="selva">Taxable</ion-label>
+                        </ion-item>
+                    </ion-col>
+                    <ion-col col-8>
+                        <ion-item>
+                            <ion-label *ngIf="isToggledTax" text-right>Yes</ion-label>
+                            <ion-label *ngIf="!isToggledTax" text-right>No</ion-label>
+                            <ion-toggle (ionChange)="notifyTaxOption(order.taxable)" color="danger" [checked]="isToggledTax" required></ion-toggle>
+                            <!-- <ion-checkbox (ionChange)="notifyTaxOption(order.taxable)" [checked]="isToggledTax" required></ion-checkbox> -->
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col>
+                        <ion-item>
+                            <ion-label color="selva">Total Cost </ion-label>
+                            <ion-label>{{displayINR(order.estimation.totalCost)}}</ion-label>
+                        </ion-item>
+                        <ion-item>
+                            <ion-label color="selva">Product Cost </ion-label>
+                            <ion-input *ngIf="order_type=='requests' && (role == '1' || role=='2')" class="text-in" [(ngModel)]="order.estimation.product.product_COST"
+                                (ionChange)="reCalculateTotals()" name="product_COST" type="number" maxlength="5" required></ion-input>
+                            <ion-label *ngIf="order_type=='requests' && role == '3'">{{displayINR(order.estimation.product.product_COST)}}</ion-label>
+                            <ion-label *ngIf="order_type=='responses' &&  (role == '1' || role=='2' || role == '3')">{{displayINR(order.estimation.product.product_COST)}}</ion-label>
+                            <!-- *ngIf="(order_type=='requests' || order_type=='responses' ) && (role == '1' || role=='2')">{{order.estimation.distanceKM}} -->
+                            <!-- <ion-label>{{displayINR(order.totalProductCost)}}</ion-label> -->
+                        </ion-item>
+                        <ion-item *ngIf="order.remarkMgr != ''">
+                            <ion-label color="selva">Manager Remarks </ion-label>
+                            <ion-label class="text-in">{{order.remarkMgr}}</ion-label>
+                            <ion-label *ngIf="order_type=='responses' && role == '3'" class="text-in">{{order.remarkMgr}}</ion-label>
+                            <ion-input *ngIf="order_type=='requests' && (role == '1' || role=='2')" class="text-in" [(ngModel)]="order.remarkMgr" name="remarkMgr"
+                                type="text"></ion-input>
+                        </ion-item>
+                        <ion-item *ngIf="order.remarkRep != ''">
+                            <ion-label color="selva">Rep Remarks </ion-label>
+                            <ion-label class="text-in">{{order.remarkRep}}</ion-label>
+                            <ion-label *ngIf="order_type=='responses' && role == '3'" class="text-in">{{order.remarkRep}}</ion-label>
+                        </ion-item>
+                        <!-- <ion-item *ngIf="order_type=='responses'"> -->
+                        <!-- <ion-label color="selva">Product Cost </ion-label> -->
+                        <!-- <ion-input class="text-in" [(ngModel)]="order.estimation.product.product_COST" name="product_COST" type="number" maxlength="5"
+                                    required></ion-input> -->
+                        <!-- <ion-label>{{displayINR(order.estimation.product.product_COST)}}</ion-label> -->
+                        <!-- </ion-item> -->
+                        <ion-item *ngIf="isToggledTax">
+                            <ion-label color="selva">Tax </ion-label>
+                            <ion-label>{{displayINR(order.estimation.totalTax)}}</ion-label>
+                        </ion-item>
+                        <ion-item *ngIf="showTransportCost">
+                            <ion-label color="selva">Transport Cost </ion-label>
+                            <ion-label>{{displayINR(order.estimation.totalTransportCost)}}</ion-label>
+                        </ion-item>
+                        <ion-item *ngIf="showLoadingCost">
+                            <ion-label color="selva">Loading Cost </ion-label>
+                            <ion-label>{{displayINR(order.estimation.totalLoadingCost)}}</ion-label>
+                        </ion-item>
+                        <ion-item>
+                            <ion-label color="selva">Cost per Unit</ion-label>
+                            <ion-label>{{displayINR(order.estimation.product.product_COST)}}</ion-label>
+                            <!-- <ion-label>{{displayINR(estimate['product'].product_COST)}}</ion-label> -->
+                        </ion-item>
+                        <ion-item>
+                            <ion-label color="selva">Loading per Unit</ion-label>
+                            <ion-label>{{displayDecimalINR(order.estimation.sqftLoadingCost)}}</ion-label>
+                            <!-- <ion-label>{{displayINR(estimate['product'].loading_COST)}}</ion-label> -->
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
+            </ion-list>
+            <!-- </ion-card> -->
+            <!-- <button ion-button block type="submit" [color]="'head'" [disabled]="!estimateForm.valid"> -->
+            <div *ngIf="role == '1' || role == '2'" padding>
+                <!-- <button *ngIf="order_type=='requests'" ion-button block color="one" type="submit" (click)="updatePriceCheckOrder(order.orderGroupNo,'ORDER_PRICE_CHECK_APPROVED')"> -->
+                <button *ngIf="order_type=='requests'" ion-button block color="one" type="submit" (click)="sendPriceCheck(order)">
+                    Approve
+                </button>
+                <button *ngIf="order_type=='requests'" ion-button block color="danger" type="submit" (click)="updatePriceCheckOrder(order.orderGroupNo,'REJECTED')">
+                    Reject
+                </button>
+                <!-- <button ion-button block color="danger" (click)="clearAllData(priceForm)">
+                        Clear All
+                    </button>
+                    <button ion-button block color="danger" (click)="sendPriceCheck(order)">
+                        Sumit New Price Check
+                    </button>
+                    <button ion-button block color="danger" (click)="sendNewEstimation(order)">
+                        Submit New Estimation
+                    </button>
+                    <button ion-button block color="danger" (click)="updatePriceCheckOrder(order.orderGroupNo)">
+                        Delete New Estimation
+                    </button> -->
+            </div>
+            <div *ngIf="role == '3'" padding>
+                <!-- <button ion-button block color="one" type="submit">
+                        Request Price
+                    </button> -->
+                <!-- <button ion-button block color="danger" (click)="clearAllData(priceForm)">
+                        Clear All
+                    </button> -->
+                <!-- <button ion-button block color="danger" (click)="sendPriceCheck(order)">
+                        Submit New Price Check
+                    </button>
+                    <button ion-button block color="danger" (click)="sendNewEstimation(order)">
+                        Submit New Estimation
+                    </button> -->
+                <button *ngIf="order_type=='requests'" ion-button block color="danger" (click)="updatePriceCheckOrder(order.orderGroupNo,'DELETED')">
+                    Delete Estimation
+                </button>
+                <button *ngIf="order_type=='responses'" ion-button block color="secondary" (click)="sendNewEstimation(order)">
+                    Submit Estimation
+                </button>
+
+            </div>
+        </form>
+    </div>
+</ion-content>

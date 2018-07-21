@@ -13,8 +13,8 @@
   <ion-toolbar no-border-top [color]="isAndroid ? 'royal' : 'masters'">
     <div>
       <ion-segment [(ngModel)]="category" [color]="'head'">
-        <ion-segment-button value="new-customer">
-          New Customer
+        <ion-segment-button value="enquiry">
+          Enquiry
         </ion-segment-button>
         <ion-segment-button value="view">
           View Customer
@@ -29,9 +29,21 @@
 
 <ion-content padding>
   <div [ngSwitch]="category">
-    <ion-list *ngSwitchCase="'new-customer'">
+    <ion-list *ngSwitchCase="'enquiry'">
 
-      <ion-tab [root]="leadPage" tabTitle="Lead" tabIcon="watch"></ion-tab>
+      <!-- <ion-tab [root]="leadPage" tabTitle="Lead" tabIcon="watch"></ion-tab> -->
+      <!-- <div *ngIf="role == '1' || role == '2'"> -->
+        <ion-item *ngIf="role == '1' || role == '2'">
+          <ion-label color="selva">On Behalf of</ion-label>
+          <!-- Need to add sales Rep name  -->
+          <ion-select name="onBehalf">
+          <!-- <ion-select [(ngModel)]="customers.employeeId" name="onBehalf"> -->
+            <!-- <ion-option *ngFor="let user of userList.users" [value]="user.employeeId" (ionSelect)="onSelectSalesRep(user.firstName,user.lastName)" -->
+            <ion-option *ngFor="let user of userList.users" [value]="user.employeeId" (ionSelect)="onSelectSalesRep(user.employeeId)"
+              required>{{user.userName}}</ion-option>
+          </ion-select>
+        </ion-item>
+      <!-- </div> -->
 
       <ion-item>
         <ion-label color="selva" stacked>Name</ion-label>
@@ -62,12 +74,12 @@
           <ion-option *ngFor="let district of districts" [value]="district.name">{{district.name}} </ion-option>
         </ion-select>
       </ion-item>
-      <ion-item>
+      <!-- <ion-item>
         <ion-label color="selva" stacked floating>State</ion-label>
         <ion-select [(ngModel)]="customers.address.state" name="state" [compareWith]="">
           <ion-option *ngFor="let state of state_list" [value]="state.name">{{state.name}} </ion-option>
         </ion-select>
-      </ion-item>
+      </ion-item> -->
       <ion-item>
         <ion-label color="selva" stacked>Pincode</ion-label>
         <ion-input [(ngModel)]="customers.address.pinCode" name="pinCode" type="number"></ion-input>
@@ -90,33 +102,31 @@
         <ion-input [(ngModel)]="customers.gst_NUMBER" name="gst_NUMBER" type="text"></ion-input>
       </ion-item>
       <ion-item>
+        <ion-label color="selva" stacked>Meeting Notes</ion-label>
+        <ion-input [(ngModel)]="customers.customerEnquiry.meetingNotes" name="meetingNotes" type="text"></ion-input>
+      </ion-item>
+      <!-- <ion-item>
         <ion-label color="selva">Site</ion-label>
         <ion-label color="selva" *ngIf="showSiteDetails" text-right>Add</ion-label>
         <ion-label color="selva" *ngIf="!showSiteDetails" text-right>Later</ion-label>
         <ion-toggle color="danger" [checked]="showSiteDetails" (ionChange)="siteOption()" required>
         </ion-toggle>
-      </ion-item>
-      <div *ngIf="showSiteDetails">
+      </ion-item> -->
+      <!-- <div *ngIf="showSiteDetails"> -->
 
-        <ion-item>
-          <ion-label color="selva" stacked stacked>Site Name</ion-label>
-          <!-- <ion-input [(ngModel)]="customers.cust_NAME" name="cust_NAME" type="text"></ion-input> -->
-          <ion-input [(ngModel)]="customers.site_NAME" name="site_NAME" type="text"></ion-input>
-        </ion-item>
 
-        <ion-item>
+      <!-- <ion-item>
           <ion-label color="selva" stacked>Site Address</ion-label>
-          <!-- <ion-input [(ngModel)]="customers.address" name="address" type="text"></ion-input> -->
           <ion-input [(ngModel)]="customers.site_ADDRESS_ID" name="site_ADDRESS_ID" type="text"></ion-input>
         </ion-item>
-
-        <ion-item>
+ -->
+      <!-- <ion-item>
           <ion-label color="selva" stacked floating>City</ion-label>
           <ion-select [(ngModel)]="customers.address.city" name="city" [compareWith]="">
             <ion-option *ngFor="let city of cities" [value]="city.name">{{city.name}} </ion-option>
           </ion-select>
-        </ion-item>
-        <!-- <ion-item>
+        </ion-item> -->
+      <!-- <ion-item>
         <ion-label color="selva" stacked floating>District</ion-label>
         <ion-select [(ngModel)]="customers.address.district" name="district" [compareWith]="">
           <ion-option *ngFor="let district of districts" [value]="district.name">{{district.name}} </ion-option>
@@ -126,14 +136,14 @@
         <ion-label color="selva" stacked>Pincode</ion-label>
         <ion-input [(ngModel)]="customers.pinCode" name="pinCode" type="number"></ion-input>
       </ion-item> -->
-        <ion-item>
+      <!-- <ion-item>
           <ion-label color="selva" stacked>Site Contact Number</ion-label>
           <ion-input [(ngModel)]="customers.site_CONTACT_NUMBER" name="site_CONTACT_NUMBER" type="number"></ion-input>
-        </ion-item>
+        </ion-item> -->
 
-      </div>
+      <!-- </div> -->
 
-      <button ion-button block type="submit" (click)="onSubmitCustomer(customers)">
+      <button ion-button block padding type="submit" color="one" (click)="onSubmitCustomer(customers)">
         Submit
       </button>
 
