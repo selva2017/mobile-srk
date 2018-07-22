@@ -27,6 +27,7 @@ export interface SubOrders {
     product_GROUP: string;
     unitType: string;
     sub_ORDER_PRORITY: string;
+    sales_REP_NAME: string;
 }
 
 export interface VehicleList {

@@ -74,12 +74,12 @@
           <ion-option *ngFor="let district of districts" [value]="district.name">{{district.name}} </ion-option>
         </ion-select>
       </ion-item>
-      <!-- <ion-item>
+      <ion-item>
         <ion-label color="selva" stacked floating>State</ion-label>
         <ion-select [(ngModel)]="customers.address.state" name="state" [compareWith]="">
           <ion-option *ngFor="let state of state_list" [value]="state.name">{{state.name}} </ion-option>
         </ion-select>
-      </ion-item> -->
+      </ion-item>
       <ion-item>
         <ion-label color="selva" stacked>Pincode</ion-label>
         <ion-input [(ngModel)]="customers.address.pinCode" name="pinCode" type="number"></ion-input>

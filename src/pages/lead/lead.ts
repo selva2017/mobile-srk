@@ -3,13 +3,6 @@ import { AuthService } from './../../providers/auth-service/auth-service';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
-/**
- * Generated class for the LeadPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @IonicPage()
 @Component({
   selector: 'page-lead',
@@ -67,6 +60,7 @@ export class LeadPage {
   userList: UserList[];
 
   constructor(private authService: AuthService) {
+    // Get Sales Rep names
     this.authService.getInternalUsers("3")
       .subscribe(
         (list) => {
@@ -98,12 +92,18 @@ export class LeadPage {
       "site_ADDRESS_ID": null,
       "site_CONTACT_NUMBER": null,
       "site_NAME": null,
+      "business_CUSTOMER": '',
+      "alias": '',
       "address": {
         "addressId": "",
-        "address": "123",
-        "city": "chennai",
-        "district": "ch",
-        "pinCode": "12345"
+        "address": "",
+        "address2": "",
+        "city": "",
+        "district": "",
+        "state": "",
+        "pinCode": "",
+        "longitude": "",
+        "latitude": ""
       },
       "reference": {
         "reference_ID": null,
@@ -123,13 +123,26 @@ export class LeadPage {
         "address": {
           "addressId": "",
           "address": "123",
+          "address2": "",
           "city": "chennai",
           "district": "ch",
-          "pinCode": "12345"
+          "pinCode": "12345",
+          "longitude": "",
+          "latitude": ""
         }
-
       },
-      "customerEnquiry": { "enquiryId": null, "custId": null, "enquiryDate": null, "meetingType": null, "meetingNotes": null, "nextVisit": null, "interested": null, "compititor": null, "price": null, "createdBy": null }
+      "customerEnquiry": {
+        "enquiryId": null,
+        "custId": null,
+        "enquiryDate": null,
+        "meetingType": null,
+        "meetingNotes": null,
+        "nextVisit": null,
+        "interested": null,
+        "compititor": null,
+        "price": null,
+        "createdBy": null
+      }
     }
 
     // this.customers = {
@@ -206,6 +219,7 @@ export class LeadPage {
       this.customers['sales_REP_ID'] = this.sales_rep_name;
     }
     this.customers['customerEnquiry']['createdBy'] = localStorage.getItem('employeeId');
+    this.customers['customerEnquiry']['business_CUSTOMER'] = 'NON_BUSINESS';
     // this.estimate['onBehalf'] = localStorage.getItem('employeeId');
 
     this.authService.customerAddition(this.customers)

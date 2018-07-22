@@ -33,8 +33,10 @@
     <ion-list *ngSwitchCase="'approved-orders'">
       <div *ngFor="let item of approvedOrders; let i = index">
         <ion-item-divider color="light">
+         <p>
           #{{i+1}} - {{ item.order_NO }}
           Priority - {{ item.sub_ORDER_PRORITY }}
+         </p>
           <p>
             <ion-item>
               <h2>{{ item.product_NAME }}</h2>
@@ -48,8 +50,8 @@
                 <h2>Qty # {{displayIndianNumber(item.unit_TYPE)}} Units</h2>
               </div>
               <h3>{{ item.customer_NAME }}</h3>
-              <h3>{{ item.site_NAME }}</h3>
-              <h3>{{ item.ordered_CREATED_BY }}</h3>
+              <h3>Site: {{ item.site_NAME }}</h3>
+              <h3>Sales Rep: {{ item.sales_REP_NAME }}</h3>
               <button ion-button block color="secondary" (click)="doRadio(item.order_NO,'ALLOCATED','APPROVED')">Allocate Vehicle</button>
             </ion-item>
           </p>
@@ -75,8 +77,8 @@
                 <h2>Qty # {{displayIndianNumber(allocated_item.unit_TYPE)}} Units</h2>
               </div>
               <h3>{{ allocated_item.customer_NAME }}</h3>
-              <h3>{{ allocated_item.site_NAME }}</h3>
-              <h3>{{ allocated_item.ordered_CREATED_BY }}</h3>
+              <h3>Site : {{ allocated_item.site_NAME }}</h3>
+              <h3>Sales Rep : {{ allocated_item.sales_REP_NAME }}</h3>
               <!-- <button ion-button block color="secondary" (click)="doRadio(allocated_item.order_NO,'LOADED')">Loading Complete</button> -->
               <button ion-button block color="danger" (click)="updateSubOrder(allocated_item.order_NO,'APPROVED','ALLOCATED')">Cancel Allocation</button>
             </ion-item>
@@ -104,8 +106,8 @@
                 <h2>Qty # {{displayIndianNumber(loaded_item.unit_TYPE)}} Units</h2>
               </div>
               <h3>{{ loaded_item.customer_NAME }}</h3>
-              <h3>{{ loaded_item.site_NAME }}</h3>
-              <h3>{{ loaded_item.ordered_CREATED_BY }}</h3>
+              <h3>Site : {{ loaded_item.site_NAME }}</h3>
+              <h3>Saes Rep : {{ loaded_item.sales_REP_NAME }}</h3>
 
               <button ion-button block color="one" (click)="showPrompt()">Capture Weight</button>
               <button ion-button block color="secondary" (click)="updateSubOrder(loaded_item.order_NO,'WEIGHED','LOADED')">Weighment Complete</button>

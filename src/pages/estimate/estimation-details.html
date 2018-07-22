@@ -1070,9 +1070,9 @@
             </ion-item>
             <ion-item *ngIf="order_type=='responses'">
                 <ion-label color="selva">Priority</ion-label>
-                <ion-label *ngIf="order.priceCheckPriority" text-right>High</ion-label>
-                <ion-label *ngIf="!order.priceCheckPriority" text-right>Normal</ion-label>
-                <ion-toggle [disabled]="disableSiteName" color="secondary" [checked]="order.priceCheckPriority=='1'"></ion-toggle>
+                <ion-label *ngIf="isToggledPriority" text-right>High</ion-label>
+                <ion-label *ngIf="!isToggledPriority" text-right>Normal</ion-label>
+                <ion-toggle [disabled]="disableSiteName" color="secondary" (ionChange)="notifyPriorityOption(order.highPriority)" [checked]="order.priceCheckPriority=='1'"></ion-toggle>
                 <!-- <ion-toggle color="secondary" (ionChange)="notifyPriorityOption(order.highPriority)" [checked]="isToggledPriority"></ion-toggle> -->
             </ion-item>
 

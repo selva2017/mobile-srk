@@ -14,6 +14,7 @@ export interface Customer {
     site_CONTACT_NUMBER: string;
     site_ADDRESS_ID: string;
     site_ID: string;
+    business_CUSTOMER: string;
 }
 
 export interface Site {

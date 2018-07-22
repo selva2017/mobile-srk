@@ -89,17 +89,23 @@ export class EstimatePage {
       fullLoads: 0,
       fullLoadsCost: 0,
       fullLoadsTax: 0,
+      fullLoadsTax1: 0,
+      fullLoadsTax2: 0,
       fullLoadsTransportCost: 0,
       fullLoadsTotalCost: 0,
       partialLoad: 0,
       partialLoadCost: 0,
       partialLoadTax: 0,
+      partialLoadTax1: 0,
+      partialLoadTax2: 0,
       partialLoadTransportCost: 0,
       partialLoadTotalCost: 0,
       unit1: 0,
       // unit1Total: 0,
       unit1ProductCost: 0,
       unit1Tax: 0,
+      unit1Tax1: 0,
+      unit1Tax2: 0,
       unit1LoadingCost: 0,
       unitlTransportCost: 0,
       unit1TotalCost: 0,
@@ -108,11 +114,15 @@ export class EstimatePage {
       // unit2Total: 0,
       unit2ProductCost: 0,
       unit2Tax: 0,
+      unit2Tax1: 0,
+      unit2Tax2: 0,
       unit2LoadingCost: 0,
       unit2TransportCost: 0,
       unit2TotalCost: 0,
       unit3ProductCost: 0,
       unit3Tax: 0,
+      unit3Tax1: 0,
+      unit3Tax2: 0,
       unit3LoadingCost: 0,
       unit3TransportCost: 0,
       unit3TotalCost: 0,
@@ -120,6 +130,8 @@ export class EstimatePage {
       // unit4Total: 0,
       unit4ProductCost: 0,
       unit4Tax: 0,
+      unit4Tax1: 0,
+      unit4Tax2: 0,
       unit4LoadingCost: 0,
       unit4TransportCost: 0,
       unit4TotalCost: 0,
@@ -127,6 +139,8 @@ export class EstimatePage {
       // unit6Total: 0,
       unit6ProductCost: 0,
       unit6Tax: 0,
+      unit6Tax1: 0,
+      unit6Tax2: 0,
       unit6LoadingCost: 0,
       unit6TransportCost: 0,
       unit6TotalCost: 0,
@@ -164,6 +178,8 @@ export class EstimatePage {
       // taxAmount: 0, // not required
       totalProductCost: 0, //end of old model
       totalTax: 0,
+      totalTax1: 0,
+      totalTax2: 0,
       totalLoadingCost: 0,
       totalTransportCost: 0,
       totalCost: 0,
@@ -947,8 +963,9 @@ export class EstimatePage {
     this.estimate['estimation']['unit2TransportCost'] = this.transportPerKMCostUnit2 * Number(this.distanceKM);
     //console.log(this.estimate['estimation']['unit2TransportCost']);
     (this.isToggledTax == true) ?
-      (this.estimate['estimation']['unit2Tax'] = (this.estimate['estimation']['unit2ProductCost'] + this.estimate['estimation']['unit2LoadingCost'] + this.estimate['estimation']['unit2TransportCost']) * ((this.tax1 + this.tax2) / 100)) :
-      (this.estimate['estimation']['unit2Tax'] = 0);
+      (this.estimate['estimation']['unit2Tax1'] = (this.estimate['estimation']['unit2ProductCost'] + this.estimate['estimation']['unit2LoadingCost'] + this.estimate['estimation']['unit2TransportCost']) * ((this.tax1) / 100)) &
+      (this.estimate['estimation']['unit2Tax2'] = (this.estimate['estimation']['unit2ProductCost'] + this.estimate['estimation']['unit2LoadingCost'] + this.estimate['estimation']['unit2TransportCost']) * ((this.tax2) / 100)) :
+      (this.estimate['estimation']['unit2Tax1'] = 0) & (this.estimate['estimation']['unit2Tax2'] = 0);
     this.estimate['estimation']['unit2TotalCost'] = this.estimate['estimation']['unit2ProductCost'] + this.estimate['estimation']['unit2Tax'] +
       this.estimate['estimation']['unit2LoadingCost'] + this.estimate['estimation']['unit2TransportCost'];
     //console.log(this.estimate['estimation']['unit2TotalCost']);
@@ -959,9 +976,9 @@ export class EstimatePage {
     // this.unit2TaxSum = this.estimate['estimation']['unit2Tax'] * this.estimate['estimation']['unit2'];
 
     (this.isToggledTax == true) ?
-      (this.unit2TaxSum = this.estimate['estimation']['unit2Tax'] * this.estimate['estimation']['unit2']) :
+      (this.unit2TaxSum = (this.estimate['estimation']['unit2Tax1'] * this.estimate['estimation']['unit2']) + this.estimate['estimation']['unit2Tax2'] * this.estimate['estimation']['unit2']) :
       (this.unit2TaxSum = 0);
-    //console.log(this.unit2TaxSum);
+    // console.log(this.unit2TaxSum);
     this.unit2LoadingCostSum = this.estimate['estimation']['unit2LoadingCost'] * this.estimate['estimation']['unit2'];
     //console.log(this.unit2LoadingCostSum);
     this.unit2TransportCostSum = this.estimate['estimation']['unit2TransportCost'] * this.estimate['estimation']['unit2'];
@@ -2832,7 +2849,7 @@ export class EstimationDetailsPage {
     }
     // console.log(this.estimate['estimation']['orderPriority']);
   }
-  
+
   roundTransportCost(cost: number) {
     let int_part = Math.trunc(cost); // returns 3
     let float_part = Number((cost - int_part).toFixed(2)); // return 0.2
