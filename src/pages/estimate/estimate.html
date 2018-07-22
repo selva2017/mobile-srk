@@ -518,15 +518,19 @@
                 <ion-label>{{displayINR(estimate.estimation.totalProductCost)}}</ion-label>
               </ion-item>
               <ion-item *ngIf="isToggledTax">
-                <ion-label color="selva">Tax </ion-label>
-                <ion-label>{{displayINR(estimate.estimation.totalTax)}}</ion-label>
+                <ion-label color="selva">Tax 1</ion-label>
+                <ion-label>{{displayINR(estimate.estimation.totalTax1)}}</ion-label>
+              </ion-item>
+              <ion-item *ngIf="isToggledTax">
+                <ion-label color="selva">Tax 2</ion-label>
+                <ion-label>{{displayINR(estimate.estimation.totalTax2)}}</ion-label>
               </ion-item>
               <!-- <ion-item *ngIf="showTransportCost"> -->
-              <ion-item>
+              <ion-item *ngIf="estimate.estimation.totalTransportCost != 0">
                 <ion-label color="selva">Transport Cost </ion-label>
                 <ion-label>{{displayINR(estimate.estimation.totalTransportCost)}}</ion-label>
               </ion-item>
-              <ion-item *ngIf="showLoadingCost">
+              <ion-item *ngIf="showLoadingCost && estimate.estimation.totalLoadingCost != 0">
                 <ion-label color="selva">Loading Cost </ion-label>
                 <ion-label>{{displayINR(estimate.estimation.totalLoadingCost)}}</ion-label>
               </ion-item>
