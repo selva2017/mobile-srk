@@ -715,7 +715,8 @@ export class EstimatePage {
     this.estimate['estimation']['fullLoadsTransportCost'] = 0;
     this.estimate['estimation']['fullLoadsTotalCost'] = 0;
     this.fullLoadsCostSum = 0;
-    this.fullLoadsTaxSum = 0;
+    this.fullLoadsTax1Sum = 0;
+    this.fullLoadsTax2Sum = 0;
     this.fullLoadsTransportCostSum = 0;
     this.fullLoadsTotalCostSum = 0;
     this.estimate['estimation']['partialLoadCost'] = 0;
@@ -813,7 +814,8 @@ export class EstimatePage {
   productCostPerSqFt: number = 0;
 
   fullLoadsCostSum: number;
-  fullLoadsTaxSum: number;
+  fullLoadsTax1Sum: number;
+  fullLoadsTax2Sum: number;
   fullLoadsTransportCostSum: number;
   fullLoadsTotalCostSum: number;
 
@@ -839,7 +841,8 @@ export class EstimatePage {
   unit4TotalCostSum: number = 0;
 
   unit6CostSum: number = 0;
-  unit6TaxSum: number = 0;
+  unit6Tax1Sum: number = 0;
+  unit6Tax2Sum: number = 0;
   unit6LoadingCostSum: number = 0;
   unit6TransportCostSum: number = 0;
   unit6TotalCostSum: number = 0;
@@ -893,8 +896,10 @@ export class EstimatePage {
     this.estimate['estimation']['unitlTransportCost'] = this.transportPerKMCostUnit1 * Number(this.distanceKM);
     //console.log(this.estimate['estimation']['unitlTransportCost']);
     (this.isToggledTax == true) ?
-      (this.estimate['estimation']['unit1Tax'] = (this.estimate['estimation']['unit1ProductCost'] + this.estimate['estimation']['unit1LoadingCost'] + this.estimate['estimation']['unitlTransportCost']) * ((this.tax1 + this.tax2) / 100)) :
-      (this.estimate['estimation']['unit1Tax'] = 0);
+      (this.estimate['estimation']['unit1Tax1'] = (this.estimate['estimation']['unit1ProductCost'] + this.estimate['estimation']['unit1LoadingCost'] + this.estimate['estimation']['unitlTransportCost']) * ((this.tax1) / 100)) &
+      (this.estimate['estimation']['unit1Tax2'] = (this.estimate['estimation']['unit1ProductCost'] + this.estimate['estimation']['unit1LoadingCost'] + this.estimate['estimation']['unitlTransportCost']) * ((this.tax2) / 100)) :
+      (this.estimate['estimation']['unit1Tax1'] = 0) &
+      (this.estimate['estimation']['unit1Tax2'] = 0);
     this.estimate['estimation']['unit1TotalCost'] = this.estimate['estimation']['unit1ProductCost'] + this.estimate['estimation']['unit1Tax'] +
       this.estimate['estimation']['unit1LoadingCost'] + this.estimate['estimation']['unitlTransportCost'];
     //console.log(this.estimate['estimation']['unit1TotalCost']);
@@ -904,7 +909,7 @@ export class EstimatePage {
     // NEW for tax
     // this.unit1TaxSum = this.estimate['estimation']['unit1Tax'] * this.estimate['estimation']['unit1'];
     (this.isToggledTax == true) ?
-      (this.unit1TaxSum = this.estimate['estimation']['unit1Tax'] * this.estimate['estimation']['unit1']) :
+      (this.unit1TaxSum = this.estimate['estimation']['unit1Tax1'] * this.estimate['estimation']['unit1'] + this.estimate['estimation']['unit1Tax2'] * this.estimate['estimation']['unit1']) :
       (this.unit1TaxSum = 0);
 
     //console.log(this.unit1TaxSum);
@@ -1009,8 +1014,10 @@ export class EstimatePage {
     // console.log("this.estimate['estimation']['unit3TransportCost']");
     // console.log(this.estimate['estimation']['unit3TransportCost']);
     (this.isToggledTax == true) ?
-      (this.estimate['estimation']['unit3Tax'] = ((this.estimate['estimation']['unit3ProductCost'] + this.estimate['estimation']['unit3LoadingCost'] + this.estimate['estimation']['unit3TransportCost'])) * ((this.tax1 + this.tax2) / 100)) :
-      (this.estimate['estimation']['unit3Tax'] = 0);
+      (this.estimate['estimation']['unit3Tax1'] = ((this.estimate['estimation']['unit3ProductCost'] + this.estimate['estimation']['unit3LoadingCost'] + this.estimate['estimation']['unit3TransportCost'])) * ((this.tax1) / 100)) &
+      (this.estimate['estimation']['unit3Tax2'] = ((this.estimate['estimation']['unit3ProductCost'] + this.estimate['estimation']['unit3LoadingCost'] + this.estimate['estimation']['unit3TransportCost'])) * ((this.tax2) / 100)) :
+      (this.estimate['estimation']['unit3Tax1'] = 0) &
+      (this.estimate['estimation']['unit3Tax2'] = 0);
     // console.log("this.estimate['estimation']['unit3Tax']");
     // console.log(this.estimate['estimation']['unit3Tax']);
     this.estimate['estimation']['unit3TotalCost'] = this.estimate['estimation']['unit3ProductCost'] + this.estimate['estimation']['unit3Tax'] +
@@ -1023,7 +1030,7 @@ export class EstimatePage {
     // this.unit3TaxSum = this.estimate['estimation']['unit3Tax'] * this.estimate['estimation']['unit3'];
 
     (this.isToggledTax == true) ?
-      (this.unit3TaxSum = this.estimate['estimation']['unit3Tax'] * this.estimate['estimation']['unit3']) :
+      (this.unit3TaxSum = this.estimate['estimation']['unit3Tax1'] * this.estimate['estimation']['unit3'] + this.estimate['estimation']['unit3Tax2'] * this.estimate['estimation']['unit3']) :
       (this.unit3TaxSum = 0);
     // console.log("this.unit3TaxSum");
     // console.log(this.unit3TaxSum);
@@ -1034,8 +1041,8 @@ export class EstimatePage {
     // console.log("this.unitlTransportCostSum");
     // console.log(this.unitlTransportCostSum);
     this.unit3TotalCostSum = this.estimate['estimation']['unit3TotalCost'] * this.estimate['estimation']['unit3'];
-    // console.log("this.unit3TotalCostSum");
-    // console.log(this.unit3TotalCostSum);
+    console.log("this.unit3TotalCostSum");
+    console.log(this.unit3TotalCostSum);
     this.calculateAggregateTotal();
   }
   onChangeUnit4(units) {
@@ -1068,8 +1075,10 @@ export class EstimatePage {
     // console.log("this.estimate['estimation']['unit4TransportCost']");
     // console.log(this.estimate['estimation']['unit4TransportCost']);
     (this.isToggledTax == true) ?
-      (this.estimate['estimation']['unit4Tax'] = ((this.estimate['estimation']['unit4ProductCost'] + this.estimate['estimation']['unit4LoadingCost'] + this.estimate['estimation']['unit4TransportCost'])) * ((this.tax1 + this.tax2) / 100)) :
-      (this.estimate['estimation']['unit4Tax'] = 0);
+      (this.estimate['estimation']['unit4Tax1'] = ((this.estimate['estimation']['unit4ProductCost'] + this.estimate['estimation']['unit4LoadingCost'] + this.estimate['estimation']['unit4TransportCost'])) * ((this.tax1) / 100)) &
+      (this.estimate['estimation']['unit4Tax2'] = ((this.estimate['estimation']['unit4ProductCost'] + this.estimate['estimation']['unit4LoadingCost'] + this.estimate['estimation']['unit4TransportCost'])) * ((this.tax2) / 100)) :
+      (this.estimate['estimation']['unit4Tax1'] = 0) &
+      (this.estimate['estimation']['unit4Tax2'] = 0);
     // console.log("this.estimate['estimation']['unit4Tax']");
     // console.log(this.estimate['estimation']['unit4Tax']);
 
@@ -1083,7 +1092,7 @@ export class EstimatePage {
     // NEW for tax
     // this.unit4TaxSum = this.estimate['estimation']['unit4Tax'] * this.estimate['estimation']['unit4'];
     (this.isToggledTax == true) ?
-      (this.unit4TaxSum = this.estimate['estimation']['unit4Tax'] * this.estimate['estimation']['unit4']) :
+      (this.unit4TaxSum = this.estimate['estimation']['unit4Tax1'] * this.estimate['estimation']['unit4'] + this.estimate['estimation']['unit4Tax2'] * this.estimate['estimation']['unit4']) :
       (this.unit4TaxSum = 0);
     // console.log("this.unit4TaxSum");
     // console.log(this.unit4TaxSum);
@@ -1129,8 +1138,10 @@ export class EstimatePage {
     this.estimate['estimation']['unit6TransportCost'] = this.transportPerKMCostUnit6 * Number(this.distanceKM);
     //console.log(this.estimate['estimation']['unit6TransportCost']);
     (this.isToggledTax == true) ?
-      (this.estimate['estimation']['unit6Tax'] = (this.estimate['estimation']['unit6ProductCost'] + this.estimate['estimation']['unit6LoadingCost'] + this.estimate['estimation']['unit6TransportCost']) * ((this.tax1 + this.tax2) / 100)) :
-      (this.estimate['estimation']['unit6Tax'] = 0);
+      (this.estimate['estimation']['unit6Tax1'] = (this.estimate['estimation']['unit6ProductCost'] + this.estimate['estimation']['unit6LoadingCost'] + this.estimate['estimation']['unit6TransportCost']) * ((this.tax1) / 100)) &
+      (this.estimate['estimation']['unit6Tax2'] = (this.estimate['estimation']['unit6ProductCost'] + this.estimate['estimation']['unit6LoadingCost'] + this.estimate['estimation']['unit6TransportCost']) * ((this.tax2) / 100)) :
+      (this.estimate['estimation']['unit6Tax1'] = 0) &
+      (this.estimate['estimation']['unit6Tax2'] = 0);
     this.estimate['estimation']['unit6TotalCost'] = this.estimate['estimation']['unit6ProductCost'] + this.estimate['estimation']['unit6Tax'] +
       this.estimate['estimation']['unit6LoadingCost'] + this.estimate['estimation']['unit6TransportCost'];
     //console.log(this.estimate['estimation']['unit6TotalCost']);
@@ -1140,8 +1151,8 @@ export class EstimatePage {
     // NEW for tax
     // this.unit6TaxSum = this.estimate['estimation']['unit6Tax'] * this.estimate['estimation']['unit6'];
     (this.isToggledTax == true) ?
-      (this.unit6TaxSum = this.estimate['estimation']['unit6Tax'] * this.estimate['estimation']['unit6']) :
-      (this.unit6TaxSum = 0);
+      (this.unit6Tax1Sum = this.estimate['estimation']['unit6Tax1'] * this.estimate['estimation']['unit6']) & (this.unit6Tax2Sum = this.estimate['estimation']['unit6Tax2'] * this.estimate['estimation']['unit6']) :
+      (this.unit6Tax1Sum = 0) & (this.unit6Tax2Sum = 0);
 
     //console.log(this.unit6TaxSum);
     this.unit6LoadingCostSum = this.estimate['estimation']['unit6LoadingCost'] * this.estimate['estimation']['unit6'];
@@ -1356,7 +1367,8 @@ export class EstimatePage {
       // console.log(this.estimate['estimation']['fullLoadsTotalCost']);
 
       this.fullLoadsCostSum = this.estimate['estimation']['fullLoadsCost'] * this.estimate['estimation']['fullLoads'];
-      this.fullLoadsTaxSum = this.estimate['estimation']['fullLoadsTax'] * this.estimate['estimation']['fullLoads'];
+      this.fullLoadsTax1Sum = this.estimate['estimation']['fullLoadsTax1'] * this.estimate['estimation']['fullLoads'];
+      this.fullLoadsTax2Sum = this.estimate['estimation']['fullLoadsTax2'] * this.estimate['estimation']['fullLoads'];
       this.fullLoadsTransportCostSum = this.estimate['estimation']['fullLoadsTransportCost'] * this.estimate['estimation']['fullLoads'];
       this.fullLoadsTotalCostSum = this.estimate['estimation']['fullLoadsTotalCost'] * this.estimate['estimation']['fullLoads'];
     }
@@ -2296,7 +2308,8 @@ export class EstimationDetailsPage {
   productCostPerSqFt: number = 0;
 
   fullLoadsCostSum: number;
-  fullLoadsTaxSum: number;
+  fullLoadsTax1Sum: number;
+  fullLoadsTax2Sum: number;
   fullLoadsTransportCostSum: number;
   fullLoadsTotalCostSum: number;
 
@@ -2410,13 +2423,15 @@ export class EstimationDetailsPage {
       // this.order['estimation']['fullLoadsTax'] = (this.order['estimation']['fullLoadsCost'] * (this.tax1) / 100)
       // console.log(this.order['estimation']['fullLoadsTax']);
       this.order['estimation']['fullLoadsTransportCost'] = this.transportPerKMCostHB * Number(this.distanceKM);
-      this.order['estimation']['fullLoadsTax'] = ((this.order['estimation']['fullLoadsCost'] + this.order['estimation']['fullLoadsTransportCost']) * (this.tax1 + this.tax2) / 100)
+      this.order['estimation']['fullLoadsTax1'] = ((this.order['estimation']['fullLoadsCost'] + this.order['estimation']['fullLoadsTransportCost']) * (this.tax1) / 100)
+      this.order['estimation']['fullLoadsTax2'] = ((this.order['estimation']['fullLoadsCost'] + this.order['estimation']['fullLoadsTransportCost']) * (this.tax2) / 100)
       // console.log(this.order['estimation']['fullLoadsTransportCost']);
       this.order['estimation']['fullLoadsTotalCost'] = (this.order['estimation']['fullLoadsCost'] + this.order['estimation']['fullLoadsTax'] + this.order['estimation']['fullLoadsTransportCost']);
       // console.log(this.order['estimation']['fullLoadsTotalCost']);
 
       this.fullLoadsCostSum = this.order['estimation']['fullLoadsCost'] * this.order['estimation']['fullLoads'];
-      this.fullLoadsTaxSum = this.order['estimation']['fullLoadsTax'] * this.order['estimation']['fullLoads'];
+      this.fullLoadsTax1Sum = this.order['estimation']['fullLoadsTax1'] * this.order['estimation']['fullLoads'];
+      this.fullLoadsTax2Sum = this.order['estimation']['fullLoadsTax2'] * this.order['estimation']['fullLoads'];
       this.fullLoadsTransportCostSum = this.order['estimation']['fullLoadsTransportCost'] * this.order['estimation']['fullLoads'];
       this.fullLoadsTotalCostSum = this.order['estimation']['fullLoadsTotalCost'] * this.order['estimation']['fullLoads'];
     }
@@ -2426,17 +2441,19 @@ export class EstimationDetailsPage {
       this.order['estimation']['partialLoadCost'] = this.productPricePerUnit * this.order['estimation']['partialLoad'];
       // this.order['estimation']['partialLoadTax'] = this.order['estimation']['partialLoadCost'] * ((this.tax1) / 100);
       this.order['estimation']['partialLoadTransportCost'] = this.transportPerKMCostHB * Number(this.distanceKM);
-      this.order['estimation']['partialLoadTax'] = (this.order['estimation']['partialLoadCost'] + this.order['estimation']['partialLoadTransportCost']) * ((this.tax1 + this.tax2) / 100);
+      this.order['estimation']['partialLoadTax1'] = (this.order['estimation']['partialLoadCost'] + this.order['estimation']['partialLoadTransportCost']) * ((this.tax1) / 100);
+      this.order['estimation']['partialLoadTax2'] = (this.order['estimation']['partialLoadCost'] + this.order['estimation']['partialLoadTransportCost']) * ((this.tax2) / 100);
       this.order['estimation']['partialLoadTotalCost'] = this.order['estimation']['partialLoadCost'] + this.order['estimation']['partialLoadTax'] + this.order['estimation']['partialLoadTransportCost'];
     }
   }
   calculateTotalHBCost() {
     this.order['estimation']['totalProductCost'] = this.fullLoadsCostSum + this.order['estimation']['partialLoadCost'];
     //console.log(this.order['estimation']['totalProductCost']);
-    this.order['estimation']['totalTax'] = this.fullLoadsTaxSum + this.order['estimation']['partialLoadTax'];
+    this.order['estimation']['totalTax1'] = this.fullLoadsTax1Sum + this.order['estimation']['partialLoadTax1'];
+    this.order['estimation']['totalTax2'] = this.fullLoadsTax2Sum + this.order['estimation']['partialLoadTax2'];
     this.order['estimation']['totalTransportCost'] = this.fullLoadsTransportCostSum + this.order['estimation']['partialLoadTransportCost'];
     (this.isToggledTax == true) ?
-      (this.order['estimation']['totalCost'] = this.order['estimation']['totalProductCost'] + this.order['estimation']['totalTax'] + this.order['estimation']['totalTransportCost']) :
+      (this.order['estimation']['totalCost'] = this.order['estimation']['totalProductCost'] + this.order['estimation']['totalTax1'] + this.order['estimation']['totalTax2'] + this.order['estimation']['totalTransportCost']) :
       (this.order['estimation']['totalCost'] = this.order['estimation']['totalProductCost'] + this.order['estimation']['totalTransportCost']);
   }
 

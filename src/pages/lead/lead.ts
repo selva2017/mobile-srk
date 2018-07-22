@@ -135,12 +135,15 @@ export class LeadPage {
         "enquiryId": null,
         "custId": null,
         "enquiryDate": null,
-        "meetingType": null,
+        "purposeOfVisit": null,
         "meetingNotes": null,
-        "nextVisit": null,
-        "interested": null,
-        "compititor": null,
-        "price": null,
+        "nextFollowUpDate": null,
+        "siteStatus": null,
+        "materialRequest": null,
+        "remark": null,
+        "status": null,
+        "reviewedBy": null,
+        "closedDate": null,
         "createdBy": null
       }
     }
@@ -219,7 +222,7 @@ export class LeadPage {
       this.customers['sales_REP_ID'] = this.sales_rep_name;
     }
     this.customers['customerEnquiry']['createdBy'] = localStorage.getItem('employeeId');
-    this.customers['customerEnquiry']['business_CUSTOMER'] = 'NON_BUSINESS';
+    this.customers['business_CUSTOMER'] = 'NON_BUSINESS';
     // this.estimate['onBehalf'] = localStorage.getItem('employeeId');
 
     this.authService.customerAddition(this.customers)
