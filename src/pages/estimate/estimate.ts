@@ -1393,7 +1393,8 @@ export class EstimatePage {
   }
   calculatePaverCost() {
     this.transportPerKMCostPavers = 50;
-    this.paversLayingCost = 5.5; // Only for Pavers
+    // this.paversLayingCost = 5.5; // Only for Pavers
+    this.paversLayingCost = this.estimate['estimation']['product']['laying_COST'];
 
     this.showTransportCost = false;
     this.showLoadingCost = false;
@@ -2484,7 +2485,8 @@ export class EstimationDetailsPage {
   }
   calculatePaverCost() {
     this.transportPerKMCostPavers = 50;
-    this.paversLayingCost = 5.5; // Only for Pavers
+    // this.paversLayingCost = 5.5; // Only for Pavers
+    this.paversLayingCost = this.order['estimation']['product']['laying_COST'];
 
     this.showTransportCost = false;
     this.showLoadingCost = false;

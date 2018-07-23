@@ -15,7 +15,7 @@ import { AuthService } from '../providers/auth-service/auth-service';
 import { LoginPage } from './../pages/login/login';
 import { RegisterPage } from '../pages/register/register';
 import { OrdersPage, NavigationDetailsPage } from './../pages/orders/orders';
-import { LeadPage } from './../pages/lead/lead';
+import { LeadPage, CustomerMeetingsPage } from './../pages/lead/lead';
 import { EstimatePage, EstimationDetailsPage } from './../pages/estimate/estimate';
 import { PrintPage } from './../pages/print/print';
 import { Printer } from '@ionic-native/printer';
@@ -31,6 +31,7 @@ import { Geolocation } from '@ionic-native/geolocation';
     OrdersPage,
     EstimatePage,
     LeadPage,
+    CustomerMeetingsPage,
     NavigationDetailsPage,
     LoadingPage,
     LoadingDetailsPage,
@@ -53,6 +54,7 @@ import { Geolocation } from '@ionic-native/geolocation';
     EstimatePage,
     LeadPage,
     NavigationDetailsPage,
+    CustomerMeetingsPage,
     LoadingPage,
     LoadingDetailsPage,
     FrontOfficePage,
@@ -66,7 +68,8 @@ import { Geolocation } from '@ionic-native/geolocation';
     Printer,
     Geolocation,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
-    AuthService, LoginPage, NavigationDetailsPage, LoadingDetailsPage, EstimationDetailsPage
+    AuthService, LoginPage, NavigationDetailsPage, LoadingDetailsPage, EstimationDetailsPage,
+    CustomerMeetingsPage
   ]
 })
 export class AppModule { }

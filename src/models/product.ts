@@ -17,6 +17,7 @@ export interface Product {
   uom: string;
   uom_ID: string;
   hsn: string;
+  laying_COST: string;
   productDetails: [
     {
       product_ID: string;

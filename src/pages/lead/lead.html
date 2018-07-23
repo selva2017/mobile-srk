@@ -16,7 +16,7 @@
         <ion-segment-button value="enquiry">
           Enquiry
         </ion-segment-button>
-        <ion-segment-button value="view">
+        <ion-segment-button value="view" (click)="getNonBusinessCustomers('ORDER_PRICE_CHECK')">
           View Customer
         </ion-segment-button>
         <!-- <ion-segment-button value="Rejected" (click)="retrieveRejectedOrders()">
@@ -33,16 +33,16 @@
 
       <!-- <ion-tab [root]="leadPage" tabTitle="Lead" tabIcon="watch"></ion-tab> -->
       <!-- <div *ngIf="role == '1' || role == '2'"> -->
-        <ion-item *ngIf="role == '1' || role == '2'">
-          <ion-label color="selva">On Behalf of</ion-label>
-          <!-- Need to add sales Rep name  -->
-          <ion-select name="onBehalf">
+      <ion-item *ngIf="role == '1' || role == '2'">
+        <ion-label color="selva">On Behalf of</ion-label>
+        <!-- Need to add sales Rep name  -->
+        <ion-select name="onBehalf">
           <!-- <ion-select [(ngModel)]="customers.employeeId" name="onBehalf"> -->
-            <!-- <ion-option *ngFor="let user of userList.users" [value]="user.employeeId" (ionSelect)="onSelectSalesRep(user.firstName,user.lastName)" -->
-            <ion-option *ngFor="let user of userList.users" [value]="user.employeeId" (ionSelect)="onSelectSalesRep(user.employeeId)"
-              required>{{user.userName}}</ion-option>
-          </ion-select>
-        </ion-item>
+          <!-- <ion-option *ngFor="let user of userList.users" [value]="user.employeeId" (ionSelect)="onSelectSalesRep(user.firstName,user.lastName)" -->
+          <ion-option *ngFor="let user of userList.users" [value]="user.employeeId" (ionSelect)="onSelectSalesRep(user.employeeId)"
+            required>{{user.userName}}</ion-option>
+        </ion-select>
+      </ion-item>
       <!-- </div> -->
 
       <ion-item>
@@ -101,59 +101,125 @@
         <ion-label color="selva" stacked>GSTIN</ion-label>
         <ion-input [(ngModel)]="customers.gst_NUMBER" name="gst_NUMBER" type="text"></ion-input>
       </ion-item>
-      <ion-item>
+      <!-- <ion-item>
         <ion-label color="selva" stacked>Meeting Notes</ion-label>
         <ion-input [(ngModel)]="customers.customerEnquiry.meetingNotes" name="meetingNotes" type="text"></ion-input>
-      </ion-item>
-      <!-- <ion-item>
-        <ion-label color="selva">Site</ion-label>
-        <ion-label color="selva" *ngIf="showSiteDetails" text-right>Add</ion-label>
-        <ion-label color="selva" *ngIf="!showSiteDetails" text-right>Later</ion-label>
-        <ion-toggle color="danger" [checked]="showSiteDetails" (ionChange)="siteOption()" required>
-        </ion-toggle>
       </ion-item> -->
-      <!-- <div *ngIf="showSiteDetails"> -->
-
-
-      <!-- <ion-item>
-          <ion-label color="selva" stacked>Site Address</ion-label>
-          <ion-input [(ngModel)]="customers.site_ADDRESS_ID" name="site_ADDRESS_ID" type="text"></ion-input>
+      <!-- "customerEnquiry": {
+        "purposeOfVisit": null,
+        "meetingNotes": null,
+        "nextFollowUpDate": null,
+        "siteStatus": null,
+        "materialRequest": null,
+        "remark": null,
+        "status": null,
+        "reviewedBy": null,
+        "closedDate": null,
+        "createdBy": null
+      } -->
+      <ion-item>
+        <ion-label color="selva">Meeting Notes</ion-label>
+        <ion-label color="selva" *ngIf="showMeetingDetails" text-right>Add</ion-label>
+        <ion-label color="selva" *ngIf="!showMeetingDetails" text-right>Later</ion-label>
+        <ion-toggle color="danger" [checked]="showMeetingDetails" (ionChange)="onMeetingNotesChange()" required>
+        </ion-toggle>
+      </ion-item>
+      <div *ngIf="showMeetingDetails">
+        <ion-item>
+          <ion-label color="selva" stacked>Purpose of Visit</ion-label>
+          <ion-input [(ngModel)]="customers.customerEnquiry.purposeOfVisit" name="purposeOfVisit" type="text"></ion-input>
         </ion-item>
- -->
-      <!-- <ion-item>
+        <ion-item>
+          <ion-label color="selva" stacked>Meeting Notes</ion-label>
+          <ion-input [(ngModel)]="customers.customerEnquiry.meetingNotes" name="meetingNotes" type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label color="selva" stacked>Next FollowUp Date</ion-label>
+          <ion-datetime displayFormat="DD MMM YYYY" [(ngModel)]="customers.customerEnquiry.nextFollowUpDate"></ion-datetime>
+        </ion-item>
+        <ion-item>
+          <ion-label color="selva" stacked>Site Status</ion-label>
+          <ion-input [(ngModel)]="customers.customerEnquiry.siteStatus" name="siteStatus" type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label color="selva" stacked>Material Request</ion-label>
+          <ion-input [(ngModel)]="customers.customerEnquiry.materialRequest" name="materialRequest" type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label color="selva" stacked>Remarks</ion-label>
+          <ion-input [(ngModel)]="customers.customerEnquiry.remark" name="remark" type="text"></ion-input>
+        </ion-item>
+        <!-- <ion-item>
           <ion-label color="selva" stacked floating>City</ion-label>
           <ion-select [(ngModel)]="customers.address.city" name="city" [compareWith]="">
             <ion-option *ngFor="let city of cities" [value]="city.name">{{city.name}} </ion-option>
           </ion-select>
-        </ion-item> -->
-      <!-- <ion-item>
-        <ion-label color="selva" stacked floating>District</ion-label>
-        <ion-select [(ngModel)]="customers.address.district" name="district" [compareWith]="">
-          <ion-option *ngFor="let district of districts" [value]="district.name">{{district.name}} </ion-option>
-        </ion-select>
-      </ion-item>
-      <ion-item>
-        <ion-label color="selva" stacked>Pincode</ion-label>
-        <ion-input [(ngModel)]="customers.pinCode" name="pinCode" type="number"></ion-input>
-      </ion-item> -->
-      <!-- <ion-item>
+        </ion-item>
+        <ion-item>
+          <ion-label color="selva" stacked floating>District</ion-label>
+          <ion-select [(ngModel)]="customers.address.district" name="district" [compareWith]="">
+            <ion-option *ngFor="let district of districts" [value]="district.name">{{district.name}} </ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label color="selva" stacked>Pincode</ion-label>
+          <ion-input [(ngModel)]="customers.pinCode" name="pinCode" type="number"></ion-input>
+        </ion-item>
+        <ion-item>
           <ion-label color="selva" stacked>Site Contact Number</ion-label>
           <ion-input [(ngModel)]="customers.site_CONTACT_NUMBER" name="site_CONTACT_NUMBER" type="number"></ion-input>
         </ion-item> -->
-
-      <!-- </div> -->
-
+      </div>
       <button ion-button block padding type="submit" color="one" (click)="onSubmitCustomer(customers)">
         Submit
       </button>
-
     </ion-list>
   </div>
 
-
   <div [ngSwitch]="category">
     <ion-list *ngSwitchCase="'view'">
-
+      <div ion-item *ngFor="let item of customer_master; let i = index" icon-start>
+        <ion-grid>
+          <ion-row>
+            <ion-col col-5>Customer :</ion-col>
+            <ion-col col-7>
+              <h3>{{ item.cust_NAME }}</h3>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-5>Phone :</ion-col>
+            <ion-col col-7>
+              <h3>{{ item.cust_PHONE1 }}</h3>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col col-4>
+              <button ion-button block (click)="onMeetingHistoryClick(item.cust_ID,'add_meeting')">Meeting</button>
+            </ion-col>
+            <ion-col col-4>
+                <button ion-button block (click)="onMeetingHistoryClick(item.cust_ID,'view_list')">History</button>
+            </ion-col>
+            <ion-col col-4>
+                <button ion-button block (click)="convertCustomer(item.cust_ID,'BUSINESS')">Convert</button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+      <!-- <button ion-item *ngFor="let item of customer_meeting; let i = index" (click)="openNavDetailsPage(item,'estimate')" icon-start> -->
+      <!-- <button ion-item *ngFor="let item of customer_meeting; let i = index" icon-start>
+        <h2>#{{i+1}} - {{ item.custId }}</h2>
+        <h2>Purpose # {{ item.purposeOfVisit }}</h2>
+        <p>
+          <ion-grid>
+            <ion-row>
+              <ion-col col-5>Item</ion-col>
+              <ion-col col-7>
+                <h3>{{ item.meetingNotes }}</h3>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </p>
+      </button> -->
       <!-- this fab is placed at bottom right -->
       <!-- <ion-fab center middle>
           <button ion-fab color="danger"><ion-icon name="md-share"></ion-icon></button>
@@ -170,7 +236,7 @@
             <button ion-fab color="dark"><ion-icon name="logo-twitter"></ion-icon></button>
           </ion-fab-list>
         </ion-fab> -->
-      <ion-fab right bottom>
+      <!-- <ion-fab right bottom>
         <button ion-fab color="primary">
           <ion-icon name="add"></ion-icon>
         </button>
@@ -184,13 +250,12 @@
           <button ion-fab color="selva" (click)="onClick('Reference')">
             <ion-icon name="contacts"></ion-icon>
           </button>
-          <!-- <ion-icon color="selva" ios="ios-construct" md="md-construct"></ion-icon> -->
-          <!-- <button ><ion-icon color="selva" ios="ios-contacts" md="md-contacts"></ion-icon></button> -->
         </ion-fab-list>
       </ion-fab>
       <div> This is the - {{page_name}} page - under construction.....
-      </div>
+      </div> -->
     </ion-list>
+
   </div>
 </ion-content>
 <!-- <ion-header>

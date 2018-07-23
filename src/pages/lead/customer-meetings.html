@@ -1,0 +1,115 @@
+<ion-header>
+    <ion-navbar [color]="'head'">
+        <ion-buttons left>
+            <button ion-button icon-only menuToggle>
+                <ion-icon name="menu"></ion-icon>
+            </button>
+        </ion-buttons>
+        <ion-title center>Customer Meetings</ion-title>
+        <ion-buttons right>
+            <img alt="logo" height="40" src="assets/imgs/srk-0.png">
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+<ion-content padding>
+    <div *ngIf="option_type=='view_list'">
+        <div ion-item *ngFor="let item of customer_meeting; let i = index" icon-start>
+            <ion-grid>
+                <ion-row>
+                    <ion-col col-5>Date:</ion-col>
+                    <ion-col col-7>
+                        <h3>{{ item.enquiryDate}}</h3>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col col-5>Purpose of Visit:</ion-col>
+                    <ion-col col-7>
+                        <h3>{{ item.purposeOfVisit}}</h3>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col col-5>Meeting Notes:</ion-col>
+                    <ion-col col-7>
+                        <h3>{{ item.meetingNotes}}</h3>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col col-5>Next FollowUp Date:</ion-col>
+                    <ion-col col-7>
+                        <h3>{{ item.nextFollowUpDate}}</h3>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col col-5>Site Status:</ion-col>
+                    <ion-col col-7>
+                        <h3>{{ item.siteStatus}}</h3>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col col-5>Material Request:</ion-col>
+                    <ion-col col-7>
+                        <h3>{{ item.materialRequest}}</h3>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col col-5>Remark:</ion-col>
+                    <ion-col col-7>
+                        <h3>{{ item.remark}}</h3>
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col col-5>Status:</ion-col>
+                    <ion-col col-7>
+                        <h3>{{ item.status}}</h3>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </div>
+    </div>
+    <div *ngIf="option_type=='add_meeting'">
+        <ion-item>
+            <ion-label color="selva" stacked>Purpose of Visit</ion-label>
+            <ion-input [(ngModel)]="new_meeting.purposeOfVisit" name="purposeOfVisit" type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label color="selva" stacked>Meeting Notes</ion-label>
+            <ion-input [(ngModel)]="new_meeting.meetingNotes" name="meetingNotes" type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label color="selva" stacked>Next FollowUp Date</ion-label>
+            <ion-datetime displayFormat="DD MMM YYYY" [(ngModel)]="new_meeting.nextFollowUpDate"></ion-datetime>
+        </ion-item>
+        <ion-item>
+            <ion-label color="selva" stacked>Site Status</ion-label>
+            <ion-input [(ngModel)]="new_meeting.siteStatus" name="siteStatus" type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label color="selva" stacked>Material Request</ion-label>
+            <ion-input [(ngModel)]="new_meeting.materialRequest" name="materialRequest" type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label color="selva" stacked>Remarks</ion-label>
+            <ion-input [(ngModel)]="new_meeting.remark" name="remark" type="text"></ion-input>
+        </ion-item>
+        <!-- <ion-item>
+                      <ion-label color="selva" stacked floating>City</ion-label>
+                      <ion-select [(ngModel)]="customers.address.city" name="city" [compareWith]="">
+                        <ion-option *ngFor="let city of cities" [value]="city.name">{{city.name}} </ion-option>
+                      </ion-select>
+                    </ion-item>
+                    <ion-item>
+                      <ion-label color="selva" stacked floating>District</ion-label>
+                      <ion-select [(ngModel)]="customers.address.district" name="district" [compareWith]="">
+                        <ion-option *ngFor="let district of districts" [value]="district.name">{{district.name}} </ion-option>
+                      </ion-select>
+                    </ion-item>
+                    <ion-item>
+                      <ion-label color="selva" stacked>Pincode</ion-label>
+                      <ion-input [(ngModel)]="customers.pinCode" name="pinCode" type="number"></ion-input>
+                    </ion-item>
+                    <ion-item>
+                      <ion-label color="selva" stacked>Site Contact Number</ion-label>
+                      <ion-input [(ngModel)]="customers.site_CONTACT_NUMBER" name="site_CONTACT_NUMBER" type="number"></ion-input>
+                    </ion-item> -->
+    </div>
+</ion-content>
