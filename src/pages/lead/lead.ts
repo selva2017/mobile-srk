@@ -267,7 +267,7 @@ export class LeadPage {
     this.page_name = name;
   }
   onMeetingHistoryClick(item, option) {
-    console.log(item);
+    // console.log(item);
     this.nav.push(CustomerMeetingsPage, { item: item, option });
   }
   // onAddNewSite(item, option) {
@@ -278,7 +278,7 @@ export class LeadPage {
     this.authService.fetchCustomerMaster("NON_BUSINESS", "all")
       .subscribe(
         (list) => {
-          console.log(list);
+          // console.log(list);
           this.customer_master = list;
           // this.loading.dismiss();
         },
@@ -378,7 +378,7 @@ export class CustomerMeetingsPage {
     this.authService.fetchCustomerEnquiry(this.order)
       .subscribe(
         (list) => {
-          console.log(list);
+          // console.log(list);
           this.customer_meeting = list;
           // this.loading_complete = true;
           this.loading.dismiss();

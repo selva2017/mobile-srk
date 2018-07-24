@@ -36,7 +36,7 @@ export class NavigationDetailsPage {
         // (list) => {
         (list: SubOrders[]) => {
           this.subOrders = list;
-          console.log(this.subOrders);
+          // console.log(this.subOrders);
           // this.loading_complete = true;
           this.loading.dismiss();
         },
@@ -94,7 +94,7 @@ export class NavigationDetailsPage {
         // (list) => {
         (list: SubOrders[]) => {
           this.subOrders = list;
-          console.log(this.subOrders);
+          // console.log(this.subOrders);
           // this.loading_complete = true;
           this.loading.dismiss();
         },
@@ -245,7 +245,7 @@ export class OrdersPage {
       .subscribe(
         (list: Orders[]) => {
           this.estimatedOrders = list;
-          console.log(this.estimatedOrders);
+          // console.log(this.estimatedOrders);
           // this.loading_complete = true;
           this.loading.dismiss();
         },
@@ -312,7 +312,7 @@ export class OrdersPage {
       .subscribe(
         (list: Orders[]) => {
           this.rejectedOrders = list;
-          console.log(this.rejectedOrders);
+          // console.log(this.rejectedOrders);
           this.loading.dismiss();
         },
         error => {

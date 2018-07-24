@@ -173,7 +173,7 @@
                       <ion-item> -->
           <!-- <ion-select name="product"> -->
           <ion-select [(ngModel)]="estimate.estimation.product" name="product" [disabled]="disableItemName">
-            <ion-option *ngFor="let item of products" [value]="item" (ionSelect)="onItemNameChange(item.productDetails,item.uom)" required>{{item.product_NAME}}</ion-option>
+            <ion-option *ngFor="let item of products" [value]="item" (ionSelect)="onItemNameChange(item.productDetails,item.uom,item)" required>{{item.product_NAME}}</ion-option>
           </ion-select>
         </ion-item>
 
