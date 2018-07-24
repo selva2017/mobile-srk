@@ -28,7 +28,7 @@ export interface CustomerData {
         pinCode: string;
         longitude: string;
         latitude: string;
-    },
+    } ,
     reference: {
         reference_ID: string;
         refrer_NAME: string;
@@ -37,7 +37,7 @@ export interface CustomerData {
         referer_MOBILE2: string;
         referer_EMAIL: string;
         referer_TYPE: string;
-    },
+    } ,
     site: {
         cust_ID: string;
         site_ID: string;
@@ -54,7 +54,7 @@ export interface CustomerData {
             longitude: string;
             latitude: string;
         }
-    },
+    }, 
     customerEnquiry: {
         enquiryId: string;
         custId: string;
@@ -102,7 +102,7 @@ export interface CustomerMaster {
     }
     alias: string;
     balance: string;
-    business_CUSTOMER:string;
+    business_CUSTOMER: string;
     cust_ADDRESS_ID: string;
     cust_CRM_ID: string;
     cust_EMAIL: string;
@@ -123,4 +123,24 @@ export interface CustomerMaster {
     site_CONTACT_NUMBER: string;
     site_ID: string;
     site_NAME: string;
+}
+
+//Not used and created in component
+export interface Site {
+    cust_ID: string;
+    site_ID: string;
+    site_ADDRESS_ID: string;
+    site_CONTACT_NUMBER: string;
+    site_NAME:  string;
+    address: {
+        addressId:  string;
+        address: string;
+        city:  string;
+        district: string;
+        pinCode:  string;
+        state:  string;
+        address2: string;
+        longitude: string;
+        latitude:  string;
+    }
 }

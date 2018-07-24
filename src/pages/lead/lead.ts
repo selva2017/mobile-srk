@@ -229,7 +229,7 @@ export class LeadPage {
 
   onSubmitCustomer(customer) {
     // console.log(customer);
-    // this.customers['sales_REP_ID'] = localStorage.getItem('employeeId');
+    customer['customerEnquiry']['status'] = 'NEW';
 
     if (localStorage.getItem('role') == '3') {
       this.customers['sales_REP_ID'] = localStorage.getItem('employeeId');
@@ -270,6 +270,10 @@ export class LeadPage {
     console.log(item);
     this.nav.push(CustomerMeetingsPage, { item: item, option });
   }
+  // onAddNewSite(item, option) {
+  //   console.log(item);
+  //   this.nav.push(CustomerMeetingsPage, { item: item, option });
+  // }
   getNonBusinessCustomers() {
     this.authService.fetchCustomerMaster("NON_BUSINESS", "all")
       .subscribe(
@@ -332,6 +336,7 @@ export class CustomerMeetingsPage {
   option_type;
   customer_meeting: CustomerMeeting[] = [];
   new_meeting: CustomerMeeting[] = [];
+  site: any;
   loading: any;
   role: string;
   showApprove: boolean = false;
@@ -344,6 +349,24 @@ export class CustomerMeetingsPage {
   }
   constructor(public nav: NavController, params: NavParams, private authService: AuthService,
     private loadingCtrl: LoadingController) {
+    this.site = {
+      "cust_ID": '',
+      "site_ID": null,
+      "site_ADDRESS_ID": '',
+      "site_CONTACT_NUMBER": "",
+      "site_NAME": "",
+      "address": {
+        "addressId": "",
+        "address": "",
+        "address2": "",
+        "city": "",
+        "district": "",
+        "pinCode": "",
+        "longitude": "",
+        "latitude": ""
+      }
+    }
+
     this.role = localStorage.getItem('role');
     // if (this.role == '1' || this.role == '2') {
     //   this.showApprove = true;
@@ -351,7 +374,7 @@ export class CustomerMeetingsPage {
     // }
     this.order = params.data.item;
     this.option_type = params.data.option;
-    this.showLoader("Collecting Order Details....");
+    this.showLoader("Collecting Customer Enquiries....");
     this.authService.fetchCustomerEnquiry(this.order)
       .subscribe(
         (list) => {
@@ -368,7 +391,63 @@ export class CustomerMeetingsPage {
     // this.nav.push(OrdersPage, { item: this.subOrder });
   }
 
+  onAddNewSite(site_details) {
+    site_details['cust_ID'] = this.order; //option_type stores customer id
+    this.authService.addNewSite(site_details)
+      .subscribe(
+        success => {
+          if (success == 200) {
+            this.nav.pop();
+            this.nav.push(LeadPage);
+            // this.loading.dismiss();
+            // this.handleMessage("Success");
+          }
+          else {
+            // this.loading.dismiss();
+            // this.handleError("error");
+          }
+        },
+        (error) => {
+          // this.loading.dismiss();
+          // this.handleError("error");
+          // this.presentToast(error);
+        });
+  }
+  onAddNewMeeting(site_details) {
+    site_details['cust_ID'] = this.order; //option_type stores customer id
+    this.authService.addNewMeeting(site_details)
+      .subscribe(
+        success => {
+          if (success == 200) {
+            this.nav.pop();
+            this.nav.push(LeadPage);
+            // this.loading.dismiss();
+            // this.handleMessage("Success");
+          }
+          else {
+            // this.loading.dismiss();
+            // this.handleError("error");
+          }
+        },
+        (error) => {
+          // this.loading.dismiss();
+          // this.handleError("error");
+          // this.presentToast(error);
+        });
+  }
+  onChangeMeetingStatus(enquiry_id, status){
+    this.authService.changeCustomerEnquiryStatus(enquiry_id, status)
+    .subscribe(
+      (success) => {
+        this.nav.pop();
+        this.nav.push(LeadPage);
+        // this.refreshList();
+        // this.loading.dismiss();
+      },
+      (error) => console.log(error)
+    );
 
+  }
   // rejectOrder(order_GROUP_NO) {
   //   // console.log(order_GROUP_NO);
   //   this.showLoader("Collecting Rejected Orders...");
@@ -397,6 +476,29 @@ export class CustomerMeetingsPage {
   //       (error) => console.log(error)
   //     );
   // }
+  state_list = [
+    { id: 1, name: 'Tamilnadu' },
+    { id: 2, name: 'Kerala' },
+    { id: 3, name: 'Karnataka' },
+
+  ];
+
+  cities = [
+    { id: 1, name: 'Perundurai' },
+    { id: 2, name: 'Tiruppur' },
+    { id: 3, name: 'Coimbatore' },
+    { id: 4, name: 'Mettupalayam' },
+    { id: 5, name: 'Salem' },
+    { id: 7, name: 'Namakkal' }
+  ];
+  districts = [
+    { id: 1, name: 'Erode' },
+    { id: 2, name: 'Tiruppur' },
+    { id: 3, name: 'Coimbatore' },
+    { id: 4, name: 'Nilgris' },
+    { id: 5, name: 'Salem' },
+    { id: 7, name: 'Namakkal' }
+  ];
 
 }
 

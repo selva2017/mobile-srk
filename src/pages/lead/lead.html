@@ -197,11 +197,14 @@
               <button ion-button block (click)="onMeetingHistoryClick(item.cust_ID,'add_meeting')">Meeting</button>
             </ion-col>
             <ion-col col-4>
-                <button ion-button block (click)="onMeetingHistoryClick(item.cust_ID,'view_list')">History</button>
+              <button ion-button block (click)="onMeetingHistoryClick(item.cust_ID,'view_list')">History</button>
             </ion-col>
             <ion-col col-4>
-                <button ion-button block (click)="convertCustomer(item.cust_ID,'BUSINESS')">Convert</button>
+              <button ion-button block (click)="convertCustomer(item.cust_ID,'BUSINESS')">Convert</button>
             </ion-col>
+          </ion-row>
+          <button ion-button block (click)="onMeetingHistoryClick(item.cust_ID,'add_site')">Add New Site</button>
+          <ion-row>
           </ion-row>
         </ion-grid>
       </div>

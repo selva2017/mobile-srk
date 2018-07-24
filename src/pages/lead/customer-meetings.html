@@ -64,6 +64,10 @@
                     </ion-col>
                 </ion-row>
             </ion-grid>
+
+            <button ion-button block padding type="submit" color="one" (click)="onChangeMeetingStatus(item.custID,'CLOSED')">
+                Close the Meeting
+            </button>
         </div>
     </div>
     <div *ngIf="option_type=='add_meeting'">
@@ -91,15 +95,18 @@
             <ion-label color="selva" stacked>Remarks</ion-label>
             <ion-input [(ngModel)]="new_meeting.remark" name="remark" type="text"></ion-input>
         </ion-item>
+        <button ion-button block padding type="submit" color="one" (click)="onAddNewMeeting(site)">
+            Submit
+        </button>
         <!-- <ion-item>
                       <ion-label color="selva" stacked floating>City</ion-label>
-                      <ion-select [(ngModel)]="customers.address.city" name="city" [compareWith]="">
+                      <ion-select [(ngModel)]="site.address.city" name="city" [compareWith]="">
                         <ion-option *ngFor="let city of cities" [value]="city.name">{{city.name}} </ion-option>
                       </ion-select>
                     </ion-item>
                     <ion-item>
                       <ion-label color="selva" stacked floating>District</ion-label>
-                      <ion-select [(ngModel)]="customers.address.district" name="district" [compareWith]="">
+                      <ion-select [(ngModel)]="site.address.district" name="district" [compareWith]="">
                         <ion-option *ngFor="let district of districts" [value]="district.name">{{district.name}} </ion-option>
                       </ion-select>
                     </ion-item>
@@ -111,5 +118,44 @@
                       <ion-label color="selva" stacked>Site Contact Number</ion-label>
                       <ion-input [(ngModel)]="customers.site_CONTACT_NUMBER" name="site_CONTACT_NUMBER" type="number"></ion-input>
                     </ion-item> -->
+    </div>
+    <div *ngIf="option_type=='add_site'">
+        <ion-item>
+            <ion-label color="selva" stacked>Site Name</ion-label>
+            <ion-input [(ngModel)]="site.site_NAME" name="site_NAME" type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label color="selva" stacked>Site Contact Number</ion-label>
+            <ion-input [(ngModel)]="site.site_CONTACT_NUMBER" name="site_CONTACT_NUMBER" type="number"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label color="selva" stacked>Address</ion-label>
+            <ion-input [(ngModel)]="site.address.address" name="address" type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label color="selva" stacked floating>City</ion-label>
+            <ion-select [(ngModel)]="site.address.city" name="city" [compareWith]="">
+                <ion-option *ngFor="let city of cities" [value]="city.name">{{city.name}} </ion-option>
+            </ion-select>
+        </ion-item>
+        <ion-item>
+            <ion-label color="selva" stacked floating>District</ion-label>
+            <ion-select [(ngModel)]="site.address.district" name="district" [compareWith]="">
+                <ion-option *ngFor="let district of districts" [value]="district.name">{{district.name}} </ion-option>
+            </ion-select>
+        </ion-item>
+        <ion-item>
+            <ion-label color="selva" stacked floating>State</ion-label>
+            <ion-select [(ngModel)]="site.address.state" name="state" [compareWith]="">
+                <ion-option *ngFor="let state of state_list" [value]="state.name">{{state.name}} </ion-option>
+            </ion-select>
+        </ion-item>
+        <ion-item>
+            <ion-label color="selva" stacked>Pincode</ion-label>
+            <ion-input [(ngModel)]="site.address.pinCode" name="pinCode" type="number"></ion-input>
+        </ion-item>
+        <button ion-button block padding type="submit" color="one" (click)="onAddNewSite(site)">
+            Submit
+        </button>
     </div>
 </ion-content>
