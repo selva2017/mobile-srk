@@ -664,8 +664,8 @@ export class EstimatePage {
     this.estimate['estimation']['totalLoadingCost'] = 0;
     this.estimate['estimation']['totalTransportCost'] = 0;
     this.estimate['estimation']['totalCost'] = 0;
-    this.estimate['estimation']['remarkRep'] = '';
-    this.estimate['estimation']['remarkMgr'] = '';
+    this.estimate['remarkRep'] = '';
+    this.estimate['remarkMgr'] = '';
     this.productPricePerUnit = 0;
     this.loadingCostPerUnit = 0;
     // this.estimate['estimation']['product']['product_COST'] = 0;

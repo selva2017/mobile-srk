@@ -15,87 +15,92 @@
     <div *ngIf="option_type=='view_list'">
         <div ion-item *ngFor="let item of customer_meeting; let i = index" icon-start>
             <ion-grid>
-                <ion-row>
+                <ion-row text-wrap>
                     <ion-col col-5>Date:</ion-col>
                     <ion-col col-7>
-                        <h3>{{ item.enquiryDate}}</h3>
+                        <h3>{{ item.enquiryDate | date: 'dd-MM-yyyy'}}</h3>
                     </ion-col>
                 </ion-row>
-                <ion-row>
+                <ion-row text-wrap>
                     <ion-col col-5>Purpose of Visit:</ion-col>
                     <ion-col col-7>
                         <h3>{{ item.purposeOfVisit}}</h3>
                     </ion-col>
                 </ion-row>
-                <ion-row>
+                <ion-row text-wrap>
                     <ion-col col-5>Meeting Notes:</ion-col>
                     <ion-col col-7>
                         <h3>{{ item.meetingNotes}}</h3>
                     </ion-col>
                 </ion-row>
-                <ion-row>
+                <ion-row text-wrap>
                     <ion-col col-5>Next FollowUp Date:</ion-col>
                     <ion-col col-7>
-                        <h3>{{ item.nextFollowUpDate}}</h3>
+                        <h3>{{ item.nextFollowUpDate | date: 'dd-MM-yyyy'}}</h3>
                     </ion-col>
                 </ion-row>
-                <ion-row>
+                <ion-row text-wrap>
                     <ion-col col-5>Site Status:</ion-col>
                     <ion-col col-7>
                         <h3>{{ item.siteStatus}}</h3>
                     </ion-col>
                 </ion-row>
-                <ion-row>
+                <ion-row text-wrap>
                     <ion-col col-5>Material Request:</ion-col>
                     <ion-col col-7>
                         <h3>{{ item.materialRequest}}</h3>
                     </ion-col>
                 </ion-row>
-                <ion-row>
+                <ion-row text-wrap>
                     <ion-col col-5>Remark:</ion-col>
                     <ion-col col-7>
                         <h3>{{ item.remark}}</h3>
                     </ion-col>
                 </ion-row>
-                <ion-row>
+                <ion-row text-wrap>
                     <ion-col col-5>Status:</ion-col>
                     <ion-col col-7>
                         <h3>{{ item.status}}</h3>
                     </ion-col>
                 </ion-row>
             </ion-grid>
-
-            <button ion-button block padding type="submit" color="one" (click)="onChangeMeetingStatus(item.custID,'CLOSED')">
-                Close the Meeting
-            </button>
+            <div *ngIf="item.status != 'CLOSED'">
+                <button ion-button block padding type="submit" color="one" (click)="onChangeMeetingStatus(item.enquiryId,'CLOSED')">
+                    Close the Meeting
+                </button>
+            </div>
         </div>
     </div>
     <div *ngIf="option_type=='add_meeting'">
         <ion-item>
-            <ion-label color="selva" stacked>Purpose of Visit</ion-label>
-            <ion-input [(ngModel)]="new_meeting.purposeOfVisit" name="purposeOfVisit" type="text"></ion-input>
+            <ion-label color="selva" floating>Purpose of Visit</ion-label>
+            <ion-select [(ngModel)]="new_meeting.purposeOfVisit" name="purposeOfVisit" [compareWith]="">
+                <ion-option *ngFor="let purpose of purposes" [value]="purpose.name">{{purpose.name}} </ion-option>
+            </ion-select>
         </ion-item>
         <ion-item>
-            <ion-label color="selva" stacked>Meeting Notes</ion-label>
+            <ion-label color="selva" floating>Meeting Notes</ion-label>
             <ion-input [(ngModel)]="new_meeting.meetingNotes" name="meetingNotes" type="text"></ion-input>
         </ion-item>
         <ion-item>
-            <ion-label color="selva" stacked>Next FollowUp Date</ion-label>
+            <ion-label color="selva" floating>Next FollowUp Date</ion-label>
             <ion-datetime displayFormat="DD MMM YYYY" [(ngModel)]="new_meeting.nextFollowUpDate"></ion-datetime>
         </ion-item>
         <ion-item>
-            <ion-label color="selva" stacked>Site Status</ion-label>
-            <ion-input [(ngModel)]="new_meeting.siteStatus" name="siteStatus" type="text"></ion-input>
+            <ion-label color="selva" floating>Site Status</ion-label>
+            <ion-select [(ngModel)]="new_meeting.siteStatus" name="siteStatus" [compareWith]="">
+                <ion-option *ngFor="let status of site_status" [value]="status.name">{{status.name}} </ion-option>
+            </ion-select>
         </ion-item>
         <ion-item>
-            <ion-label color="selva" stacked>Material Request</ion-label>
+            <ion-label color="selva" floating>Material Request</ion-label>
             <ion-input [(ngModel)]="new_meeting.materialRequest" name="materialRequest" type="text"></ion-input>
         </ion-item>
         <ion-item>
-            <ion-label color="selva" stacked>Remarks</ion-label>
+            <ion-label color="selva" floating>Remarks</ion-label>
             <ion-input [(ngModel)]="new_meeting.remark" name="remark" type="text"></ion-input>
         </ion-item>
-        <button ion-button block padding type="submit" color="one" (click)="onAddNewMeeting(site)">
+        <button ion-button block padding type="submit" color="one" (click)="onAddNewMeeting(new_meeting)">
             Submit
         </button>
         <!-- <ion-item>
@@ -111,25 +116,25 @@
                       </ion-select>
                     </ion-item>
                     <ion-item>
-                      <ion-label color="selva" stacked>Pincode</ion-label>
+                      <ion-label color="selva" floating>Pincode</ion-label>
                       <ion-input [(ngModel)]="customers.pinCode" name="pinCode" type="number"></ion-input>
                     </ion-item>
                     <ion-item>
-                      <ion-label color="selva" stacked>Site Contact Number</ion-label>
+                      <ion-label color="selva" floating>Site Contact Number</ion-label>
                       <ion-input [(ngModel)]="customers.site_CONTACT_NUMBER" name="site_CONTACT_NUMBER" type="number"></ion-input>
                     </ion-item> -->
     </div>
     <div *ngIf="option_type=='add_site'">
         <ion-item>
-            <ion-label color="selva" stacked>Site Name</ion-label>
+            <ion-label color="selva" floating>Site Name</ion-label>
             <ion-input [(ngModel)]="site.site_NAME" name="site_NAME" type="text"></ion-input>
         </ion-item>
         <ion-item>
-            <ion-label color="selva" stacked>Site Contact Number</ion-label>
+            <ion-label color="selva" floating>Site Contact Number</ion-label>
             <ion-input [(ngModel)]="site.site_CONTACT_NUMBER" name="site_CONTACT_NUMBER" type="number"></ion-input>
         </ion-item>
         <ion-item>
-            <ion-label color="selva" stacked>Address</ion-label>
+            <ion-label color="selva" floating>Address</ion-label>
             <ion-input [(ngModel)]="site.address.address" name="address" type="text"></ion-input>
         </ion-item>
         <ion-item>
@@ -151,7 +156,7 @@
             </ion-select>
         </ion-item>
         <ion-item>
-            <ion-label color="selva" stacked>Pincode</ion-label>
+            <ion-label color="selva" floating>Pincode</ion-label>
             <ion-input [(ngModel)]="site.address.pinCode" name="pinCode" type="number"></ion-input>
         </ion-item>
         <button ion-button block padding type="submit" color="one" (click)="onAddNewSite(site)">

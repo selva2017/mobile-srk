@@ -1,4 +1,4 @@
-import { CustomerMeeting, CustomerMaster } from './../../models/customer-data';
+import { CustomerMeeting, CustomerMaster, AddCustomerMeeting } from './../../models/customer-data';
 import { UserList } from './../../models/user-list';
 import { AuthService } from './../../providers/auth-service/auth-service';
 import { Component } from '@angular/core';
@@ -30,19 +30,27 @@ export class LeadPage {
     // this.sales_rep_name = first_name + ' ' + last_name;
     this.sales_rep_name = sales_rep_id;
   }
+  purposes = [
+    { id: 1, name: 'Sales' },
+    { id: 2, name: 'Payment' },
+    { id: 3, name: 'Marketing' },
+  ];
+  site_status = [
+    { id: 1, name: 'Basement' },
+    { id: 2, name: 'Starting Stage' },
+    { id: 3, name: '2n Floor' },
+    { id: 4, name: 'Wall fixed' },
+  ];
   reference_types = [
     { id: 1, name: 'Engineer' },
     { id: 2, name: 'Masteri' },
     { id: 3, name: 'Other' },
-
   ];
   state_list = [
     { id: 1, name: 'Tamilnadu' },
     { id: 2, name: 'Kerala' },
     { id: 3, name: 'Karnataka' },
-
   ];
-
   cities = [
     { id: 1, name: 'Perundurai' },
     { id: 2, name: 'Tiruppur' },
@@ -60,8 +68,8 @@ export class LeadPage {
     { id: 7, name: 'Namakkal' }
   ];
   userList: UserList[];
-
-  constructor(public nav: NavController, private authService: AuthService,
+  loading: any;
+  constructor(public nav: NavController, private authService: AuthService, private loadingCtrl: LoadingController,
     private alertCtrl: AlertController, private toastCtrl: ToastController) {
     // Get Sales Rep names
     // this.authService.getInternalUsers("3")
@@ -241,17 +249,18 @@ export class LeadPage {
     this.customers['customerEnquiry']['createdBy'] = localStorage.getItem('employeeId');
     this.customers['business_CUSTOMER'] = 'NON_BUSINESS';
     // this.estimate['onBehalf'] = localStorage.getItem('employeeId');
-
+    this.showLoader("Adding the Customer ....");
     this.authService.customerAddition(this.customers)
       .subscribe(
         success => {
           if (success.status == 200) {
-            // this.loading.dismiss();
+            this.clearAll();
+            this.loading.dismiss();
             // this.handleMessage("Success");
           }
           else {
             console.log(success.businessError);
-            // this.loading.dismiss();
+            this.loading.dismiss();
             this.handleError(success.businessError);
             // this.presentToast(error);
           }
@@ -263,12 +272,42 @@ export class LeadPage {
         });
   }
   page_name: string;
+  showLoader(message) {
+    this.loading = this.loadingCtrl.create({
+      content: message,
+      // content: 'Collecting Orders...'
+    });
+
+    this.loading.present();
+  }
+
   onClick(name) {
     this.page_name = name;
   }
   onMeetingHistoryClick(item, option) {
     // console.log(item);
     this.nav.push(CustomerMeetingsPage, { item: item, option });
+  }
+  clearAll() {
+    this.userList['userName'] = '';
+    this.customers['cust_NAME'] = '';
+    this.customers['alias'] = '';
+    this.customers['locality_ID'] = '';
+    this.customers['address']['address'] = '';
+    this.customers['address']['city'] = '';
+    this.customers['address']['state'] = '';
+    this.customers['address']['district'] = '';
+    this.customers['address']['pinCode'] = '';
+    this.customers['cust_PHONE1'] = '';
+    this.customers['cust_PHONE2'] = '';
+    this.customers['cust_EMAIL'] = '';
+    this.customers['gst_NUMBER'] = '';
+    this.customers['customerEnquiry']['purposeOfVisit'] = '';
+    this.customers['customerEnquiry']['meetingNotes'] = '';
+    this.customers['customerEnquiry']['nextFollowUpDate'] = '';
+    this.customers['customerEnquiry']['siteStatus'] = '';
+    this.customers['customerEnquiry']['materialRequest'] = '';
+    this.customers['customerEnquiry']['remark'] = '';
   }
   // onAddNewSite(item, option) {
   //   console.log(item);
@@ -335,7 +374,7 @@ export class CustomerMeetingsPage {
   order;
   option_type;
   customer_meeting: CustomerMeeting[] = [];
-  new_meeting: CustomerMeeting[] = [];
+  new_meeting: AddCustomerMeeting[] = [];
   site: any;
   loading: any;
   role: string;
@@ -413,9 +452,11 @@ export class CustomerMeetingsPage {
           // this.presentToast(error);
         });
   }
-  onAddNewMeeting(site_details) {
-    site_details['cust_ID'] = this.order; //option_type stores customer id
-    this.authService.addNewMeeting(site_details)
+  onAddNewMeeting(new_meeting) {
+    console.log("onAddNewMeeting");
+    console.log(new_meeting);
+    this.new_meeting['custId'] = this.order; //option_type stores customer id
+    this.authService.addNewMeeting(new_meeting)
       .subscribe(
         success => {
           if (success == 200) {
@@ -435,17 +476,17 @@ export class CustomerMeetingsPage {
           // this.presentToast(error);
         });
   }
-  onChangeMeetingStatus(enquiry_id, status){
+  onChangeMeetingStatus(enquiry_id, status) {
     this.authService.changeCustomerEnquiryStatus(enquiry_id, status)
-    .subscribe(
-      (success) => {
-        this.nav.pop();
-        this.nav.push(LeadPage);
-        // this.refreshList();
-        // this.loading.dismiss();
-      },
-      (error) => console.log(error)
-    );
+      .subscribe(
+        (success) => {
+          this.nav.pop();
+          this.nav.push(LeadPage);
+          // this.refreshList();
+          // this.loading.dismiss();
+        },
+        (error) => console.log(error)
+      );
 
   }
   // rejectOrder(order_GROUP_NO) {
@@ -499,6 +540,16 @@ export class CustomerMeetingsPage {
     { id: 5, name: 'Salem' },
     { id: 7, name: 'Namakkal' }
   ];
-
+  purposes = [
+    { id: 1, name: 'Sales' },
+    { id: 2, name: 'Payment' },
+    { id: 3, name: 'Marketing' },
+  ];
+  site_status = [
+    { id: 1, name: 'Basement' },
+    { id: 2, name: 'Starting Stage' },
+    { id: 3, name: '2n Floor' },
+    { id: 4, name: 'Wall fixed' },
+  ];
 }
 

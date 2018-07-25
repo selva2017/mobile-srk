@@ -87,6 +87,21 @@ export interface CustomerMeeting {
     closedDate: string;
     createdBy: string;
 }
+export interface AddCustomerMeeting {
+    enquiryId: string;
+    custId: string;
+    enquiryDate: string;
+    purposeOfVisit: string;
+    meetingNotes: string;
+    nextFollowUpDate: string;
+    siteStatus: string;
+    materialRequest: string;
+    remark: string;
+    status: string;
+    reviewedBy: string;
+    closedDate: string;
+    createdBy: string;
+}
 
 export interface CustomerMaster {
     address: {
