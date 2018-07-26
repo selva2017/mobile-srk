@@ -9,7 +9,7 @@ import { NavController, NavParams, LoadingController, AlertController, ToastCont
   templateUrl: 'lead.html',
 })
 export class LeadPage {
-
+  public firstParam;
   customers: any;
   customer_meeting: CustomerMeeting[] = [];
   customer_master: CustomerMaster[] = [];
@@ -26,7 +26,7 @@ export class LeadPage {
   sales_rep_name: string;
   // onSelectSalesRep(first_name, last_name) {
   onSelectSalesRep(sales_rep_id) {
-    console.log(sales_rep_id);
+    // console.log(sales_rep_id);
     // this.sales_rep_name = first_name + ' ' + last_name;
     this.sales_rep_name = sales_rep_id;
   }
@@ -69,8 +69,14 @@ export class LeadPage {
   ];
   userList: UserList[];
   loading: any;
+  category: string;
   constructor(public nav: NavController, private authService: AuthService, private loadingCtrl: LoadingController,
-    private alertCtrl: AlertController, private toastCtrl: ToastController) {
+    private alertCtrl: AlertController, private toastCtrl: ToastController, public navParams: NavParams) {
+    this.firstParam = navParams.get("firstPassed");
+    if (this.firstParam != '') {
+      this.category = this.firstParam;
+      this.getNonBusinessCustomers();
+    }
     // Get Sales Rep names
     // this.authService.getInternalUsers("3")
     this.authService.getInternalUsers("3")
@@ -89,7 +95,7 @@ export class LeadPage {
     this.authService.fetchCustomerEnquiry("all")//all or id
       .subscribe(
         (list) => {
-          console.log(list);
+          // console.log(list);
           this.customer_meeting = list;
           // this.loading.dismiss();
         },
@@ -260,14 +266,16 @@ export class LeadPage {
           }
           else {
             console.log(success.businessError);
+            this.clearAll();
+            success.businessError! = '' ? this.handleError(success.businessError) : '';
             this.loading.dismiss();
-            this.handleError(success.businessError);
+            // this.handleError(success.businessError);
             // this.presentToast(error);
           }
         },
         (error) => {
           console.log(error.businessError);
-          // this.loading.dismiss();
+          this.loading.dismiss();
           // this.handleError("error");
         });
   }
@@ -314,32 +322,38 @@ export class LeadPage {
   //   this.nav.push(CustomerMeetingsPage, { item: item, option });
   // }
   getNonBusinessCustomers() {
+    this.showLoader("Collecting Future Customers....");
     this.authService.fetchCustomerMaster("NON_BUSINESS", "all")
       .subscribe(
         (list) => {
           // console.log(list);
           this.customer_master = list;
-          // this.loading.dismiss();
+          this.loading.dismiss();
         },
         error => {
-          // this.loading.dismiss();
+          this.loading.dismiss();
           // this.handleError(error.json().error);
         }
       );
-
   }
   convertCustomer(customer_id, type) {
+    this.showLoader("Adding to the Customers list....");
     this.authService.changeCustomerType(customer_id, type)
       .subscribe(
         (success) => {
+          console.log("succes" + success);
           this.nav.pop();
           this.nav.push(LeadPage);
           // this.refreshList();
-          // this.loading.dismiss();
+          this.loading.dismiss();
         },
-        (error) => console.log(error)
+        (error) => {
+          console.log("fail" + error);
+          this.nav.pop();
+          this.nav.push(LeadPage);
+          this.loading.dismiss();
+        }
       );
-
   }
   private handleError(errorMessage: string) {
     const alert = this.alertCtrl.create({
@@ -374,7 +388,22 @@ export class CustomerMeetingsPage {
   order;
   option_type;
   customer_meeting: CustomerMeeting[] = [];
-  new_meeting: AddCustomerMeeting[] = [];
+  // new_meeting: AddCustomerMeeting[] = [];
+  new_meeting = {
+    enquiryId: '',
+    custId: '',
+    enquiryDate: '',
+    purposeOfVisit: '',
+    meetingNotes: '',
+    nextFollowUpDate: '',
+    siteStatus: '',
+    materialRequest: '',
+    remark: '',
+    status: '',
+    reviewedBy: '',
+    closedDate: '',
+    createdBy: ''
+  }
   site: any;
   loading: any;
   role: string;
@@ -413,6 +442,9 @@ export class CustomerMeetingsPage {
     // }
     this.order = params.data.item;
     this.option_type = params.data.option;
+    this.option_type == 'view_list' ? this.retrieveCustomerEnquiries() : '';
+  }
+  retrieveCustomerEnquiries() {
     this.showLoader("Collecting Customer Enquiries....");
     this.authService.fetchCustomerEnquiry(this.order)
       .subscribe(
@@ -429,25 +461,25 @@ export class CustomerMeetingsPage {
       );
     // this.nav.push(OrdersPage, { item: this.subOrder });
   }
-
   onAddNewSite(site_details) {
     site_details['cust_ID'] = this.order; //option_type stores customer id
+    this.showLoader("Adding New Site to the Customer....");
     this.authService.addNewSite(site_details)
       .subscribe(
         success => {
           if (success == 200) {
             this.nav.pop();
-            this.nav.push(LeadPage);
-            // this.loading.dismiss();
+            this.nav.push(LeadPage, { firstPassed: "view" });
+            this.loading.dismiss();
             // this.handleMessage("Success");
           }
           else {
-            // this.loading.dismiss();
+            this.loading.dismiss();
             // this.handleError("error");
           }
         },
         (error) => {
-          // this.loading.dismiss();
+          this.loading.dismiss();
           // this.handleError("error");
           // this.presentToast(error);
         });
@@ -456,38 +488,42 @@ export class CustomerMeetingsPage {
     console.log("onAddNewMeeting");
     console.log(new_meeting);
     this.new_meeting['custId'] = this.order; //option_type stores customer id
+    this.showLoader("Adding New Meeting to the Customer....");
     this.authService.addNewMeeting(new_meeting)
       .subscribe(
         success => {
           if (success == 200) {
             this.nav.pop();
             this.nav.push(LeadPage);
-            // this.loading.dismiss();
+            this.loading.dismiss();
             // this.handleMessage("Success");
           }
           else {
-            // this.loading.dismiss();
+            this.loading.dismiss();
             // this.handleError("error");
           }
         },
         (error) => {
-          // this.loading.dismiss();
+          this.loading.dismiss();
           // this.handleError("error");
           // this.presentToast(error);
         });
   }
   onChangeMeetingStatus(enquiry_id, status) {
+    this.showLoader("Changing the meeting Status to " + status);
     this.authService.changeCustomerEnquiryStatus(enquiry_id, status)
       .subscribe(
         (success) => {
           this.nav.pop();
           this.nav.push(LeadPage);
           // this.refreshList();
-          // this.loading.dismiss();
+          this.loading.dismiss();
         },
-        (error) => console.log(error)
+        (error) => {
+          console.log(error)
+          this.loading.dismiss();
+        }
       );
-
   }
   // rejectOrder(order_GROUP_NO) {
   //   // console.log(order_GROUP_NO);

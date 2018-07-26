@@ -139,9 +139,9 @@
                     <ion-col col-7>{{displayINR(row.order_TRANSPORT_COST)}}</ion-col>
                 </ion-row>
                 <ion-row>
-                    <ion-col col-5>Tax 1:</ion-col>
+                    <ion-col col-5>CGST:</ion-col>
                     <ion-col col-7>{{displayINR(row.order_TAX1)}} </ion-col>
-                    <ion-col col-5>Tax 2:</ion-col>
+                    <ion-col col-5>SGST:</ion-col>
                     <ion-col col-5> {{displayINR(row.order_TAX2)}}</ion-col>
                 </ion-row>
             </ion-grid>
@@ -150,7 +150,7 @@
                 <h2>Unit(s): {{displayIndianNumber(row.unit_TYPE)}} Load: {{displayIndianNumber(row.unit)}}</h2>
                 <h3>Total Cost: {{displayINR(row.order_TOTAL_COST)}}</h3>
                 <p>Transport: {{displayINR(row.order_TRANSPORT_COST)}}</p>
-                <p>Tax 1: {{displayINR(row.order_TAX1)}} Tax 2: {{displayINR(row.order_TAX2)}}</p>
+                <p>CGST: {{displayINR(row.order_TAX1)}}SGST: {{displayINR(row.order_TAX2)}}</p>
             </ion-list> -->
             <!-- </ion-card> -->
         </div>
@@ -193,15 +193,15 @@
                             <ion-col col-5> {{displayINR(item.order_TRANSPORT_COST)}}</ion-col>
                         </ion-row>
                         <ion-row>
-                            <ion-col col-5>Tax 1: {{displayINR(item.order_TAX1)}} </ion-col>
-                            <ion-col col-5> Tax 2: {{displayINR(item.order_TAX2)}}</ion-col>
+                            <ion-col col-5>CGST: {{displayINR(item.order_TAX1)}} </ion-col>
+                            <ion-col col-5>SGST: {{displayINR(item.order_TAX2)}}</ion-col>
                         </ion-row>
                     </ion-grid>
                     <!-- <ion-card>
                         <h2>Unit(s): {{displayIndianNumber(item.unit_TYPE)}} Load: {{displayIndianNumber(item.unit)}}</h2>
                         <h3>Total Cost: {{displayINR(item.order_TOTAL_COST)}}</h3>
                         <p>Transport: {{displayINR(item.order_TRANSPORT_COST)}}</p>
-                        <p>Tax 1: {{displayINR(item.order_TAX1)}} Tax 2: {{displayINR(item.order_TAX2)}}</p>
+                        <p>CGST: {{displayINR(item.order_TAX1)}}SGST: {{displayINR(item.order_TAX2)}}</p>
                     </ion-card> -->
                 </div>
             </div>
@@ -224,11 +224,11 @@
 
             <div *ngIf="order.taxable_STATUS == 'Yes'">
                 <ion-row>
-                    <ion-col col-5>Tax 1 :</ion-col>
+                    <ion-col col-5>CGST :</ion-col>
                     <ion-col col-7>{{displayINR(order.total_TAX1)}}</ion-col>
                 </ion-row>
                 <ion-row>
-                    <ion-col col-5>Tax 2 :</ion-col>
+                    <ion-col col-5>SGST :</ion-col>
                     <ion-col col-7>{{displayINR(order.total_TAX2)}}</ion-col>
                 </ion-row>
             </div>

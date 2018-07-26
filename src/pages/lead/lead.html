@@ -16,7 +16,7 @@
         <ion-segment-button value="enquiry">
           Enquiry
         </ion-segment-button>
-        <ion-segment-button value="view" (click)="getNonBusinessCustomers('ORDER_PRICE_CHECK')">
+        <ion-segment-button value="view" (click)="getNonBusinessCustomers()">
           View Customer
         </ion-segment-button>
         <!-- <ion-segment-button value="Rejected" (click)="retrieveRejectedOrders()">
@@ -204,12 +204,12 @@
             </ion-col>
           </ion-row>
           <ion-row>
-            <button ion-button block (click)="onMeetingHistoryClick(item.cust_ID,'add_meeting')">Add New Meeting</button>
-            <button ion-button block (click)="onMeetingHistoryClick(item.cust_ID,'view_list')">Meeting History</button>
+            <button ion-button block color="secondary" (click)="onMeetingHistoryClick(item.cust_ID,'add_meeting')">Add New Meeting</button>
+            <button ion-button block color="one" (click)="onMeetingHistoryClick(item.cust_ID,'view_list')">Meeting History</button>
           </ion-row>
           <ion-row>
-            <button ion-button block (click)="convertCustomer(item.cust_ID,'BUSINESS')">Make Biz Customer</button>
-            <button ion-button block (click)="onMeetingHistoryClick(item.cust_ID,'add_site')">Add New Site</button>
+            <button ion-button block color="secondary" (click)="convertCustomer(item.cust_ID,'BUSINESS')">Make Biz Customer</button>
+            <button ion-button block color="primary" (click)="onMeetingHistoryClick(item.cust_ID,'add_site')">Add New Site</button>
           </ion-row>
         </ion-grid>
       </div>

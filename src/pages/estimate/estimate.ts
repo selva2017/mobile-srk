@@ -307,14 +307,15 @@ export class EstimatePage {
         }
       );
   }
-  users: any[];
-  userList: UserList[];
-  constructor(public navCtrl: NavController, public navParams: NavParams,
-    private authService: AuthService,
-    private loadingCtrl: LoadingController,
-    private alertCtrl: AlertController, private toastCtrl: ToastController,
-    platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
-    // Role 3 is for sales rep - for on behalf list
+  retrieveUserInformation() {
+    this.showLoader("Collecting Customers....");
+    this.retrieveInternalUsers();
+    this.retrieveCustomerandProducts();
+    this.loading.dismiss();
+  }
+  retrieveInternalUsers() {
+    this.userList = [];
+    // this.showLoader("Collecting Customers....");
     this.authService.getInternalUsers("3")
       .subscribe(
         (list) => {
@@ -328,6 +329,16 @@ export class EstimatePage {
           // this.handleError(error.json().error);
         }
       );
+  }
+
+  users: any[];
+  userList: UserList[] = [];
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+    private authService: AuthService,
+    private loadingCtrl: LoadingController,
+    private alertCtrl: AlertController, private toastCtrl: ToastController,
+    platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
+    // Role 3 is for sales rep - for on behalf list
     // this.getGroupOrdersByStatus("APPROVED");
     // this.getGroupOrdersByStatus("ESTIMATION");
     // this.retrieveAllPriceCheckOrders();
@@ -724,11 +735,11 @@ export class EstimatePage {
     this.estimate['estimation']['partialLoadTransportCost'] = 0;
     this.estimate['estimation']['partialLoadTotalCost'] = 0;
   }
-  onItemNameChange(product: Product[], uom,item) {
+  onItemNameChange(product: Product[], uom, item) {
     // //console.log("customer");
     // //console.log(product);
     this.estimate['estimation']['unitsTotal'] = '';
-    
+
     this.totalSqFtCount = 0;
     this.productPricePerUnit = 0;
     this.loadingCostPerUnit = 0;
@@ -1672,25 +1683,17 @@ export class EstimatePage {
 
     this.loading.present();
   }
-
-  ngOnInit() {
-    this.role = localStorage.getItem('role');
-    // const loading = this.loadingCtrl.create({
-    //   content: 'Please wait...'
-    // });
-    // this.authService.getActiveUser().getToken()
-    // .then(
-    // (token: string) => {
-    this.showLoader("Loading Customers...");
+  retrieveCustomerandProducts() {
+    // this.showLoader("Loading Customers...");
     this.authService.fetchCustomerData()
       .subscribe(
         (list: Customer[]) => {
           // //console.log(list);
           this.customers = list;
-          this.loading.dismiss();
+          // this.loading.dismiss();
         },
         error => {
-          this.loading.dismiss();
+          // this.loading.dismiss();
           this.handleError(error.json().error);
         }
       );
@@ -1700,13 +1703,23 @@ export class EstimatePage {
         (list: ProductGroup[]) => {
           this.productGroupModel = list;
           // console.log(this.productGroupModel);
-          this.loading.dismiss();
+          // this.loading.dismiss();
         },
         error => {
-          this.loading.dismiss();
+          // this.loading.dismiss();
           this.handleError(error.json().error);
         }
       );
+
+  }
+  ngOnInit() {
+    this.role = localStorage.getItem('role');
+    // const loading = this.loadingCtrl.create({
+    //   content: 'Please wait...'
+    // });
+    // this.authService.getActiveUser().getToken()
+    // .then(
+    // (token: string) => {
   }
   retrievePriceResponses(status) {
     if (this.role == '1' || this.role == '2') {
