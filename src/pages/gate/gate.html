@@ -44,7 +44,7 @@
               <h3>{{ item.customer_NAME }}</h3>
               <h3>{{ item.site_NAME }}</h3>
               <h3>{{ item.ordered_CREATED_BY }}</h3>
-              <button ion-button block color="secondary" (click)="updateSubOrder(item.order_NO,'TRANSIT','WEIGHED')">Out-Pass</button>
+              <button ion-button block color="secondary" (click)="updateSubOrder(item.order_NO,item.order_GROUP_NO,'TRANSIT','WEIGHED')">Out-Pass</button>
             </ion-item>
           </p>
         </ion-item-divider>
@@ -65,8 +65,8 @@
               <h3>{{ transit_item.customer_NAME }}</h3>
               <h3>{{ transit_item.site_NAME }}</h3>
               <h3>{{ transit_item.ordered_CREATED_BY }}</h3>
-              <button ion-button block color="secondary" (click)="updateSubOrder(transit_item.order_NO,'DELIVERED','TRANSIT')">In-Pass</button>
-              <button ion-button block color="danger" (click)="updateSubOrder(transit_item.order_NO,'WEIGHED','TRANSIT')">Cancel Out-Pass</button>
+              <button ion-button block color="secondary" (click)="updateSubOrder(transit_item.order_NO,transit_item.order_GROUP_NO,'DELIVERED','TRANSIT')">In-Pass</button>
+              <button ion-button block color="danger" (click)="updateSubOrder(transit_item.order_NO,transit_item.order_GROUP_NO,'WEIGHED','TRANSIT')">Cancel Out-Pass</button>
             </ion-item>
           </p>
         </ion-item-divider>
@@ -86,7 +86,7 @@
               <h3>{{ delivered_item.customer_NAME }}</h3>
               <h3>{{ delivered_item.site_NAME }}</h3>
               <h3>{{ delivered_item.ordered_CREATED_BY }}</h3>
-              <button ion-button block color="danger" (click)="updateSubOrder(delivered_item.order_NO,'TRANSIT','DELIVERED')">Cancel In-Pass</button>
+              <button ion-button block color="danger" (click)="updateSubOrder(delivered_item.order_NO,delivered_item.order_GROUP_NO,'TRANSIT','DELIVERED')">Cancel In-Pass</button>
             </ion-item>
           </p>
         </ion-item-divider>

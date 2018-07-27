@@ -80,7 +80,7 @@
               <h3>Site : {{ allocated_item.site_NAME }}</h3>
               <h3>Sales Rep : {{ allocated_item.sales_REP_NAME }}</h3>
               <!-- <button ion-button block color="secondary" (click)="doRadio(allocated_item.order_NO,'LOADED')">Loading Complete</button> -->
-              <button ion-button block color="danger" (click)="updateSubOrder(allocated_item.order_NO,'APPROVED','ALLOCATED')">Cancel Allocation</button>
+              <button ion-button block color="danger" (click)="updateSubOrder(allocated_item.order_NO,allocated_item.order_GROUP_NO,'APPROVED','ALLOCATED')">Cancel Allocation</button>
             </ion-item>
           </p>
         </ion-item-divider>
@@ -110,7 +110,7 @@
               <h3>Saes Rep : {{ loaded_item.sales_REP_NAME }}</h3>
 
               <button ion-button block color="one" (click)="showPrompt()">Capture Weight</button>
-              <button ion-button block color="secondary" (click)="updateSubOrder(loaded_item.order_NO,'WEIGHED','LOADED')">Weighment Complete</button>
+              <button ion-button block color="secondary" (click)="updateSubOrder(loaded_item.order_NO,loaded_item.order_GROUP_NO,'WEIGHED','LOADED')">Weighment Complete</button>
               <!-- <button ion-button block color="danger" (click)="updateSubOrder(loaded_item.order_NO,'ALLOCATED','LOADED')">Cancel Loading</button> -->
             </ion-item>
           </p>

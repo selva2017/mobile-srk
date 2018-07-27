@@ -3,6 +3,7 @@ import { UserList } from './../../models/user-list';
 import { AuthService } from './../../providers/auth-service/auth-service';
 import { Component } from '@angular/core';
 import { NavController, NavParams, LoadingController, AlertController, ToastController } from 'ionic-angular';
+import { Site } from '../../models/customer';
 
 @Component({
   selector: 'page-lead',
@@ -164,6 +165,7 @@ export class LeadPage {
       },
       "customerEnquiry": {
         "enquiryId": '',
+        "siteId": '',
         "custId": '',
         "enquiryDate": '',
         "purposeOfVisit": '',
@@ -240,7 +242,22 @@ export class LeadPage {
   ngOnInit() {
     this.role = localStorage.getItem('role');
   }
+  sites: Site[] = [];
+  retrieveSiteofCustomer(customer_id) {
+    this.authService.fetchSiteDetails(customer_id)
+      .subscribe(
+        (list: Site[]) => {
+          // //console.log(list);
+          this.sites = list;
+          this.loading.dismiss();
+        },
+        error => {
+          this.loading.dismiss();
+          this.handleError(error.json().error);
+        }
+      );
 
+  }
   onSubmitCustomer(customer) {
     // console.log(customer);
     customer['customerEnquiry']['status'] = 'NEW';
@@ -391,6 +408,7 @@ export class CustomerMeetingsPage {
   // new_meeting: AddCustomerMeeting[] = [];
   new_meeting = {
     enquiryId: '',
+    siteId: '',
     custId: '',
     enquiryDate: '',
     purposeOfVisit: '',
@@ -443,6 +461,7 @@ export class CustomerMeetingsPage {
     this.order = params.data.item;
     this.option_type = params.data.option;
     this.option_type == 'view_list' ? this.retrieveCustomerEnquiries() : '';
+    this.retrieveSiteofCustomer(this.order);
   }
   retrieveCustomerEnquiries() {
     this.showLoader("Collecting Customer Enquiries....");
@@ -525,6 +544,22 @@ export class CustomerMeetingsPage {
         }
       );
   }
+  sites: Site[] = [];
+  retrieveSiteofCustomer(customer_id) {
+    this.authService.fetchSiteDetails(customer_id)
+      .subscribe(
+        (list: Site[]) => {
+          // //console.log(list);
+          this.sites = list;
+          this.loading.dismiss();
+        },
+        error => {
+          this.loading.dismiss();
+          // this.handleError(error.json().error);
+        }
+      );
+  }
+
   // rejectOrder(order_GROUP_NO) {
   //   // console.log(order_GROUP_NO);
   //   this.showLoader("Collecting Rejected Orders...");

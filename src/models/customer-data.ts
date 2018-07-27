@@ -74,6 +74,7 @@ export interface CustomerData {
 
 export interface CustomerMeeting {
     enquiryId: string;
+    siteName: string;
     custId: string;
     enquiryDate: string;
     purposeOfVisit: string;

@@ -121,14 +121,20 @@
         "closedDate": null,
         "createdBy": null
       } -->
-      <ion-item>
+      <!-- <ion-item>
         <ion-label color="selva">Meeting Notes</ion-label>
         <ion-label color="selva" *ngIf="showMeetingDetails" text-right>Add</ion-label>
         <ion-label color="selva" *ngIf="!showMeetingDetails" text-right>Later</ion-label>
         <ion-toggle color="danger" [checked]="showMeetingDetails" (ionChange)="onMeetingNotesChange()" required>
         </ion-toggle>
-      </ion-item>
+      </ion-item> -->
       <div *ngIf="showMeetingDetails">
+        <!-- <ion-item>
+          <ion-label color="selva" floating>Site</ion-label>
+          <ion-select [(ngModel)]="customers.customerEnquiry.siteId" name="siteId">
+            <ion-option *ngFor="let site of sites" [value]="site.siteId" (ionSelect)="retrieveSiteofCustomer(0)" required>{{site.site_NAME}}</ion-option>
+          </ion-select>
+        </ion-item>
         <ion-item>
           <ion-label color="selva" floating>Purpose of Visit</ion-label>
           <ion-select [(ngModel)]="customers.customerEnquiry.purposeOfVisit" name="purposeOfVisit" [compareWith]="">
@@ -156,7 +162,7 @@
         <ion-item>
           <ion-label color="selva" floating>Remarks</ion-label>
           <ion-input [(ngModel)]="customers.customerEnquiry.remark" name="remark" type="text"></ion-input>
-        </ion-item>
+        </ion-item> -->
         <!-- <ion-item>
           <ion-label color="selva" floating>City</ion-label>
           <ion-select [(ngModel)]="customers.address.city" name="city" [compareWith]="">

@@ -113,7 +113,7 @@
         </ion-row>
     </div>
     <div padding>
-        <button ion-button block color="secondary" (click)="updateSubOrder(order.order_NO,'LOADED')">Loading Completed</button>
-        <button ion-button block color="danger" (click)="updateSubOrder(order.order_NO,'ALLOCATED')">Cancel Loading</button>
+        <button ion-button block color="secondary" (click)="updateSubOrder(order.order_NO,order.order_GROUP_NO,'LOADED')">Loading Completed</button>
+        <button ion-button block color="danger" (click)="updateSubOrder(order.order_NO,order.order_GROUP_NO,'ALLOCATED')">Cancel Loading</button>
     </div>
 </ion-content>

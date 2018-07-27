@@ -53,11 +53,11 @@ export class GatePage {
     return Number(Math.round(amount)).toLocaleString('en-IN');
   }
 
-  updateSubOrder(sub_order_number, status, refresh_list) {
-    // console.log(sub_order_number, status);
+  updateSubOrder(sub_order_number,group_order_number, status, refresh_list) {
+    console.log(group_order_number,sub_order_number);
     // this.showLoader();
     // this.showLoader("Updating Order Status....");
-    this.authService.updateStatusOfSubOrder(sub_order_number, status)
+    this.authService.updateStatusOfSubOrder(sub_order_number, group_order_number,status)
       .subscribe(
         (success) => {
           this.retrieveSubOrders(refresh_list);

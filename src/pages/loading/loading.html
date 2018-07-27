@@ -84,7 +84,7 @@
               <h3>{{ loaded_item.site_NAME }}</h3>
               <h3>{{ loaded_item.ordered_CREATED_BY }}</h3>
               <!-- <button ion-button block color="secondary" (click)="updateSubOrder(loaded_item.order_NO,'WEIGHED','LOADED')">Weighment Complete</button> -->
-              <button ion-button block color="danger" (click)="updateSubOrder(loaded_item.order_NO,'ALLOCATED','LOADED')">Cancel Loading</button>
+              <button ion-button block color="danger" (click)="updateSubOrder(loaded_item.order_NO,loaded_item.order_GROUP_NO,'ALLOCATED','LOADED')">Cancel Loading</button>
             </ion-item>
           </p>
         </ion-item-divider>

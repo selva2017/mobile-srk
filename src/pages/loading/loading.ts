@@ -44,11 +44,11 @@ export class LoadingPage {
     this.retrieveSubOrders("ALLOCATED");
     refresher.complete();
   }
-  updateSubOrder(sub_order_number, status, refresh_list) {
+  updateSubOrder(sub_order_number,group_order_number, status, refresh_list) {
     // console.log(sub_order_number, status);
     // this.showLoader();
     // this.showLoader("Updating the Order....");
-    this.authService.updateStatusOfSubOrder(sub_order_number, status)
+    this.authService.updateStatusOfSubOrder(sub_order_number,group_order_number, status)
       .subscribe(
         (success) => {
           this.retrieveSubOrders(refresh_list);
@@ -687,11 +687,11 @@ export class LoadingDetailsPage {
     });
   }
 
-  updateSubOrder(sub_order_number, status) {
+  updateSubOrder(sub_order_number, order_group_number, status) {
     console.log(sub_order_number, status);
     // this.showLoader();
     // this.showLoader("Updating the Order....");
-    this.authService.updateStatusOfSubOrder(sub_order_number, status)
+    this.authService.updateStatusOfSubOrder(sub_order_number,order_group_number, status)
       .subscribe(
         (success) => {
           // this.retrieveSubOrders(refresh_list);
