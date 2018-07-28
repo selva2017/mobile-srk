@@ -10,6 +10,7 @@ import { AuthService } from '../providers/auth-service/auth-service';
 import { RegisterPage } from './../pages/register/register';
 import { LoginPage } from './../pages/login/login';
 import { OrdersPage } from '../pages/orders/orders';
+import { App } from 'ionic-angular/components/app/app';
 
 @Component({
   templateUrl: 'app.html'
@@ -23,29 +24,33 @@ export class MyApp {
   leadPage = LeadPage;
   estimatePage = EstimatePage;
   isAuthenticated: boolean;
-  
+
   @ViewChild('nav') nav: NavController;
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,
-    private menuCtrl: MenuController,  public authService: AuthService) {
-      platform.ready().then(() => {
+  constructor(statusBar: StatusBar, splashScreen: SplashScreen,
+    private menuCtrl: MenuController, public authService: AuthService,
+    public platform: Platform, app: App) {
+    platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
       splashScreen.hide();
+      this.platform.registerBackButtonAction(() => {
+        app.navPop();
+      });
     });
     if (localStorage.getItem('isAuthenticated') === 'true')
       this.isAuthenticated = true;
-     else
-    this.isAuthenticated = false;
+    else
+      this.isAuthenticated = false;
   }
-  
+
   onLoad(page: any) {
     this.nav.setRoot(page);
     this.menuCtrl.close();
     if (localStorage.getItem('isAuthenticated') === 'true')
       this.isAuthenticated = true;
-     else
-    this.isAuthenticated = false;
+    else
+      this.isAuthenticated = false;
   }
   onLogout() {
     this.authService.logout();

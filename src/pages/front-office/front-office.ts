@@ -175,11 +175,11 @@ export class FrontOfficePage {
     }
   }
 
-  updateSubOrder(sub_order_number,order_group_number, status, refresh_list) {
-    // console.log(sub_order_number, status, refresh_list);
+  updateSubOrder(sub_order_number, order_group_number, status, refresh_list) {
+    console.log(sub_order_number, order_group_number, status, refresh_list);
     // this.showLoader();
     // this.showLoader("Updating the Order....");
-    this.authService.updateStatusOfSubOrder(sub_order_number,order_group_number, status)
+    this.authService.updateStatusOfSubOrder(sub_order_number, order_group_number, status)
       .subscribe(
         (success) => {
           this.retrieveSubOrders(refresh_list);
@@ -259,7 +259,7 @@ export class FrontOfficePage {
     ];
 
   }
-  doRadio(sub_order_number,order_group_number, status, refresh_list) {
+  doRadio(sub_order_number, order_group_number, status, refresh_list) {
     let alert = this.alertCtrl.create();
     alert.setTitle('Select Vehicle');
     for (var i = 0; i < this.vehicles.length; i++) {
@@ -276,7 +276,7 @@ export class FrontOfficePage {
         console.log('Radio data:', data);
         this.testRadioOpen = false;
         this.testRadioResult = data;
-        this.updateSubOrder(sub_order_number, order_group_number,status, refresh_list);
+        this.updateSubOrder(sub_order_number, order_group_number, status, refresh_list);
       }
     });
 

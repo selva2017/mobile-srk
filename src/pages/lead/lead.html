@@ -16,8 +16,11 @@
         <ion-segment-button value="enquiry">
           Enquiry
         </ion-segment-button>
-        <ion-segment-button value="view" (click)="getNonBusinessCustomers()">
-          View Customer
+        <ion-segment-button value="view_future" (click)="getNonBusinessCustomers()">
+          Future Customers
+        </ion-segment-button>
+        <ion-segment-button value="view_customers" (click)="getBusinessCustomers()">
+          Customers
         </ion-segment-button>
         <!-- <ion-segment-button value="Rejected" (click)="retrieveRejectedOrders()">
           Rejected
@@ -194,7 +197,7 @@
   </div>
 
   <div [ngSwitch]="category">
-    <ion-list *ngSwitchCase="'view'">
+    <ion-list *ngSwitchCase="'view_future'">
       <div ion-item *ngFor="let item of customer_master; let i = index" icon-start>
         <ion-grid>
           <ion-row text-wrap>
@@ -209,14 +212,37 @@
               <h3>{{ item.cust_PHONE1 }}</h3>
             </ion-col>
           </ion-row>
-          <ion-row>
+          <!-- <ion-row>
             <button ion-button block color="secondary" (click)="onMeetingHistoryClick(item.cust_ID,'add_meeting')">Add New Meeting</button>
             <button ion-button block color="one" (click)="onMeetingHistoryClick(item.cust_ID,'view_list')">Meeting History</button>
           </ion-row>
           <ion-row>
             <button ion-button block color="secondary" (click)="convertCustomer(item.cust_ID,'BUSINESS')">Make Biz Customer</button>
             <button ion-button block color="primary" (click)="onMeetingHistoryClick(item.cust_ID,'add_site')">Add New Site</button>
-          </ion-row>
+          </ion-row> -->
+          <!-- <button ion-button >Delete</button> -->
+          <ion-item>
+            <ion-fab right middle>
+              <button ion-fab mini>
+                <ion-icon name="log-in"></ion-icon>
+              </button>
+              <ion-fab-list side="left">
+                <button ion-fab mini color="secondary" (click)="onMeetingHistoryClick(item.cust_ID,'add_meeting')">
+                  <ion-icon name="people"></ion-icon>
+                </button>
+                <button ion-fab mini color="primary" (click)="convertCustomer(item.cust_ID,'BUSINESS')">
+                  <ion-icon name="thumbs-up"></ion-icon>
+                </button>
+                <button ion-fab mini color="secondary" (click)="onMeetingHistoryClick(item.cust_ID,'view_list')">
+                  <ion-icon name="book"></ion-icon>
+                </button>
+                <button ion-fab mini color="primary" (click)="onMeetingHistoryClick(item.cust_ID,'add_site')">
+                  <ion-icon name="construct"></ion-icon>
+                </button>
+              </ion-fab-list>
+            </ion-fab>
+          </ion-item>
+          <!-- <button ion-button  light >Allocate</button> -->
         </ion-grid>
       </div>
       <!-- <button ion-item *ngFor="let item of customer_meeting; let i = index" (click)="openNavDetailsPage(item,'estimate')" icon-start> -->
@@ -269,7 +295,46 @@
       <div> This is the - {{page_name}} page - under construction.....
       </div> -->
     </ion-list>
-
+    <ion-list *ngSwitchCase="'view_customers'">
+      <div ion-item *ngFor="let customer of current_customers; let i = index" icon-start>
+        <ion-grid>
+          <ion-row text-wrap>
+            <ion-col col-5>Customer </ion-col>
+            <ion-col col-7>
+              <h3>{{ customer.cust_NAME }}</h3>
+            </ion-col>
+          </ion-row>
+          <ion-row text-wrap>
+            <ion-col col-5>Phone </ion-col>
+            <ion-col col-7>
+              <h3>{{ customer.cust_PHONE1 }}</h3>
+            </ion-col>
+          </ion-row>
+          <ion-item>
+            <ion-fab right middle>
+              <button ion-fab mini>
+                <ion-icon name="log-in"></ion-icon>
+              </button>
+              <ion-fab-list side="left">
+                <button ion-fab color="secondary" (click)="onMeetingHistoryClick(customer.cust_ID,'add_meeting')">
+                  <ion-icon name="people"></ion-icon>
+                </button>
+                <button ion-fab color="primary" (click)="convertCustomer(customer.cust_ID,'BUSINESS')">
+                  <ion-icon name="thumbs-up"></ion-icon>
+                </button>
+                <button ion-fab color="secondary" (click)="onMeetingHistoryClick(customer.cust_ID,'view_list')">
+                  <ion-icon name="book"></ion-icon>
+                </button>
+                <button ion-fab color="primary" (click)="onMeetingHistoryClick(customer.cust_ID,'add_site')">
+                  <ion-icon name="construct"></ion-icon>
+                </button>
+              </ion-fab-list>
+            </ion-fab>
+          </ion-item>
+          <!-- <button ion-button  light >Allocate</button> -->
+        </ion-grid>
+      </div>
+    </ion-list>
   </div>
 </ion-content>
 <!-- <ion-header>

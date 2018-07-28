@@ -52,7 +52,7 @@
               <h3>{{ item.customer_NAME }}</h3>
               <h3>Site: {{ item.site_NAME }}</h3>
               <h3>Sales Rep: {{ item.sales_REP_NAME }}</h3>
-              <button ion-button block color="secondary" (click)="doRadio(item.order_NO,'ALLOCATED','APPROVED')">Allocate Vehicle</button>
+              <button ion-button block color="secondary" (click)="doRadio(item.order_NO,item.order_GROUP_NO,'ALLOCATED','APPROVED')">Allocate Vehicle</button>
             </ion-item>
           </p>
         </ion-item-divider>

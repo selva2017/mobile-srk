@@ -1,8 +1,9 @@
+import { Platform } from 'ionic-angular/platform/platform';
 import { CustomerMeeting, CustomerMaster, AddCustomerMeeting } from './../../models/customer-data';
 import { UserList } from './../../models/user-list';
 import { AuthService } from './../../providers/auth-service/auth-service';
 import { Component } from '@angular/core';
-import { NavController, NavParams, LoadingController, AlertController, ToastController } from 'ionic-angular';
+import { NavController, NavParams, LoadingController, AlertController, ToastController, App } from 'ionic-angular';
 import { Site } from '../../models/customer';
 
 @Component({
@@ -14,6 +15,7 @@ export class LeadPage {
   customers: any;
   customer_meeting: CustomerMeeting[] = [];
   customer_master: CustomerMaster[] = [];
+  current_customers: CustomerMaster[] = [];
   showMeetingDetails: boolean = false;
 
   onMeetingNotesChange() {
@@ -72,12 +74,20 @@ export class LeadPage {
   loading: any;
   category: string;
   constructor(public nav: NavController, private authService: AuthService, private loadingCtrl: LoadingController,
-    private alertCtrl: AlertController, private toastCtrl: ToastController, public navParams: NavParams) {
+    private alertCtrl: AlertController, private toastCtrl: ToastController, public navParams: NavParams,
+    public platform: Platform, app: App) {
     this.firstParam = navParams.get("firstPassed");
     if (this.firstParam != '') {
       this.category = this.firstParam;
       this.getNonBusinessCustomers();
     }
+
+    // this.platform.ready().then(() => {
+    //   this.platform.registerBackButtonAction(() => {
+    //     app.navPop();
+    //   });
+    // })
+
     // Get Sales Rep names
     // this.authService.getInternalUsers("3")
     this.authService.getInternalUsers("3")
@@ -345,6 +355,21 @@ export class LeadPage {
         (list) => {
           // console.log(list);
           this.customer_master = list;
+          this.loading.dismiss();
+        },
+        error => {
+          this.loading.dismiss();
+          // this.handleError(error.json().error);
+        }
+      );
+  }
+  getBusinessCustomers() {
+    this.showLoader("Collecting the Customers....");
+    this.authService.fetchCustomerMaster("BUSINESS", "all")
+      .subscribe(
+        (list) => {
+          // console.log(list);
+          this.current_customers = list;
           this.loading.dismiss();
         },
         error => {
